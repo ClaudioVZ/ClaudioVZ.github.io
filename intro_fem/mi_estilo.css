@@ -1,5 +1,5 @@
 div.cell{
-max-width:5000px;
+max-width:7500px;
 margin-left:auto;
 margin-right:auto;
 }
@@ -7,7 +7,7 @@ margin-right:auto;
 .text_cell_render {
 font-family: Palatino, serif;
 font-size: 16px;
-max-width: 5000px;
+max-width: 7500px;
 }
 
 .MathJax_Display {
@@ -15,5 +15,5 @@ max-width: 5000px;
 }
 
 #notebook-container {
-    width:5100px;
+    width:7600px;
 }
