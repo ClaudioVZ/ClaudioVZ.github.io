@@ -177,26 +177,9 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Funciones-de-forma-para-elementos-viga">Funciones de forma para elementos viga<a class="anchor-link" href="#Funciones-de-forma-para-elementos-viga">&#182;</a></h1>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Elementos-de-dos-nodos">Elementos de dos nodos<a class="anchor-link" href="#Elementos-de-dos-nodos">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-\begin{equation}
-    v = N_{1} v_{1} + N_{2} \theta_{1} + N_{3} v_{2} + N_{4} \theta_{2}
+<h1 id="Funciones-de-forma-para-elementos-viga">Funciones de forma para elementos viga<a class="anchor-link" href="#Funciones-de-forma-para-elementos-viga">&#182;</a></h1><h3 id="Elementos-de-dos-nodos">Elementos de dos nodos<a class="anchor-link" href="#Elementos-de-dos-nodos">&#182;</a></h3>\begin{equation}
+    v = N_{1} v_{1} + N_{2} \frac{d v_{1}}{d x} + N_{3} v_{2} + N_{4} \frac{d v_{2}}{d x}
+    = N_{1} v_{1} + N_{2} \theta_{1} + N_{3} v_{2} + N_{4} \theta_{2}
     = \sum_{i = 0}^{3} \alpha_{i} x^{i}
     = \alpha_{0} + \alpha_{1} x + \alpha_{2} x^{2} + \alpha_{3} x^{3}
 \end{equation}<p>en forma matricial</p>
@@ -291,7 +274,7 @@ div#notebook {
         \theta_{2}
     \end{bmatrix} =
     \begin{bmatrix}
-    \frac{1}{L^{2}} x^{2} + \frac{2}{L^{3}} x^{3} &
+    1 - \frac{3}{L^{2}} x^{2} + \frac{2}{L^{3}} x^{3} &
     x - \frac{2}{L} x^{2} + \frac{1}{L^{2}} x^{3} &
     \frac{3}{L^{2}} x^{2} - \frac{2}{L^{3}} x^{3} &
     -\frac{1}{L} x^{2} + \frac{1}{L^{2}} x^{3}
@@ -304,7 +287,7 @@ div#notebook {
     \end{bmatrix}
 \end{equation}<p>Reescribiendo $v$</p>
 \begin{equation}
-    v = \bigg( \frac{1}{L^{2}} x^{2} + \frac{2}{L^{3}} x^{3} \bigg) v_{1}
+    v = \bigg( 1 - \frac{3}{L^{2}} x^{2} + \frac{2}{L^{3}} x^{3} \bigg) v_{1}
     + \bigg( x - \frac{2}{L} x^{2} + \frac{1}{L^{2}} x^{3} \bigg) \theta_{1}
     + \bigg( \frac{3}{L^{2}} x^{2} - \frac{2}{L^{3}} x^{3} \bigg) v_{2}
     + \bigg( -\frac{1}{L} x^{2} + \frac{1}{L^{2}} x^{3} \bigg) \theta_{2}
@@ -318,17 +301,9 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Elemento-de-tres-nodos">Elemento de tres nodos<a class="anchor-link" href="#Elemento-de-tres-nodos">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-\begin{equation}
-    v = N_{1} v_{1} + N_{2} \theta_{1} + N_{3} v_{2} + N_{4} \theta_{2} + N_{5} v_{3} + N_{6} \theta_{3}
+<h3 id="Elemento-de-tres-nodos">Elemento de tres nodos<a class="anchor-link" href="#Elemento-de-tres-nodos">&#182;</a></h3>\begin{equation}
+    v = N_{1} v_{1} + N_{2} \frac{d v_{1}}{d x} + N_{3} v_{2} + N_{4} \frac{d v_{2}}{d x} + N_{5} v_{3} + N_{6} \frac{d v_{3}}{d x}
+    = N_{1} v_{1} + N_{2} \theta_{1} + N_{3} v_{2} + N_{4} \theta_{2} + N_{5} v_{3} + N_{6} \theta_{3}
     = \sum_{i = 0}^{5} \alpha_{i} x^{i}
     = \alpha_{0} + \alpha_{1} x + \alpha_{2} x^{2} + \alpha_{3} x^{3} + \alpha_{4} x^{4} + \alpha_{5} x^{5}
 \end{equation}<p>en forma matricial</p>
