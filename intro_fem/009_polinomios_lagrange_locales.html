@@ -3,7 +3,7 @@
 <head>
 
 <meta charset="utf-8" />
-<title>014_polinomios_hermite</title>
+<title>009_polinomios_lagrange_locales</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -177,277 +177,179 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Funciones-de-forma-para-elementos-viga">Funciones de forma para elementos viga<a class="anchor-link" href="#Funciones-de-forma-para-elementos-viga">&#182;</a></h1><h3 id="Elementos-de-dos-nodos">Elementos de dos nodos<a class="anchor-link" href="#Elementos-de-dos-nodos">&#182;</a></h3>\begin{equation}
-    v = N_{1} v_{1} + N_{2} \frac{d v_{1}}{d x} + N_{3} v_{2} + N_{4} \frac{d v_{2}}{d x}
-    = N_{1} v_{1} + N_{2} \theta_{1} + N_{3} v_{2} + N_{4} \theta_{2}
-    = \sum_{i = 0}^{3} \alpha_{i} x^{i}
-    = \alpha_{0} + \alpha_{1} x + \alpha_{2} x^{2} + \alpha_{3} x^{3}
+<h1 id="Funciones-de-forma-para-elementos-barra">Funciones de forma para elementos barra<a class="anchor-link" href="#Funciones-de-forma-para-elementos-barra">&#182;</a></h1><h3 id="Elemento-de-dos-nodos">Elemento de dos nodos<a class="anchor-link" href="#Elemento-de-dos-nodos">&#182;</a></h3>\begin{equation}
+    u = N_{1} u_{1} + N_{2} u_{2} = \sum_{i = 0}^{1} \alpha_{i} x^{i} = \alpha_{0} + \alpha_{1} x
 \end{equation}<p>en forma matricial</p>
 \begin{equation}
-    v = \alpha_{0} + \alpha_{1} x + \alpha_{2} x^{2} + \alpha_{3} x^{3} =
+    u = \alpha_{0} + \alpha_{1} x  =
     \begin{bmatrix}
-        1 & x & x^{2} & x^{3}
+        1 & x
     \end{bmatrix}
     \begin{bmatrix}
         \alpha_{0} \\
-        \alpha_{1} \\
-        \alpha_{2} \\
-        \alpha_{3}
+        \alpha_{1}
     \end{bmatrix}
 \end{equation}<p>reemplazando $x_{1} = 0$ y $x_{2} = L$</p>
 \begin{align}
-    \alpha_{0} + \alpha_{1} (0) + \alpha_{2} (0)^{2} + \alpha_{3} (0)^{3} &= v_{1} \\
-    \alpha_{1} + 2 \alpha_{2} (0) + 3 \alpha_{3} (0)^{2} &= \theta_{1} \\
-    \alpha_{0} + \alpha_{1} (L) + \alpha_{2} (L)^{2} + \alpha_{3} (L)^{3} &= v_{2} \\
-    \alpha_{1} + 2 \alpha_{2} (L) + 3 \alpha_{3} (L)^{2} &= \theta_{2}
+    \alpha_{0} + \alpha_{1} (0) &= u_{1} \\
+    \alpha_{0} + \alpha_{1} (L) &= u_{2}
 \end{align}<p>simplificando</p>
 \begin{align}
-    \alpha_{0} &= v_{1} \\
-    \alpha_{1} &= \theta_{1} \\
-    \alpha_{0} + L \alpha_{1} + L^{2} \alpha_{2} + L^{3} \alpha_{3} &= v_{2} \\
-    \alpha_{1} + 2 L \alpha_{2} + 3 L^{2} \alpha_{3} &= \theta_{2}
+    \alpha_{0} &= u_{1} \\
+    \alpha_{0} + L \alpha_{1} &= u_{2}
 \end{align}<p>en forma matricial</p>
 \begin{equation}
     \begin{bmatrix}
-    1 & 0 & 0 & 0 \\
-    0 & 1 & 0 & 0 \\
-    1 & L & L^{2} & L^{3} \\
-    0 & 1 & 2 L & 3 L^{2}
+        1 & 0 \\
+        1 & L
     \end{bmatrix}
     \begin{bmatrix}
         \alpha_{0} \\
-        \alpha_{1} \\
-        \alpha_{2} \\
-        \alpha_{3}
+        \alpha_{1}
     \end{bmatrix} =
     \begin{bmatrix}
-        v_{1} \\
-        \theta_{1} \\
-        v_{2} \\
-        \theta_{2}
+        u_{1} \\
+        u_{2}
     \end{bmatrix}
 \end{equation}<p>resolviendo el sistema</p>
 \begin{equation}
     \begin{bmatrix}
         \alpha_{0} \\
-        \alpha_{1} \\
-        \alpha_{2} \\
-        \alpha_{3}
+        \alpha_{1}
     \end{bmatrix} =
     \begin{bmatrix}
-        1 & 0 & 0 & 0 \\
-        0 & 1 & 0 & 0 \\
-        -\frac{3}{L^{2}} & -\frac{2}{L} & \frac{3}{L^{2}} & -\frac{1}{L} \\
-        \frac{2}{L^{3}} & \frac{1}{L^{2}} & -\frac{2}{L^{3}} & \frac{1}{L^{2}}
+        1 & 0 \\
+        -\frac{1}{L} & \frac{1}{L}
     \end{bmatrix}
     \begin{bmatrix}
-        v_{1} \\
-        \theta_{1} \\
-        v_{2} \\
-        \theta_{2}
+        u_{1} \\
+        u_{2}
     \end{bmatrix}
 \end{equation}<p>reemplazando las incógnitas</p>
 \begin{equation}
-    v =
+    u =
     \begin{bmatrix}
-        1 & x & x^{2} & x^{3}
+        1 & x
     \end{bmatrix}
     \begin{bmatrix}
         \alpha_{0} \\
-        \alpha_{1} \\
-        \alpha_{2} \\
-        \alpha_{3}
+        \alpha_{1}
     \end{bmatrix} =
     \begin{bmatrix}
-        1 & x & x^{2} & x^{3}
+        1 & x
     \end{bmatrix}
     \begin{bmatrix}
-        1 & 0 & 0 & 0 \\
-        0 & 1 & 0 & 0 \\
-        -\frac{3}{L^{2}} & -\frac{2}{L} & \frac{3}{L^{2}} & -\frac{1}{L} \\
-        \frac{2}{L^{3}} & \frac{1}{L^{2}} & -\frac{2}{L^{3}} & \frac{1}{L^{2}}
+        1 & 0 \\
+        -\frac{1}{L} & \frac{1}{L}
     \end{bmatrix}
     \begin{bmatrix}
-        v_{1} \\
-        \theta_{1} \\
-        v_{2} \\
-        \theta_{2}
+        u_{1} \\
+        u_{2}
     \end{bmatrix} =
     \begin{bmatrix}
-    1 - \frac{3}{L^{2}} x^{2} + \frac{2}{L^{3}} x^{3} &
-    x - \frac{2}{L} x^{2} + \frac{1}{L^{2}} x^{3} &
-    \frac{3}{L^{2}} x^{2} - \frac{2}{L^{3}} x^{3} &
-    -\frac{1}{L} x^{2} + \frac{1}{L^{2}} x^{3}
+        1 - \frac{1}{L} x & \frac{1}{L} x
     \end{bmatrix}
     \begin{bmatrix}
-        v_{1} \\
-        \theta_{1} \\
-        v_{2} \\
-        \theta_{2}
+        u_{1} \\
+        u_{2}
     \end{bmatrix}
-\end{equation}<p>Reescribiendo $v$</p>
+\end{equation}<p>Reescribiendo $u$</p>
 \begin{equation}
-    v = \bigg( 1 - \frac{3}{L^{2}} x^{2} + \frac{2}{L^{3}} x^{3} \bigg) v_{1}
-    + \bigg( x - \frac{2}{L} x^{2} + \frac{1}{L^{2}} x^{3} \bigg) \theta_{1}
-    + \bigg( \frac{3}{L^{2}} x^{2} - \frac{2}{L^{3}} x^{3} \bigg) v_{2}
-    + \bigg( -\frac{1}{L} x^{2} + \frac{1}{L^{2}} x^{3} \bigg) \theta_{2}
-    = N_{1} v_{1} + N_{2} \theta_{1} + N_{3} v_{2} + N_{4} \theta_{2}
-\end{equation}
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Elemento-de-tres-nodos">Elemento de tres nodos<a class="anchor-link" href="#Elemento-de-tres-nodos">&#182;</a></h3>\begin{equation}
-    v = N_{1} v_{1} + N_{2} \frac{d v_{1}}{d x} + N_{3} v_{2} + N_{4} \frac{d v_{2}}{d x} + N_{5} v_{3} + N_{6} \frac{d v_{3}}{d x}
-    = N_{1} v_{1} + N_{2} \theta_{1} + N_{3} v_{2} + N_{4} \theta_{2} + N_{5} v_{3} + N_{6} \theta_{3}
-    = \sum_{i = 0}^{5} \alpha_{i} x^{i}
-    = \alpha_{0} + \alpha_{1} x + \alpha_{2} x^{2} + \alpha_{3} x^{3} + \alpha_{4} x^{4} + \alpha_{5} x^{5}
+    u = \bigg( 1 - \frac{1}{L} x \bigg) u_{1} + \bigg( \frac{1}{L} x \bigg) u_{2}
+    = N_{1} u_{1} + N_{2} u_{2}
+\end{equation}<h3 id="Elemento-de-tres-nodos">Elemento de tres nodos<a class="anchor-link" href="#Elemento-de-tres-nodos">&#182;</a></h3>\begin{equation}
+    u = N_{1} u_{1} + N_{2} u_{2} + N_{3} u_{3} = \sum_{i = 0}^{2} \alpha_{i} x^{i} = \alpha_{0} + \alpha_{1} x + \alpha_{2} x^{2}
 \end{equation}<p>en forma matricial</p>
 \begin{equation}
-    v = \alpha_{0} + \alpha_{1} x + \alpha_{2} x^{2} + \alpha_{3} x^{3} + \alpha_{4} x^{4} + \alpha_{5} x^{5} =
+    u = \alpha_{0} + \alpha_{1} x + \alpha_{2} x^{2} =
     \begin{bmatrix}
-        1 & x & x^{2} & x^{3} & x^{4} & x^{5}
+        1 & x & x^{2}
     \end{bmatrix}
     \begin{bmatrix}
         \alpha_{0} \\
         \alpha_{1} \\
-        \alpha_{2} \\
-        \alpha_{3} \\
-        \alpha_{4} \\
-        \alpha_{5}
+        \alpha_{2}
     \end{bmatrix}
 \end{equation}<p>reemplazando $x_{1} = 0$, $x_{2} = \frac{L}{2}$ y $x_{3} = L$</p>
 \begin{align}
-    \alpha_{0} + \alpha_{1} (0) + \alpha_{2} (0)^{2} + \alpha_{3} (0)^{3} + \alpha_{4} (0)^{4} + \alpha_{5} (0)^{5} &= v_{1} \\
-    \alpha_{1} + 2 \alpha_{2} (0) + 3 \alpha_{3} (0)^{2} + 4 \alpha_{4} (0)^{3} + 5 \alpha_{5} (0)^{4} &= \theta_{1} \\
-    \alpha_{0} + \alpha_{1} \bigg( \frac{L}{2} \bigg) + \alpha_{2} \bigg( \frac{L}{2} \bigg)^{2} + \alpha_{3} \bigg( \frac{L}{2} \bigg)^{3} + \alpha_{4} \bigg( \frac{L}{2} \bigg)^{4} + \alpha_{5} \bigg( \frac{L}{2} \bigg)^{5} &= v_{2} \\
-    \alpha_{1} + 2 \alpha_{2} \bigg( \frac{L}{2} \bigg) + 3 \alpha_{3} \bigg( \frac{L}{2} \bigg)^{2} + 4 \alpha_{4} \bigg( \frac{L}{2} \bigg)^{3} + 5 \alpha_{5} \bigg( \frac{L}{2} \bigg)^{4} &= \theta_{2} \\
-    \alpha_{0} + \alpha_{1} (L) + \alpha_{2} (L)^{2} + \alpha_{3} (L)^{3} + \alpha_{4} (L)^{4} + \alpha_{5} (L)^{5} &= v_{3} \\
-    \alpha_{1} + 2 \alpha_{2} (L) + 3 \alpha_{3} (L)^{2} + 4 \alpha_{4} (L)^{3} + 5 \alpha_{5} (L)^{4} &= \theta_{3}
+    \alpha_{0} + \alpha_{1}(0) + \alpha_{2}(0)^{2} &= u_{1} \\
+    \alpha_{0} + \alpha_{1} \bigg( \frac{L}{2} \bigg) + \alpha_{2} \bigg( \frac{L}{2} \bigg)^{2} &= u_{2} \\
+    \alpha_{0} + \alpha_{1}(L) + \alpha_{2}(L)^{2} &= u_{3}
 \end{align}<p>simplificando</p>
 \begin{align}
-    \alpha_{0} &= v_{1} \\
-    \alpha_{1} &= \theta_{1} \\
-    \alpha_{0} + \frac{L}{2} \alpha_{1} + \frac{L^{2}}{4} \alpha_{2} + \frac{L^{3}}{8} \alpha_{3} + \frac{L^{4}}{16} \alpha_{4} + \frac{L^{5}}{32} \alpha_{5} &= v_{2} \\
-    \alpha_{1} + L \alpha_{2} + \frac{3 L^{2}}{4} \alpha_{3} + \frac{L^{3}}{2} \alpha_{4} + \frac{5 L^{4}}{16} \alpha_{5} &= \theta_{2} \\
-    \alpha_{0} + L \alpha_{1} + L^{2} \alpha_{2} + L^{3} \alpha_{3} + L^{4} \alpha_{4} + L^{5} \alpha_{5} &= v_{3} \\
-    \alpha_{1} + 2 L \alpha_{2} + 3 L^{2} \alpha_{3} + 4 L^{3} \alpha_{4} + 5 L^{4} \alpha_{5} &= \theta_{3}
+    \alpha_{0} &= u_{1} \\
+    \alpha_{0} + \frac{L}{2} \alpha_{1} + \frac{L^{2}}{4} \alpha_{2} &= u_{2}\\
+    \alpha_{0} + L \alpha_{1} + L^{2} \alpha_{1} &= u_{3}
 \end{align}<p>en forma matricial</p>
-\begin{equation}
+\begin{align}
     \begin{bmatrix}
-    1 & 0 & 0 & 0 & 0 & 0 \\
-    0 & 1 & 0 & 0 & 0 & 0 \\
-    1 & \frac{L}{2} & \frac{L^{2}}{4} & \frac{L^{3}}{8} & \frac{L^{4}}{16} & \frac{L^{5}}{32} \\
-    0 & 1 & L & \frac{3 L^{2}}{4} & \frac{L^{3}}{2} & \frac{5 L^{4}}{16} \\
-    1 & L & L^{2} & L^{3} & L^{4} & L^{5} \\
-    0 & 1 & 2 L & 3 L^{2} & 4 L^{3} & 5 L^{4}
+        1 & 0 & 0 \\
+        1 & \frac{L}{2} & \frac{L^{2}}{4} \\
+        1 & L & L^{2}
     \end{bmatrix}
     \begin{bmatrix}
         \alpha_{0} \\
         \alpha_{1} \\
-        \alpha_{2} \\
-        \alpha_{3} \\
-        \alpha_{4} \\
-        \alpha_{5}
+        \alpha_{2}
     \end{bmatrix} =
     \begin{bmatrix}
-        v_{1} \\
-        \theta_{1} \\
-        v_{2} \\
-        \theta_{2} \\
-        v_{3} \\
-        \theta_{3}
+        u_{1} \\
+        u_{2} \\
+        u_{3}
     \end{bmatrix}
-\end{equation}<p>resolviendo el sistema</p>
+\end{align}<p>resolviendo</p>
 \begin{equation}
     \begin{bmatrix}
         \alpha_{0} \\
         \alpha_{1} \\
-        \alpha_{2} \\
-        \alpha_{3} \\
-        \alpha_{4} \\
-        \alpha_{5}
+        \alpha_{2}
     \end{bmatrix} =
     \begin{bmatrix}
-        1 & 0 & 0 & 0 & 0 & 0 \\
-        0 & 1 & 0 & 0 & 0 & 0 \\
-        -\frac{23}{L^{2}} & -\frac{6}{L} & \frac{16}{L^{2}} & -\frac{8}{L} & \frac{7}{L^{2}} & -\frac{1}{L} \\
-        \frac{66}{L^{3}} & \frac{13}{L^{2}} & -\frac{32}{L^{3}} & \frac{32}{L^{2}} & -\frac{34}{L^{3}} & \frac{5}{L^{2}} \\
-        -\frac{68}{L^{4}} & -\frac{12}{L^{3}} & \frac{16}{L^{4}} & -\frac{40}{L^{3}} & \frac{52}{L^{4}} & -\frac{8}{L^{3}} \\
-        \frac{24}{L^{5}} & \frac{4}{L^{4}} & 0 & \frac{16}{L^{4}} & -\frac{24}{L^{5}} & \frac{4}{L^{4}}
+        1 & 0 & 0 \\
+        -\frac{3}{L} & \frac{4}{L} & -\frac{1}{L} \\
+        \frac{2}{L^{2}} & -\frac{4}{L^{2}} & \frac{2}{L^{2}}
     \end{bmatrix}
     \begin{bmatrix}
-        v_{1} \\
-        \theta_{1} \\
-        v_{2} \\
-        \theta_{2} \\
-        v_{3} \\
-        \theta_{3}
+        u_{1} \\
+        u_{2} \\
+        u_{3}
     \end{bmatrix}
 \end{equation}<p>reemplazando las incógnitas</p>
 \begin{equation}
-    v =
+    u =
     \begin{bmatrix}
-        1 & x & x^{2} & x^{3} & x^{4} & x^{5}
+        1 & x & x^{2}
     \end{bmatrix}
     \begin{bmatrix}
         \alpha_{0} \\
         \alpha_{1} \\
-        \alpha_{2} \\
-        \alpha_{3} \\
-        \alpha_{4} \\
-        \alpha_{5}
+        \alpha_{2}
     \end{bmatrix} =
     \begin{bmatrix}
-        1 & x & x^{2} & x^{3} & x^{4} & x^{5}
+        1 & x & x^{2}
     \end{bmatrix}
     \begin{bmatrix}
-        1 & 0 & 0 & 0 & 0 & 0 \\
-        0 & 1 & 0 & 0 & 0 & 0 \\
-        -\frac{23}{L^{2}} & -\frac{6}{L} & \frac{16}{L^{2}} & -\frac{8}{L} & \frac{7}{L^{2}} & -\frac{1}{L} \\
-        \frac{66}{L^{3}} & \frac{13}{L^{2}} & -\frac{32}{L^{3}} & \frac{32}{L^{2}} & -\frac{34}{L^{3}} & \frac{5}{L^{2}} \\
-        -\frac{68}{L^{4}} & -\frac{12}{L^{3}} & \frac{16}{L^{4}} & -\frac{40}{L^{3}} & \frac{52}{L^{4}} & -\frac{8}{L^{3}} \\
-        \frac{24}{L^{5}} & \frac{4}{L^{4}} & 0 & \frac{16}{L^{4}} & -\frac{24}{L^{5}} & \frac{4}{L^{4}}
+        1 & 0 & 0 \\
+        -\frac{3}{L} & \frac{4}{L} & -\frac{1}{L} \\
+        \frac{2}{L^{2}} & -\frac{4}{L^{2}} & \frac{2}{L^{2}}
     \end{bmatrix}
     \begin{bmatrix}
-        v_{1} \\
-        \theta_{1} \\
-        v_{2} \\
-        \theta_{2} \\
-        v_{3} \\
-        \theta_{3}
+        u_{1} \\
+        u_{2} \\
+        u_{3}
     \end{bmatrix} =
     \begin{bmatrix}
-    \frac{1}{L^{2}} {x}^{2} + \frac{66}{L^{3}} x^{3} - \frac {68}{L^{4}} x^{4} + \frac {24}{L^{5}} x^{5} &
-    x - \frac{6}{L} x^{2} + \frac{13}{L^{2}} x^{3} - \frac{12}{L^{3}} x^{4} + \frac{4}{L^{4}} x^{5} &
-    \frac{16}{L^{2}} x^{2} - \frac{32}{L^{3}} x^{3} + \frac{16}{L^{4}} x^{4} &
-    -\frac{8}{L} x^{2} + \frac{32}{L^{2}} x^{3} - \frac{40}{L^{3}} x^{4} + \frac{16}{L^{4}} x^{5} &
-    \frac{7}{L^{2}} x^{2} - \frac{34}{L^{3}} x^{3} + \frac{52}{L^{4}} x^{4} - \frac{24}{L^{5}} x^{5} &
-    -\frac{1}{L} x^{2} + \frac{5}{L^{2}} x^{3} - \frac{8}{L^{3}} x^{4} + \frac{4}{L^{4}} x^{5}
+        1 - \frac{3}{L} x + \frac{2}{L^{2}} x^{2} & \frac{4}{L} x - \frac{4}{L^{2}} x^{2} & -\frac{1}{L} x + \frac{2}{L^{2}} x^{2}
     \end{bmatrix}
     \begin{bmatrix}
-        v_{1} \\
-        \theta_{1} \\
-        v_{2} \\
-        \theta_{2} \\
-        v_{3} \\
-        \theta_{3}
+        u_{1} \\
+        u_{2} \\
+        u_{3}
     \end{bmatrix}
-\end{equation}<p>Reescribiendo $v$</p>
+\end{equation}<p>Reescribiendo $u$</p>
 \begin{equation}
-    v = \bigg( \frac{1}{L^{2}} {x}^{2} + \frac{66}{L^{3}} x^{3} - \frac {68}{L^{4}} x^{4} + \frac {24}{L^{5}} x^{5} \bigg) v_{1}
-    + \bigg( x - \frac{6}{L} x^{2} + \frac{13}{L^{2}} x^{3} - \frac{12}{L^{3}} x^{4} + \frac{4}{L^{4}} x^{5} \bigg) \theta_{1}
-    + \bigg( \frac{16}{L^{2}} x^{2} - \frac{32}{L^{3}} x^{3} + \frac{16}{L^{4}} x^{4} \bigg) v_{2}
-    + \bigg( -\frac{8}{L} x^{2} + \frac{32}{L^{2}} x^{3} - \frac{40}{L^{3}} x^{4} + \frac{16}{L^{4}} x^{5} \bigg) \theta_{2}
-    + \bigg( \frac{7}{L^{2}} x^{2} - \frac{34}{L^{3}} x^{3} + \frac{52}{L^{4}} x^{4} - \frac{24}{L^{5}} x^{5} \bigg) v_{3}
-    + \bigg( -\frac{1}{L} x^{2} + \frac{5}{L^{2}} x^{3} - \frac{8}{L^{3}} x^{4} + \frac{4}{L^{4}} x^{5} \bigg) \theta_{3}
-    = N_{1} v_{1} + N_{2} \theta_{1} + N_{3} v_{2} + N_{4} \theta_{2} + N_{5} v_{3} + N_{6} \theta_{3}
-\end{equation}<p></p>
-
+    u = \bigg( 1 - \frac{3}{L} x + \frac{2}{L^{2}} x^{2} \bigg) u_{1} + \bigg( \frac{4}{L} x - \frac{4}{L^{2}} x^{2} \bigg) u_{2} + \bigg( -\frac{1}{L} x + \frac{2}{L^{2}} x^{2} \bigg) u_{3} = N_{1} u_{1} + N_{2} u_{2} + N_{3} u_{3}
+\end{equation}
 </div>
 </div>
 </div>

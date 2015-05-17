@@ -3,7 +3,7 @@
 <head>
 
 <meta charset="utf-8" />
-<title>021_elemento_triangulo</title>
+<title>008_polinomios_lagrange_globales</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -177,198 +177,203 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Funciones-de-forma-triangulares">Funciones de forma triangulares<a class="anchor-link" href="#Funciones-de-forma-triangulares">&#182;</a></h1>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Elemento-de-tres-nodos">Elemento de tres nodos<a class="anchor-link" href="#Elemento-de-tres-nodos">&#182;</a></h3>\begin{equation}
+<h1 id="Funciones-de-forma-para-elementos-barra">Funciones de forma para elementos barra<a class="anchor-link" href="#Funciones-de-forma-para-elementos-barra">&#182;</a></h1><h3 id="Elemento-de-dos-nodos">Elemento de dos nodos<a class="anchor-link" href="#Elemento-de-dos-nodos">&#182;</a></h3>\begin{equation}
+    u = N_{1} u_{1} + N_{2} u_{2} = \sum_{i = 0}^{1} \alpha_{i} x^{i} = \alpha_{0} + \alpha_{1} x
+\end{equation}<p>en forma matricial</p>
+\begin{equation}
+    u = \alpha_{0} + \alpha_{1} x  =
     \begin{bmatrix}
-    & 1 & \\
-    x & & y
+        1 & x
     \end{bmatrix}
-\end{equation}<p>campo de desplazamientos</p>
+    \begin{bmatrix}
+        \alpha_{0} \\
+        \alpha_{1}
+    \end{bmatrix}
+\end{equation}<p>reemplazando los puntos $x_{1}$ y $x_{2}$</p>
 \begin{align}
-    u &= \alpha_{1} + \alpha_{2} x + \alpha_{3} y \\
-    v &= \alpha_{4} + \alpha_{5} x + \alpha_{6} y
+    \alpha_{0} + \alpha_{1} x_{1} &= u_{1} \\
+    \alpha_{0} + \alpha_{1} x_{2} &= u_{2}
 \end{align}<p>en forma matricial</p>
 \begin{equation}
     \begin{bmatrix}
-        u \\
-        v
+        1 & x_{1} \\
+        1 & x_{2}
+    \end{bmatrix}
+    \begin{bmatrix}
+        \alpha_{0} \\
+        \alpha_{1}
     \end{bmatrix} =
     \begin{bmatrix}
-        1 & x & y & 0 & 0 & 0 \\
-        0 & 0 & 0 & 1 & x & y
+        u_{1} \\
+        u_{2}
+    \end{bmatrix}
+\end{equation}<p>resolviendo el sistema</p>
+\begin{equation}
+    \begin{bmatrix}
+        \alpha_{0} \\
+        \alpha_{1}
+    \end{bmatrix} =
+    \begin{bmatrix}
+    \frac{x_{2}}{x_{2} - x_{1}} & -\frac{x_{1}}{x_{2} - x_{1}} \\
+    -\frac{1}{x_{2} - x_{1}} & \frac{1}{x_{2} - x_{1}}
     \end{bmatrix}
     \begin{bmatrix}
-        \alpha_{1} \\
-        \alpha_{2} \\
-        \alpha_{3} \\
-        \alpha_{4} \\
-        \alpha_{5} \\
-        \alpha_{6}
+        u_{1} \\
+        u_{2}
     \end{bmatrix}
-\end{equation}<p>reemplazando valores</p>
+\end{equation}<p>reemplazando las incógnitas</p>
+\begin{equation}
+    u =
+    \begin{bmatrix}
+        1 & x
+    \end{bmatrix}
+    \begin{bmatrix}
+        \alpha_{0} \\
+        \alpha_{1}
+    \end{bmatrix} =
+    \begin{bmatrix}
+        1 & x
+    \end{bmatrix}
+    \begin{bmatrix}
+    \frac{x_{2}}{x_{2} - x_{1}} & -\frac{x_{1}}{x_{2} - x_{1}} \\
+    -\frac{1}{x_{2} - x_{1}} & \frac{1}{x_{2} - x_{1}}
+    \end{bmatrix}
+    \begin{bmatrix}
+        u_{1} \\
+        u_{2}
+    \end{bmatrix} =
+    \begin{bmatrix}
+        \frac{x_{2}}{x_{2} - x_{1}} - \frac{1}{x_{2} - x_{1}} x &
+        -\frac{x_{1}}{x_{2} - x_{1}} + \frac{1}{x_{2} - x_{1}} x
+    \end{bmatrix}
+    \begin{bmatrix}
+        u_{1} \\
+        u_{2}
+    \end{bmatrix}
+\end{equation}<p>Reescribiendo $u$</p>
+\begin{equation}
+    u = \bigg( \frac{x_{2}}{x_{2} - x_{1}} - \frac{1}{x_{2} - x_{1}} x \bigg) u_{1} +
+        \bigg( -\frac{x_{1}}{x_{2} - x_{1}} + \frac{1}{x_{2} - x_{1}} x \bigg) u_{2}
+        = N_{1} u_{1} + N_{2} u_{2}
+\end{equation}<h3 id="Elemento-de-tres-nodos">Elemento de tres nodos<a class="anchor-link" href="#Elemento-de-tres-nodos">&#182;</a></h3>\begin{equation}
+    u = N_{1} u_{1} + N_{2} u_{2} + N_{3} u_{3} = \sum_{i = 0}^{2} \alpha_{i} x^{i} = \alpha_{0} + \alpha_{1} x + \alpha_{2} x^{2}
+\end{equation}<p>en forma matricial</p>
+\begin{equation}
+    u = \alpha_{0} + \alpha_{1} x + \alpha_{2} x^{2} =
+    \begin{bmatrix}
+        1 & x & x^{2}
+    \end{bmatrix}
+    \begin{bmatrix}
+        \alpha_{0} \\
+        \alpha_{1} \\
+        \alpha_{2}
+    \end{bmatrix}
+\end{equation}<p>reemplazando los puntos $x_{1}$, $x_{2}$ y $x_{3}$</p>
 \begin{align}
-    \alpha_{1} + \alpha_{2} x_{1} + \alpha_{3} y_{1} &= u_{1} \\
-    \alpha_{4} + \alpha_{5} x_{1} + \alpha_{6} y_{1} &= v_{1} \\
-    \alpha_{1} + \alpha_{2} x_{2} + \alpha_{3} y_{2} &= u_{2} \\
-    \alpha_{4} + \alpha_{5} x_{2} + \alpha_{6} y_{2} &= v_{2} \\
-    \alpha_{1} + \alpha_{2} x_{3} + \alpha_{3} y_{3} &= u_{3} \\
-    \alpha_{4} + \alpha_{5} x_{3} + \alpha_{6} y_{3} &= v_{3}
-\end{align}<p>en forma matricial:</p>
-\begin{equation}
+    \alpha_{0} + \alpha_{1} x_{1} + \alpha_{2} x_{1}^{2} &= u_{1} \\
+    \alpha_{0} + \alpha_{1} x_{2} + \alpha_{2} x_{2}^{2} &= u_{2} \\
+    \alpha_{0} + \alpha_{1} x_{3} + \alpha_{2} x_{3}^{2} &= u_{3}
+\end{align}<p>en forma matricial</p>
+\begin{align}
     \begin{bmatrix}
-        1 & x_{1} & y_{1} & 0 & 0 & 0 \\
-        0 & 0 & 0 & 1 & x_{1} & y_{1} \\
-        1 & x_{2} & y_{2} & 0 & 0 & 0 \\
-        0 & 0 & 0 & 1 & x_{2} & y_{2} \\
-        1 & x_{3} & y_{3} & 0 & 0 & 0 \\
-        0 & 0 & 0 & 1 & x_{3} & y_{3}
+        1 & x_{1} & x_{1}^{2} \\
+        1 & x_{2} & x_{2}^{2} \\
+        1 & x_{3} & x_{3}^{2}
     \end{bmatrix}
     \begin{bmatrix}
+        \alpha_{0} \\
         \alpha_{1} \\
-        \alpha_{2} \\
-        \alpha_{3} \\
-        \alpha_{4} \\
-        \alpha_{5} \\
-        \alpha_{6}
+        \alpha_{2}
     \end{bmatrix} =
     \begin{bmatrix}
         u_{1} \\
-        v_{1} \\
         u_{2} \\
-        v_{2} \\
-        u_{3} \\
-        v_{3}
+        u_{3}
     \end{bmatrix}
-\end{equation}<p>resolviendo el sistema:</p>
+\end{align}<p>resolviendo</p>
 \begin{equation}
     \begin{bmatrix}
+        \alpha_{0} \\
         \alpha_{1} \\
-        \alpha_{2} \\
-        \alpha_{3} \\
-        \alpha_{4} \\
-        \alpha_{5} \\
-        \alpha_{6}
+        \alpha_{2}
     \end{bmatrix} =
     \begin{bmatrix}
-        \frac{x_{2} y_{3} - x_{3} y_{2}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 & \frac{y_{1} x_{3} - x_{1} y_{3}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 & \frac{x_{1} y_{2} - y_{1} x_{2}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 \\
-        \frac{y_{2} - y_{3}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 & \frac{y_{3} - y_{1}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 & \frac{y_{1} - y_{2}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 \\
-        \frac{x_{3} - x_{2}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 & \frac{x_{1} - x_{3}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 & \frac{x_{2} - x_{1}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 \\
-        0 & \frac{x_{2} y_{3} - x_{3} y_{2}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 & \frac{y_{1} x_{3} - x_{1} y_{3}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 & \frac{x_{1} y_{2} - y_{1} x_{2}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} \\
-        0 & \frac{y_{2} - y_{3}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 & \frac{y_{3} - y_{1}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 & \frac{y_{1} - y_{2}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} \\
-        0 & \frac{x_{3} - x_{2}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 & \frac{x_{1} - x_{3}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 & \frac{x_{2} - x_{1}} {y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}}
+        \frac{x_{2} x_{3}}{x_{1}^{2} - x_{1} x_{2} - x_{1} x_{3} + x_{2} x_{3}} &
+        -\frac{x_{1}x_{3}}{x_{1} x_{2} - x_{1} x_{3} - x_{2}^{2} + x_{2} x_{3}} &
+        \frac{x_{1} x_{2}}{x_{1} x_{2} - x_{1} x_{3} - x_{2} x_{3} + x_{3}^{2}} \\
+        -\frac{x_{2} + x_{3}}{x_{1}^{2} - x_{1} x_{2} - x_{1} x_{3} + x_{2} x_{3}} &
+        \frac{x_{1} + x_{3}}{x_{1} x_{2} - x_{1} x_{3} - x_{2}^{2} + x_{2} x_{3}} &
+        -\frac{x_{1} + x_{2}}{x_{1} x_{2} - x_{1} x_{3} - x_{2} x_{3} + x_{3}^{2}} \\
+        \frac{1}{x_{1}^{2} - x_{1} x_{2} - x_{1} x_{3} + x_{2} x_{3}} &
+        -\frac{1}{x_{1} x_{2} - x_{1} x_{3} - x_{2}^{2} + x_{2} x_{3}} &
+        \frac{1}{x_{1} x_{2} - x_{1} x_{3} - x_{2} x_{3} + x_{3}^{2}}
     \end{bmatrix}
     \begin{bmatrix}
         u_{1} \\
-        v_{1} \\
         u_{2} \\
-        v_{2} \\
-        u_{3} \\
-        v_{3}
+        u_{3}
     \end{bmatrix}
-\end{equation}<p>reemplazando:</p>
+\end{equation}<p>reemplazando las incógnitas</p>
 \begin{equation}
     u =
     \begin{bmatrix}
-        1 & x & y & 0 & 0 & 0 \\
-        0 & 0 & 0 & 1 & x & y
+        1 & x & x^{2}
     \end{bmatrix}
     \begin{bmatrix}
-        \frac{x_{2} y_{3} - x_{3} y_{2}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 & \frac{y_{1} x_{3} - x_{1} y_{3}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 & \frac{x_{1} y_{2} - y_{1} x_{2}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 \\
-        \frac{y_{2} - y_{3}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 & \frac{y_{3} - y_{1}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 & \frac{y_{1} - y_{2}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 \\
-        \frac{x_{3} - x_{2}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 & \frac{x_{1} - x_{3}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 & \frac{x_{2} - x_{1}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 \\
-        0 & \frac{x_{2} y_{3} - x_{3} y_{2}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 & \frac{y_{1} x_{3} - x_{1} y_{3}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 & \frac{x_{1} y_{2} - y_{1} x_{2}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} \\
-        0 & \frac{y_{2} - y_{3}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 & \frac{y_{3} - y_{1}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 & \frac{y_{1} - y_{2}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} \\
-        0 & \frac{x_{3} - x_{2}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 & \frac{x_{1} - x_{3}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 & \frac{x_{2} - x_{1}} {y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}}
+        \alpha_{0} \\
+        \alpha_{1} \\
+        \alpha_{2}
+    \end{bmatrix} =
+    \begin{bmatrix}
+        1 & x & x^{2}
     \end{bmatrix}
     \begin{bmatrix}
-        u_{1} \\
-        v_{1} \\
-        u_{2} \\
-        v_{2} \\
-        u_{3} \\
-        v_{3}
-    \end{bmatrix}
-\end{equation}<p>multiplicando:</p>
-\begin{equation}
-    u =
-    \begin{bmatrix}
-        \frac{x_{2} y_{3} - x_{3} y_{2}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} + \frac{(y_{2} - y_{3}) x}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} + \frac{(x_{3} - x_{2}) y}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 & \frac{x_{1} y_{1} - y_{3} x_{3}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} + \frac{(y_{3} - y_{1}) x}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} + \frac{(x_{1} - x_{3}) y}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 & \frac{x_{1} y_{2} - y_{1} x_{2}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} + \frac{(y_{1} - y_{2}) x}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} + \frac{(x_{2} - x_{1}) y}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 \\
-        0 & \frac{x_{2} y_{3} - x_{3} y_{2}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} + \frac{(y_{2} - y_{3}) x}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} + \frac{(x_{3} - x_{2}) y}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 & \frac{x_{1} y_{1} - y_{3} x_{3}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} + \frac{(y_{3} - y_{1}) x}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} + \frac{(x_{1} - x_{3}) y}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 & \frac{x_{1} y_{2} - y_{1} x_{2}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} + \frac{(y_{1} - y_{2}) x}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} + \frac{(x_{2} - x_{1}) y}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}}
+        \frac{x_{2} x_{3}}{x_{1}^{2} - x_{1} x_{2} - x_{1} x_{3} + x_{2} x_{3}} &
+        -\frac{x_{1}x_{3}}{x_{1} x_{2} - x_{1} x_{3} - x_{2}^{2} + x_{2} x_{3}} &
+        \frac{x_{1} x_{2}}{x_{1} x_{2} - x_{1} x_{3} - x_{2} x_{3} + x_{3}^{2}} \\
+        -\frac{x_{2} + x_{3}}{x_{1}^{2} - x_{1} x_{2} - x_{1} x_{3} + x_{2} x_{3}} &
+        \frac{x_{1} + x_{3}}{x_{1} x_{2} - x_{1} x_{3} - x_{2}^{2} + x_{2} x_{3}} &
+        -\frac{x_{1} + x_{2}}{x_{1} x_{2} - x_{1} x_{3} - x_{2} x_{3} + x_{3}^{2}} \\
+        \frac{1}{x_{1}^{2} - x_{1} x_{2} - x_{1} x_{3} + x_{2} x_{3}} &
+        -\frac{1}{x_{1} x_{2} - x_{1} x_{3} - x_{2}^{2} + x_{2} x_{3}} &
+        \frac{1}{x_{1} x_{2} - x_{1} x_{3} - x_{2} x_{3} + x_{3}^{2}}
     \end{bmatrix}
     \begin{bmatrix}
         u_{1} \\
-        v_{1} \\
         u_{2} \\
-        v_{2} \\
-        u_{3} \\
-        v_{3}
-    \end{bmatrix}
-\end{equation}<p>El área de un triángulo con vértices $(x_{1}, y_{1})$, $(x_{2}, y_{2})$ y $(x_{3}, y_{3})$ es:</p>
-\begin{equation}
-    A = \frac{1}{2} 
-    \begin{vmatrix}
-        x_{1} & y_{1} & 1 \\
-        x_{2} & y_{2} & 1 \\
-        x_{3} & y_{3} & 1
-    \end{vmatrix} =
-    \frac{1}{2} (y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2})
-\end{equation}<p>reemplazando</p>
-\begin{equation}
-    u = \frac{1}{2 A}
+        u_{3}
+    \end{bmatrix} =
     \begin{bmatrix}
-        (x_{2} y_{3} - x_{3} y_{2}) + (y_{2} - y_{3}) x + (x_{3} - x_{2}) y & 0 & (x_{1} y_{1} - y_{3} x_{3}) + (y_{3} - y_{1}) x + (x_{1} - x_{3}) y & 0 & (x_{1} y_{2} - y_{1} x_{2}) + (y_{1} - y_{2}) x + (x_{2} - x_{1}) y & 0 \\
-        0 & (x_{2} y_{3} - x_{3} y_{2}) + (y_{2} - y_{3}) x + (x_{3} - x_{2}) y & 0 & (x_{1} y_{1} - y_{3} x_{3}) + (y_{3} - y_{1}) x + (x_{1} - x_{3}) y & 0 & (x_{1} y_{2} - y_{1} x_{2}) + (y_{1} - y_{2}) x + (x_{2} - x_{1}) y
+        \frac{x_{2} x_{3}}{x_{1}^{2} - x_{1} x_{2} -x_{1} x_{3} + x_{2} x_{3}}
+        - \frac{x_{2} + x_{3}}{x_{1}^{2} - x_{1} x_{2} - x_{1} x_{3} + x_{2} x_{3}} x
+        + \frac{1}{x_{1}^{2} - x_{1} x_{2} - x_{1} x_{3} + x_{2} x_{3}} x^{2} &
+        - \frac{x_{1} x_{3}}{x_{1} x_{2} - x_{1} x_{3} - x_{2}^{2} + x_{2} x_{3}}
+        + \frac{x_{1} + x_{3}}{x_{1} x_{2} - x_{1} x_{3} - x_{2}^{2} + x_{2} x_{3}} x
+        - \frac{1}{x_{1} x_{2} - x_{1} x_{3} - x_{2}^{2} + x_{2} x_{3}} x^{2} &
+        \frac{x_{1} x_{2}}{x_{1} x_{2} - x_{1} x_{3} - x_{2} x_{3} + x_{3}^{2}}
+        - \frac{x_{1} + x_{2}}{x_{1} x_{2} - x_{1} x_{3} - x_{2} x_{3} + x_{3}^{2}} x
+        + \frac{1}{x_{1} x_{2} - x_{1} x_{3} - x_{2} x_{3} + x_{3}^{2}} x^{2}
     \end{bmatrix}
     \begin{bmatrix}
         u_{1} \\
-        v_{1} \\
         u_{2} \\
-        v_{2} \\
-        u_{3} \\
-        v_{3}
+        u_{3}
     \end{bmatrix}
-\end{equation}<p>En forma matricial:</p>
+\end{equation}<p>Reescribiendo $u$</p>
 \begin{equation}
-    u =
-    \begin{bmatrix}
-        N_{1} & 0 & N_{2} & 0 & N_{3} & 0 \\
-        0 & N_{1} & 0 & N_{2} & 0 & N_{3}
-    \end{bmatrix}
-    \begin{bmatrix}
-        u_{1} \\
-        v_{1} \\
-        u_{2} \\
-        v_{2} \\
-        u_{3} \\
-        v_{3}
-    \end{bmatrix}
-\end{equation}<p>En forma matricial reducida:</p>
-\begin{equation}
-    u = N \ u
+    u = \bigg( \frac{x_{2} x_{3}}{x_{1}^{2} - x_{1} x_{2} -x_{1} x_{3} + x_{2} x_{3}}
+    - \frac{x_{2} + x_{3}}{x_{1}^{2} - x_{1} x_{2} - x_{1} x_{3} + x_{2} x_{3}} x
+    + \frac{1}{x_{1}^{2} - x_{1} x_{2} - x_{1} x_{3} + x_{2} x_{3}} x^{2} \bigg) u_{1}
+    + \bigg( -\frac{x_{1} x_{3}}{x_{1} x_{2} - x_{1} x_{3} - x_{2}^{2} + x_{2} x_{3}}
+    + \frac{x_{1} + x_{3}}{x_{1} x_{2} - x_{1} x_{3} - x_{2}^{2} + x_{2} x_{3}} x
+    - \frac{1}{x_{1} x_{2} - x_{1} x_{3} - x_{2}^{2} + x_{2} x_{3}} x^{2} \bigg) u_{2}
+    + \bigg( \frac{x_{1} x_{2}}{x_{1} x_{2} - x_{1} x_{3} - x_{2} x_{3} + x_{3}^{2}}
+    - \frac{x_{1} + x_{2}}{x_{1} x_{2} - x_{1} x_{3} - x_{2} x_{3} + x_{3}^{2}} x
+    + \frac{1}{x_{1} x_{2} - x_{1} x_{3} - x_{2} x_{3} + x_{3}^{2}} x^{2} \bigg) u_{3}
+    = N_{1} u_{1} + N_{2} u_{2} + N_{3} u_{3}
 \end{equation}
 </div>
 </div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-julia"><pre>
-</pre></div>
-
-</div>
-</div>
-</div>
-
 </div>
 
     </div>

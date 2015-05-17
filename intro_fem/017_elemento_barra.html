@@ -3,7 +3,7 @@
 <head>
 
 <meta charset="utf-8" />
-<title>016_ejemplo_viga</title>
+<title>017_elemento_barra</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -177,33 +177,128 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Ejemplo-1">Ejemplo 1<a class="anchor-link" href="#Ejemplo-1">&#182;</a></h1><p>$L = 100 \ \text{cm}$, $b = 4 \ \text{cm}$, $h = 6 \ \text{cm}$ y $E = 200 \ \text{Kg}/\text{cm}^{2}$</p>
-
+<h1 id="Elemento-barra-en-torsi&#243;n">Elemento barra en torsi&#243;n<a class="anchor-link" href="#Elemento-barra-en-torsi&#243;n">&#182;</a></h1><p>Ecuación diferencial de una barra circular</p>
+\begin{equation}
+    G I_{p} \frac{d^{2} \theta(x)}{d x^{2}} + m(x) = 0
+\end{equation}<p>usando el método de Galerkin</p>
+\begin{equation}
+    \int_{0}^{L} R(x) W(x) \ dx = \int_{0}^{L} \bigg( G I_{p} \frac{d^{2} \theta(x)}{d x^{2}} + m(x) \bigg) W(x) \ dx = 0
+\end{equation}<p>puede escribirse como la suma de integrales</p>
+\begin{equation}
+    \int_{0}^{L} G I_{p} \frac{d^{2} \theta(x)}{d x^{2}} W(x) \ dx + \int_{0}^{L} m(x) W(x) \ dx = 0
+\end{equation}<p>integrando por partes para reducir el orden de la derivada</p>
+\begin{align}
+    \int u \ dv &= uv - \int v \ du \\
+    \int_{0}^{L} W(x) G I_{p} \frac{d^{2} \theta(x)}{d x^{2}} \ dx &= \bigg( W(x) G I_{p} \frac{d \theta(x)}{d x} \bigg) \bigg|_{0}^{L} - \int_{0}^{L} G I_{p} \frac{d \theta(x)}{d x} \frac{d W(x)}{d x} \ dx
+\end{align}<p>reemplazando</p>
+\begin{equation}
+    \bigg( G I_{p} \frac{d \theta(x)}{d x} W(x) \bigg) \bigg|_{0}^{L} - \int_{0}^{L} G I_{p} \frac{d \theta(x)}{d x} \frac{d W(x)}{d x}\ dx + \int_{0}^{L} m(x) W(x) \ dx = 0
+\end{equation}<p>reordenando</p>
+\begin{equation}
+    \int_{0}^{L} G I_{p} \frac{d \theta(x)}{d x} \frac{d W(x)}{d x} \ dx = \int_{0}^{L} m(x) W(x) \ dx + \bigg( G I_{p} \frac{d \theta(x)}{d x} W(x) \bigg) \bigg|_{0}^{L}
+\end{equation}<p>para la solución se usará un elemento de dos nodos</p>
+\begin{align}
+    \theta(x) &= N_{1} \theta_{1} + N_{2} \theta_{2} \\ 
+    \frac{d \theta(x)}{d x} &= \frac{d N_{1}}{d x} \theta_{1} + \frac{d N_{2}}{d x} \theta_{2} \\
+    W(x) &= N_{1} \delta \theta_{1} + N_{2} \delta \theta_{2} \\
+    \frac{d W(x)}{d x} &= \frac{d N_{1}}{d x} \delta \theta_{1} + \frac{d N_{2}}{d x} \delta \theta_{2}
+\end{align}<p>reemplazando</p>
+\begin{equation}
+    \int_{0}^{L} G I_{p} \bigg( \frac{d N_{1}}{d x} \theta_{1} + \frac{d N_{2}}{d x} \theta_{2} \bigg) \bigg( \frac{d N_{1}}{d x} \delta \theta_{1} + \frac{d N_{2}}{d x} \delta \theta_{2} \bigg) \ dx = \int_{0}^{L} m(x) (N_{1} \delta \theta_{1} + N_{2} \delta \theta_{2}) \ dx + \bigg[ G I_{p} \frac{d \theta(x)}{d x} (N_{1} \delta \theta_{1} + N_{2} \delta \theta_{2}) \bigg] \bigg|_{0}^{L}
+\end{equation}<p>reemplazando $G I_{p} \frac{d \theta(x)}{d x} = M(x)$</p>
+\begin{equation}
+    \int_{0}^{L} G I_{p} \bigg( \frac{d N_{1}}{d x} \theta_{1} + \frac{d N_{2}}{d x} \theta_{2} \bigg) \bigg( \frac{d N_{1}}{d x} \delta \theta_{1} + \frac{d N_{2}}{d x} \delta \theta_{2} \bigg) \ dx = \int_{0}^{L} m(x) (N_{1} \delta \theta_{1} + N_{2} \delta \theta_{2}) \ dx + \bigg[ M(x) (N_{1} \delta \theta_{1} + N_{2} \delta \theta_{2}) \bigg] \bigg|_{0}^{L}
+\end{equation}<p>multiplicando</p>
+\begin{equation}
+    \int_{0}^{L} G I_{p} \frac{d N_{1}}{d x} \frac{d N_{1}}{d x} \theta_{1} \delta \theta_{1} + G I_{p} \frac{d N_{1}}{d x} \frac{d N_{2}}{d x} \theta_{2} \delta \theta_{1} + G I_{p} \frac{d N_{2}}{d x} \frac{d N_{1}}{d x} \theta_{1} \delta \theta_{2} + G I_{p} \frac{d N_{2}}{d x} \frac{d N_{2}}{d x} \theta_{2} \delta \theta_{2} \ dx = \int_{0}^{L} m(x) N_{1} \delta \theta_{1} + m(x) N_{2} \delta \theta_{2} \ dx + \bigg( M(x) N_{1} \delta \theta_{1} + M(x) N_{2} \delta \theta_{2} \bigg) \bigg|_{0}^{L}
+\end{equation}<p>reemplazando los límites de integración en el lado derecho</p>
+\begin{equation}
+    \int_{0}^{L} G I_{p} \frac{d N_{1}}{d x} \frac{d N_{1}}{d x} \theta_{1} \delta \theta_{1} + G I_{p} \frac{d N_{1}}{d x} \frac{d N_{2}}{d x} \theta_{2} \delta \theta_{1} + G I_{p} \frac{d N_{2}}{d x} \frac{d N_{1}}{d x} \theta_{1} \delta \theta_{2} + G I_{p} \frac{d N_{2}}{d x} \frac{d N_{2}}{d x} \theta_{2} \delta \theta_{2} \ dx = \int_{0}^{L} m(x) N_{1} \delta \theta_{1} + m(x) N_{2} \delta \theta_{2} \ dx + ( M(L) N_{1}(L) \delta \theta_{1} + M(L) N_{2}(L) \delta \theta_{2} ) - ( M(0) N_{1}(0) \delta \theta_{1} + M(0) N_{2}(0) \delta \theta_{2} )
+\end{equation}<p>reordenando y agrupando</p>
+\begin{equation}
+    \int_{0}^{L} G I_{p} \bigg( \frac{d N_{1}}{d x} \frac{d N_{1}}{d x} \theta_{1} + \frac{d N_{1}}{d x} \frac{d N_{2}}{d x} \theta_{2} \bigg) \delta \theta_{1} + G I_{p} \bigg( \frac{d N_{2}}{d x} \frac{d N_{1}}{d x} \theta_{1} + \frac{d N_{2}}{d x} \frac{d N_{2}}{d x} \theta_{2} \bigg) \delta \theta_{2} \ dx = \int_{0}^{L} m(x) N_{1} \delta \theta_{1} + m(x) N_{2} \delta \theta_{2} \ dx + ( M(L) N_{1}(L) - M(0) N_{1}(0) ) \delta \theta_{1} + ( M(L) N_{2}(L) - M(0) N_{2}(0) ) \delta \theta_{2}
+\end{equation}<p>formando un sistema de ecuaciones</p>
+\begin{align}
+    \int_{0}^{L} G I_{p} \bigg( \frac{d N_{1}}{d x} \frac{d N_{1}}{d x} \theta_{1} + \frac{d N_{1}}{d x} \frac{d N_{2}}{d x} \theta_{2} \bigg) \delta \theta_{1} \ dx = \int_{0}^{L} m(x) N_{1} \delta \theta_{1} \ dx + ( M(L) N_{1}(L) - M(0) N_{1}(0) ) \delta \theta_{1} \\
+    \int_{0}^{L} G I_{p} \bigg( \frac{d N_{2}}{d x} \frac{d N_{1}}{d x} \theta_{1} + \frac{d N_{2}}{d x} \frac{d N_{2}}{d x} \theta_{2} \bigg) \delta \theta_{2} \ dx = \int_{0}^{L} m(x) N_{2} \delta \theta_{2} \ dx + ( M(L) N_{2}(L) - M(0) N_{2}(0) ) \delta \theta_{2}
+\end{align}<p>las constantes se simplifican en ambos lados</p>
+\begin{align}
+    \int_{0}^{L} G I_{p} \bigg( \frac{d N_{1}}{d x} \frac{d N_{1}}{d x} \theta_{1} + \frac{d N_{1}}{d x} \frac{d N_{2}}{d x} \theta_{2} \bigg) \ dx = \int_{0}^{L} m(x) N_{1} \ dx + M(L) N_{1}(L) - M(0) N_{1}(0) \\
+    \int_{0}^{L} G I_{p} \bigg( \frac{d N_{2}}{d x} \frac{d N_{1}}{d x} \theta_{1} + \frac{d N_{2}}{d x} \frac{d N_{2}}{d x} \theta_{2} \bigg) \ dx = \int_{0}^{L} m(x) N_{2} \ dx + M(L) N_{2}(L) - M(0) N_{2}(0)
+\end{align}<p>las funciones de forma tienen los siguientes valores</p>
+\begin{matrix}
+    N_{1}(L) = 0 & N_{1}(0) = 1 \\
+    N_{2}(L) = 1 & N_{2}(0) = 0
+\end{matrix}<p>reemplazando</p>
+\begin{align}
+    \int_{0}^{L} G I_{p} \bigg( \frac{d N_{1}}{d x} \frac{d N_{1}}{d x} \theta_{1} + \frac{d N_{1}}{d x} \frac{d N_{2}}{d x} \theta_{2} \bigg) \ dx = \int_{0}^{L} m(x) N_{1} \ dx - M(0) \\
+    \int_{0}^{L} G I_{p} \bigg( \frac{d N_{2}}{d x} \frac{d N_{1}}{d x} \theta_{1} + \frac{d N_{2}}{d x} \frac{d N_{2}}{d x} \theta_{2} \bigg) \ dx = \int_{0}^{L} m(x) N_{2} \ dx + M(L)
+\end{align}<p>en forma matricial</p>
+\begin{equation}
+    \int_{0}^{L} G I_{p}
+    \begin{bmatrix}
+        \frac{d N_{1}}{d x} \frac{d N_{1}}{d x} & \frac{d N_{1}}{d x} \frac{d N_{2}}{d x} \\
+        \frac{d N_{2}}{d x} \frac{d N_{1}}{d x} & \frac{d N_{2}}{d x} \frac{d N_{2}}{d x}
+    \end{bmatrix} dx
+    \begin{bmatrix}
+    \theta_{1} \\
+    \theta_{2}
+    \end{bmatrix} = \int_{0}^{L} m(x)
+    \begin{bmatrix}
+    N_{1} \\
+    N_{2}
+    \end{bmatrix} dx +
+    \begin{bmatrix}
+    -M(0) \\
+    M(L)
+    \end{bmatrix}
+\end{equation}<p>cambiando $-M(0)$ y $M(L)$ por momentos en los nodos 1 y 2</p>
+\begin{equation}
+    \int_{0}^{L} G I_{p}
+    \begin{bmatrix}
+        \frac{d N_{1}}{d x} \frac{d N_{1}}{d x} & \frac{d N_{1}}{d x} \frac{d N_{2}}{d x} \\
+        \frac{d N_{2}}{d x} \frac{d N_{1}}{d x} & \frac{d N_{2}}{d x} \frac{d N_{2}}{d x}
+    \end{bmatrix} dx
+    \begin{bmatrix}
+    \theta_{1} \\
+    \theta_{2}
+    \end{bmatrix} = \int_{0}^{L} m(x)
+    \begin{bmatrix}
+    N_{1} \\
+    N_{2}
+    \end{bmatrix} dx +
+    \begin{bmatrix}
+    M_{1} \\
+    M_{2}
+    \end{bmatrix}
+\end{equation}<p>factorizando matrices</p>
+\begin{equation}
+    \int_{0}^{L}
+    \begin{bmatrix}
+        \frac{d N_{1}}{d x} \\
+        \frac{d N_{2}}{d x}
+    \end{bmatrix} G I_{p}
+    \begin{bmatrix}
+        \frac{d N_{1}}{d x} & \frac{d N_{2}}{d x}
+    \end{bmatrix} dx
+    \begin{bmatrix}
+    \theta_{1} \\
+    \theta_{2}
+    \end{bmatrix} = \int_{0}^{L} m(x)
+    \begin{bmatrix}
+    N_{1} \\
+    N_{2}
+    \end{bmatrix} dx +
+    \begin{bmatrix}
+    M_{1} \\
+    M_{2}
+    \end{bmatrix}
+\end{equation}<p>en forma compacta</p>
+\begin{equation}
+    \int_{0}^{L} B^{T} D \ B \ dx \ \theta = \int_{0}^{L} m \ N^{T} dx + f
+\end{equation}
 </div>
 </div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><img align="left" src="imagenes/016_ejemplo_viga_1.svg"></p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-julia"><pre>
-</pre></div>
-
-</div>
-</div>
-</div>
-
 </div>
 
     </div>

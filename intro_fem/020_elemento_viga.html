@@ -3,7 +3,7 @@
 <head>
 
 <meta charset="utf-8" />
-<title>018_coordenadas_naturales</title>
+<title>020_elemento_viga</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -177,7 +177,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Elementos-barra">Elementos barra<a class="anchor-link" href="#Elementos-barra">&#182;</a></h1>
+<h1 id="Elemento-viga">Elemento viga<a class="anchor-link" href="#Elemento-viga">&#182;</a></h1>
 </div>
 </div>
 </div>
@@ -186,272 +186,169 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Elemento-de-dos-nodos">Elemento de dos nodos<a class="anchor-link" href="#Elemento-de-dos-nodos">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
+<p>Ecuación diferencial de una viga</p>
 \begin{equation}
-    u = \alpha_{0} + \alpha_{1} \xi  =
-    \begin{bmatrix}
-        1 & \xi
-    \end{bmatrix}
-    \begin{bmatrix}
-        \alpha_{0} \\
-        \alpha_{1}
-    \end{bmatrix}
-\end{equation}<p>reemplazando los valores $\xi = -1$ y $\xi = 1$</p>
+    EI \frac{d^{4} v(x)}{d x^{4}} - q(x) = 0
+\end{equation}<p>usando el método de Galerkin</p>
+\begin{equation}
+    \int_{0}^{L} R(x) W(x) \ dx = \int_{0}^{L} \bigg( EI \frac{d^{4} v(x)}{d x^{4}} - q(x) \bigg) W(x) \ dx = 0
+\end{equation}<p>puede escribirse como la suma de integrales</p>
+\begin{equation}
+    \int_{0}^{L} EI \frac{d^{4} v(x)}{d x^{4}} W(x) \ dx - \int_{0}^{L} q(x) W(x) \ dx = 0
+\end{equation}<p>integrando por partes para reducir el orden de la derivada</p>
 \begin{align}
-    \alpha_{0} + \alpha_{1}(-1) &= u_{1} \\
-    \alpha_{0} + \alpha_{1}(1) &= u_{2}
-\end{align}<p>simplificando</p>
+    \int u \ dv &= uv - \int v \ du \\
+    \int_{0}^{L} W(x) E I \frac{d^{4} v(x)}{d x^{4}} \ dx &= \bigg( W(x) E I \frac{d^{3} v(x)}{d x^{3}} \bigg) \bigg|_{0}^{L} - \int_{0}^{L} E I \frac{d^{3} v(x)}{d x^{3}} \frac{d W(x)}{d x} \ dx
+\end{align}<p>integrando por partes para reducir el orden de la derivada</p>
 \begin{align}
-    \alpha_{0} - \alpha_{1} &= u_{1} \\
-    \alpha_{0} + \alpha_{1} &= u_{2}
+    \int u \ dv &= uv - \int v \ du \\
+    \int_{0}^{L} \frac{d W(x)}{d x} E I \frac{d^{3} v(x)}{d x^{3}} \ dx &= \bigg( \frac{d W(x)}{d x} E I \frac{d^{2} v(x)}{d x^{2}} \bigg) \bigg|_{0}^{L} - \int_{0}^{L} E I \frac{d^{2} v(x)}{d x^{2}} \frac{d^{2} W(x)}{d x^{2}} \ dx
+\end{align}<p>reemplazando</p>
+\begin{equation}
+    \bigg( E I \frac{d^{3} v(x)}{d x^{3}} W(x) \bigg) \bigg|_{0}^{L} - \bigg( E I \frac{d^{2} v(x)}{d x^{2}} \frac{d W(x)}{d x} \bigg) \bigg|_{0}^{L} + \int_{0}^{L} E I \frac{d^{2} v(x)}{d x^{2}} \frac{d^{2} W(x)}{d x^{2}} \ dx - \int_{0}^{L} q(x) W(x) \ dx = 0
+\end{equation}<p>reordenando</p>
+\begin{equation}
+    \int_{0}^{L} E I \frac{d^{2} v(x)}{d x^{2}} \frac{d^{2} W(x)}{d x^{2}} \ dx = \int_{0}^{L} q(x) W(x) \ dx - \bigg( E I \frac{d^{3} v(x)}{d x^{3}} W(x) - E I \frac{d^{2} v(x)}{d x^{2}} \frac{d W(x)}{d x} \bigg) \bigg|_{0}^{L}
+\end{equation}<p>para la solución se usará un elemento de dos nodos</p>
+\begin{align}
+    v(x) &= N_{1} v_{1} + N_{2} \theta_{1} + N_{3} v_{2} + N_{4} \theta_{2} \\ 
+    \frac{d^{2} v(x)}{d x^{2}} &= \frac{d^{2} N_{1}}{d x^{2}} v_{1} + \frac{d^{2} N_{2}}{d x^{2}} \theta_{1} + \frac{d^{2} N_{3}}{d x^{2}} v_{2} + \frac{d^{2} N_{4}}{d x^{2}} \theta_{2} \\
+    W(x) &= N_{1} \delta v_{1} + N_{2} \delta \theta_{1} + N_{3} \delta v_{2} + N_{4} \delta \theta_{2} \\
+    \frac{d W(x)}{d x} &= \frac{d N_{1}}{d x} \delta v_{1} + \frac{d N_{2}}{d x} \delta \theta_{1} + \frac{d N_{3}}{d x} \delta v_{2} + \frac{d N_{4}}{d x} \delta \theta_{2} \\
+    \frac{d^{2} W(x)}{d x^{2}} &= \frac{d^{2} N_{1}}{d x^{2}} \delta v_{1} + \frac{d^{2} N_{2}}{d x^{2}} \delta \theta_{1} + \frac{d^{2} N_{3}}{d x^{2}} \delta v_{2} + \frac{d^{2} N_{4}}{d x^{2}} \delta \theta_{2}
+\end{align}<p>reemplazando</p>
+\begin{equation}
+    \int_{0}^{L} E I \bigg( \frac{d^{2} N_{1}}{d x^{2}} v_{1} + \frac{d^{2} N_{2}}{d x^{2}} \theta_{1} + \frac{d^{2} N_{3}}{d x^{2}} v_{2} + \frac{d^{2} N_{4}}{d x^{2}} \theta_{2} \bigg) \bigg( \frac{d^{2} N_{1}}{d x^{2}} \delta v_{1} + \frac{d^{2} N_{2}}{d x^{2}} \delta \theta_{1} + \frac{d^{2} N_{3}}{d x^{2}} \delta v_{2} + \frac{d^{2} N_{4}}{d x^{2}} \delta \theta_{2} \bigg) \ dx = \int_{0}^{L} q(x) (N_{1} \delta v_{1} + N_{2} \delta \theta_{1} + N_{3} \delta v_{2} + N_{4} \delta \theta_{2}) \ dx - \bigg[ E I \frac{d^{3} v(x)}{d x^{3}} (N_{1} \delta v_{1} + N_{2} \delta \theta_{1} + N_{3} \delta v_{2} + N_{4} \delta \theta_{2}) - E I \frac{d^{2} v(x)}{d x^{2}} \bigg( \frac{d N_{1}}{d x} \delta v_{1} + \frac{d N_{2}}{d x} \delta \theta_{1} + \frac{d N_{3}}{d x} \delta v_{2} + \frac{d N_{4}}{d x} \delta \theta_{2} \bigg) \bigg] \bigg|_{0}^{L}
+\end{equation}<p>reemplazando $E I \frac{d^{3} v(x)}{d x^{3}} = V(x)$ y $E I \frac{d^{2} v(x)}{d x^{2}} = M(x)$</p>
+\begin{equation}
+    \int_{0}^{L} E I \bigg( \frac{d^{2} N_{1}}{d x^{2}} v_{1} + \frac{d^{2} N_{2}}{d x^{2}} \theta_{1} + \frac{d^{2} N_{3}}{d x^{2}} v_{2} + \frac{d^{2} N_{4}}{d x^{2}} \theta_{2} \bigg) \bigg( \frac{d^{2} N_{1}}{d x^{2}} \delta v_{1} + \frac{d^{2} N_{2}}{d x^{2}} \delta \theta_{1} + \frac{d^{2} N_{3}}{d x^{2}} \delta v_{2} + \frac{d^{2} N_{4}}{d x^{2}} \delta \theta_{2} \bigg) \ dx = \int_{0}^{L} q(x) (N_{1} \delta v_{1} + N_{2} \delta \theta_{1} + N_{3} \delta v_{2} + N_{4} \delta \theta_{2}) \ dx - \bigg[ V(x) (N_{1} \delta v_{1} + N_{2} \delta \theta_{1} + N_{3} \delta v_{2} + N_{4} \delta \theta_{2}) - M(x) \bigg( \frac{d N_{1}}{d x} \delta v_{1} + \frac{d N_{2}}{d x} \delta \theta_{1} + \frac{d N_{3}}{d x} \delta v_{2} + \frac{d N_{4}}{d x} \delta \theta_{2} \bigg) \bigg] \bigg|_{0}^{L}
+\end{equation}<p>multiplicando</p>
+\begin{equation}
+    \int_{0}^{L} E I \frac{d^{2} N_{1}}{d x^{2}} \frac{d^{2} N_{1}}{d x^{2}} v_{1} \delta v_{1} + E I \frac{d^{2} N_{1}}{d x^{2}} \frac{d^{2} N_{2}}{d x^{2}} \theta_{1} \delta v_{1} + E I \frac{d^{2} N_{1}}{d x^{2}} \frac{d^{2} N_{3}}{d x^{2}} v_{2} \delta v_{1} + \frac{d^{2} N_{1}}{d x^{2}} \frac{d^{2} N_{4}}{d x^{2}} \theta_{2} \delta v_{1} + E I \frac{d^{2} N_{2}}{d x^{2}} \frac{d^{2} N_{1}}{d x^{2}} v_{1} \delta \theta_{1} + E I \frac{d^{2} N_{2}}{d x^{2}} \frac{d^{2} N_{2}}{d x^{2}} \theta_{1} \delta \theta_{1} + E I \frac{d^{2} N_{2}}{d x^{2}} \frac{d^{2} N_{3}}{d x^{2}} v_{2} \delta \theta_{1} + \frac{d^{2} N_{2}}{d x^{2}} \frac{d^{2} N_{4}}{d x^{2}} \theta_{2} \delta \theta_{1} + E I \frac{d^{2} N_{3}}{d x^{2}} \frac{d^{2} N_{1}}{d x^{2}} v_{1} \delta v_{2} + E I \frac{d^{2} N_{3}}{d x^{2}} \frac{d^{2} N_{2}}{d x^{2}} \theta_{1} \delta v_{2} + E I \frac{d^{2} N_{3}}{d x^{2}} \frac{d^{2} N_{3}}{d x^{2}} v_{2} \delta v_{2} + \frac{d^{2} N_{3}}{d x^{2}} \frac{d^{2} N_{4}}{d x^{2}} \theta_{2} \delta v_{2} + E I \frac{d^{2} N_{4}}{d x^{2}} \frac{d^{2} N_{1}}{d x^{2}} v_{1} \delta \theta_{2} + E I \frac{d^{2} N_{4}}{d x^{2}} \frac{d^{2} N_{2}}{d x^{2}} \theta_{1} \delta \theta_{2} + E I \frac{d^{2} N_{4}}{d x^{2}} \frac{d^{2} N_{3}}{d x^{2}} v_{2} \delta \theta_{2} + \frac{d^{2} N_{4}}{d x^{2}} \frac{d^{2} N_{4}}{d x^{2}} \theta_{2} \delta \theta_{2} \ dx = \int_{0}^{L} q(x) N_{1} \delta v_{1} + q(x) N_{2} \delta \theta_{1} + q(x) N_{3} \delta v_{2} + q(x) N_{4} \delta \theta_{2} \ dx - \bigg( V(x) N_{1} \delta v_{1} + V(x) N_{2} \delta \theta_{1} + V(x) N_{3} \delta v_{2} + V(x) N_{4} \delta \theta_{2} - M(x) \frac{d N_{1}}{d x} \delta v_{1} - M(x) \frac{d N_{2}}{d x} \delta \theta_{1} - M(x) \frac{d N_{3}}{d x} \delta v_{2} - M(x) \frac{d N_{4}}{d x} \delta \theta_{2} \bigg) \bigg|_{0}^{L}
+\end{equation}<p>reemplazando los límites de integración en el lado derecho</p>
+\begin{equation}
+    \int_{0}^{L} E I \frac{d^{2} N_{1}}{d x^{2}} \frac{d^{2} N_{1}}{d x^{2}} v_{1} \delta v_{1} + E I \frac{d^{2} N_{1}}{d x^{2}} \frac{d^{2} N_{2}}{d x^{2}} \theta_{1} \delta v_{1} + E I \frac{d^{2} N_{1}}{d x^{2}} \frac{d^{2} N_{3}}{d x^{2}} v_{2} \delta v_{1} + \frac{d^{2} N_{1}}{d x^{2}} \frac{d^{2} N_{4}}{d x^{2}} \theta_{2} \delta v_{1} + E I \frac{d^{2} N_{2}}{d x^{2}} \frac{d^{2} N_{1}}{d x^{2}} v_{1} \delta \theta_{1} + E I \frac{d^{2} N_{2}}{d x^{2}} \frac{d^{2} N_{2}}{d x^{2}} \theta_{1} \delta \theta_{1} + E I \frac{d^{2} N_{2}}{d x^{2}} \frac{d^{2} N_{3}}{d x^{2}} v_{2} \delta \theta_{1} + \frac{d^{2} N_{2}}{d x^{2}} \frac{d^{2} N_{4}}{d x^{2}} \theta_{2} \delta \theta_{1} + E I \frac{d^{2} N_{3}}{d x^{2}} \frac{d^{2} N_{1}}{d x^{2}} v_{1} \delta v_{2} + E I \frac{d^{2} N_{3}}{d x^{2}} \frac{d^{2} N_{2}}{d x^{2}} \theta_{1} \delta v_{2} + E I \frac{d^{2} N_{3}}{d x^{2}} \frac{d^{2} N_{3}}{d x^{2}} v_{2} \delta v_{2} + \frac{d^{2} N_{3}}{d x^{2}} \frac{d^{2} N_{4}}{d x^{2}} \theta_{2} \delta v_{2} + E I \frac{d^{2} N_{4}}{d x^{2}} \frac{d^{2} N_{1}}{d x^{2}} v_{1} \delta \theta_{2} + E I \frac{d^{2} N_{4}}{d x^{2}} \frac{d^{2} N_{2}}{d x^{2}} \theta_{1} \delta \theta_{2} + E I \frac{d^{2} N_{4}}{d x^{2}} \frac{d^{2} N_{3}}{d x^{2}} v_{2} \delta \theta_{2} + \frac{d^{2} N_{4}}{d x^{2}} \frac{d^{2} N_{4}}{d x^{2}} \theta_{2} \delta \theta_{2} \ dx = \int_{0}^{L} q(x) N_{1} \delta v_{1} + q(x) N_{2} \delta \theta_{1} + q(x) N_{3} \delta v_{2} + q(x) N_{4} \delta \theta_{2} \ dx - \bigg( V(L) N_{1}(L) \delta v_{1} + V(L) N_{2}(L) \delta \theta_{1} + V(L) N_{3}(L) \delta v_{2} + V(L) N_{4}(L) \delta \theta_{2} - M(L) \frac{d N_{1}(L)}{d x} \delta v_{1} - M(L) \frac{d N_{2}(L)}{d x} \delta \theta_{1} - M(L) \frac{d N_{3}(L)}{d x} \delta v_{2} - M(L) \frac{d N_{4}(L)}{d x} \delta \theta_{2} \bigg) + \bigg( V(0) N_{1}(0) \delta v_{1} + V(0) N_{2}(0) \delta \theta_{1} + V(0) N_{3}(0) \delta v_{2} + V(0) N_{4}(0) \delta \theta_{2} - M(0) \frac{d N_{1}(0)}{d x} \delta v_{1} - M(0) \frac{d N_{2}(0)}{d x} \delta \theta_{1} - M(0) \frac{d N_{3}(0)}{d x} \delta v_{2} - M(0) \frac{d N_{4}(0)}{d x} \delta \theta_{2} \bigg)
+\end{equation}<p>reordenando y agrupando</p>
+\begin{equation}
+    \int_{0}^{L} E I \bigg( \frac{d^{2} N_{1}}{d x^{2}} \frac{d^{2} N_{1}}{d x^{2}} v_{1} + \frac{d^{2} N_{1}}{d x^{2}} \frac{d^{2} N_{2}}{d x^{2}} \theta_{1} + \frac{d^{2} N_{1}}{d x^{2}} \frac{d^{2} N_{3}}{d x^{2}} v_{2} + \frac{d^{2} N_{1}}{d x^{2}} \frac{d^{2} N_{4}}{d x^{2}} \theta_{2} \bigg) \delta v_{1} + E I \bigg( \frac{d^{2} N_{2}}{d x^{2}} \frac{d^{2} N_{1}}{d x^{2}} v_{1} + \frac{d^{2} N_{2}}{d x^{2}} \frac{d^{2} N_{2}}{d x^{2}} \theta_{1} + \frac{d^{2} N_{2}}{d x^{2}} \frac{d^{2} N_{3}}{d x^{2}} v_{2} + \frac{d^{2} N_{2}}{d x^{2}} \frac{d^{2} N_{4}}{d x^{2}} \theta_{2} \bigg) \delta \theta_{1} + E I \bigg( \frac{d^{2} N_{3}}{d x^{2}} \frac{d^{2} N_{1}}{d x^{2}} v_{1} + \frac{d^{2} N_{3}}{d x^{2}} \frac{d^{2} N_{2}}{d x^{2}} \theta_{1} + \frac{d^{2} N_{3}}{d x^{2}} \frac{d^{2} N_{3}}{d x^{2}} v_{2} + \frac{d^{2} N_{3}}{d x^{2}} \frac{d^{2} N_{4}}{d x^{2}} \theta_{2} \bigg) \delta v_{2} + E I \bigg( \frac{d^{2} N_{4}}{d x^{2}} \frac{d^{2} N_{1}}{d x^{2}} v_{1} + \frac{d^{2} N_{4}}{d x^{2}} \frac{d^{2} N_{2}}{d x^{2}} \theta_{1} + \frac{d^{2} N_{4}}{d x^{2}} \frac{d^{2} N_{3}}{d x^{2}} v_{2} + \frac{d^{2} N_{4}}{d x^{2}} \frac{d^{2} N_{4}}{d x^{2}} \theta_{2} \bigg) \delta \theta_{2} \ dx = \int_{0}^{L} q(x) N_{1} \delta v_{1} + q(x) N_{2} \delta \theta_{1} + q(x) N_{3} \delta v_{2} + q(x) N_{4} \delta \theta_{2} \ dx + \bigg(- V(L) N_{1}(L) + M(L) \frac{d N_{1}(L)}{d x} + V(0) N_{1}(0) - M(0) \frac{d N_{1}(0)}{d x} \bigg) \delta v_{1} + \bigg(- V(L) N_{2}(L) + M(L) \frac{d N_{2}(L)}{d x} + V(0) N_{2}(0) - M(0) \frac{d N_{2}(0)}{d x} \bigg) \delta \theta_{1} + \bigg(- V(L) N_{3}(L) + M(L) \frac{d N_{3}(L)}{d x} + V(0) N_{3}(0) - M(0) \frac{d N_{3}(0)}{d x} \bigg) \delta v_{2} + \bigg(- V(L) N_{4}(L) + M(L) \frac{d N_{4}(L)}{d x} + V(0) N_{4}(0) - M(0) \frac{d N_{4}(0)}{d x} \bigg) \delta \theta_{2}
+\end{equation}<p>formando un sistema</p>
+\begin{align}
+    \int_{0}^{L} E I \bigg( \frac{d^{2} N_{1}}{d x^{2}} \frac{d^{2} N_{1}}{d x^{2}} v_{1} + \frac{d^{2} N_{1}}{d x^{2}} \frac{d^{2} N_{2}}{d x^{2}} \theta_{1} + \frac{d^{2} N_{1}}{d x^{2}} \frac{d^{2} N_{3}}{d x^{2}} v_{2} + \frac{d^{2} N_{1}}{d x^{2}} \frac{d^{2} N_{4}}{d x^{2}} \theta_{2} \bigg) \delta v_{1} \ dx = \int_{0}^{L} q(x) N_{1} \delta v_{1} \ dx + \bigg(- V(L) N_{1}(L) + M(L) \frac{d N_{1}(L)}{d x} + V(0) N_{1}(0) - M(0) \frac{d N_{1}(0)}{d x} \bigg) \delta v_{1} \\
+    \int_{0}^{L} E I \bigg( \frac{d^{2} N_{2}}{d x^{2}} \frac{d^{2} N_{1}}{d x^{2}} v_{1} + \frac{d^{2} N_{2}}{d x^{2}} \frac{d^{2} N_{2}}{d x^{2}} \theta_{1} + \frac{d^{2} N_{2}}{d x^{2}} \frac{d^{2} N_{3}}{d x^{2}} v_{2} + \frac{d^{2} N_{2}}{d x^{2}} \frac{d^{2} N_{4}}{d x^{2}} \theta_{2} \bigg) \delta \theta_{1} \ dx = \int_{0}^{L} q(x) N_{2} \delta \theta_{1} \ dx + \bigg(- V(L) N_{2}(L) + M(L) \frac{d N_{2}(L)}{d x} + V(0) N_{2}(0) - M(0) \frac{d N_{2}(0)}{d x} \bigg) \delta \theta_{1} \\
+    \int_{0}^{L} E I \bigg( \frac{d^{2} N_{3}}{d x^{2}} \frac{d^{2} N_{1}}{d x^{2}} v_{1} + \frac{d^{2} N_{3}}{d x^{2}} \frac{d^{2} N_{2}}{d x^{2}} \theta_{1} + \frac{d^{2} N_{3}}{d x^{2}} \frac{d^{2} N_{3}}{d x^{2}} v_{2} + \frac{d^{2} N_{3}}{d x^{2}} \frac{d^{2} N_{4}}{d x^{2}} \theta_{2} \bigg) \delta v_{2} \ dx = \int_{0}^{L} q(x) N_{3} \delta v_{2} \ dx + \bigg(- V(L) N_{3}(L) + M(L) \frac{d N_{3}(L)}{d x} + V(0) N_{3}(0) - M(0) \frac{d N_{3}(0)}{d x} \bigg) \delta v_{2} \\
+    \int_{0}^{L} E I \bigg( \frac{d^{2} N_{4}}{d x^{2}} \frac{d^{2} N_{1}}{d x^{2}} v_{1} + \frac{d^{2} N_{4}}{d x^{2}} \frac{d^{2} N_{2}}{d x^{2}} \theta_{1} + \frac{d^{2} N_{4}}{d x^{2}} \frac{d^{2} N_{3}}{d x^{2}} v_{2} + \frac{d^{2} N_{4}}{d x^{2}} \frac{d^{2} N_{4}}{d x^{2}} \theta_{2} \bigg) \delta \theta_{2} \ dx = \int_{0}^{L} q(x) N_{4} \delta \theta_{2} \ dx + \bigg(- V(L) N_{4}(L) + M(L) \frac{d N_{4}(L)}{d x} + V(0) N_{4}(0) - M(0) \frac{d N_{4}(0)}{d x} \bigg) \delta \theta_{2}
+\end{align}<p>simplificando constantes</p>
+\begin{align}
+    \int_{0}^{L} E I \bigg( \frac{d^{2} N_{1}}{d x^{2}} \frac{d^{2} N_{1}}{d x^{2}} v_{1} + \frac{d^{2} N_{1}}{d x^{2}} \frac{d^{2} N_{2}}{d x^{2}} \theta_{1} + \frac{d^{2} N_{1}}{d x^{2}} \frac{d^{2} N_{3}}{d x^{2}} v_{2} + \frac{d^{2} N_{1}}{d x^{2}} \frac{d^{2} N_{4}}{d x^{2}} \theta_{2} \bigg) \ dx = \int_{0}^{L} q(x) N_{1} \ dx + \bigg(- V(L) N_{1}(L) + M(L) \frac{d N_{1}(L)}{d x} + V(0) N_{1}(0) - M(0) \frac{d N_{1}(0)}{d x} \bigg) \\
+    \int_{0}^{L} E I \bigg( \frac{d^{2} N_{2}}{d x^{2}} \frac{d^{2} N_{1}}{d x^{2}} v_{1} + \frac{d^{2} N_{2}}{d x^{2}} \frac{d^{2} N_{2}}{d x^{2}} \theta_{1} + \frac{d^{2} N_{2}}{d x^{2}} \frac{d^{2} N_{3}}{d x^{2}} v_{2} + \frac{d^{2} N_{2}}{d x^{2}} \frac{d^{2} N_{4}}{d x^{2}} \theta_{2} \bigg) \ dx = \int_{0}^{L} q(x) N_{2} \ dx + \bigg(- V(L) N_{2}(L) + M(L) \frac{d N_{2}(L)}{d x} + V(0) N_{2}(0) - M(0) \frac{d N_{2}(0)}{d x} \bigg) \\
+    \int_{0}^{L} E I \bigg( \frac{d^{2} N_{3}}{d x^{2}} \frac{d^{2} N_{1}}{d x^{2}} v_{1} + \frac{d^{2} N_{3}}{d x^{2}} \frac{d^{2} N_{2}}{d x^{2}} \theta_{1} + \frac{d^{2} N_{3}}{d x^{2}} \frac{d^{2} N_{3}}{d x^{2}} v_{2} + \frac{d^{2} N_{3}}{d x^{2}} \frac{d^{2} N_{4}}{d x^{2}} \theta_{2} \bigg) \ dx = \int_{0}^{L} q(x) N_{3} \ dx + \bigg(- V(L) N_{3}(L) + M(L) \frac{d N_{3}(L)}{d x} + V(0) N_{3}(0) - M(0) \frac{d N_{3}(0)}{d x} \bigg) \\
+    \int_{0}^{L} E I \bigg( \frac{d^{2} N_{4}}{d x^{2}} \frac{d^{2} N_{1}}{d x^{2}} v_{1} + \frac{d^{2} N_{4}}{d x^{2}} \frac{d^{2} N_{2}}{d x^{2}} \theta_{1} + \frac{d^{2} N_{4}}{d x^{2}} \frac{d^{2} N_{3}}{d x^{2}} v_{2} + \frac{d^{2} N_{4}}{d x^{2}} \frac{d^{2} N_{4}}{d x^{2}} \theta_{2} \bigg) \ dx = \int_{0}^{L} q(x) N_{4} \ dx + \bigg(- V(L) N_{4}(L) + M(L) \frac{d N_{4}(L)}{d x} + V(0) N_{4}(0) - M(0) \frac{d N_{4}(0)}{d x} \bigg)
+\end{align}<p>las funciones de forma tienen los siguientes valores</p>
+\begin{matrix}
+    N_{1}(L) = 0 & \frac{N_{1}(L)}{d x} = 0 & N_{1}(0) = 1 & \frac{N_{1}(0)}{d x} = 0 \\
+    N_{2}(L) = 0 & \frac{N_{2}(L)}{d x} = 0 & N_{2}(0) = 0 & \frac{N_{2}(0)}{d x} = 1 \\
+    N_{3}(L) = 1 & \frac{N_{3}(L)}{d x} = 0 & N_{3}(0) = 0 & \frac{N_{3}(0)}{d x} = 0 \\
+    N_{4}(L) = 0 & \frac{N_{4}(L)}{d x} = 1 & N_{4}(0) = 0 & \frac{N_{4}(0)}{d x} = 0
+\end{matrix}<p>reemplazando valores</p>
+\begin{align}
+    \int_{0}^{L} E I \bigg( \frac{d^{2} N_{1}}{d x^{2}} \frac{d^{2} N_{1}}{d x^{2}} v_{1} + \frac{d^{2} N_{1}}{d x^{2}} \frac{d^{2} N_{2}}{d x^{2}} \theta_{1} + \frac{d^{2} N_{1}}{d x^{2}} \frac{d^{2} N_{3}}{d x^{2}} v_{2} + \frac{d^{2} N_{1}}{d x^{2}} \frac{d^{2} N_{4}}{d x^{2}} \theta_{2} \bigg) \ dx = \int_{0}^{L} q(x) N_{1} \ dx + V(0) \\
+    \int_{0}^{L} E I \bigg( \frac{d^{2} N_{2}}{d x^{2}} \frac{d^{2} N_{1}}{d x^{2}} v_{1} + \frac{d^{2} N_{2}}{d x^{2}} \frac{d^{2} N_{2}}{d x^{2}} \theta_{1} + \frac{d^{2} N_{2}}{d x^{2}} \frac{d^{2} N_{3}}{d x^{2}} v_{2} + \frac{d^{2} N_{2}}{d x^{2}} \frac{d^{2} N_{4}}{d x^{2}} \theta_{2} \bigg) \ dx = \int_{0}^{L} q(x) N_{2} \ dx - M(0) \\
+    \int_{0}^{L} E I \bigg( \frac{d^{2} N_{3}}{d x^{2}} \frac{d^{2} N_{1}}{d x^{2}} v_{1} + \frac{d^{2} N_{3}}{d x^{2}} \frac{d^{2} N_{2}}{d x^{2}} \theta_{1} + \frac{d^{2} N_{3}}{d x^{2}} \frac{d^{2} N_{3}}{d x^{2}} v_{2} + \frac{d^{2} N_{3}}{d x^{2}} \frac{d^{2} N_{4}}{d x^{2}} \theta_{2} \bigg) \ dx = \int_{0}^{L} q(x) N_{3} \ dx - V(L) \\
+    \int_{0}^{L} E I \bigg( \frac{d^{2} N_{4}}{d x^{2}} \frac{d^{2} N_{1}}{d x^{2}} v_{1} + \frac{d^{2} N_{4}}{d x^{2}} \frac{d^{2} N_{2}}{d x^{2}} \theta_{1} + \frac{d^{2} N_{4}}{d x^{2}} \frac{d^{2} N_{3}}{d x^{2}} v_{2} + \frac{d^{2} N_{4}}{d x^{2}} \frac{d^{2} N_{4}}{d x^{2}} \theta_{2} \bigg) \ dx = \int_{0}^{L} q(x) N_{4} \ dx + M(L)
 \end{align}<p>en forma matricial</p>
 \begin{equation}
+    \int_{0}^{L} E I
     \begin{bmatrix}
-        1 & -1 \\
-        1 & 1
+        \frac{d^{2} N_{1}}{d x^{2}} \frac{d^{2} N_{1}}{d x^{2}} & \frac{d^{2} N_{1}}{d x^{2}} \frac{d^{2} N_{2}}{d x^{2}} & \frac{d^{2} N_{1}}{d x^{2}} \frac{d^{2} N_{3}}{d x^{2}} & \frac{d^{2} N_{1}}{d x^{2}} \frac{d^{2} N_{4}}{d x^{2}} \\
+        \frac{d^{2} N_{2}}{d x^{2}} \frac{d^{2} N_{1}}{d x^{2}} & \frac{d^{2} N_{2}}{d x^{2}} \frac{d^{2} N_{2}}{d x^{2}} & \frac{d^{2} N_{2}}{d x^{2}} \frac{d^{2} N_{3}}{d x^{2}} & \frac{d^{2} N_{2}}{d x^{2}} \frac{d^{2} N_{4}}{d x^{2}} \\
+        \frac{d^{2} N_{3}}{d x^{2}} \frac{d^{2} N_{1}}{d x^{2}} & \frac{d^{2} N_{3}}{d x^{2}} \frac{d^{2} N_{2}}{d x^{2}} & \frac{d^{2} N_{3}}{d x^{2}} \frac{d^{2} N_{3}}{d x^{2}} & \frac{d^{2} N_{3}}{d x^{2}} \frac{d^{2} N_{4}}{d x^{2}} \\
+        \frac{d^{2} N_{4}}{d x^{2}} \frac{d^{2} N_{1}}{d x^{2}} & \frac{d^{2} N_{4}}{d x^{2}} \frac{d^{2} N_{2}}{d x^{2}} & \frac{d^{2} N_{4}}{d x^{2}} \frac{d^{2} N_{3}}{d x^{2}} & \frac{d^{2} N_{4}}{d x^{2}} \frac{d^{2} N_{4}}{d x^{2}}
     \end{bmatrix}
     \begin{bmatrix}
-        \alpha_{0} \\
-        \alpha_{1}
-    \end{bmatrix} =
+    v_{1} \\
+    \theta_{1} \\
+    v_{2} \\
+    \theta_{2}
+    \end{bmatrix} dx =
+    \int_{0}^{L} q(x)
     \begin{bmatrix}
-        u_{1} \\
-        u_{2}
+    N_{1} \\
+    N_{2} \\
+    N_{3} \\
+    N_{4}
+    \end{bmatrix} dx +
+    \begin{bmatrix}
+    V(0) \\
+    -M(0) \\
+    -V(L) \\
+    M(L)
     \end{bmatrix}
-\end{equation}<p>resolviendo</p>
+\end{equation}<p>factorizando</p>
 \begin{equation}
+    \int_{0}^{L}
     \begin{bmatrix}
-        \alpha_{0} \\
-        \alpha_{1}
+        \frac{d^{2} N_{1}}{d x^{2}} \\
+        \frac{d^{2} N_{2}}{d x^{2}} \\
+        \frac{d^{2} N_{3}}{d x^{2}} \\
+        \frac{d^{2} N_{4}}{d x^{2}}
+    \end{bmatrix} E I
+    \begin{bmatrix}
+        \frac{d^{2} N_{1}}{d x^{2}} & \frac{d^{2} N_{2}}{d x^{2}} & \frac{d^{2} N_{3}}{d x^{2}} & \frac{d^{2} N_{4}}{d x^{2}}
+    \end{bmatrix} dx
+    \begin{bmatrix}
+    v_{1} \\
+    \theta_{1} \\
+    v_{2} \\
+    \theta_{2}
     \end{bmatrix} =
+    \int_{0}^{L} q(x)
     \begin{bmatrix}
-        \frac{1}{2} & \frac{1}{2} \\
-        -\frac{1}{2} & \frac{1}{2}
-    \end{bmatrix}
+    N_{1} \\
+    N_{2} \\
+    N_{3} \\
+    N_{4}
+    \end{bmatrix} dx +
     \begin{bmatrix}
-        u_{1} \\
-        u_{2}
+    V(0) \\
+    -M(0) \\
+    -V(L) \\
+    M(L)
     \end{bmatrix}
-\end{equation}<p>reemplazando</p>
+\end{equation}<p>reemplazando fuerzas y momentos en los nodos 1 y 2</p>
 \begin{equation}
-    u =
+    \int_{0}^{L}
     \begin{bmatrix}
-        1 & \xi
-    \end{bmatrix}
+        \frac{d^{2} N_{1}}{d x^{2}} \\
+        \frac{d^{2} N_{2}}{d x^{2}} \\
+        \frac{d^{2} N_{3}}{d x^{2}} \\
+        \frac{d^{2} N_{4}}{d x^{2}}
+    \end{bmatrix} E I
     \begin{bmatrix}
-        \alpha_{0} \\
-        \alpha_{1}
+        \frac{d^{2} N_{1}}{d x^{2}} & \frac{d^{2} N_{2}}{d x^{2}} & \frac{d^{2} N_{3}}{d x^{2}} & \frac{d^{2} N_{4}}{d x^{2}}
+    \end{bmatrix} dx
+    \begin{bmatrix}
+    v_{1} \\
+    \theta_{1} \\
+    v_{2} \\
+    \theta_{2}
     \end{bmatrix} =
+    \int_{0}^{L} q(x)
     \begin{bmatrix}
-        1 & \xi
+    N_{1} \\
+    N_{2} \\
+    N_{3} \\
+    N_{4}
+    \end{bmatrix} dx +
+    \begin{bmatrix}
+    F_{1} \\
+    M_{1} \\
+    F_{2} \\
+    M_{2}
     \end{bmatrix}
-    \begin{bmatrix}
-        \frac{1}{2} & \frac{1}{2} \\
-        -\frac{1}{2} & \frac{1}{2}
-    \end{bmatrix}
-    \begin{bmatrix}
-        u_{1} \\
-        u_{2}
-    \end{bmatrix} =
-    \begin{bmatrix}
-        \frac{1}{2} - \frac{1}{2} \xi  & \frac{1}{2} + \frac{1}{2} \xi
-    \end{bmatrix}
-    \begin{bmatrix}
-        u_{1} \\
-        u_{2}
-    \end{bmatrix}
-\end{equation}<p>reescribiendo $u$</p>
+\end{equation}<p>en forma compacta</p>
 \begin{equation}
-    u = \bigg( \frac{1}{2} - \frac{1}{2} \xi \bigg) u_{1} +
-    \bigg( \frac{1}{2} + \frac{1}{2} \xi \bigg) u_{2} =
-    N_{1} u_{1} + N_{2} u_{2}
+    \int_{0}^{L} B^{T} D \ B \ dx \ v = \int_{0}^{L} q \ N^{T} dx + f
 \end{equation}
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Elemento-de-tres-nodos">Elemento de tres nodos<a class="anchor-link" href="#Elemento-de-tres-nodos">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-\begin{equation}
-    u = \alpha_{0} + \alpha_{1} \xi + \alpha_{2} \xi^{2} =
-    \begin{bmatrix}
-        1 & \xi & \xi^{2}
-    \end{bmatrix}
-    \begin{bmatrix}
-        \alpha_{0} \\
-        \alpha_{1} \\
-        \alpha_{2}
-    \end{bmatrix}
-\end{equation}<p>reemplazando los valores $\xi = -1$, $\xi = 0$ y $\xi = 1$</p>
-\begin{align}
-    \alpha_{0} + \alpha_{1}(-1) + \alpha_{2}(-1)^{2} &= u_{1} \\
-    \alpha_{0} + \alpha_{1}(0) + \alpha_{2}(0)^{2} &= u_{2} \\
-    \alpha_{0} + \alpha_{1}(1) + \alpha_{2}(1)^{2} &= u_{3}
-\end{align}<p>simplificando</p>
-\begin{align}
-    \alpha_{0} - \alpha_{1} + \alpha_{1} &= u_{1} \\
-    \alpha_{0} &= u_{2}\\
-    \alpha_{0} + \alpha_{1} + \alpha_{1}&= u_{3}
-\end{align}<p>en forma matricial</p>
-\begin{equation}
-    \begin{bmatrix}
-        1 & -1 & 1 \\
-        1 & 0 & 0 \\
-        1 & 1 & 1
-    \end{bmatrix}
-    \begin{bmatrix}
-        \alpha_{0} \\
-        \alpha_{1} \\
-        \alpha_{2}
-    \end{bmatrix} =
-    \begin{bmatrix}
-        u_{1} \\
-        u_{2} \\
-        u_{3}
-    \end{bmatrix}
-\end{equation}<p>resolviendo</p>
-\begin{equation}
-    \begin{bmatrix}
-        \alpha_{0} \\
-        \alpha_{1} \\
-        \alpha_{2}
-    \end{bmatrix} =
-    \begin{bmatrix}
-        0 & 1 & 0 \\
-        -\frac{1}{2} & 0 & \frac{1}{2} \\
-        \frac{1}{2} & -1 & \frac{1}{2}
-    \end{bmatrix}
-    \begin{bmatrix}
-        u_{1} \\
-        u_{2} \\
-        u_{3}
-    \end{bmatrix}
-\end{equation}<p>reemplazando</p>
-\begin{equation}
-    u =
-    \begin{bmatrix}
-        1 & \xi & \xi^{2}
-    \end{bmatrix}
-    \begin{bmatrix}
-        \alpha_{0} \\
-        \alpha_{1} \\
-        \alpha_{2}
-    \end{bmatrix} =
-    \begin{bmatrix}
-        1 & \xi & \xi^{2}
-    \end{bmatrix}
-    \begin{bmatrix}
-        0 & 1 & 0 \\
-        -\frac{1}{2} & 0 & \frac{1}{2} \\
-        \frac{1}{2} & -1 & \frac{1}{2}
-    \end{bmatrix}
-    \begin{bmatrix}
-        u_{1} \\
-        u_{2} \\
-        u_{3}
-    \end{bmatrix} =
-    \begin{bmatrix}
-        -\frac{1}{2} \xi + \frac{1}{2} \xi^{2} &
-        1 - \xi^{2} &
-        \frac{1}{2} \xi + \frac{1}{2} \xi^{2}
-    \end{bmatrix}
-    \begin{bmatrix}
-        u_{1} \\
-        u_{2} \\
-        u_{3}
-    \end{bmatrix}
-\end{equation}<p>reescribiendo $u$</p>
-\begin{equation}
-    u = \bigg( -\frac{1}{2} \xi + \frac{1}{2} \xi^{2} \bigg) u_{1} +
-    (1 - \xi^{2}) u_{2} +
-    \bigg( \frac{1}{2} \xi + \frac{1}{2} \xi^{2} \bigg) u_{3} =
-    N_{1} u_{1} + N_{2} u_{2} + N_{3} u_{3}
-\end{equation}
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Elementos-barra-de-mayor-grado-polinomial">Elementos barra de mayor grado polinomial<a class="anchor-link" href="#Elementos-barra-de-mayor-grado-polinomial">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Los elementos de mayor grado pueden obtenerse mediante polinomios de Lagrange:</p>
-\begin{equation}
-    \ell = \prod_{i=0, i \neq j}^{k} \frac{\xi - \xi_{i}}{\xi_{j} - \xi_{i}}
-\end{equation}
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Elemento-de-dos-nodos">Elemento de dos nodos<a class="anchor-link" href="#Elemento-de-dos-nodos">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Usando la fórmula:</p>
-\begin{align}
-    N_{1} &= \frac{\xi - 1}{-1 - 1} = \frac{1}{2} - \frac{1}{2} \xi \\
-    N_{2} &= \frac{\xi - (-1)}{1 - (-1)} = \frac{1}{2} + \frac{1}{2} \xi
-\end{align}
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Elemento-de-tres-nodos">Elemento de tres nodos<a class="anchor-link" href="#Elemento-de-tres-nodos">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Usando la fórmula:</p>
-\begin{align}
-    N_{1} &= \frac{\xi - 0}{-1 - 0} \frac{\xi - 1}{-1 - 1} = -\frac{1}{2} \xi + \frac{1}{2} \xi^{2} \\
-    N_{2} &= \frac{\xi - (-1)}{0 - (-1)} \frac{\xi - 1}{0 - 1} = 1 - \xi^{2} \\
-    N_{3} &= \frac{\xi - 0}{1 - 0} \frac{\xi - 1}{1 - 1} = \frac{1}{2} \xi + \frac{1}{2} \xi^{2}
-\end{align}
 </div>
 </div>
 </div>

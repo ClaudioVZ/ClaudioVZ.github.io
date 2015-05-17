@@ -3,7 +3,7 @@
 <head>
 
 <meta charset="utf-8" />
-<title>007_metodo_galerkin</title>
+<title>019_polinomios_hermite_locales</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -177,332 +177,273 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="M&#233;todo-de-Galerkin">M&#233;todo de Galerkin<a class="anchor-link" href="#M&#233;todo-de-Galerkin">&#182;</a></h1><p>Resolver $u(0 < x < 1)$ para</p>
-\begin{align}
-    \frac{d^{2} u(x)}{d x^{2}} + x^{2} &= 0 \\
-    u(0) &= 0 \\
-    u(1) &= 0 \\
-\end{align}
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Ejemplo-1">Ejemplo 1<a class="anchor-link" href="#Ejemplo-1">&#182;</a></h3><p>Se utilizaran tres términos en la aproximación</p>
+<h1 id="Funciones-de-forma-para-elementos-viga">Funciones de forma para elementos viga<a class="anchor-link" href="#Funciones-de-forma-para-elementos-viga">&#182;</a></h1><h3 id="Elementos-de-dos-nodos">Elementos de dos nodos<a class="anchor-link" href="#Elementos-de-dos-nodos">&#182;</a></h3>\begin{equation}
+    v = N_{1} v_{1} + N_{2} \theta_{1} + N_{3} v_{2} + N_{4} \theta_{2}
+    = \sum_{i = 0}^{3} \alpha_{i} x^{i}
+    = \alpha_{0} + \alpha_{1} x + \alpha_{2} x^{2} + \alpha_{3} x^{3}
+\end{equation}<p>en forma matricial</p>
 \begin{equation}
-    u(x) \approx \hat u(x) = \sum_{i=0}^{2} a_{i} x^{i} = a_{0} + a_{1} x + a_{2} x^{2} 
-\end{equation}<p>reemplazando las condiciones de contorno</p>
-\begin{align}
-\require{cancel}
-    \hat u(0) &= a_{0} + a_{1} (0) + a_{2} (0)^{2} = 0 \\
-    \hat u(1) &= \cancel{a_{0}} + a_{1} (1) + a_{2} (1)^{2} = 0
-\end{align}<p>resolviendo el sistema</p>
-\begin{align}
-    a_{0} &= 0 \\
-    a_{1} &= -a_{2}
-\end{align}<p>reemplazando las constantes</p>
-\begin{equation}
-    \hat u(x) = -a_{2} x + a_{2} x^{2} = a_{2} (x^{2} - x)
-\end{equation}<p>$\hat u_{x}$ es</p>
-\begin{equation}
-    \frac{d \hat u(x)}{d x} = -a_{1} + 2 a_{2} x
-\end{equation}<p>$\hat u_{xx}$ es</p>
-\begin{equation}
-    \frac{d^{2} \hat u(x)}{d x^{2}} = 2 a_{2}
-\end{equation}<p>la función residual es</p>
-\begin{equation}
-    R(x) = \frac{d^{2} \hat u(x)}{d x^{2}} + x^{2} = 2 a_{2} + x^{2}
-\end{equation}<p>la función ponderada es</p>
-\begin{equation}
-    W(x) = \frac{d \hat u(x)}{d a_{2}} = (x^{2} - x)
-\end{equation}<p>la forma débil de la ecuación diferencial es</p>
-\begin{equation}
-    \int_{0}^{1} R(x) W(x) \ dx = \int_{0}^{1} (2 a_{2} + x^{2}) (x^{2} - x) \ dx = 0
-\end{equation}<p>multiplicando y ordenando</p>
-\begin{equation}
-    \int_{0}^{1} - 2 a_{2} x + 2 a_{2} x^{2} - x^{3} + x^{4} \ dx = 0
-\end{equation}<p>integrando</p>
-\begin{equation}
-    \bigg(- a_{2} x^{2} + \frac{2}{3} a_{2} x^{3} - \frac{1}{4} x^{4} + \frac{1}{5} x^{5} \bigg) \bigg|_{0}^{1} = 0
-\end{equation}<p>reemplazando límites de integración y simplificando</p>
-\begin{equation}
-    -\frac{1}{3} a_{2} = \frac{1}{20}
-\end{equation}<p>despejando</p>
-\begin{equation}
-    a_{2} = -\frac{3}{20}
-\end{equation}<p>reemplazando en la solución aproximada</p>
-\begin{equation}
-    \hat u(x) = - \frac{3}{20} (x^{2} - x) = \frac{3}{20} x - \frac{3}{20} x^{2}
-\end{equation}
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Ejemplo-2">Ejemplo 2<a class="anchor-link" href="#Ejemplo-2">&#182;</a></h3><p>Se utilizaran cuatro términos en la aproximación</p>
-\begin{equation}
-    u(x) \approx \hat u(x) = \sum_{i=0}^{3} a_{i} x^{i} = a_{0} + a_{1} x + a_{2} x^{2} + a_{3} x^{3} 
-\end{equation}<p>reemplazando las condiciones de contorno</p>
-\begin{align}
-\require{cancel}
-    \hat u(0) &= a_{0} + a_{1} (0) + a_{2} (0)^{2} + a_{3} (0)^{3} = 0 \\
-    \hat u(1) &= \cancel{a_{0}} + a_{1} (1) + a_{2} (1)^{2} + a_{3} (1)^{3} = 0
-\end{align}<p>resolviendo el sistema</p>
-\begin{align}
-    a_{0} &= 0 \\
-    a_{1} &= - a_{2} - a_{3}
-\end{align}<p>reemplazando las constantes</p>
-\begin{equation}
-    \hat u(x) = - a_{2} x - a_{3} x + a_{2} x^{2} + a_{3} x^{3} = a_{2} (x^{2} - x) + a_{3} (x^{3} - x)
-\end{equation}<p>la anterior puede escribirse como</p>
-\begin{equation}
-    \hat u(x) = \hat u_{1}(x) + \hat u_{2}(x) 
-\end{equation}<p>$\hat u_{x}$ es</p>
-\begin{equation}
-    \frac{d \hat u(x)}{d x} = - a_{2} - a_{3} + 2 a_{2} x + 3 a_{3} x^{2}
-\end{equation}<p>$\hat u_{xx}$ es</p>
-\begin{equation}
-    \frac{d^{2} \hat u(x)}{d x^{2}} = 2 a_{2} + 6 a_{3} x
-\end{equation}<p>la función residual es</p>
-\begin{equation}
-    R(x) = \frac{d^{2} \hat u(x)}{d x^{2}} + x^{2} = 2 a_{2} + 6 a_{3} x + x^{2}
-\end{equation}<p>la función ponderada puede escribirse como</p>
-\begin{equation}
-    W(x) = W_{1}(x) + W_{2}(x) 
-\end{equation}<p>derivando respecto a las variables desconocidas</p>
-\begin{align}
-    W_{1}(x) = \frac{d \hat u_{1}(x)}{d a_{2}} &= x^{2} - x \\
-    W_{2}(x) = \frac{d \hat u_{2}(x)}{d a_{3}} &= x^{3} - x
-\end{align}<p>reemplazando en la función ponderada</p>
-\begin{equation}
-    W(x) = (x^{2} - x) + (x^{3} - x) 
-\end{equation}<p>la forma débil de la ecuación diferencial es</p>
-\begin{equation}
-    \int_{0}^{1} R(x) W(x) \ dx = \int_{0}^{1} (2 a_{2} + 6 a_{3} x + x^{2}) [(x^{2} - x) + (x^{3} - x)] \ dx = 0
-\end{equation}<p>puede escribirse como la suma de integrales</p>
-\begin{equation}
-    \int_{0}^{1} R(x) W_{1}(x) \ dx + \int_{0}^{1} R(x) W_{2}(x) \ dx = 0
-\end{equation}<p>y también como un sistema de ecuaciones</p>
-\begin{align}
-    \int_{0}^{1} R(x) W_{1}(x) \ dx &= 0 \\
-    \int_{0}^{1} R(x) W_{2}(x) \ dx &= 0
-\end{align}<p>reemplazando en la anterior fórmula</p>
-\begin{align}
-    \int_{0}^{1} (2 a_{2} + 6 a_{3} x + x^{2}) (x^{2} - x) \ dx &= 0 \\
-    \int_{0}^{1} (2 a_{2} + 6 a_{3} x + x^{2}) (x^{3} - x) \ dx &= 0
-\end{align}<p>multiplicando y ordenando</p>
-\begin{align}
-    \int_{0}^{1} 2 a_{2} x^{2} + 6 a_{3} x^{3} + x^{4} - 2 a_{2} x - 6 a_{3} x^{2} - x^{3} \ dx &= 0 \\
-    \int_{0}^{1} 2 a_{2} x^{3} + 6 a_{3} x^{4} + x^{5} - 2 a_{2} x - 6 a_{3} x^{2} - x^{3} \ dx &= 0
-\end{align}<p>integrando</p>
-\begin{align}
-    \bigg( \frac{2}{3} a_{2} x^{3} + \frac{3}{2} a_{3} x^{4} + \frac{1}{5} x^{5} - a_{2} x^{2} - 2 a_{3} x^{3} - \frac{1}{4} x^{4} \bigg) \bigg|_{0}^{1} &= 0 \\
-    \bigg( \frac{1}{2} a_{2} x^{4} + \frac{6}{5} a_{3} x^{5} + \frac{1}{6} x^{6} - a_{2} x^{2} - 2 a_{3} x^{3} - \frac{1}{4} x^{4} \bigg) \bigg|_{0}^{1} &= 0
-\end{align}<p>reemplazando límites de integración y simplificando</p>
-\begin{align}
-    - \frac{1}{3} a_{2} - \frac{1}{2} a_{3} &= \frac{1}{20} \\
-    - \frac{1}{2} a_{2} - \frac{4}{5} a_{3} &= \frac{1}{12}
-\end{align}<p>resolviendo el sistema</p>
-\begin{align}
-    a_{2} &= \frac{1}{10} \\
-    a_{3} &= - \frac{1}{6}
-\end{align}<p>reemplazando en la solución aproximada</p>
-\begin{equation}
-    \hat u(x) = \frac{1}{10} (x^{2} - x) - \frac{1}{6} (x^{3} - x) = \frac{1}{15} x + \frac{1}{10} x^{2} - \frac{1}{6} x^{3}
-\end{equation}
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Forma-alternativa">Forma alternativa<a class="anchor-link" href="#Forma-alternativa">&#182;</a></h3><p>La solución puede escribirse como</p>
-\begin{equation}
-    u(x) \approx \hat u(x) = \sum_{i=0}^{n} a_{i} N_{i}  
-\end{equation}<p>y la función ponderada como</p>
-\begin{equation}
-    W(x) = \sum_{i=0}^{n} \delta a_{i} N_{i}  
-\end{equation}<p>donde $N$ es una función de aproximación o interpolante, también llamada función de forma</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Ejemplo-3">Ejemplo 3<a class="anchor-link" href="#Ejemplo-3">&#182;</a></h3><p>Se utilizaran cuatro términos en la aproximación</p>
-\begin{equation}
-    \hat u(x) = a_{0} + a_{1} x + a_{2} x^{2} - a_{3} x^{3} 
-\end{equation}<p>reemplazando las condiciones de contorno</p>
-\begin{align}
-\require{cancel}
-    \hat u(0) &= a_{0} + a_{1} (0) + a_{2} (0)^{2} - a_{3} (0)^{3} = 0 \\
-    \hat u(1) &= \cancel{a_{0}} + a_{1} (1) + a_{2} (1)^{2} - a_{3} (1)^{3} = 0
-\end{align}<p>resolviendo el sistema</p>
-\begin{align}
-    a_{0} &= 0 \\
-    a_{2} &= a_{3} - a_{1}
-\end{align}<p>reemplazando las constantes</p>
-\begin{equation}
-    \hat u(x) = a_{1} x + a_{3} x^{2} - a_{1} x^{2} - a_{3} x^{3} = a_{1} x (1- x) + a_{3} x^{2} (1 - x)
-\end{equation}<p>$\hat u_{x}$ es</p>
-\begin{equation}
-    \frac{d \hat u(x)}{d x} = a_{1} + 2 a_{3} x - 2 a_{1} x - 3 a_{3} x^{2}
-\end{equation}<p>$\hat u_{xx}$ es</p>
-\begin{equation}
-    \frac{d^{2} \hat u(x)}{d x^{2}} = 2 a_{3} - 2 a_{1} - 6 a_{3} x = 2(a_{3} - a_{1}) - 6 a_{3} x
-\end{equation}<p>la función residual es</p>
-\begin{equation}
-    R(x) = \frac{d^{2} \hat u(x)}{d x^{2}} + x^{2} = 2(a_{3} - a_{1}) - 6 a_{3} x + x^{2}
-\end{equation}<p>la función ponderada es</p>
-\begin{equation}
-    W(x) = \delta a_{1} x (1- x) + \delta a_{3} x^{2} (1 - x) 
-\end{equation}<p>la forma débil de la ecuación diferencial es</p>
-\begin{equation}
-    \int_{0}^{1} R(x) W(x) \ dx = \int_{0}^{1} [2(a_{3} - a_{1}) - 6 a_{3} x + x^{2}] [\delta a_{1} x (1- x) + \delta a_{3} x^{2} (1 - x)] \ dx = 0
-\end{equation}<p>puede escribirse como la suma de integrales</p>
-\begin{equation}
-    \int_{0}^{1} [2(a_{3} - a_{1}) - 6 a_{3} x + x^{2}] [\delta a_{1} x (1- x)] \ dx + \int_{0}^{1} [2(a_{3} - a_{1}) - 6 a_{3} x + x^{2}] [\delta a_{3} x^{2} (1 - x)] \ dx = 0
-\end{equation}<p>las constantes salen de la integral</p>
-\begin{align}
-    \delta a_{1} \int_{0}^{1} [2(a_{3} - a_{1}) - 6 a_{3} x + x^{2}] [x (1- x)] \ dx &= 0 \\
-    \delta a_{3} \int_{0}^{1} [2(a_{3} - a_{1}) - 6 a_{3} x + x^{2}] [x^{2} (1 - x)] \ dx &= 0
-\end{align}<p>multiplicando y ordenando</p>
-\begin{align}
-    \int_{0}^{1} - 2 a_{1} x + 2 a_{3} x + 2 a_{1} x^{2} - 8 a_{3} x^{2} + 6 a_{3} x^{3} + x^{3} - x^{4} \ dx &= 0 \\
-    \int_{0}^{1} - 2 a_{1} x^{2} + 2 a_{3} x^{2} + 2 a_{1} x^{3} - 8 a_{3} x^{3} + 6 a_{3} x^{4} + x^{4} - x^{5} \ dx &= 0
-\end{align}<p>integrando</p>
-\begin{align}
-    \bigg( - a_{1} x^{2} + a_{3} x^{2} + \frac{2}{3} a_{1} x^{3} - \frac{8}{3} a_{3} x^{3} + \frac{3}{2} a_{3} x^{4} + \frac{1}{4} x^{4} - \frac{1}{5} x^{5} \bigg) \bigg|_{0}^{1} &= 0 \\
-    \bigg( - \frac{2}{3} a_{1} x^{3} + \frac{2}{3} a_{3} x^{3} + \frac{1}{2} a_{1} x^{4} - 2 a_{3} x^{4} + \frac{6}{5} a_{3} x^{5} + \frac{1}{5} x^{5} - \frac{1}{6} x^{6} \bigg) \bigg|_{0}^{1} &= 0
-\end{align}<p>reemplazando límites de integración y simplificando</p>
-\begin{align}
-    - \frac{1}{3} a_{1} - \frac{1}{6} a_{3} &= - \frac{1}{20} \\
-    - \frac{1}{6} a_{1} - \frac{2}{15} a_{3} &= - \frac{1}{30}
-\end{align}<p>resolviendo el sistema</p>
-\begin{align}
-    a_{1} &= \frac{1}{15} \\
-    a_{3} &= \frac{1}{6}
-\end{align}<p>reemplazando en la solución aproximada</p>
-\begin{equation}
-    \hat u(x) = \frac{1}{15} x (1 - x) + \frac{1}{6} x^{2} (1 - x) = \frac{1}{15} x + \frac{1}{10} x^{2} - \frac{1}{6} x^{3}
-\end{equation}
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Soluci&#243;n-general">Soluci&#243;n general<a class="anchor-link" href="#Soluci&#243;n-general">&#182;</a></h3>\begin{equation}
-    \int_{0}^{1} R(x) W(x) \ dx = \int_{0}^{1} \bigg( \frac{d^{2} u(x)}{d x^{2}} + x^{2} \bigg) W(x) \ dx = 0
-\end{equation}<p>puede escribirse como la suma de integrales</p>
-\begin{equation}
-    \int_{0}^{1} \frac{d^{2} u(x)}{d x^{2}} W(x) \ dx + \int_{0}^{1} x^{2} W(x) \ dx = 0
-\end{equation}<p>integrando por partes para reducir el orden de la derivada</p>
-\begin{align}
-    \int u \ dv &= uv - \int v \ du \\
-    \int_{0}^{1} W(x) \frac{d^{2} u(x)}{d x^{2}} \ dx &= \bigg( W(x) \frac{d u(x)}{d x} \bigg) \bigg|_{0}^{1} - \int_{0}^{1} \frac{d u(x)}{d x} \frac{d W(x)}{d x}\ dx
-\end{align}<p>reemplazando</p>
-\begin{equation}
-    \bigg( \frac{d u(x)}{d x} W(x) \bigg) \bigg|_{0}^{1} - \int_{0}^{1} \frac{d u(x)}{d x} \frac{d W(x)}{d x}\ dx + \int_{0}^{1} x^{2} W(x) \ dx = 0
-\end{equation}<p>reordenando</p>
-\begin{equation}
-    \int_{0}^{1} \frac{d u(x)}{d x} \frac{d W(x)}{d x} \ dx = \int_{0}^{1} x^{2} W(x) \ dx + \bigg( \frac{d u(x)}{d x} W(x) \bigg) \bigg|_{0}^{1}
-\end{equation}<p>para la solución se usara un elemento de dos nodos</p>
-\begin{align}
-    u(x) &= \sum_{i=1}^{2} N_{i} a_{i} = N_{1} a_{1} + N_{2} a_{2} \\ 
-    \frac{d u(x)}{d x} &= \frac{d N_{1}}{d x} a_{1} + \frac{d N_{2}}{d x} a_{2} \\
-    W(x) &= \sum_{i=1}^{2} N_{i} \delta a_{i} = N_{1} \delta a_{1} + N_{2} \delta a_{2} \\
-    \frac{d W(x)}{d x} &= \frac{d N_{1}}{d x} \delta a_{1} + \frac{d N_{2}}{d x} \delta a_{2}
-\end{align}<p>reemplazando</p>
-\begin{equation}
-    \int_{0}^{1} \bigg( \frac{d N_{1}}{d x} a_{1} + \frac{d N_{2}}{d x} a_{2} \bigg) \bigg( \frac{d N_{1}}{d x} \delta a_{1} + \frac{d N_{2}}{d x} \delta a_{2} \bigg) \ dx = \int_{0}^{1} x^{2} (N_{1} \delta a_{1} + N_{2} \delta a_{2}) \ dx + \bigg[ \frac{d u(x)}{d x} (N_{1} \delta a_{1} + N_{2} \delta a_{2}) \bigg] \bigg|_{0}^{1}
-\end{equation}<p>multiplicando</p>
-\begin{equation}
-    \int_{0}^{1} \frac{d N_{1}}{d x} \frac{d N_{1}}{d x} a_{1} \delta a_{1} + \frac{d N_{1}}{d x} \frac{d N_{2}}{d x} a_{2} \delta a_{1} + \frac{d N_{2}}{d x} \frac{d N_{1}}{d x} a_{1} \delta a_{2} + \frac{d N_{2}}{d x} \frac{d N_{2}}{d x} a_{2} \delta a_{2} \ dx = \int_{0}^{1} x^{2} N_{1} \delta a_{1} + x^{2} N_{2} \delta a_{2} \ dx + \bigg( \frac{d u(x)}{d x} N_{1} \delta a_{1} + \frac{d u(x)}{d x} N_{2} \delta a_{2} \bigg) \bigg|_{0}^{1}
-\end{equation}<p>reemplazando los límites de integración en el lado derecho</p>
-\begin{equation}
-    \int_{0}^{1} \frac{d N_{1}}{d x} \frac{d N_{1}}{d x} a_{1} \delta a_{1} + \frac{d N_{1}}{d x} \frac{d N_{2}}{d x} a_{2} \delta a_{1} + \frac{d N_{2}}{d x} \frac{d N_{1}}{d x} a_{1} \delta a_{2} + \frac{d N_{2}}{d x} \frac{d N_{2}}{d x} a_{2} \delta a_{2} \ dx = \int_{0}^{1} x^{2} N_{1} \delta a_{1} + x^{2} N_{2} \delta a_{2} \ dx + \bigg( \frac{d u(1)}{d x} N_{1}(1) \delta a_{1} + \frac{d u(1)}{d x} N_{2}(1) \delta a_{2} \bigg) - \bigg( \frac{d u(0)}{d x} N_{1}(0) \delta a_{1} + \frac{d u(0)}{d x} N_{2}(0) \delta a_{2} \bigg)
-\end{equation}<p>reordenando y agrupando</p>
-\begin{equation}
-    \int_{0}^{1} \bigg( \frac{d N_{1}}{d x} \frac{d N_{1}}{d x} a_{1} + \frac{d N_{1}}{d x} \frac{d N_{2}}{d x} a_{2} \bigg) \delta a_{1} + \bigg( \frac{d N_{2}}{d x} \frac{d N_{1}}{d x} a_{1} + \frac{d N_{2}}{d x} \frac{d N_{2}}{d x} a_{2} \bigg) \delta a_{2} \ dx = \int_{0}^{1} x^{2} N_{1} \delta a_{1} + x^{2} N_{2} \delta a_{2} \ dx + \bigg( \frac{d u(1)}{d x} N_{1}(1) - \frac{d u(0)}{d x} N_{1}(0) \bigg) \delta a_{1} + \bigg( \frac{d u(1)}{d x} N_{2}(1) - \frac{d u(0)}{d x} N_{2}(0) \bigg) \delta a_{2}
-\end{equation}<p>formando un sistema de ecuaciones</p>
-\begin{align}
-    \int_{0}^{1} \bigg( \frac{d N_{1}}{d x} \frac{d N_{1}}{d x} a_{1} + \frac{d N_{1}}{d x} \frac{d N_{2}}{d x} a_{2} \bigg) \delta a_{1} \ dx &= \int_{0}^{1} x^{2} N_{1} \delta a_{1} \ dx + \bigg( \frac{d u(1)}{d x} N_{1}(1) - \frac{d u(0)}{d x} N_{1}(0) \bigg) \delta a_{1} \\
-    \int_{0}^{1} \bigg( \frac{d N_{2}}{d x} \frac{d N_{1}}{d x} a_{1} + \frac{d N_{2}}{d x} \frac{d N_{2}}{d x} a_{2} \bigg) \delta a_{2} \ dx &= \int_{0}^{1} x^{2} N_{2} \delta a_{2} \ dx + \bigg( \frac{d u(1)}{d x} N_{2}(1) - \frac{d u(0)}{d x} N_{2}(0) \bigg) \delta a_{2}
-\end{align}<p>las constantes se simplifican en ambos lados</p>
-\begin{align}
-    \int_{0}^{1} \frac{d N_{1}}{d x} \frac{d N_{1}}{d x} a_{1} + \frac{d N_{1}}{d x} \frac{d N_{2}}{d x} a_{2} \ dx &= \int_{0}^{1} x^{2} N_{1} \ dx + \frac{d u(1)}{d x} N_{1}(1) - \frac{d u(0)}{d x} N_{1}(0) \\
-    \int_{0}^{1} \frac{d N_{2}}{d x} \frac{d N_{1}}{d x} a_{1} + \frac{d N_{2}}{d x} \frac{d N_{2}}{d x} a_{2} \ dx &= \int_{0}^{1} x^{2} N_{2} \ dx + \frac{d u(1)}{d x} N_{2}(1) - \frac{d u(0)}{d x} N_{2}(0)
-\end{align}<p>las funciones de forma obtenidas anteriomente, tienen los siguientes valores</p>
-\begin{matrix}
-    N_{1}(1) = 0 & N_{1}(0) = 0 \\
-    N_{2}(1) = 0 & N_{2}(0) = 0
-\end{matrix}<p>reemplazando</p>
-\begin{align}
-    \int_{0}^{1} \frac{d N_{1}}{d x} \frac{d N_{1}}{d x} a_{1} + \frac{d N_{1}}{d x} \frac{d N_{2}}{d x} a_{2} \ dx &= \int_{0}^{1} x^{2} N_{1} \ dx \\
-    \int_{0}^{1} \frac{d N_{2}}{d x} \frac{d N_{1}}{d x} a_{1} + \frac{d N_{2}}{d x} \frac{d N_{2}}{d x} a_{2} \ dx &= \int_{0}^{1} x^{2} N_{2} \ dx
-\end{align}<p>en forma matricial</p>
-\begin{equation}
-    \int_{0}^{1}
+    v = \alpha_{0} + \alpha_{1} x + \alpha_{2} x^{2} + \alpha_{3} x^{3} =
     \begin{bmatrix}
-        \frac{d N_{1}}{d x} \frac{d N_{1}}{d x} & \frac{d N_{1}}{d x} \frac{d N_{2}}{d x} \\
-        \frac{d N_{2}}{d x} \frac{d N_{1}}{d x} & \frac{d N_{2}}{d x} \frac{d N_{2}}{d x}
-    \end{bmatrix} dx
-    \begin{bmatrix}
-    a_{1} \\
-    a_{2}
-    \end{bmatrix} = \int_{0}^{1} x^{2}
-    \begin{bmatrix}
-    N_{1} \\
-    N_{2}
-    \end{bmatrix} dx
-\end{equation}<p>factorizando matrices</p>
-\begin{equation}
-    \int_{0}^{1}
-    \begin{bmatrix}
-        \frac{d N_{1}}{d x} \\
-        \frac{d N_{2}}{d x}
+        1 & x & x^{2} & x^{3}
     \end{bmatrix}
     \begin{bmatrix}
-        \frac{d N_{1}}{d x} & \frac{d N_{2}}{d x}
-    \end{bmatrix} dx
+        \alpha_{0} \\
+        \alpha_{1} \\
+        \alpha_{2} \\
+        \alpha_{3}
+    \end{bmatrix}
+\end{equation}<p>la deformación angular es</p>
+\begin{equation}
+    \theta = \frac{d v}{ d x} = \alpha_{1} + 2 \alpha_{2} x + 3 \alpha_{3} x^{2}
+\end{equation}<p>reemplazando $x_{1} = 0$ y $x_{2} = L$</p>
+\begin{align}
+    \alpha_{0} + \alpha_{1} (0) + \alpha_{2} (0)^{2} + \alpha_{3} (0)^{3} &= v_{1} \\
+    \alpha_{1} + 2 \alpha_{2} (0) + 3 \alpha_{3} (0)^{2} &= \theta_{1} \\
+    \alpha_{0} + \alpha_{1} (L) + \alpha_{2} (L)^{2} + \alpha_{3} (L)^{3} &= v_{2} \\
+    \alpha_{1} + 2 \alpha_{2} (L) + 3 \alpha_{3} (L)^{2} &= \theta_{2}
+\end{align}<p>simplificando</p>
+\begin{align}
+    \alpha_{0} &= v_{1} \\
+    \alpha_{1} &= \theta_{1} \\
+    \alpha_{0} + L \alpha_{1} + L^{2} \alpha_{2} + L^{3} \alpha_{3} &= v_{2} \\
+    \alpha_{1} + 2 L \alpha_{2} + 3 L^{2} \alpha_{3} &= \theta_{2}
+\end{align}<p>en forma matricial</p>
+\begin{equation}
     \begin{bmatrix}
-    a_{1} \\
-    a_{2}
-    \end{bmatrix} = \int_{0}^{1} x^{2}
+    1 & 0 & 0 & 0 \\
+    0 & 1 & 0 & 0 \\
+    1 & L & L^{2} & L^{3} \\
+    0 & 1 & 2 L & 3 L^{2}
+    \end{bmatrix}
     \begin{bmatrix}
-    N_{1} \\
-    N_{2}
-    \end{bmatrix} dx
+        \alpha_{0} \\
+        \alpha_{1} \\
+        \alpha_{2} \\
+        \alpha_{3}
+    \end{bmatrix} =
+    \begin{bmatrix}
+        v_{1} \\
+        \theta_{1} \\
+        v_{2} \\
+        \theta_{2}
+    \end{bmatrix}
+\end{equation}<p>resolviendo el sistema</p>
+\begin{equation}
+    \begin{bmatrix}
+        \alpha_{0} \\
+        \alpha_{1} \\
+        \alpha_{2} \\
+        \alpha_{3}
+    \end{bmatrix} =
+    \begin{bmatrix}
+        1 & 0 & 0 & 0 \\
+        0 & 1 & 0 & 0 \\
+        -\frac{3}{L^{2}} & -\frac{2}{L} & \frac{3}{L^{2}} & -\frac{1}{L} \\
+        \frac{2}{L^{3}} & \frac{1}{L^{2}} & -\frac{2}{L^{3}} & \frac{1}{L^{2}}
+    \end{bmatrix}
+    \begin{bmatrix}
+        v_{1} \\
+        \theta_{1} \\
+        v_{2} \\
+        \theta_{2}
+    \end{bmatrix}
+\end{equation}<p>reemplazando las incógnitas</p>
+\begin{equation}
+    v =
+    \begin{bmatrix}
+        1 & x & x^{2} & x^{3}
+    \end{bmatrix}
+    \begin{bmatrix}
+        \alpha_{0} \\
+        \alpha_{1} \\
+        \alpha_{2} \\
+        \alpha_{3}
+    \end{bmatrix} =
+    \begin{bmatrix}
+        1 & x & x^{2} & x^{3}
+    \end{bmatrix}
+    \begin{bmatrix}
+        1 & 0 & 0 & 0 \\
+        0 & 1 & 0 & 0 \\
+        -\frac{3}{L^{2}} & -\frac{2}{L} & \frac{3}{L^{2}} & -\frac{1}{L} \\
+        \frac{2}{L^{3}} & \frac{1}{L^{2}} & -\frac{2}{L^{3}} & \frac{1}{L^{2}}
+    \end{bmatrix}
+    \begin{bmatrix}
+        v_{1} \\
+        \theta_{1} \\
+        v_{2} \\
+        \theta_{2}
+    \end{bmatrix} =
+    \begin{bmatrix}
+    1 - \frac{3}{L^{2}} x^{2} + \frac{2}{L^{3}} x^{3} &
+    x - \frac{2}{L} x^{2} + \frac{1}{L^{2}} x^{3} &
+    \frac{3}{L^{2}} x^{2} - \frac{2}{L^{3}} x^{3} &
+    -\frac{1}{L} x^{2} + \frac{1}{L^{2}} x^{3}
+    \end{bmatrix}
+    \begin{bmatrix}
+        v_{1} \\
+        \theta_{1} \\
+        v_{2} \\
+        \theta_{2}
+    \end{bmatrix}
+\end{equation}<p>Reescribiendo $v$</p>
+\begin{equation}
+    v = \bigg( 1 - \frac{3}{L^{2}} x^{2} + \frac{2}{L^{3}} x^{3} \bigg) v_{1}
+    + \bigg( x - \frac{2}{L} x^{2} + \frac{1}{L^{2}} x^{3} \bigg) \theta_{1}
+    + \bigg( \frac{3}{L^{2}} x^{2} - \frac{2}{L^{3}} x^{3} \bigg) v_{2}
+    + \bigg( -\frac{1}{L} x^{2} + \frac{1}{L^{2}} x^{3} \bigg) \theta_{2}
+    = N_{1} v_{1} + N_{2} \theta_{1} + N_{3} v_{2} + N_{4} \theta_{2}
+\end{equation}<h3 id="Elemento-de-tres-nodos">Elemento de tres nodos<a class="anchor-link" href="#Elemento-de-tres-nodos">&#182;</a></h3>\begin{equation}
+    v = N_{1} v_{1} + N_{2} \theta_{1} + N_{3} v_{2} + N_{4} \theta_{2} + N_{5} v_{3} + N_{6} \theta_{3}
+    = \sum_{i = 0}^{5} \alpha_{i} x^{i}
+    = \alpha_{0} + \alpha_{1} x + \alpha_{2} x^{2} + \alpha_{3} x^{3} + \alpha_{4} x^{4} + \alpha_{5} x^{5}
+\end{equation}<p>en forma matricial</p>
+\begin{equation}
+    v = \alpha_{0} + \alpha_{1} x + \alpha_{2} x^{2} + \alpha_{3} x^{3} + \alpha_{4} x^{4} + \alpha_{5} x^{5} =
+    \begin{bmatrix}
+        1 & x & x^{2} & x^{3} & x^{4} & x^{5}
+    \end{bmatrix}
+    \begin{bmatrix}
+        \alpha_{0} \\
+        \alpha_{1} \\
+        \alpha_{2} \\
+        \alpha_{3} \\
+        \alpha_{4} \\
+        \alpha_{5}
+    \end{bmatrix}
+\end{equation}<p>la deformación angular es</p>
+\begin{equation}
+    \theta = \frac{d v}{ d x} = \alpha_{1} + 2 \alpha_{2} x + 3 \alpha_{3} x^{2} + 4 \alpha_{4} x^{3} + 5 \alpha_{5} x^{4}
+\end{equation}<p>reemplazando $x_{1} = 0$, $x_{2} = \frac{L}{2}$ y $x_{3} = L$</p>
+\begin{align}
+    \alpha_{0} + \alpha_{1} (0) + \alpha_{2} (0)^{2} + \alpha_{3} (0)^{3} + \alpha_{4} (0)^{4} + \alpha_{5} (0)^{5} &= v_{1} \\
+    \alpha_{1} + 2 \alpha_{2} (0) + 3 \alpha_{3} (0)^{2} + 4 \alpha_{4} (0)^{3} + 5 \alpha_{5} (0)^{4} &= \theta_{1} \\
+    \alpha_{0} + \alpha_{1} \bigg( \frac{L}{2} \bigg) + \alpha_{2} \bigg( \frac{L}{2} \bigg)^{2} + \alpha_{3} \bigg( \frac{L}{2} \bigg)^{3} + \alpha_{4} \bigg( \frac{L}{2} \bigg)^{4} + \alpha_{5} \bigg( \frac{L}{2} \bigg)^{5} &= v_{2} \\
+    \alpha_{1} + 2 \alpha_{2} \bigg( \frac{L}{2} \bigg) + 3 \alpha_{3} \bigg( \frac{L}{2} \bigg)^{2} + 4 \alpha_{4} \bigg( \frac{L}{2} \bigg)^{3} + 5 \alpha_{5} \bigg( \frac{L}{2} \bigg)^{4} &= \theta_{2} \\
+    \alpha_{0} + \alpha_{1} (L) + \alpha_{2} (L)^{2} + \alpha_{3} (L)^{3} + \alpha_{4} (L)^{4} + \alpha_{5} (L)^{5} &= v_{3} \\
+    \alpha_{1} + 2 \alpha_{2} (L) + 3 \alpha_{3} (L)^{2} + 4 \alpha_{4} (L)^{3} + 5 \alpha_{5} (L)^{4} &= \theta_{3}
+\end{align}<p>simplificando</p>
+\begin{align}
+    \alpha_{0} &= v_{1} \\
+    \alpha_{1} &= \theta_{1} \\
+    \alpha_{0} + \frac{L}{2} \alpha_{1} + \frac{L^{2}}{4} \alpha_{2} + \frac{L^{3}}{8} \alpha_{3} + \frac{L^{4}}{16} \alpha_{4} + \frac{L^{5}}{32} \alpha_{5} &= v_{2} \\
+    \alpha_{1} + L \alpha_{2} + \frac{3 L^{2}}{4} \alpha_{3} + \frac{L^{3}}{2} \alpha_{4} + \frac{5 L^{4}}{16} \alpha_{5} &= \theta_{2} \\
+    \alpha_{0} + L \alpha_{1} + L^{2} \alpha_{2} + L^{3} \alpha_{3} + L^{4} \alpha_{4} + L^{5} \alpha_{5} &= v_{3} \\
+    \alpha_{1} + 2 L \alpha_{2} + 3 L^{2} \alpha_{3} + 4 L^{3} \alpha_{4} + 5 L^{4} \alpha_{5} &= \theta_{3}
+\end{align}<p>en forma matricial</p>
+\begin{equation}
+    \begin{bmatrix}
+    1 & 0 & 0 & 0 & 0 & 0 \\
+    0 & 1 & 0 & 0 & 0 & 0 \\
+    1 & \frac{L}{2} & \frac{L^{2}}{4} & \frac{L^{3}}{8} & \frac{L^{4}}{16} & \frac{L^{5}}{32} \\
+    0 & 1 & L & \frac{3 L^{2}}{4} & \frac{L^{3}}{2} & \frac{5 L^{4}}{16} \\
+    1 & L & L^{2} & L^{3} & L^{4} & L^{5} \\
+    0 & 1 & 2 L & 3 L^{2} & 4 L^{3} & 5 L^{4}
+    \end{bmatrix}
+    \begin{bmatrix}
+        \alpha_{0} \\
+        \alpha_{1} \\
+        \alpha_{2} \\
+        \alpha_{3} \\
+        \alpha_{4} \\
+        \alpha_{5}
+    \end{bmatrix} =
+    \begin{bmatrix}
+        v_{1} \\
+        \theta_{1} \\
+        v_{2} \\
+        \theta_{2} \\
+        v_{3} \\
+        \theta_{3}
+    \end{bmatrix}
+\end{equation}<p>resolviendo el sistema</p>
+\begin{equation}
+    \begin{bmatrix}
+        \alpha_{0} \\
+        \alpha_{1} \\
+        \alpha_{2} \\
+        \alpha_{3} \\
+        \alpha_{4} \\
+        \alpha_{5}
+    \end{bmatrix} =
+    \begin{bmatrix}
+        1 & 0 & 0 & 0 & 0 & 0 \\
+        0 & 1 & 0 & 0 & 0 & 0 \\
+        -\frac{23}{L^{2}} & -\frac{6}{L} & \frac{16}{L^{2}} & -\frac{8}{L} & \frac{7}{L^{2}} & -\frac{1}{L} \\
+        \frac{66}{L^{3}} & \frac{13}{L^{2}} & -\frac{32}{L^{3}} & \frac{32}{L^{2}} & -\frac{34}{L^{3}} & \frac{5}{L^{2}} \\
+        -\frac{68}{L^{4}} & -\frac{12}{L^{3}} & \frac{16}{L^{4}} & -\frac{40}{L^{3}} & \frac{52}{L^{4}} & -\frac{8}{L^{3}} \\
+        \frac{24}{L^{5}} & \frac{4}{L^{4}} & 0 & \frac{16}{L^{4}} & -\frac{24}{L^{5}} & \frac{4}{L^{4}}
+    \end{bmatrix}
+    \begin{bmatrix}
+        v_{1} \\
+        \theta_{1} \\
+        v_{2} \\
+        \theta_{2} \\
+        v_{3} \\
+        \theta_{3}
+    \end{bmatrix}
+\end{equation}<p>reemplazando las incógnitas</p>
+\begin{equation}
+    v =
+    \begin{bmatrix}
+        1 & x & x^{2} & x^{3} & x^{4} & x^{5}
+    \end{bmatrix}
+    \begin{bmatrix}
+        \alpha_{0} \\
+        \alpha_{1} \\
+        \alpha_{2} \\
+        \alpha_{3} \\
+        \alpha_{4} \\
+        \alpha_{5}
+    \end{bmatrix} =
+    \begin{bmatrix}
+        1 & x & x^{2} & x^{3} & x^{4} & x^{5}
+    \end{bmatrix}
+    \begin{bmatrix}
+        1 & 0 & 0 & 0 & 0 & 0 \\
+        0 & 1 & 0 & 0 & 0 & 0 \\
+        -\frac{23}{L^{2}} & -\frac{6}{L} & \frac{16}{L^{2}} & -\frac{8}{L} & \frac{7}{L^{2}} & -\frac{1}{L} \\
+        \frac{66}{L^{3}} & \frac{13}{L^{2}} & -\frac{32}{L^{3}} & \frac{32}{L^{2}} & -\frac{34}{L^{3}} & \frac{5}{L^{2}} \\
+        -\frac{68}{L^{4}} & -\frac{12}{L^{3}} & \frac{16}{L^{4}} & -\frac{40}{L^{3}} & \frac{52}{L^{4}} & -\frac{8}{L^{3}} \\
+        \frac{24}{L^{5}} & \frac{4}{L^{4}} & 0 & \frac{16}{L^{4}} & -\frac{24}{L^{5}} & \frac{4}{L^{4}}
+    \end{bmatrix}
+    \begin{bmatrix}
+        v_{1} \\
+        \theta_{1} \\
+        v_{2} \\
+        \theta_{2} \\
+        v_{3} \\
+        \theta_{3}
+    \end{bmatrix} =
+    \begin{bmatrix}
+    \frac{1}{L^{2}} {x}^{2} + \frac{66}{L^{3}} x^{3} - \frac {68}{L^{4}} x^{4} + \frac {24}{L^{5}} x^{5} &
+    x - \frac{6}{L} x^{2} + \frac{13}{L^{2}} x^{3} - \frac{12}{L^{3}} x^{4} + \frac{4}{L^{4}} x^{5} &
+    \frac{16}{L^{2}} x^{2} - \frac{32}{L^{3}} x^{3} + \frac{16}{L^{4}} x^{4} &
+    -\frac{8}{L} x^{2} + \frac{32}{L^{2}} x^{3} - \frac{40}{L^{3}} x^{4} + \frac{16}{L^{4}} x^{5} &
+    \frac{7}{L^{2}} x^{2} - \frac{34}{L^{3}} x^{3} + \frac{52}{L^{4}} x^{4} - \frac{24}{L^{5}} x^{5} &
+    -\frac{1}{L} x^{2} + \frac{5}{L^{2}} x^{3} - \frac{8}{L^{3}} x^{4} + \frac{4}{L^{4}} x^{5}
+    \end{bmatrix}
+    \begin{bmatrix}
+        v_{1} \\
+        \theta_{1} \\
+        v_{2} \\
+        \theta_{2} \\
+        v_{3} \\
+        \theta_{3}
+    \end{bmatrix}
+\end{equation}<p>Reescribiendo $v$</p>
+\begin{equation}
+    v = \bigg( \frac{1}{L^{2}} {x}^{2} + \frac{66}{L^{3}} x^{3} - \frac {68}{L^{4}} x^{4} + \frac {24}{L^{5}} x^{5} \bigg) v_{1}
+    + \bigg( x - \frac{6}{L} x^{2} + \frac{13}{L^{2}} x^{3} - \frac{12}{L^{3}} x^{4} + \frac{4}{L^{4}} x^{5} \bigg) \theta_{1}
+    + \bigg( \frac{16}{L^{2}} x^{2} - \frac{32}{L^{3}} x^{3} + \frac{16}{L^{4}} x^{4} \bigg) v_{2}
+    + \bigg( -\frac{8}{L} x^{2} + \frac{32}{L^{2}} x^{3} - \frac{40}{L^{3}} x^{4} + \frac{16}{L^{4}} x^{5} \bigg) \theta_{2}
+    + \bigg( \frac{7}{L^{2}} x^{2} - \frac{34}{L^{3}} x^{3} + \frac{52}{L^{4}} x^{4} - \frac{24}{L^{5}} x^{5} \bigg) v_{3}
+    + \bigg( -\frac{1}{L} x^{2} + \frac{5}{L^{2}} x^{3} - \frac{8}{L^{3}} x^{4} + \frac{4}{L^{4}} x^{5} \bigg) \theta_{3}
+    = N_{1} v_{1} + N_{2} \theta_{1} + N_{3} v_{2} + N_{4} \theta_{2} + N_{5} v_{3} + N_{6} \theta_{3}
 \end{equation}
 </div>
 </div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-julia"><pre>
-</pre></div>
-
-</div>
-</div>
-</div>
-
 </div>
 
     </div>

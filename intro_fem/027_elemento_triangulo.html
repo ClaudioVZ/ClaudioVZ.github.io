@@ -3,7 +3,7 @@
 <head>
 
 <meta charset="utf-8" />
-<title>010_ejemplo_barra</title>
+<title>027_elemento_triangulo</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -177,8 +177,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Ejemplo-1">Ejemplo 1<a class="anchor-link" href="#Ejemplo-1">&#182;</a></h1><p>$L = 0.5 \ \text{m}$, $A = 6.25 \times 10^{-4} \ \text{m}^{2}$ y $E = 200 \ \text{MPa}$</p>
-
+<h1 id="Funciones-de-forma-triangulares">Funciones de forma triangulares<a class="anchor-link" href="#Funciones-de-forma-triangulares">&#182;</a></h1>
 </div>
 </div>
 </div>
@@ -187,366 +186,189 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><img align="left" src="imagenes/010_ejemplo_barra_1.svg"></p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Un-elemento-de-dos-nodos">Un elemento de dos nodos<a class="anchor-link" href="#Un-elemento-de-dos-nodos">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><img align="left" src="imagenes/010_ejemplo_barra_2.svg"></p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-\begin{equation}
-    \int_{0}^{L} B^{T} D \ B \ dx \ u = \int_{0}^{L} q \ N^{T} dx + f
-\end{equation}<p>desplazamientos</p>
-\begin{equation}
-    N =
+<h3 id="Elemento-de-tres-nodos">Elemento de tres nodos<a class="anchor-link" href="#Elemento-de-tres-nodos">&#182;</a></h3>\begin{equation}
     \begin{bmatrix}
-        1 - \frac{x}{0.5} & \frac{x}{0.5}
+    & 1 & \\
+    x & & y
+    \end{bmatrix}
+\end{equation}<p>campo de desplazamientos</p>
+\begin{align}
+    u &= \alpha_{1} + \alpha_{2} x + \alpha_{3} y \\
+    v &= \alpha_{4} + \alpha_{5} x + \alpha_{6} y
+\end{align}<p>en forma matricial</p>
+\begin{equation}
+    \begin{bmatrix}
+        u \\
+        v
     \end{bmatrix} =
     \begin{bmatrix}
-        1 - 2 x & 2 x
+        1 & x & y & 0 & 0 & 0 \\
+        0 & 0 & 0 & 1 & x & y
     \end{bmatrix}
-\end{equation}<p>deformaciones</p>
-\begin{equation}
-    B = \frac{d N}{d x} =
     \begin{bmatrix}
-        -\frac{1}{0.5} & \frac{1}{0.5}
+        \alpha_{1} \\
+        \alpha_{2} \\
+        \alpha_{3} \\
+        \alpha_{4} \\
+        \alpha_{5} \\
+        \alpha_{6}
+    \end{bmatrix}
+\end{equation}<p>reemplazando valores</p>
+\begin{align}
+    \alpha_{1} + \alpha_{2} x_{1} + \alpha_{3} y_{1} &= u_{1} \\
+    \alpha_{4} + \alpha_{5} x_{1} + \alpha_{6} y_{1} &= v_{1} \\
+    \alpha_{1} + \alpha_{2} x_{2} + \alpha_{3} y_{2} &= u_{2} \\
+    \alpha_{4} + \alpha_{5} x_{2} + \alpha_{6} y_{2} &= v_{2} \\
+    \alpha_{1} + \alpha_{2} x_{3} + \alpha_{3} y_{3} &= u_{3} \\
+    \alpha_{4} + \alpha_{5} x_{3} + \alpha_{6} y_{3} &= v_{3}
+\end{align}<p>en forma matricial:</p>
+\begin{equation}
+    \begin{bmatrix}
+        1 & x_{1} & y_{1} & 0 & 0 & 0 \\
+        0 & 0 & 0 & 1 & x_{1} & y_{1} \\
+        1 & x_{2} & y_{2} & 0 & 0 & 0 \\
+        0 & 0 & 0 & 1 & x_{2} & y_{2} \\
+        1 & x_{3} & y_{3} & 0 & 0 & 0 \\
+        0 & 0 & 0 & 1 & x_{3} & y_{3}
+    \end{bmatrix}
+    \begin{bmatrix}
+        \alpha_{1} \\
+        \alpha_{2} \\
+        \alpha_{3} \\
+        \alpha_{4} \\
+        \alpha_{5} \\
+        \alpha_{6}
     \end{bmatrix} =
     \begin{bmatrix}
-        -2 & 2
+        u_{1} \\
+        v_{1} \\
+        u_{2} \\
+        v_{2} \\
+        u_{3} \\
+        v_{3}
     \end{bmatrix}
-\end{equation}<p>matriz constitutiva</p>
+\end{equation}<p>resolviendo el sistema:</p>
 \begin{equation}
-    D = E A = 1.25 \times 10^{5}
+    \begin{bmatrix}
+        \alpha_{1} \\
+        \alpha_{2} \\
+        \alpha_{3} \\
+        \alpha_{4} \\
+        \alpha_{5} \\
+        \alpha_{6}
+    \end{bmatrix} =
+    \begin{bmatrix}
+        \frac{x_{2} y_{3} - x_{3} y_{2}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 & \frac{y_{1} x_{3} - x_{1} y_{3}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 & \frac{x_{1} y_{2} - y_{1} x_{2}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 \\
+        \frac{y_{2} - y_{3}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 & \frac{y_{3} - y_{1}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 & \frac{y_{1} - y_{2}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 \\
+        \frac{x_{3} - x_{2}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 & \frac{x_{1} - x_{3}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 & \frac{x_{2} - x_{1}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 \\
+        0 & \frac{x_{2} y_{3} - x_{3} y_{2}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 & \frac{y_{1} x_{3} - x_{1} y_{3}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 & \frac{x_{1} y_{2} - y_{1} x_{2}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} \\
+        0 & \frac{y_{2} - y_{3}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 & \frac{y_{3} - y_{1}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 & \frac{y_{1} - y_{2}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} \\
+        0 & \frac{x_{3} - x_{2}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 & \frac{x_{1} - x_{3}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 & \frac{x_{2} - x_{1}} {y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}}
+    \end{bmatrix}
+    \begin{bmatrix}
+        u_{1} \\
+        v_{1} \\
+        u_{2} \\
+        v_{2} \\
+        u_{3} \\
+        v_{3}
+    \end{bmatrix}
+\end{equation}<p>reemplazando:</p>
+\begin{equation}
+    u =
+    \begin{bmatrix}
+        1 & x & y & 0 & 0 & 0 \\
+        0 & 0 & 0 & 1 & x & y
+    \end{bmatrix}
+    \begin{bmatrix}
+        \frac{x_{2} y_{3} - x_{3} y_{2}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 & \frac{y_{1} x_{3} - x_{1} y_{3}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 & \frac{x_{1} y_{2} - y_{1} x_{2}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 \\
+        \frac{y_{2} - y_{3}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 & \frac{y_{3} - y_{1}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 & \frac{y_{1} - y_{2}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 \\
+        \frac{x_{3} - x_{2}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 & \frac{x_{1} - x_{3}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 & \frac{x_{2} - x_{1}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 \\
+        0 & \frac{x_{2} y_{3} - x_{3} y_{2}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 & \frac{y_{1} x_{3} - x_{1} y_{3}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 & \frac{x_{1} y_{2} - y_{1} x_{2}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} \\
+        0 & \frac{y_{2} - y_{3}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 & \frac{y_{3} - y_{1}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 & \frac{y_{1} - y_{2}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} \\
+        0 & \frac{x_{3} - x_{2}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 & \frac{x_{1} - x_{3}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 & \frac{x_{2} - x_{1}} {y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}}
+    \end{bmatrix}
+    \begin{bmatrix}
+        u_{1} \\
+        v_{1} \\
+        u_{2} \\
+        v_{2} \\
+        u_{3} \\
+        v_{3}
+    \end{bmatrix}
+\end{equation}<p>multiplicando:</p>
+\begin{equation}
+    u =
+    \begin{bmatrix}
+        \frac{x_{2} y_{3} - x_{3} y_{2}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} + \frac{(y_{2} - y_{3}) x}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} + \frac{(x_{3} - x_{2}) y}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 & \frac{x_{1} y_{1} - y_{3} x_{3}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} + \frac{(y_{3} - y_{1}) x}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} + \frac{(x_{1} - x_{3}) y}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 & \frac{x_{1} y_{2} - y_{1} x_{2}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} + \frac{(y_{1} - y_{2}) x}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} + \frac{(x_{2} - x_{1}) y}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 \\
+        0 & \frac{x_{2} y_{3} - x_{3} y_{2}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} + \frac{(y_{2} - y_{3}) x}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} + \frac{(x_{3} - x_{2}) y}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 & \frac{x_{1} y_{1} - y_{3} x_{3}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} + \frac{(y_{3} - y_{1}) x}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} + \frac{(x_{1} - x_{3}) y}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} & 0 & \frac{x_{1} y_{2} - y_{1} x_{2}}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} + \frac{(y_{1} - y_{2}) x}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}} + \frac{(x_{2} - x_{1}) y}{y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2}}
+    \end{bmatrix}
+    \begin{bmatrix}
+        u_{1} \\
+        v_{1} \\
+        u_{2} \\
+        v_{2} \\
+        u_{3} \\
+        v_{3}
+    \end{bmatrix}
+\end{equation}<p>El área de un triángulo con vértices $(x_{1}, y_{1})$, $(x_{2}, y_{2})$ y $(x_{3}, y_{3})$ es:</p>
+\begin{equation}
+    A = \frac{1}{2} 
+    \begin{vmatrix}
+        x_{1} & y_{1} & 1 \\
+        x_{2} & y_{2} & 1 \\
+        x_{3} & y_{3} & 1
+    \end{vmatrix} =
+    \frac{1}{2} (y_{1} x_{3} - y_{1} x_{2} - x_{1} y_{3} + x_{1} y_{2} + x_{2} y_{3} - x_{3} y_{2})
 \end{equation}<p>reemplazando</p>
 \begin{equation}
-    \int_{0}^{0.5}
+    u = \frac{1}{2 A}
     \begin{bmatrix}
-        -2 \\
-        2
+        (x_{2} y_{3} - x_{3} y_{2}) + (y_{2} - y_{3}) x + (x_{3} - x_{2}) y & 0 & (x_{1} y_{1} - y_{3} x_{3}) + (y_{3} - y_{1}) x + (x_{1} - x_{3}) y & 0 & (x_{1} y_{2} - y_{1} x_{2}) + (y_{1} - y_{2}) x + (x_{2} - x_{1}) y & 0 \\
+        0 & (x_{2} y_{3} - x_{3} y_{2}) + (y_{2} - y_{3}) x + (x_{3} - x_{2}) y & 0 & (x_{1} y_{1} - y_{3} x_{3}) + (y_{3} - y_{1}) x + (x_{1} - x_{3}) y & 0 & (x_{1} y_{2} - y_{1} x_{2}) + (y_{1} - y_{2}) x + (x_{2} - x_{1}) y
     \end{bmatrix}
     \begin{bmatrix}
-        1.25 \times 10^{5}
+        u_{1} \\
+        v_{1} \\
+        u_{2} \\
+        v_{2} \\
+        u_{3} \\
+        v_{3}
     \end{bmatrix}
-    \begin{bmatrix}
-        -2 & 2
-    \end{bmatrix} dx
-    \begin{bmatrix}
-    0 \\
-    u_{2}
-    \end{bmatrix} = \int_{0}^{0.5} 1000
-    \begin{bmatrix}
-    1 - 2 x \\
-    2 x
-    \end{bmatrix} dx +
-    \begin{bmatrix}
-    F_{1} \\
-    250
-    \end{bmatrix}
-\end{equation}<p>integrando y sumando</p>
+\end{equation}<p>En forma matricial:</p>
 \begin{equation}
+    u =
     \begin{bmatrix}
-        2.5 \times 10^{5} & -2.5 \times 10^{5} \\
-        -2.5 \times 10^{5} & 2.5 \times 10^{5}
+        N_{1} & 0 & N_{2} & 0 & N_{3} & 0 \\
+        0 & N_{1} & 0 & N_{2} & 0 & N_{3}
     \end{bmatrix}
     \begin{bmatrix}
-    0 \\
-    u_{2}
-    \end{bmatrix} =
-    \begin{bmatrix}
-    F_{1} + 250 \\
-    500
+        u_{1} \\
+        v_{1} \\
+        u_{2} \\
+        v_{2} \\
+        u_{3} \\
+        v_{3}
     \end{bmatrix}
-\end{equation}<p>resolviendo</p>
-\begin{align}
-    F_{1} &= -750 \ \text{N} \\
-    u_{2} &= 0.002 \ \text{m}
-\end{align}<p>desplazamientos</p>
+\end{equation}<p>En forma matricial reducida:</p>
 \begin{equation}
-    u = N u =
-    \begin{bmatrix}
-        1 - 2 x & 2 x
-    \end{bmatrix}
-    \begin{bmatrix}
-    0 \\
-    0.002
-    \end{bmatrix} = 0.004 x
-\end{equation}<p>deformación normal</p>
-\begin{equation}
-    \varepsilon = B u =
-    \begin{bmatrix}
-        -2 & 2
-    \end{bmatrix}
-    \begin{bmatrix}
-    0 \\
-    0.002
-    \end{bmatrix} = 0.004
-\end{equation}<p>esfuerzo normal</p>
-\begin{equation}
-    \sigma = E \varepsilon = 800 \ \text{KPa}
+    u = N \ u
 \end{equation}
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Dos-elementos-de-dos-nodos">Dos elementos de dos nodos<a class="anchor-link" href="#Dos-elementos-de-dos-nodos">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><img align="left" src="imagenes/010_ejemplo_barra_3.svg"></p>
+    <div class="input_area">
+<div class=" highlight hl-julia"><pre>
+</pre></div>
 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-\begin{equation}
-    \int_{0}^{L} B^{T} D \ B \ dx \ u = \int_{0}^{L} q \ N^{T} dx + f
-\end{equation}<p><strong>Elemento 1</strong></p>
-<p>desplazamientos</p>
-\begin{equation}
-    N =
-    \begin{bmatrix}
-        1 - \frac{x}{0.25} & \frac{x}{0.25}
-    \end{bmatrix} =
-    \begin{bmatrix}
-        1 - 4 x & 4 x
-    \end{bmatrix}
-\end{equation}<p>deformaciones</p>
-\begin{equation}
-    B = \frac{d N}{d x} =
-    \begin{bmatrix}
-        -\frac{1}{0.25} & \frac{1}{0.25}
-    \end{bmatrix} =
-    \begin{bmatrix}
-        -4 & 4
-    \end{bmatrix}
-\end{equation}<p>matriz constitutiva</p>
-\begin{equation}
-    D = E A = 1.25 \times 10^{5}
-\end{equation}<p>reemplazando</p>
-\begin{equation}
-    \int_{0}^{0.25}
-    \begin{bmatrix}
-        -4 \\
-        4
-    \end{bmatrix}
-    \begin{bmatrix}
-        1.25 \times 10^{5}
-    \end{bmatrix}
-    \begin{bmatrix}
-        -4 & 4
-    \end{bmatrix} dx
-    \begin{bmatrix}
-    0 \\
-    u_{2}
-    \end{bmatrix} = \int_{0}^{0.25} 1000
-    \begin{bmatrix}
-    1 - 4 x \\
-    4 x
-    \end{bmatrix} dx +
-    \begin{bmatrix}
-    F_{1} \\
-    0
-    \end{bmatrix}
-\end{equation}<p>integrando y sumando</p>
-\begin{equation}
-    \begin{bmatrix}
-        5 \times 10^{5} & -5 \times 10^{5} \\
-        -5 \times 10^{5} & 5 \times 10^{5}
-    \end{bmatrix}
-    \begin{bmatrix}
-    0 \\
-    u_{2}
-    \end{bmatrix} =
-    \begin{bmatrix}
-    F_{1} + 125 \\
-    125
-    \end{bmatrix}
-\end{equation}<p><strong>Elemento 2</strong></p>
-<p>desplazamientos</p>
-\begin{equation}
-    N =
-    \begin{bmatrix}
-        1 - \frac{x}{0.25} & \frac{x}{0.25}
-    \end{bmatrix} =
-    \begin{bmatrix}
-        1 - 4 x & 4 x
-    \end{bmatrix}
-\end{equation}<p>deformaciones</p>
-\begin{equation}
-    B = \frac{d N}{d x} =
-    \begin{bmatrix}
-        -\frac{1}{0.25} & \frac{1}{0.25}
-    \end{bmatrix} =
-    \begin{bmatrix}
-        -4 & 4
-    \end{bmatrix}
-\end{equation}<p>matriz constitutiva</p>
-\begin{equation}
-    D = E A = 1.25 \times 10^{5}
-\end{equation}<p>reemplazando</p>
-\begin{equation}
-    \int_{0.25}^{0.50}
-    \begin{bmatrix}
-        -4 \\
-        4
-    \end{bmatrix}
-    \begin{bmatrix}
-        1.25 \times 10^{5}
-    \end{bmatrix}
-    \begin{bmatrix}
-        -4 & 4
-    \end{bmatrix} dx
-    \begin{bmatrix}
-    u_{1} \\
-    u_{2}
-    \end{bmatrix} = \int_{0.25}^{0.50} 1000
-    \begin{bmatrix}
-    1 - 4 x \\
-    4 x
-    \end{bmatrix} dx +
-    \begin{bmatrix}
-    0 \\
-    250
-    \end{bmatrix}
-\end{equation}<p>integrando y sumando</p>
-\begin{equation}
-    \begin{bmatrix}
-        5 \times 10^{5} & -5 \times 10^{5} \\
-        -5 \times 10^{5} & 5 \times 10^{5}
-    \end{bmatrix}
-    \begin{bmatrix}
-    u_{1} \\
-    u_{2}
-    \end{bmatrix} =
-    \begin{bmatrix}
-    125 \\
-    375
-    \end{bmatrix}
-\end{equation}<p>ensamblando matriz global</p>
-\begin{equation}
-    \begin{bmatrix}
-        5 \times 10^{5} & -5 \times 10^{5} & 0 \\
-        -5 \times 10^{5} & 5 \times 10^{5} + 5 \times 10^{5} & -5 \times 10^{5} \\
-        0 & -5 \times 10^{5} & 5 \times 10^{5}
-    \end{bmatrix}
-    \begin{bmatrix}
-    0 \\
-    u_{2} \\
-    u_{3}
-    \end{bmatrix} =
-    \begin{bmatrix}
-    F_{1} + 125 \\
-    125 + 125 \\
-    375
-    \end{bmatrix}
-\end{equation}<p>sumando</p>
-\begin{equation}
-    \begin{bmatrix}
-        5 \times 10^{5} & -5 \times 10^{5} & 0 \\
-        -5 \times 10^{5} & 10 \times 10^{5} & -5 \times 10^{5} \\
-        0 & -5 \times 10^{5} & 5 \times 10^{5}
-    \end{bmatrix}
-    \begin{bmatrix}
-    0 \\
-    u_{2} \\
-    u_{3}
-    \end{bmatrix} =
-    \begin{bmatrix}
-    F_{1} + 125 \\
-    250 \\
-    375
-    \end{bmatrix}
-\end{equation}<p>resolviendo</p>
-\begin{align}
-    F_{1} &= -750 \ \text{N} \\
-    u_{2} &= 0.00125 \ \text{m} \\
-    u_{3} &= 0.002 \ \text{m}
-\end{align}<p><strong>Elemento 1</strong></p>
-<p>desplazamientos</p>
-\begin{equation}
-    u = N u =
-    \begin{bmatrix}
-        1 - 4 x & 4 x
-    \end{bmatrix}
-    \begin{bmatrix}
-    0 \\
-    0.00125
-    \end{bmatrix} = 0.005 x
-\end{equation}<p>deformación normal</p>
-\begin{equation}
-    \varepsilon = B u =
-    \begin{bmatrix}
-        -4 & 4
-    \end{bmatrix}
-    \begin{bmatrix}
-    0 \\
-    0.00125
-    \end{bmatrix} = 0.005
-\end{equation}<p>esfuerzo normal</p>
-\begin{equation}
-    \sigma = E \varepsilon = 100 \ \text{KPa}
-\end{equation}<p><strong>Elemento 2</strong></p>
-<p>desplazamientos</p>
-\begin{equation}
-    u = N u =
-    \begin{bmatrix}
-        1 - 4 x & 4 x
-    \end{bmatrix}
-    \begin{bmatrix}
-    0.00125 \\
-    0.002
-    \end{bmatrix} = 0.00125 + 0.003 x
-\end{equation}<p>deformación normal</p>
-\begin{equation}
-    \varepsilon = B u =
-    \begin{bmatrix}
-        -4 & 4
-    \end{bmatrix}
-    \begin{bmatrix}
-    0.00125 \\
-    0.002
-    \end{bmatrix} = 0.003
-\end{equation}<p>esfuerzo normal</p>
-\begin{equation}
-    \sigma = E \varepsilon = 60 \ \text{KPa}
-\end{equation}
-</div>
-</div>
+
 </div>
 
     </div>

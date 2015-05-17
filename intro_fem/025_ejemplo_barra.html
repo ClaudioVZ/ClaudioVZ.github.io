@@ -3,7 +3,7 @@
 <head>
 
 <meta charset="utf-8" />
-<title>007_metodo_galerkin</title>
+<title>025_ejemplo_barra</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -177,12 +177,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="M&#233;todo-de-Galerkin">M&#233;todo de Galerkin<a class="anchor-link" href="#M&#233;todo-de-Galerkin">&#182;</a></h1><p>Resolver $u(0 < x < 1)$ para</p>
-\begin{align}
-    \frac{d^{2} u(x)}{d x^{2}} + x^{2} &= 0 \\
-    u(0) &= 0 \\
-    u(1) &= 0 \\
-\end{align}
+<h1 id="Ejemplo-1">Ejemplo 1<a class="anchor-link" href="#Ejemplo-1">&#182;</a></h1>
 </div>
 </div>
 </div>
@@ -191,51 +186,37 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Ejemplo-1">Ejemplo 1<a class="anchor-link" href="#Ejemplo-1">&#182;</a></h3><p>Se utilizaran tres términos en la aproximación</p>
+<p>$L = 40 \ \text{cm}$, $A_{1} = 16 \ \text{cm}^{2}$, $A_{2} = 25 \ \text{cm}^{2}$ y $E = 2000 \ \text{Kg}/\text{cm}^{2}$</p>
 \begin{equation}
-    u(x) \approx \hat u(x) = \sum_{i=0}^{2} a_{i} x^{i} = a_{0} + a_{1} x + a_{2} x^{2} 
-\end{equation}<p>reemplazando las condiciones de contorno</p>
-\begin{align}
-\require{cancel}
-    \hat u(0) &= a_{0} + a_{1} (0) + a_{2} (0)^{2} = 0 \\
-    \hat u(1) &= \cancel{a_{0}} + a_{1} (1) + a_{2} (1)^{2} = 0
-\end{align}<p>resolviendo el sistema</p>
-\begin{align}
-    a_{0} &= 0 \\
-    a_{1} &= -a_{2}
-\end{align}<p>reemplazando las constantes</p>
+    A(x) = 25 - \frac{9}{40} x
+\end{equation}<p>la función que interpola la geometría es</p>
 \begin{equation}
-    \hat u(x) = -a_{2} x + a_{2} x^{2} = a_{2} (x^{2} - x)
-\end{equation}<p>$\hat u_{x}$ es</p>
+    x = \bigg( \frac{1}{2} - \frac{1}{2} \xi \bigg) x_{1} + \bigg( \frac{1}{2} + \frac{1}{2} \xi \bigg) x_{2}
+\end{equation}<p>reemplazando</p>
 \begin{equation}
-    \frac{d \hat u(x)}{d x} = -a_{1} + 2 a_{2} x
-\end{equation}<p>$\hat u_{xx}$ es</p>
+    A(\xi) = 25 - \frac{9}{40} \bigg[ \bigg( \frac{1}{2} - \frac{1}{2} \xi \bigg) x_{1} + \bigg( \frac{1}{2} + \frac{1}{2} \xi \bigg) x_{2} \bigg]
+\end{equation}<p>agrupando</p>
 \begin{equation}
-    \frac{d^{2} \hat u(x)}{d x^{2}} = 2 a_{2}
-\end{equation}<p>la función residual es</p>
+    A(\xi) = 25 - \frac{9}{40} \bigg[ \frac{x_{1} + x_{2}}{2} + \bigg( \frac{x_{2} - x_{1}}{2} \bigg) \xi \bigg]
+\end{equation}<p>reemplazando $x_{2} - x_{1} = l$ y $x_{1} + x_{2} = (2 n + 1) l$</p>
 \begin{equation}
-    R(x) = \frac{d^{2} \hat u(x)}{d x^{2}} + x^{2} = 2 a_{2} + x^{2}
-\end{equation}<p>la función ponderada es</p>
+    A(\xi) = 25 - \frac{9}{40} \bigg[ \frac{(2 n + 1) l}{2} + \frac{l}{2} \xi \bigg]
+\end{equation}<p>donde $l$ es la longitud del elemento y $n = 0, 1, 2, \ldots$; las funciones de forma son</p>
 \begin{equation}
-    W(x) = \frac{d \hat u(x)}{d a_{2}} = (x^{2} - x)
-\end{equation}<p>la forma débil de la ecuación diferencial es</p>
+    N =
+    \begin{bmatrix}
+        \frac{1}{2} - \frac{1}{2} \xi & \frac{1}{2} + \frac{1}{2} \xi
+    \end{bmatrix}
+\end{equation}<p>deformaciones</p>
 \begin{equation}
-    \int_{0}^{1} R(x) W(x) \ dx = \int_{0}^{1} (2 a_{2} + x^{2}) (x^{2} - x) \ dx = 0
-\end{equation}<p>multiplicando y ordenando</p>
-\begin{equation}
-    \int_{0}^{1} - 2 a_{2} x + 2 a_{2} x^{2} - x^{3} + x^{4} \ dx = 0
-\end{equation}<p>integrando</p>
-\begin{equation}
-    \bigg(- a_{2} x^{2} + \frac{2}{3} a_{2} x^{3} - \frac{1}{4} x^{4} + \frac{1}{5} x^{5} \bigg) \bigg|_{0}^{1} = 0
-\end{equation}<p>reemplazando límites de integración y simplificando</p>
-\begin{equation}
-    -\frac{1}{3} a_{2} = \frac{1}{20}
-\end{equation}<p>despejando</p>
-\begin{equation}
-    a_{2} = -\frac{3}{20}
-\end{equation}<p>reemplazando en la solución aproximada</p>
-\begin{equation}
-    \hat u(x) = - \frac{3}{20} (x^{2} - x) = \frac{3}{20} x - \frac{3}{20} x^{2}
+    B = \frac{d N}{d x} = \frac{d N}{d \xi} \frac{d \xi}{d x} =
+    \begin{bmatrix}
+        -\frac{1}{2} & \frac{1}{2}
+    \end{bmatrix}
+    \frac{2}{l} =
+    \begin{bmatrix}
+        -\frac{1}{l} & \frac{1}{l}
+    \end{bmatrix}
 \end{equation}
 </div>
 </div>
@@ -245,77 +226,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Ejemplo-2">Ejemplo 2<a class="anchor-link" href="#Ejemplo-2">&#182;</a></h3><p>Se utilizaran cuatro términos en la aproximación</p>
-\begin{equation}
-    u(x) \approx \hat u(x) = \sum_{i=0}^{3} a_{i} x^{i} = a_{0} + a_{1} x + a_{2} x^{2} + a_{3} x^{3} 
-\end{equation}<p>reemplazando las condiciones de contorno</p>
-\begin{align}
-\require{cancel}
-    \hat u(0) &= a_{0} + a_{1} (0) + a_{2} (0)^{2} + a_{3} (0)^{3} = 0 \\
-    \hat u(1) &= \cancel{a_{0}} + a_{1} (1) + a_{2} (1)^{2} + a_{3} (1)^{3} = 0
-\end{align}<p>resolviendo el sistema</p>
-\begin{align}
-    a_{0} &= 0 \\
-    a_{1} &= - a_{2} - a_{3}
-\end{align}<p>reemplazando las constantes</p>
-\begin{equation}
-    \hat u(x) = - a_{2} x - a_{3} x + a_{2} x^{2} + a_{3} x^{3} = a_{2} (x^{2} - x) + a_{3} (x^{3} - x)
-\end{equation}<p>la anterior puede escribirse como</p>
-\begin{equation}
-    \hat u(x) = \hat u_{1}(x) + \hat u_{2}(x) 
-\end{equation}<p>$\hat u_{x}$ es</p>
-\begin{equation}
-    \frac{d \hat u(x)}{d x} = - a_{2} - a_{3} + 2 a_{2} x + 3 a_{3} x^{2}
-\end{equation}<p>$\hat u_{xx}$ es</p>
-\begin{equation}
-    \frac{d^{2} \hat u(x)}{d x^{2}} = 2 a_{2} + 6 a_{3} x
-\end{equation}<p>la función residual es</p>
-\begin{equation}
-    R(x) = \frac{d^{2} \hat u(x)}{d x^{2}} + x^{2} = 2 a_{2} + 6 a_{3} x + x^{2}
-\end{equation}<p>la función ponderada puede escribirse como</p>
-\begin{equation}
-    W(x) = W_{1}(x) + W_{2}(x) 
-\end{equation}<p>derivando respecto a las variables desconocidas</p>
-\begin{align}
-    W_{1}(x) = \frac{d \hat u_{1}(x)}{d a_{2}} &= x^{2} - x \\
-    W_{2}(x) = \frac{d \hat u_{2}(x)}{d a_{3}} &= x^{3} - x
-\end{align}<p>reemplazando en la función ponderada</p>
-\begin{equation}
-    W(x) = (x^{2} - x) + (x^{3} - x) 
-\end{equation}<p>la forma débil de la ecuación diferencial es</p>
-\begin{equation}
-    \int_{0}^{1} R(x) W(x) \ dx = \int_{0}^{1} (2 a_{2} + 6 a_{3} x + x^{2}) [(x^{2} - x) + (x^{3} - x)] \ dx = 0
-\end{equation}<p>puede escribirse como la suma de integrales</p>
-\begin{equation}
-    \int_{0}^{1} R(x) W_{1}(x) \ dx + \int_{0}^{1} R(x) W_{2}(x) \ dx = 0
-\end{equation}<p>y también como un sistema de ecuaciones</p>
-\begin{align}
-    \int_{0}^{1} R(x) W_{1}(x) \ dx &= 0 \\
-    \int_{0}^{1} R(x) W_{2}(x) \ dx &= 0
-\end{align}<p>reemplazando en la anterior fórmula</p>
-\begin{align}
-    \int_{0}^{1} (2 a_{2} + 6 a_{3} x + x^{2}) (x^{2} - x) \ dx &= 0 \\
-    \int_{0}^{1} (2 a_{2} + 6 a_{3} x + x^{2}) (x^{3} - x) \ dx &= 0
-\end{align}<p>multiplicando y ordenando</p>
-\begin{align}
-    \int_{0}^{1} 2 a_{2} x^{2} + 6 a_{3} x^{3} + x^{4} - 2 a_{2} x - 6 a_{3} x^{2} - x^{3} \ dx &= 0 \\
-    \int_{0}^{1} 2 a_{2} x^{3} + 6 a_{3} x^{4} + x^{5} - 2 a_{2} x - 6 a_{3} x^{2} - x^{3} \ dx &= 0
-\end{align}<p>integrando</p>
-\begin{align}
-    \bigg( \frac{2}{3} a_{2} x^{3} + \frac{3}{2} a_{3} x^{4} + \frac{1}{5} x^{5} - a_{2} x^{2} - 2 a_{3} x^{3} - \frac{1}{4} x^{4} \bigg) \bigg|_{0}^{1} &= 0 \\
-    \bigg( \frac{1}{2} a_{2} x^{4} + \frac{6}{5} a_{3} x^{5} + \frac{1}{6} x^{6} - a_{2} x^{2} - 2 a_{3} x^{3} - \frac{1}{4} x^{4} \bigg) \bigg|_{0}^{1} &= 0
-\end{align}<p>reemplazando límites de integración y simplificando</p>
-\begin{align}
-    - \frac{1}{3} a_{2} - \frac{1}{2} a_{3} &= \frac{1}{20} \\
-    - \frac{1}{2} a_{2} - \frac{4}{5} a_{3} &= \frac{1}{12}
-\end{align}<p>resolviendo el sistema</p>
-\begin{align}
-    a_{2} &= \frac{1}{10} \\
-    a_{3} &= - \frac{1}{6}
-\end{align}<p>reemplazando en la solución aproximada</p>
-\begin{equation}
-    \hat u(x) = \frac{1}{10} (x^{2} - x) - \frac{1}{6} (x^{3} - x) = \frac{1}{15} x + \frac{1}{10} x^{2} - \frac{1}{6} x^{3}
-\end{equation}
+<h3 id="Un-elemento-de-dos-nodos">Un elemento de dos nodos<a class="anchor-link" href="#Un-elemento-de-dos-nodos">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -324,176 +235,450 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Forma-alternativa">Forma alternativa<a class="anchor-link" href="#Forma-alternativa">&#182;</a></h3><p>La solución puede escribirse como</p>
 \begin{equation}
-    u(x) \approx \hat u(x) = \sum_{i=0}^{n} a_{i} N_{i}  
-\end{equation}<p>y la función ponderada como</p>
+    \int_{-1}^{+1} B^{T} D \ B \ J \ d\xi \ u = \int_{-1}^{+1} q \ N^{T} J \ d\xi + f
+\end{equation}<p>para $l = 40$ y $n = 0$</p>
 \begin{equation}
-    W(x) = \sum_{i=0}^{n} \delta a_{i} N_{i}  
-\end{equation}<p>donde $N$ es una función de aproximación o interpolante, también llamada función de forma</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Ejemplo-3">Ejemplo 3<a class="anchor-link" href="#Ejemplo-3">&#182;</a></h3><p>Se utilizaran cuatro términos en la aproximación</p>
+    A(\xi) = \frac{41}{2} - \frac{9}{2} \xi
+\end{equation}<p>desplazamientos</p>
 \begin{equation}
-    \hat u(x) = a_{0} + a_{1} x + a_{2} x^{2} - a_{3} x^{3} 
-\end{equation}<p>reemplazando las condiciones de contorno</p>
-\begin{align}
-\require{cancel}
-    \hat u(0) &= a_{0} + a_{1} (0) + a_{2} (0)^{2} - a_{3} (0)^{3} = 0 \\
-    \hat u(1) &= \cancel{a_{0}} + a_{1} (1) + a_{2} (1)^{2} - a_{3} (1)^{3} = 0
-\end{align}<p>resolviendo el sistema</p>
-\begin{align}
-    a_{0} &= 0 \\
-    a_{2} &= a_{3} - a_{1}
-\end{align}<p>reemplazando las constantes</p>
-\begin{equation}
-    \hat u(x) = a_{1} x + a_{3} x^{2} - a_{1} x^{2} - a_{3} x^{3} = a_{1} x (1- x) + a_{3} x^{2} (1 - x)
-\end{equation}<p>$\hat u_{x}$ es</p>
-\begin{equation}
-    \frac{d \hat u(x)}{d x} = a_{1} + 2 a_{3} x - 2 a_{1} x - 3 a_{3} x^{2}
-\end{equation}<p>$\hat u_{xx}$ es</p>
-\begin{equation}
-    \frac{d^{2} \hat u(x)}{d x^{2}} = 2 a_{3} - 2 a_{1} - 6 a_{3} x = 2(a_{3} - a_{1}) - 6 a_{3} x
-\end{equation}<p>la función residual es</p>
-\begin{equation}
-    R(x) = \frac{d^{2} \hat u(x)}{d x^{2}} + x^{2} = 2(a_{3} - a_{1}) - 6 a_{3} x + x^{2}
-\end{equation}<p>la función ponderada es</p>
-\begin{equation}
-    W(x) = \delta a_{1} x (1- x) + \delta a_{3} x^{2} (1 - x) 
-\end{equation}<p>la forma débil de la ecuación diferencial es</p>
-\begin{equation}
-    \int_{0}^{1} R(x) W(x) \ dx = \int_{0}^{1} [2(a_{3} - a_{1}) - 6 a_{3} x + x^{2}] [\delta a_{1} x (1- x) + \delta a_{3} x^{2} (1 - x)] \ dx = 0
-\end{equation}<p>puede escribirse como la suma de integrales</p>
-\begin{equation}
-    \int_{0}^{1} [2(a_{3} - a_{1}) - 6 a_{3} x + x^{2}] [\delta a_{1} x (1- x)] \ dx + \int_{0}^{1} [2(a_{3} - a_{1}) - 6 a_{3} x + x^{2}] [\delta a_{3} x^{2} (1 - x)] \ dx = 0
-\end{equation}<p>las constantes salen de la integral</p>
-\begin{align}
-    \delta a_{1} \int_{0}^{1} [2(a_{3} - a_{1}) - 6 a_{3} x + x^{2}] [x (1- x)] \ dx &= 0 \\
-    \delta a_{3} \int_{0}^{1} [2(a_{3} - a_{1}) - 6 a_{3} x + x^{2}] [x^{2} (1 - x)] \ dx &= 0
-\end{align}<p>multiplicando y ordenando</p>
-\begin{align}
-    \int_{0}^{1} - 2 a_{1} x + 2 a_{3} x + 2 a_{1} x^{2} - 8 a_{3} x^{2} + 6 a_{3} x^{3} + x^{3} - x^{4} \ dx &= 0 \\
-    \int_{0}^{1} - 2 a_{1} x^{2} + 2 a_{3} x^{2} + 2 a_{1} x^{3} - 8 a_{3} x^{3} + 6 a_{3} x^{4} + x^{4} - x^{5} \ dx &= 0
-\end{align}<p>integrando</p>
-\begin{align}
-    \bigg( - a_{1} x^{2} + a_{3} x^{2} + \frac{2}{3} a_{1} x^{3} - \frac{8}{3} a_{3} x^{3} + \frac{3}{2} a_{3} x^{4} + \frac{1}{4} x^{4} - \frac{1}{5} x^{5} \bigg) \bigg|_{0}^{1} &= 0 \\
-    \bigg( - \frac{2}{3} a_{1} x^{3} + \frac{2}{3} a_{3} x^{3} + \frac{1}{2} a_{1} x^{4} - 2 a_{3} x^{4} + \frac{6}{5} a_{3} x^{5} + \frac{1}{5} x^{5} - \frac{1}{6} x^{6} \bigg) \bigg|_{0}^{1} &= 0
-\end{align}<p>reemplazando límites de integración y simplificando</p>
-\begin{align}
-    - \frac{1}{3} a_{1} - \frac{1}{6} a_{3} &= - \frac{1}{20} \\
-    - \frac{1}{6} a_{1} - \frac{2}{15} a_{3} &= - \frac{1}{30}
-\end{align}<p>resolviendo el sistema</p>
-\begin{align}
-    a_{1} &= \frac{1}{15} \\
-    a_{3} &= \frac{1}{6}
-\end{align}<p>reemplazando en la solución aproximada</p>
-\begin{equation}
-    \hat u(x) = \frac{1}{15} x (1 - x) + \frac{1}{6} x^{2} (1 - x) = \frac{1}{15} x + \frac{1}{10} x^{2} - \frac{1}{6} x^{3}
-\end{equation}
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Soluci&#243;n-general">Soluci&#243;n general<a class="anchor-link" href="#Soluci&#243;n-general">&#182;</a></h3>\begin{equation}
-    \int_{0}^{1} R(x) W(x) \ dx = \int_{0}^{1} \bigg( \frac{d^{2} u(x)}{d x^{2}} + x^{2} \bigg) W(x) \ dx = 0
-\end{equation}<p>puede escribirse como la suma de integrales</p>
-\begin{equation}
-    \int_{0}^{1} \frac{d^{2} u(x)}{d x^{2}} W(x) \ dx + \int_{0}^{1} x^{2} W(x) \ dx = 0
-\end{equation}<p>integrando por partes para reducir el orden de la derivada</p>
-\begin{align}
-    \int u \ dv &= uv - \int v \ du \\
-    \int_{0}^{1} W(x) \frac{d^{2} u(x)}{d x^{2}} \ dx &= \bigg( W(x) \frac{d u(x)}{d x} \bigg) \bigg|_{0}^{1} - \int_{0}^{1} \frac{d u(x)}{d x} \frac{d W(x)}{d x}\ dx
-\end{align}<p>reemplazando</p>
-\begin{equation}
-    \bigg( \frac{d u(x)}{d x} W(x) \bigg) \bigg|_{0}^{1} - \int_{0}^{1} \frac{d u(x)}{d x} \frac{d W(x)}{d x}\ dx + \int_{0}^{1} x^{2} W(x) \ dx = 0
-\end{equation}<p>reordenando</p>
-\begin{equation}
-    \int_{0}^{1} \frac{d u(x)}{d x} \frac{d W(x)}{d x} \ dx = \int_{0}^{1} x^{2} W(x) \ dx + \bigg( \frac{d u(x)}{d x} W(x) \bigg) \bigg|_{0}^{1}
-\end{equation}<p>para la solución se usara un elemento de dos nodos</p>
-\begin{align}
-    u(x) &= \sum_{i=1}^{2} N_{i} a_{i} = N_{1} a_{1} + N_{2} a_{2} \\ 
-    \frac{d u(x)}{d x} &= \frac{d N_{1}}{d x} a_{1} + \frac{d N_{2}}{d x} a_{2} \\
-    W(x) &= \sum_{i=1}^{2} N_{i} \delta a_{i} = N_{1} \delta a_{1} + N_{2} \delta a_{2} \\
-    \frac{d W(x)}{d x} &= \frac{d N_{1}}{d x} \delta a_{1} + \frac{d N_{2}}{d x} \delta a_{2}
-\end{align}<p>reemplazando</p>
-\begin{equation}
-    \int_{0}^{1} \bigg( \frac{d N_{1}}{d x} a_{1} + \frac{d N_{2}}{d x} a_{2} \bigg) \bigg( \frac{d N_{1}}{d x} \delta a_{1} + \frac{d N_{2}}{d x} \delta a_{2} \bigg) \ dx = \int_{0}^{1} x^{2} (N_{1} \delta a_{1} + N_{2} \delta a_{2}) \ dx + \bigg[ \frac{d u(x)}{d x} (N_{1} \delta a_{1} + N_{2} \delta a_{2}) \bigg] \bigg|_{0}^{1}
-\end{equation}<p>multiplicando</p>
-\begin{equation}
-    \int_{0}^{1} \frac{d N_{1}}{d x} \frac{d N_{1}}{d x} a_{1} \delta a_{1} + \frac{d N_{1}}{d x} \frac{d N_{2}}{d x} a_{2} \delta a_{1} + \frac{d N_{2}}{d x} \frac{d N_{1}}{d x} a_{1} \delta a_{2} + \frac{d N_{2}}{d x} \frac{d N_{2}}{d x} a_{2} \delta a_{2} \ dx = \int_{0}^{1} x^{2} N_{1} \delta a_{1} + x^{2} N_{2} \delta a_{2} \ dx + \bigg( \frac{d u(x)}{d x} N_{1} \delta a_{1} + \frac{d u(x)}{d x} N_{2} \delta a_{2} \bigg) \bigg|_{0}^{1}
-\end{equation}<p>reemplazando los límites de integración en el lado derecho</p>
-\begin{equation}
-    \int_{0}^{1} \frac{d N_{1}}{d x} \frac{d N_{1}}{d x} a_{1} \delta a_{1} + \frac{d N_{1}}{d x} \frac{d N_{2}}{d x} a_{2} \delta a_{1} + \frac{d N_{2}}{d x} \frac{d N_{1}}{d x} a_{1} \delta a_{2} + \frac{d N_{2}}{d x} \frac{d N_{2}}{d x} a_{2} \delta a_{2} \ dx = \int_{0}^{1} x^{2} N_{1} \delta a_{1} + x^{2} N_{2} \delta a_{2} \ dx + \bigg( \frac{d u(1)}{d x} N_{1}(1) \delta a_{1} + \frac{d u(1)}{d x} N_{2}(1) \delta a_{2} \bigg) - \bigg( \frac{d u(0)}{d x} N_{1}(0) \delta a_{1} + \frac{d u(0)}{d x} N_{2}(0) \delta a_{2} \bigg)
-\end{equation}<p>reordenando y agrupando</p>
-\begin{equation}
-    \int_{0}^{1} \bigg( \frac{d N_{1}}{d x} \frac{d N_{1}}{d x} a_{1} + \frac{d N_{1}}{d x} \frac{d N_{2}}{d x} a_{2} \bigg) \delta a_{1} + \bigg( \frac{d N_{2}}{d x} \frac{d N_{1}}{d x} a_{1} + \frac{d N_{2}}{d x} \frac{d N_{2}}{d x} a_{2} \bigg) \delta a_{2} \ dx = \int_{0}^{1} x^{2} N_{1} \delta a_{1} + x^{2} N_{2} \delta a_{2} \ dx + \bigg( \frac{d u(1)}{d x} N_{1}(1) - \frac{d u(0)}{d x} N_{1}(0) \bigg) \delta a_{1} + \bigg( \frac{d u(1)}{d x} N_{2}(1) - \frac{d u(0)}{d x} N_{2}(0) \bigg) \delta a_{2}
-\end{equation}<p>formando un sistema de ecuaciones</p>
-\begin{align}
-    \int_{0}^{1} \bigg( \frac{d N_{1}}{d x} \frac{d N_{1}}{d x} a_{1} + \frac{d N_{1}}{d x} \frac{d N_{2}}{d x} a_{2} \bigg) \delta a_{1} \ dx &= \int_{0}^{1} x^{2} N_{1} \delta a_{1} \ dx + \bigg( \frac{d u(1)}{d x} N_{1}(1) - \frac{d u(0)}{d x} N_{1}(0) \bigg) \delta a_{1} \\
-    \int_{0}^{1} \bigg( \frac{d N_{2}}{d x} \frac{d N_{1}}{d x} a_{1} + \frac{d N_{2}}{d x} \frac{d N_{2}}{d x} a_{2} \bigg) \delta a_{2} \ dx &= \int_{0}^{1} x^{2} N_{2} \delta a_{2} \ dx + \bigg( \frac{d u(1)}{d x} N_{2}(1) - \frac{d u(0)}{d x} N_{2}(0) \bigg) \delta a_{2}
-\end{align}<p>las constantes se simplifican en ambos lados</p>
-\begin{align}
-    \int_{0}^{1} \frac{d N_{1}}{d x} \frac{d N_{1}}{d x} a_{1} + \frac{d N_{1}}{d x} \frac{d N_{2}}{d x} a_{2} \ dx &= \int_{0}^{1} x^{2} N_{1} \ dx + \frac{d u(1)}{d x} N_{1}(1) - \frac{d u(0)}{d x} N_{1}(0) \\
-    \int_{0}^{1} \frac{d N_{2}}{d x} \frac{d N_{1}}{d x} a_{1} + \frac{d N_{2}}{d x} \frac{d N_{2}}{d x} a_{2} \ dx &= \int_{0}^{1} x^{2} N_{2} \ dx + \frac{d u(1)}{d x} N_{2}(1) - \frac{d u(0)}{d x} N_{2}(0)
-\end{align}<p>las funciones de forma obtenidas anteriomente, tienen los siguientes valores</p>
-\begin{matrix}
-    N_{1}(1) = 0 & N_{1}(0) = 0 \\
-    N_{2}(1) = 0 & N_{2}(0) = 0
-\end{matrix}<p>reemplazando</p>
-\begin{align}
-    \int_{0}^{1} \frac{d N_{1}}{d x} \frac{d N_{1}}{d x} a_{1} + \frac{d N_{1}}{d x} \frac{d N_{2}}{d x} a_{2} \ dx &= \int_{0}^{1} x^{2} N_{1} \ dx \\
-    \int_{0}^{1} \frac{d N_{2}}{d x} \frac{d N_{1}}{d x} a_{1} + \frac{d N_{2}}{d x} \frac{d N_{2}}{d x} a_{2} \ dx &= \int_{0}^{1} x^{2} N_{2} \ dx
-\end{align}<p>en forma matricial</p>
-\begin{equation}
-    \int_{0}^{1}
+    N =
     \begin{bmatrix}
-        \frac{d N_{1}}{d x} \frac{d N_{1}}{d x} & \frac{d N_{1}}{d x} \frac{d N_{2}}{d x} \\
-        \frac{d N_{2}}{d x} \frac{d N_{1}}{d x} & \frac{d N_{2}}{d x} \frac{d N_{2}}{d x}
-    \end{bmatrix} dx
-    \begin{bmatrix}
-    a_{1} \\
-    a_{2}
-    \end{bmatrix} = \int_{0}^{1} x^{2}
-    \begin{bmatrix}
-    N_{1} \\
-    N_{2}
-    \end{bmatrix} dx
-\end{equation}<p>factorizando matrices</p>
+        \frac{1}{2} - \frac{1}{2} \xi & \frac{1}{2} + \frac{1}{2} \xi
+    \end{bmatrix}
+\end{equation}<p>deformaciones</p>
 \begin{equation}
-    \int_{0}^{1}
+    B =
     \begin{bmatrix}
-        \frac{d N_{1}}{d x} \\
-        \frac{d N_{2}}{d x}
+        -\frac{1}{40} & \frac{1}{40}
+    \end{bmatrix}
+\end{equation}<p>matriz constitutiva</p>
+\begin{equation}
+    D = E A = 41000 - 9000 \xi
+\end{equation}<p>jacobiano</p>
+\begin{equation}
+    J = \frac{dx}{d\xi} = \frac{l}{2} = \frac{40}{2} = 20
+\end{equation}<p>reemplazando</p>
+\begin{equation}
+    \int_{-1}^{+1}
+    \begin{bmatrix}
+        -\frac{1}{40} \\
+        \frac{1}{40}
     \end{bmatrix}
     \begin{bmatrix}
-        \frac{d N_{1}}{d x} & \frac{d N_{2}}{d x}
-    \end{bmatrix} dx
+        41000 - 9000 \xi
+    \end{bmatrix}
     \begin{bmatrix}
-    a_{1} \\
-    a_{2}
-    \end{bmatrix} = \int_{0}^{1} x^{2}
+        -\frac{1}{40} & \frac{1}{40}
+    \end{bmatrix} 20 \ d\xi
     \begin{bmatrix}
-    N_{1} \\
-    N_{2}
-    \end{bmatrix} dx
+    0 \\
+    u_{2}
+    \end{bmatrix} =
+    \begin{bmatrix}
+    F_{1} \\
+    -300
+    \end{bmatrix}
+\end{equation}<p>integrando y sumando</p>
+\begin{equation}
+    \begin{bmatrix}
+        1025 & -1025 \\
+        -1025 & 1025
+    \end{bmatrix}
+    \begin{bmatrix}
+    0 \\
+    u_{2}
+    \end{bmatrix} =
+    \begin{bmatrix}
+    F_{1} \\
+    -300
+    \end{bmatrix}
+\end{equation}<p>resolviendo</p>
+\begin{align}
+    F_{1} &= 300 \ \text{Kg} \\
+    u_{2} &= -0.293 \ \text{cm}
+\end{align}<p>desplazamientos</p>
+\begin{equation}
+    u = N u =
+    \begin{bmatrix}
+        \frac{1}{2} - \frac{1}{2} \xi & \frac{1}{2} + \frac{1}{2} \xi
+    \end{bmatrix}
+    \begin{bmatrix}
+    0 \\
+    -0.293
+    \end{bmatrix} = ???
+\end{equation}<p>deformación normal</p>
+\begin{equation}
+    \varepsilon = B u =
+    \begin{bmatrix}
+        -\frac{1}{40} & \frac{1}{40}
+    \end{bmatrix}
+    \begin{bmatrix}
+    0 \\
+    -0.293
+    \end{bmatrix} = -0.007325
+\end{equation}<p>esfuerzo normal</p>
+\begin{equation}
+    \sigma = E \varepsilon = -14.65 \ \text{Kg}/\text{cm}^{2}
+\end{equation}
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Dos-elementos-de-dos-nodos">Dos elementos de dos nodos<a class="anchor-link" href="#Dos-elementos-de-dos-nodos">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+\begin{equation}
+    \int_{-1}^{+1} B^{T} D \ B \ J \ d\xi \ u = \int_{-1}^{+1} q \ N^{T} J \ d\xi + f
+\end{equation}<p><strong>Elemento 1</strong></p>
+<p>para $l = 20$ y $n = 0$</p>
+\begin{equation}
+    A(\xi) = \frac{91}{4} - \frac{9}{4} \xi
+\end{equation}<p>desplazamientos</p>
+\begin{equation}
+    N =
+    \begin{bmatrix}
+        \frac{1}{2} - \frac{1}{2} \xi & \frac{1}{2} + \frac{1}{2} \xi
+    \end{bmatrix}
+\end{equation}<p>deformaciones</p>
+\begin{equation}
+    B =
+    \begin{bmatrix}
+        -\frac{1}{20} & \frac{1}{20}
+    \end{bmatrix}
+\end{equation}<p>matriz constitutiva</p>
+\begin{equation}
+    D = E A = 45500 - 4500 \xi
+\end{equation}<p>jacobiano</p>
+\begin{equation}
+    J = \frac{dx}{d\xi} = \frac{l}{2} = \frac{20}{2} = 10
+\end{equation}<p>reemplazando</p>
+\begin{equation}
+    \int_{-1}^{+1}
+    \begin{bmatrix}
+        -\frac{1}{20} \\
+        \frac{1}{20}
+    \end{bmatrix}
+    \begin{bmatrix}
+        45500 - 4500 \xi
+    \end{bmatrix}
+    \begin{bmatrix}
+        -\frac{1}{20} & \frac{1}{20}
+    \end{bmatrix} 10 \ d\xi
+    \begin{bmatrix}
+    0 \\
+    u_{2}
+    \end{bmatrix} =
+    \begin{bmatrix}
+    F_{1} \\
+    0
+    \end{bmatrix}
+\end{equation}<p>integrando y sumando</p>
+\begin{equation}
+    \begin{bmatrix}
+        2275 & -2275 \\
+        -2275 & 2275
+    \end{bmatrix}
+    \begin{bmatrix}
+    0 \\
+    u_{2}
+    \end{bmatrix} =
+    \begin{bmatrix}
+    F_{1} \\
+    0
+    \end{bmatrix}
+\end{equation}<p><strong>Elemento 2</strong></p>
+<p>para $l = 20$ y $n = 1$</p>
+\begin{equation}
+    A(\xi) = \frac{73}{4} - \frac{9}{4} \xi
+\end{equation}<p>desplazamientos</p>
+\begin{equation}
+    N =
+    \begin{bmatrix}
+        \frac{1}{2} - \frac{1}{2} \xi & \frac{1}{2} + \frac{1}{2} \xi
+    \end{bmatrix}
+\end{equation}<p>deformaciones</p>
+\begin{equation}
+    B =
+    \begin{bmatrix}
+        -\frac{1}{20} & \frac{1}{20}
+    \end{bmatrix}
+\end{equation}<p>matriz constitutiva</p>
+\begin{equation}
+    D = E A = 36500 - 4500 \xi
+\end{equation}<p>jacobiano</p>
+\begin{equation}
+    J = \frac{dx}{d\xi} = \frac{l}{2} = \frac{20}{2} = 10
+\end{equation}<p>reemplazando</p>
+\begin{equation}
+    \int_{-1}^{+1}
+    \begin{bmatrix}
+        -\frac{1}{20} \\
+        \frac{1}{20}
+    \end{bmatrix}
+    \begin{bmatrix}
+        36500 - 4500 \xi
+    \end{bmatrix}
+    \begin{bmatrix}
+        -\frac{1}{20} & \frac{1}{20}
+    \end{bmatrix} 10 \ d\xi
+    \begin{bmatrix}
+    u_{1} \\
+    u_{2}
+    \end{bmatrix} =
+    \begin{bmatrix}
+    0 \\
+    -300
+    \end{bmatrix}
+\end{equation}<p>integrando y sumando</p>
+\begin{equation}
+    \begin{bmatrix}
+        1825 & -1825 \\
+        -1825 & 1825
+    \end{bmatrix}
+    \begin{bmatrix}
+    u_{1} \\
+    u_{2}
+    \end{bmatrix} =
+    \begin{bmatrix}
+    0 \\
+    -300
+    \end{bmatrix}
+\end{equation}<p>ensamblando matriz global</p>
+\begin{equation}
+    \begin{bmatrix}
+        2275 & -2275 & 0 \\
+        -2275 & 2275+ 1825 & -1825 \\
+        0& -1825 & 1825
+    \end{bmatrix}
+    \begin{bmatrix}
+    0 \\
+    u_{2} \\
+    u_{3}
+    \end{bmatrix} =
+    \begin{bmatrix}
+    F_{1} \\
+    0 + 0 \\
+    -300
+    \end{bmatrix}
+\end{equation}<p>sumando</p>
+\begin{equation}
+    \begin{bmatrix}
+        2275 & -2275 & 0 \\
+        -2275 & 4100 & -1825 \\
+        0& -1825 & 1825
+    \end{bmatrix}
+    \begin{bmatrix}
+    0 \\
+    u_{2} \\
+    u_{3}
+    \end{bmatrix} =
+    \begin{bmatrix}
+    F_{1} \\
+    0 \\
+    -300
+    \end{bmatrix}
+\end{equation}<p>resolviendo</p>
+\begin{align}
+    F_{1} &= 300 \ \text{Kg} \\
+    u_{2} &= -0.132 \ \text{m} \\
+    u_{3} &= -0.296 \ \text{m}
+\end{align}<p><strong>Elemento 1</strong></p>
+<p>desplazamientos</p>
+\begin{equation}
+    u = N u =
+    \begin{bmatrix}
+        \frac{1}{2} - \frac{1}{2} \xi & \frac{1}{2} + \frac{1}{2} \xi
+    \end{bmatrix}
+    \begin{bmatrix}
+    0 \\
+    -0.132
+    \end{bmatrix} = ???
+\end{equation}<p>deformación normal</p>
+\begin{equation}
+    \varepsilon = B u =
+    \begin{bmatrix}
+        -\frac{1}{20} & \frac{1}{20}
+    \end{bmatrix}
+    \begin{bmatrix}
+    0 \\
+    -0.132
+    \end{bmatrix} = -0.0066
+\end{equation}<p>esfuerzo normal</p>
+\begin{equation}
+    \sigma = E \varepsilon = -13.2 \ \text{Kg}/\text{cm}^{2}
+\end{equation}<p><strong>Elemento 2</strong></p>
+<p>desplazamientos</p>
+\begin{equation}
+    u = N u =
+    \begin{bmatrix}
+        \frac{1}{2} - \frac{1}{2} \xi & \frac{1}{2} + \frac{1}{2} \xi
+    \end{bmatrix}
+    \begin{bmatrix}
+    -0.132 \\
+    -0.296
+    \end{bmatrix} = ???
+\end{equation}<p>deformación normal</p>
+\begin{equation}
+    \varepsilon = B u =
+    \begin{bmatrix}
+        -\frac{1}{20} & \frac{1}{20}
+    \end{bmatrix}
+    \begin{bmatrix}
+    -0.132 \\
+    -0.296
+    \end{bmatrix} = -0.0082
+\end{equation}<p>esfuerzo normal</p>
+\begin{equation}
+    \sigma = E \varepsilon = -16.4 \ \text{Kg}/\text{cm}^{2}
 \end{equation}
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-julia"><pre><span class="k">function</span><span class="nf"> f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[1]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>f (generic function with 1 method)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-julia"><pre><span class="n">quadgk</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">pi</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[2]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>0.521606959131886</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-julia"><pre><span class="k">using</span> <span class="n">Polynomials</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-julia"><pre><span class="n">p</span> <span class="o">=</span> <span class="n">Poly</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[4]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Poly(1.0 + 2.0x + 3.0x^2 + 4.0x^3 + 5.0x^4)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-julia"><pre><span class="nb">typeof</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[5]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Poly{Float64} (constructor with 1 method)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-julia"><pre>

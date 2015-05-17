@@ -3,7 +3,7 @@
 <head>
 
 <meta charset="utf-8" />
-<title>008_polinomios_lagrange</title>
+<title>015_ejemplo_barra_locales</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -177,7 +177,8 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Funciones-de-forma-para-elementos-barra">Funciones de forma para elementos barra<a class="anchor-link" href="#Funciones-de-forma-para-elementos-barra">&#182;</a></h1>
+<h1 id="Ejemplo-2">Ejemplo 2<a class="anchor-link" href="#Ejemplo-2">&#182;</a></h1><p>$L = 0.5 \ \text{m}$, $A = 6.25 \times 10^{-4} \ \text{m}^{2}$ y $E = 200 \ \text{MPa}$</p>
+
 </div>
 </div>
 </div>
@@ -186,7 +187,27 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Elemento-de-dos-nodos">Elemento de dos nodos<a class="anchor-link" href="#Elemento-de-dos-nodos">&#182;</a></h3>
+<p><img align="left" src="imagenes/011_ejemplo_barra_1.svg"></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Un-elemento-de-tres-nodos">Un elemento de tres nodos<a class="anchor-link" href="#Un-elemento-de-tres-nodos">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img align="left" src="imagenes/011_ejemplo_barra_2.svg"></p>
+
 </div>
 </div>
 </div>
@@ -196,84 +217,156 @@ div#notebook {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 \begin{equation}
-    u = N_{1} u_{1} + N_{2} u_{2} = \sum_{i = 0}^{1} \alpha_{i} x^{i} = \alpha_{0} + \alpha_{1} x
-\end{equation}<p>en forma matricial</p>
+    \int_{0}^{L} \boldsymbol{B^{T} D \ B} \ dx \ \boldsymbol{u}
+    = \int_{0}^{L} q \ \boldsymbol{N^{T}} dx + \boldsymbol{F}
+\end{equation}<p>funciones de forma</p>
 \begin{equation}
-    u = \alpha_{0} + \alpha_{1} x  =
+    \boldsymbol{N} =
     \begin{bmatrix}
-        1 & x
+        1 - \frac{3}{0.5} x + \frac{2}{0.5^{2}} x^{2} &
+        \frac{4}{0.5} x - \frac{4}{0.5^{2}} x^{2} &
+        -\frac{1}{0.5} x + \frac{2}{0.5^{2}} x^{2}
+    \end{bmatrix} =
+    \begin{bmatrix}
+        1 - 6 x + 8 x^{2} & 8 x - 16 x^{2} & -2 x + 8 x^{2}
+    \end{bmatrix}
+\end{equation}<p>deformaciones</p>
+\begin{equation}
+    \boldsymbol{B} = \frac{d \boldsymbol{N}}{d x} =
+    \begin{bmatrix}
+        -\frac{3}{0.5} + \frac{4}{0.5^{2}} x &
+        \frac{4}{0.5} - \frac{8}{0.5^{2}} x &
+        -\frac{1}{0.5} + \frac{4}{0.5^{2}} x
+    \end{bmatrix} =
+    \begin{bmatrix}
+        -6 + 16 x & 8 - 32 x & -2 + 16 x
+    \end{bmatrix}
+\end{equation}<p>matriz constitutiva</p>
+\begin{equation}
+    \boldsymbol{D} = E A = 1.25 \times 10^{5} \ [\text{N}]
+\end{equation}<p>reemplazando</p>
+\begin{equation}
+    \int_{0}^{0.5}
+    \begin{bmatrix}
+        -6 + 16 x \\
+        8 - 32 x \\
+        -2 + 16 x
     \end{bmatrix}
     \begin{bmatrix}
-        \alpha_{0} \\
-        \alpha_{1}
+        1.25 \times 10^{5}
     \end{bmatrix}
-\end{equation}<p>reemplazando $x_{1} = 0$ y $x_{2} = L$</p>
+    \begin{bmatrix}
+        -6 + 16 x & 8 - 32 x & -2 + 16 x
+    \end{bmatrix} dx
+    \begin{bmatrix}
+    u_{1} \\
+    u_{2} \\
+    u_{3}
+    \end{bmatrix} = \int_{0}^{0.5} 1000
+    \begin{bmatrix}
+    1 - 6 x + 8 x^{2} \\
+    8 x - 16 x^{2} \\
+    -2 x + 8 x^{2}
+    \end{bmatrix} dx +
+    \begin{bmatrix}
+    F_{1} \\
+    F_{2} \\
+    F_{3}
+    \end{bmatrix}
+\end{equation}<p>integrando</p>
+\begin{equation}
+    \begin{bmatrix}
+        5.83 \times 10^{5} & -6.67 \times 10^{5} & 8.33 \times 10^{4} \\
+        -6.67 \times 10^{5} & 1.33 \times 10^{6} & -6.67 \times 10^{5} \\
+        8.33 \times 10^{4} & -6.67 \times 10^{5} & 5.83 \times 10^{5}
+    \end{bmatrix}
+    \begin{bmatrix}
+    u_{1} \\
+    u_{2} \\
+    u_{3}
+    \end{bmatrix} =
+    \begin{bmatrix}
+    83.33 \\
+    333.33 \\
+    83.33
+    \end{bmatrix} +
+    \begin{bmatrix}
+    F_{1} \\
+    F_{2} \\
+    F_{3}
+    \end{bmatrix}
+\end{equation}<p>reemplazando las condiciones de contorno</p>
+\begin{equation}
+    \begin{bmatrix}
+        5.83 \times 10^{5} & -6.67 \times 10^{5} & 8.33 \times 10^{4} \\
+        -6.67 \times 10^{5} & 1.33 \times 10^{6} & -6.67 \times 10^{5} \\
+        8.33 \times 10^{4} & -6.67 \times 10^{5} & 5.83 \times 10^{5}
+    \end{bmatrix}
+    \begin{bmatrix}
+    0 \\
+    u_{2} \\
+    u_{3}
+    \end{bmatrix} =
+    \begin{bmatrix}
+    83.33 \\
+    333.33 \\
+    83.33
+    \end{bmatrix} +
+    \begin{bmatrix}
+    F_{1} \\
+    0 \\
+    250
+    \end{bmatrix}
+\end{equation}<p>sumando</p>
+\begin{equation}
+    \begin{bmatrix}
+        5.83 \times 10^{5} & -6.67 \times 10^{5} & 8.33 \times 10^{4} \\
+        -6.67 \times 10^{5} & 1.33 \times 10^{6} & -6.67 \times 10^{5} \\
+        8.33 \times 10^{4} & -6.67 \times 10^{5} & 5.83 \times 10^{5}
+    \end{bmatrix}
+    \begin{bmatrix}
+    0 \\
+    u_{2} \\
+    u_{3}
+    \end{bmatrix} =
+    \begin{bmatrix}
+    F_{1} + 83.33 \\
+    333.33 \\
+    333.33
+    \end{bmatrix}
+\end{equation}<p>resolviendo</p>
 \begin{align}
-    \alpha_{0} + \alpha_{1} (0) &= u_{1} \\
-    \alpha_{0} + \alpha_{1} (L) &= u_{2}
-\end{align}<p>simplificando</p>
-\begin{align}
-    \alpha_{0} &= u_{1} \\
-    \alpha_{0} + L \alpha_{1} &= u_{2}
-\end{align}<p>en forma matricial</p>
+    F_{1} &= -750 \ [\text{N}] \\
+    u_{2} &= 0.00125 \ [\text{m}] \\
+    u_{3} &= 0.002 \ [\text{m}]
+\end{align}<h3 id="Desplazamientos,-deformaciones-y-esfuerzos">Desplazamientos, deformaciones y esfuerzos<a class="anchor-link" href="#Desplazamientos,-deformaciones-y-esfuerzos">&#182;</a></h3><p>Las funciones de forma en coordenadas locales se transforman a coordenadas globales usando:</p>
 \begin{equation}
-    \begin{bmatrix}
-        1 & 0 \\
-        1 & L
-    \end{bmatrix}
-    \begin{bmatrix}
-        \alpha_{0} \\
-        \alpha_{1}
-    \end{bmatrix} =
-    \begin{bmatrix}
-        u_{1} \\
-        u_{2}
-    \end{bmatrix}
-\end{equation}<p>resolviendo el sistema</p>
+    x = X - x_{0}
+\end{equation}<p>desplazamientos</p>
 \begin{equation}
+    u = \boldsymbol{N \ u} =
     \begin{bmatrix}
-        \alpha_{0} \\
-        \alpha_{1}
-    \end{bmatrix} =
-    \begin{bmatrix}
-        1 & 0 \\
-        -\frac{1}{L} & \frac{1}{L}
+        1 - 6 (X - 0) + 8 (X - 0)^{2} & 8 (X - 0) - 16 (X - 0)^{2} & -2 (X - 0) + 8 (X - 0)^{2}
     \end{bmatrix}
     \begin{bmatrix}
-        u_{1} \\
-        u_{2}
-    \end{bmatrix}
-\end{equation}<p>reemplazando las incógnitas</p>
+    0 \\
+    0.00125 \\
+    0.002
+    \end{bmatrix} = 0.006 X - 0.004 X^{2} \ [\text{m}]
+\end{equation}<p>deformación</p>
 \begin{equation}
-    u =
+    \varepsilon = \boldsymbol{B \ u} =
     \begin{bmatrix}
-        1 & x
+        -6 + 16 (X - 0) & 8 - 32 (X - 0) & -2 + 16 (X - 0)
     \end{bmatrix}
     \begin{bmatrix}
-        \alpha_{0} \\
-        \alpha_{1}
-    \end{bmatrix} =
-    \begin{bmatrix}
-        1 & x
-    \end{bmatrix}
-    \begin{bmatrix}
-        1 & 0 \\
-        -\frac{1}{L} & \frac{1}{L}
-    \end{bmatrix}
-    \begin{bmatrix}
-        u_{1} \\
-        u_{2}
-    \end{bmatrix} =
-    \begin{bmatrix}
-        1 - \frac{x}{L} & \frac{x}{L}
-    \end{bmatrix}
-    \begin{bmatrix}
-        u_{1} \\
-        u_{2}
-    \end{bmatrix}
-\end{equation}<p>Reescribiendo $u$</p>
+    0 \\
+    0.00125 \\
+    0.002
+    \end{bmatrix} = 0.006 - 0.008 X
+\end{equation}<p>esfuerzo</p>
 \begin{equation}
-    u = \bigg( 1 - \frac{x}{L} \bigg) u_{1} + \bigg( \frac{x}{L} \bigg) u_{2} = N_{1} u_{1} + N_{2} u_{2}
+    \sigma = E \ \varepsilon = 1.2 - 1.6 X \ [\text{MPa}]
 \end{equation}
 </div>
 </div>
@@ -283,7 +376,17 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Elemento-de-tres-nodos">Elemento de tres nodos<a class="anchor-link" href="#Elemento-de-tres-nodos">&#182;</a></h3>
+<h3 id="Dos-elementos-de-tres-nodos">Dos elementos de tres nodos<a class="anchor-link" href="#Dos-elementos-de-tres-nodos">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img align="left" src="imagenes/011_ejemplo_barra_3.svg"></p>
+
 </div>
 </div>
 </div>
@@ -293,97 +396,338 @@ div#notebook {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 \begin{equation}
-    u = N_{1} u_{1} + N_{2} u_{2} + N_{3} u_{3} = \sum_{i = 0}^{2} \alpha_{i} x^{i} = \alpha_{0} + \alpha_{1} x + \alpha_{2} x^{2}
-\end{equation}<p>en forma matricial</p>
+    \int_{0}^{L} \boldsymbol{B^{T} D \ B} \ dx \ \boldsymbol{u}
+    = \int_{0}^{L} q \ \boldsymbol{N^{T}} dx + \boldsymbol{F}
+\end{equation}<p><strong>Elemento 1</strong></p>
+<p>funciones de forma</p>
 \begin{equation}
-    u = \alpha_{0} + \alpha_{1} x + \alpha_{2} x^{2} =
+    \boldsymbol{N} =
     \begin{bmatrix}
-        1 & x & x^{2}
+        1 - \frac{3}{0.25} x + \frac{2}{0.25^{2}} x^{2} &
+        \frac{4}{0.25} x - \frac{4}{0.25^{2}} x^{2} &
+        -\frac{1}{0.25} x + \frac{2}{0.25^{2}} x^{2}
+    \end{bmatrix} =
+    \begin{bmatrix}
+        1 - 12 x + 32 x^{2} & 16 x - 64 x^{2} & -4 x + 32 x^{2}
+    \end{bmatrix}
+\end{equation}<p>deformaciones</p>
+\begin{equation}
+    \boldsymbol{B} = \frac{d \boldsymbol{N}}{d x} =
+    \begin{bmatrix}
+        -\frac{3}{0.25} + \frac{4}{0.25^{2}} x &
+        \frac{4}{0.25} - \frac{8}{0.25^{2}} x &
+        -\frac{1}{0.25} + \frac{4}{0.25^{2}} x
+    \end{bmatrix} =
+    \begin{bmatrix}
+        -12 + 64 x & 16 - 128 x & -4 + 64 x
+    \end{bmatrix}
+\end{equation}<p>matriz constitutiva</p>
+\begin{equation}
+    \boldsymbol{D} = E A = 1.25 \times 10^{5} \ [\text{N}]
+\end{equation}<p>reemplazando</p>
+\begin{equation}
+    \int_{0}^{0.25}
+    \begin{bmatrix}
+        -12 + 64 x \\
+        16 - 128 x \\
+        -4 + 64 x
     \end{bmatrix}
     \begin{bmatrix}
-        \alpha_{0} \\
-        \alpha_{1} \\
-        \alpha_{2}
+        1.25 \times 10^{5}
     \end{bmatrix}
-\end{equation}<p>reemplazando $x_{1} = 0$, $x_{2} = \frac{L}{2}$ y $x_{3} = L$</p>
+    \begin{bmatrix}
+        -12 + 64 x & 16 - 128 x & -4 + 64 x
+    \end{bmatrix} dx
+    \begin{bmatrix}
+    u_{1} \\
+    u_{2} \\
+    u_{3}
+    \end{bmatrix} = \int_{0}^{0.25} 1000
+    \begin{bmatrix}
+        1 - 12 x + 32 x^{2} \\
+        16 x - 64 x^{2} \\
+        -4 x + 32 x^{2}
+    \end{bmatrix} dx +
+    \begin{bmatrix}
+    F_{1} \\
+    F_{2} \\
+    F_{3}
+    \end{bmatrix}
+\end{equation}<p>integrando</p>
+\begin{equation}
+    \begin{bmatrix}
+        1.17 \times 10^{6} & -1.33 \times 10^{6} & 1.67 \times 10^{5} \\
+        -1.33 \times 10^{6} & 2.67 \times 10^{6} & -1.33 \times 10^{6} \\
+        1.67 \times 10^{5} & -1.33 \times 10^{6} & 1.17 \times 10^{6}
+    \end{bmatrix}
+    \begin{bmatrix}
+    u_{1} \\
+    u_{2} \\
+    u_{3}
+    \end{bmatrix} =
+    \begin{bmatrix}
+    41.67 \\
+    166.67 \\
+    41.67
+    \end{bmatrix} +
+    \begin{bmatrix}
+    F_{1} \\
+    F_{2} \\
+    F_{3}
+    \end{bmatrix}
+\end{equation}<p><strong>Elemento 2</strong></p>
+<p>funciones de forma</p>
+\begin{equation}
+    \boldsymbol{N} =
+    \begin{bmatrix}
+        1 - \frac{3}{0.25} x + \frac{2}{0.25^{2}} x^{2} &
+        \frac{4}{0.25} x - \frac{4}{0.25^{2}} x^{2} &
+        -\frac{1}{0.25} x + \frac{2}{0.25^{2}} x^{2}
+    \end{bmatrix} =
+    \begin{bmatrix}
+        1 - 12 x + 32 x^{2} & 16 x - 64 x^{2} & -4 x + 32 x^{2}
+    \end{bmatrix}
+\end{equation}<p>deformaciones</p>
+\begin{equation}
+    \boldsymbol{B} = \frac{d \boldsymbol{N}}{d x} =
+    \begin{bmatrix}
+        -\frac{3}{0.25} + \frac{4}{0.25^{2}} x &
+        \frac{4}{0.25} - \frac{8}{0.25^{2}} x &
+        -\frac{1}{0.25} + \frac{4}{0.25^{2}} x
+    \end{bmatrix} =
+    \begin{bmatrix}
+        -12 + 64 x & 16 - 128 x & -4 + 64 x
+    \end{bmatrix}
+\end{equation}<p>matriz constitutiva</p>
+\begin{equation}
+    \boldsymbol{D} = E A = 1.25 \times 10^{5} \ [\text{N}]
+\end{equation}<p>reemplazando</p>
+\begin{equation}
+    \int_{0}^{0.25}
+    \begin{bmatrix}
+        -12 + 64 x \\
+        16 - 128 x \\
+        -4 + 64 x
+    \end{bmatrix}
+    \begin{bmatrix}
+        1.25 \times 10^{5}
+    \end{bmatrix}
+    \begin{bmatrix}
+        -12 + 64 x & 16 - 128 x & -4 + 64 x
+    \end{bmatrix} dx
+    \begin{bmatrix}
+    u_{1} \\
+    u_{2} \\
+    u_{3}
+    \end{bmatrix} = \int_{0}^{0.25} 1000
+    \begin{bmatrix}
+        1 - 12 x + 32 x^{2} \\
+        16 x - 64 x^{2} \\
+        -4 x + 32 x^{2}
+    \end{bmatrix} dx +
+    \begin{bmatrix}
+    F_{1} \\
+    F_{2} \\
+    F_{3}
+    \end{bmatrix}
+\end{equation}<p>integrando</p>
+\begin{equation}
+    \begin{bmatrix}
+        1.17 \times 10^{6} & -1.33 \times 10^{6} & 1.67 \times 10^{5} \\
+        -1.33 \times 10^{6} & 2.67 \times 10^{6} & -1.33 \times 10^{6} \\
+        1.67 \times 10^{5} & -1.33 \times 10^{6} & 1.17 \times 10^{6}
+    \end{bmatrix}
+    \begin{bmatrix}
+    u_{1} \\
+    u_{2} \\
+    u_{3}
+    \end{bmatrix} =
+    \begin{bmatrix}
+    41.67 \\
+    166.67 \\
+    41.67
+    \end{bmatrix} +
+    \begin{bmatrix}
+    F_{1} \\
+    F_{2} \\
+    F_{3}
+    \end{bmatrix}
+\end{equation}<p><strong>Ensamblaje y solución</strong></p>
+<p>ensamblando matriz global</p>
+\begin{equation}
+    \begin{bmatrix}
+        1.17 \times 10^{6} & -1.33 \times 10^{6} & 1.67 \times 10^{5} & 0 & 0 \\
+        -1.33 \times 10^{6} & 2.67 \times 10^{6} & -1.33 \times 10^{6} & 0 & 0 \\
+        1.67 \times 10^{5} & -1.33 \times 10^{6} & 1.17 \times 10^{6} + 1.17 \times 10^{6} & -1.33 \times 10^{6} & 1.67 \times 10^{5} \\
+        0 & 0 & -1.33 \times 10^{6} & 2.67 \times 10^{6} & -1.33 \times 10^{6} \\
+        0 & 0 & 1.67 \times 10^{5} & -1.33 \times 10^{6} & 1.17 \times 10^{6}
+    \end{bmatrix}
+    \begin{bmatrix}
+    u_{1} \\
+    u_{2} \\
+    u_{3} + u_{1} \\
+    u_{2} \\
+    u_{3}
+    \end{bmatrix} =
+    \begin{bmatrix}
+    41.67 \\
+    166.67 \\
+    41.67 + 41.67 \\
+    166.67 \\
+    41.67
+    \end{bmatrix} +
+    \begin{bmatrix}
+    F_{1} \\
+    F_{2} \\
+    F_{3} + F_{1} \\
+    F_{2} \\
+    F_{3}
+    \end{bmatrix}
+\end{equation}<p>sumando</p>
+\begin{equation}
+    \begin{bmatrix}
+        1.17 \times 10^{6} & -1.33 \times 10^{6} & 1.67 \times 10^{5} & 0 & 0 \\
+        -1.33 \times 10^{6} & 2.67 \times 10^{6} & -1.33 \times 10^{6} & 0 & 0 \\
+        1.67 \times 10^{5} & -1.33 \times 10^{6} & 2.33 \times 10^{6} & -1.33 \times 10^{6} & 1.67 \times 10^{5} \\
+        0 & 0 & -1.33 \times 10^{6} & 2.67 \times 10^{6} & -1.33 \times 10^{6} \\
+        0 & 0 & 1.67 \times 10^{5} & -1.33 \times 10^{6} & 1.17 \times 10^{6}
+    \end{bmatrix}
+    \begin{bmatrix}
+    u_{1} \\
+    u_{2} \\
+    u_{3} \\
+    u_{4} \\
+    u_{5}
+    \end{bmatrix} =
+    \begin{bmatrix}
+    41.67 \\
+    166.67 \\
+    83.33 \\
+    166.67 \\
+    41.67
+    \end{bmatrix} +
+    \begin{bmatrix}
+    F_{1} \\
+    F_{2} \\
+    F_{3} \\
+    F_{4} \\
+    F_{5}
+    \end{bmatrix}
+\end{equation}<p>reemplazando las condiciones de contorno</p>
+\begin{equation}
+    \begin{bmatrix}
+        1.17 \times 10^{6} & -1.33 \times 10^{6} & 1.67 \times 10^{5} & 0 & 0 \\
+        -1.33 \times 10^{6} & 2.67 \times 10^{6} & -1.33 \times 10^{6} & 0 & 0 \\
+        1.67 \times 10^{5} & -1.33 \times 10^{6} & 2.33 \times 10^{6} & -1.33 \times 10^{6} & 1.67 \times 10^{5} \\
+        0 & 0 & -1.33 \times 10^{6} & 2.67 \times 10^{6} & -1.33 \times 10^{6} \\
+        0 & 0 & 1.67 \times 10^{5} & -1.33 \times 10^{6} & 1.17 \times 10^{6}
+    \end{bmatrix}
+    \begin{bmatrix}
+    0 \\
+    u_{2} \\
+    u_{3} \\
+    u_{4} \\
+    u_{5}
+    \end{bmatrix} =
+    \begin{bmatrix}
+    41.67 \\
+    166.67 \\
+    83.33 \\
+    166.67 \\
+    41.67
+    \end{bmatrix} +
+    \begin{bmatrix}
+    F_{1} \\
+    0 \\
+    0 \\
+    0 \\
+    250
+    \end{bmatrix}
+\end{equation}<p>sumando</p>
+\begin{equation}
+    \begin{bmatrix}
+        1.17 \times 10^{6} & -1.33 \times 10^{6} & 1.67 \times 10^{5} & 0 & 0 \\
+        -1.33 \times 10^{6} & 2.67 \times 10^{6} & -1.33 \times 10^{6} & 0 & 0 \\
+        1.67 \times 10^{5} & -1.33 \times 10^{6} & 2.33 \times 10^{6} & -1.33 \times 10^{6} & 1.67 \times 10^{5} \\
+        0 & 0 & -1.33 \times 10^{6} & 2.67 \times 10^{6} & -1.33 \times 10^{6} \\
+        0 & 0 & 1.67 \times 10^{5} & -1.33 \times 10^{6} & 1.17 \times 10^{6}
+    \end{bmatrix}
+    \begin{bmatrix}
+    0 \\
+    u_{2} \\
+    u_{3} \\
+    u_{4} \\
+    u_{5}
+    \end{bmatrix} =
+    \begin{bmatrix}
+    F_{1} + 41.67 \\
+    166.67 \\
+    83.33 \\
+    166.67 \\
+    291.67
+    \end{bmatrix}
+\end{equation}<p>resolviendo</p>
 \begin{align}
-    \alpha_{0} + \alpha_{1}(0) + \alpha_{2}(0)^{2} &= u_{1} \\
-    \alpha_{0} + \alpha_{1} \bigg( \frac{L}{2} \bigg) + \alpha_{2} \bigg( \frac{L}{2} \bigg)^{2} &= u_{2} \\
-    \alpha_{0} + \alpha_{1}(L) + \alpha_{2}(L)^{2} &= u_{3}
-\end{align}<p>simplificando</p>
-\begin{align}
-    \alpha_{0} &= u_{1} \\
-    \alpha_{0} + \frac{L}{2} \alpha_{1} + \frac{L^{2}}{4} \alpha_{2} &= u_{2}\\
-    \alpha_{0} + L \alpha_{1} + L^{2} \alpha_{1} &= u_{3}
-\end{align}<p>en forma matricial</p>
-\begin{align}
-    \begin{bmatrix}
-        1 & 0 & 0 \\
-        1 & \frac{L}{2} & \frac{L^{2}}{4} \\
-        1 & L & L^{2}
-    \end{bmatrix}
-    \begin{bmatrix}
-        \alpha_{0} \\
-        \alpha_{1} \\
-        \alpha_{2}
-    \end{bmatrix} =
-    \begin{bmatrix}
-        u_{1} \\
-        u_{2} \\
-        u_{3}
-    \end{bmatrix}
-\end{align}<p>resolviendo</p>
+    F_{1} &= -750 \ [\text{N}] \\
+    u_{2} &= 0.0006875 \ [\text{m}] \\
+    u_{3} &= 0.00125 \ [\text{m}] \\
+    u_{4} &= 0.0016875 \ [\text{m}] \\
+    u_{5} &= 0.002 \ [\text{m}] \\
+\end{align}<h3 id="Desplazamientos,-deformaciones-y-esfuerzos">Desplazamientos, deformaciones y esfuerzos<a class="anchor-link" href="#Desplazamientos,-deformaciones-y-esfuerzos">&#182;</a></h3><p>Las funciones de forma en coordenadas locales se transforman a coordenadas globales usando:</p>
 \begin{equation}
-    \begin{bmatrix}
-        \alpha_{0} \\
-        \alpha_{1} \\
-        \alpha_{2}
-    \end{bmatrix} =
-    \begin{bmatrix}
-        1 & 0 & 0 \\
-        -\frac{3}{L} & \frac{4}{L} & -\frac{1}{L} \\
-        \frac{2}{L^{2}} & -\frac{4}{L^{2}} & \frac{2}{L^{2}}
-    \end{bmatrix}
-    \begin{bmatrix}
-        u_{1} \\
-        u_{2} \\
-        u_{3}
-    \end{bmatrix}
-\end{equation}<p>reemplazando las incógnitas</p>
+    x = X - x_{0}
+\end{equation}<p><strong>Elemento 1</strong></p>
+<p>desplazamientos</p>
 \begin{equation}
-    u =
+    u = \boldsymbol{N \ u} =
     \begin{bmatrix}
-        1 & x & x^{2}
+        1 - 12 (X - 0) + 32 (X - 0)^{2} & 16 (X - 0) - 64 (X - 0)^{2} & -4 (X - 0) + 32 (X - 0)^{2}
     \end{bmatrix}
     \begin{bmatrix}
-        \alpha_{0} \\
-        \alpha_{1} \\
-        \alpha_{2}
-    \end{bmatrix} =
-    \begin{bmatrix}
-        1 & x & x^{2}
-    \end{bmatrix}
-    \begin{bmatrix}
-        1 & 0 & 0 \\
-        -\frac{3}{L} & \frac{4}{L} & -\frac{1}{L} \\
-        \frac{2}{L^{2}} & -\frac{4}{L^{2}} & \frac{2}{L^{2}}
-    \end{bmatrix}
-    \begin{bmatrix}
-        u_{1} \\
-        u_{2} \\
-        u_{3}
-    \end{bmatrix} =
-    \begin{bmatrix}
-        1 - \frac{3}{L} x + \frac{2}{L^{2}} x^{2} & \frac{4}{L} x - \frac{4}{L^{2}} x^{2} & -\frac{1}{L} x + \frac{2}{L^{2}} x^{2}
-    \end{bmatrix}
-    \begin{bmatrix}
-        u_{1} \\
-        u_{2} \\
-        u_{3}
-    \end{bmatrix}
-\end{equation}<p>Reescribiendo $u$</p>
+    0 \\
+    0.0006875 \\
+    0.00125
+    \end{bmatrix} = 0.006 X - 0.004 X^{2} \ [\text{m}]
+\end{equation}<p>deformación</p>
 \begin{equation}
-    u = \bigg( 1 - \frac{3}{L} x + \frac{2}{L^{2}} x^{2} \bigg) u_{1} + \bigg( \frac{4}{L} x - \frac{4}{L^{2}} x^{2} \bigg) u_{2} + \bigg( -\frac{1}{L} x + \frac{2}{L^{2}} x^{2} \bigg) u_{3} = N_{1} u_{1} + N_{2} u_{2} + N_{3} u_{3}
+    \varepsilon = \boldsymbol{B \ u} =
+    \begin{bmatrix}
+        -12 + 64 (X - 0) & 16 - 128 (X - 0) & -4 + 64 (X - 0)
+    \end{bmatrix}
+    \begin{bmatrix}
+    0 \\
+    0.0006875 \\
+    0.00125
+    \end{bmatrix} = 0.006 - 0.008 X
+\end{equation}<p>esfuerzo</p>
+\begin{equation}
+    \sigma = E \ \varepsilon = 1.2 - 1.6 X \ [\text{MPa}]
+\end{equation}<p><strong>Elemento 2</strong></p>
+<p>desplazamientos</p>
+\begin{equation}
+    u = \boldsymbol{N \ u} =
+    \begin{bmatrix}
+        1 - 12 (X - 0.25) + 32 (X - 0.25)^{2} & 16 (X - 0.25) - 64 (X - 0.25)^{2} & -4 (X - 0.25) + 32 (X - 0.25)^{2}
+    \end{bmatrix}
+    \begin{bmatrix}
+    0.00125 \\
+    0.0016875 \\
+    0.002
+    \end{bmatrix} = 0.006 X - 0.004 X^{2} \ [\text{m}]
+\end{equation}<p>deformación</p>
+\begin{equation}
+    \varepsilon = \boldsymbol{B \ u} =
+    \begin{bmatrix}
+        -12 + 64 (X - 0.25) & 16 - 128 (X - 0.25) & -4 + 64 (X - 0.25)
+    \end{bmatrix}
+    \begin{bmatrix}
+    0.00125 \\
+    0.0016875 \\
+    0.002
+    \end{bmatrix} = 0.006 - 0.008 X
+\end{equation}<p>esfuerzo</p>
+\begin{equation}
+    \sigma = E \ \varepsilon = 1.2 - 1.6 X \ [\text{MPa}]
 \end{equation}
 </div>
 </div>

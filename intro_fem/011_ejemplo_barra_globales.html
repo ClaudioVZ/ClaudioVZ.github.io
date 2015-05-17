@@ -3,7 +3,7 @@
 <head>
 
 <meta charset="utf-8" />
-<title>012_ejemplo_barra</title>
+<title>011_ejemplo_barra_globales</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -177,10 +177,8 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Ejemplo-3">Ejemplo 3<a class="anchor-link" href="#Ejemplo-3">&#182;</a></h1><p>$L = 40 \ \text{cm}$, $A_{1} = 16 \ \text{cm}^{2}$, $A_{2} = 25 \ \text{cm}^{2}$ y $E = 2000 \ \text{Kg}/\text{cm}^{2}$</p>
-\begin{equation}
-    A(x) = 25 - \frac{9}{40} x
-\end{equation}
+<h1 id="Ejemplo-1">Ejemplo 1<a class="anchor-link" href="#Ejemplo-1">&#182;</a></h1><p>$L = 0.5 \ \text{m}$, $A = 6.25 \times 10^{-4} \ \text{m}^{2}$ y $E = 200 \ \text{MPa}$</p>
+
 </div>
 </div>
 </div>
@@ -189,7 +187,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><img align="left" src="imagenes/012_ejemplo_barra_1.svg"></p>
+<p><img align="left" src="imagenes/010_ejemplo_barra_1.svg"></p>
 
 </div>
 </div>
@@ -208,7 +206,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><img align="left" src="imagenes/012_ejemplo_barra_2.svg"></p>
+<p><img align="left" src="imagenes/010_ejemplo_barra_2.svg"></p>
 
 </div>
 </div>
@@ -219,84 +217,133 @@ div#notebook {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 \begin{equation}
-    \int_{0}^{L} B^{T} D \ B \ dx \ u = \int_{0}^{L} q \ N^{T} dx + f
-\end{equation}<p>desplazamientos</p>
+    \int_{x_{1}}^{x_{2}} \boldsymbol{B^{T} D \ B} \ dx \ \boldsymbol{u}
+    = \int_{x_{1}}^{x_{2}} q \ \boldsymbol{N^{T}} dx + \boldsymbol{F}
+\end{equation}<p>interpolación de desplazamientos</p>
 \begin{equation}
-    N =
+    \boldsymbol{N} =
     \begin{bmatrix}
-        1 - \frac{1}{40} x & \frac{1}{40} x
+        \frac{0.5}{0.5 - 0} - \frac{1}{0.5 - 0} x &
+        -\frac{0}{0.5 - 0} + \frac{1}{0.5 - 0} x
+    \end{bmatrix} =
+    \begin{bmatrix}
+        1 - 2 x & 2 x
     \end{bmatrix}
-\end{equation}<p>deformaciones</p>
+\end{equation}<p>interpolación de deformaciones</p>
 \begin{equation}
-    B = \frac{d N}{d x} =
+    \boldsymbol{B} = \frac{d \boldsymbol{N}}{d x} =
     \begin{bmatrix}
-        -\frac{1}{40} & \frac{1}{40}
+        - \frac{1}{0.5 - 0} &
+        \frac{1}{0.5 - 0}
+    \end{bmatrix} =
+    \begin{bmatrix}
+        -2 & 2
     \end{bmatrix}
 \end{equation}<p>matriz constitutiva</p>
 \begin{equation}
-    D = E A = 50000 - 450 x
+    \boldsymbol{D} = E A = 1.25 \times 10^{5} [\text{N}]
 \end{equation}<p>reemplazando</p>
 \begin{equation}
-    \int_{0}^{40}
+    \int_{0}^{0.5}
     \begin{bmatrix}
-        -\frac{1}{40} \\
-        \frac{1}{40}
+        -2 \\
+        2
     \end{bmatrix}
     \begin{bmatrix}
-        50000 - 450 x
+        1.25 \times 10^{5}
     \end{bmatrix}
     \begin{bmatrix}
-        -\frac{1}{40} & \frac{1}{40}
+        -2 & 2
     \end{bmatrix} dx
     \begin{bmatrix}
-    0 \\
+    u_{1} \\
     u_{2}
-    \end{bmatrix} =
+    \end{bmatrix} = \int_{0}^{0.5} 1000
+    \begin{bmatrix}
+    1 - 2 x \\
+    2 x
+    \end{bmatrix} dx +
     \begin{bmatrix}
     F_{1} \\
-    -300
+    F_{2}
     \end{bmatrix}
-\end{equation}<p>integrando y sumando</p>
+\end{equation}<p>integrando</p>
 \begin{equation}
     \begin{bmatrix}
-        1025 & -1025 \\
-        -1025 & 1025
+        2.5 \times 10^{5} & -2.5 \times 10^{5} \\
+        -2.5 \times 10^{5} & 2.5 \times 10^{5}
+    \end{bmatrix}
+    \begin{bmatrix}
+    u_{1} \\
+    u_{2}
+    \end{bmatrix} =
+    \begin{bmatrix}
+    250 \\
+    250
+    \end{bmatrix} +
+    \begin{bmatrix}
+    F_{1} \\
+    F_{2}
+    \end{bmatrix}
+\end{equation}<p>reemplazando las condiciones de contorno</p>
+\begin{equation}
+    \begin{bmatrix}
+        2.5 \times 10^{5} & -2.5 \times 10^{5} \\
+        -2.5 \times 10^{5} & 2.5 \times 10^{5}
     \end{bmatrix}
     \begin{bmatrix}
     0 \\
     u_{2}
     \end{bmatrix} =
     \begin{bmatrix}
+    250 \\
+    250
+    \end{bmatrix} +
+    \begin{bmatrix}
     F_{1} \\
-    -300
+    250
+    \end{bmatrix}
+\end{equation}<p>sumando</p>
+\begin{equation}
+    \begin{bmatrix}
+        2.5 \times 10^{5} & -2.5 \times 10^{5} \\
+        -2.5 \times 10^{5} & 2.5 \times 10^{5}
+    \end{bmatrix}
+    \begin{bmatrix}
+    0 \\
+    u_{2}
+    \end{bmatrix} =
+    \begin{bmatrix}
+    F_{1} + 250 \\
+    500
     \end{bmatrix}
 \end{equation}<p>resolviendo</p>
 \begin{align}
-    F_{1} &= 300 \ \text{Kg} \\
-    u_{2} &= -0.293 \ \text{cm}
-\end{align}<p>desplazamientos</p>
+    F_{1} &= -750 \ [\text{N}] \\
+    u_{2} &= 0.002 \ [\text{m}]
+\end{align}<h3 id="Desplazamientos,-deformaciones-y-esfuerzos">Desplazamientos, deformaciones y esfuerzos<a class="anchor-link" href="#Desplazamientos,-deformaciones-y-esfuerzos">&#182;</a></h3><p>desplazamientos</p>
 \begin{equation}
-    u = N u =
+    u = \boldsymbol{N \ u} =
     \begin{bmatrix}
-        1 - \frac{1}{40} x & \frac{1}{40} x
+        1 - 2 x & 2 x
     \end{bmatrix}
     \begin{bmatrix}
     0 \\
-    -0.293
-    \end{bmatrix} = -0.007325 x
-\end{equation}<p>deformación normal</p>
+    0.002
+    \end{bmatrix} = 0.004 x \ [\text{m}]
+\end{equation}<p>deformaciones</p>
 \begin{equation}
-    \varepsilon = B u =
+    \varepsilon = \boldsymbol{B \ u} =
     \begin{bmatrix}
-        -\frac{1}{40} & \frac{1}{40}
+        -2 & 2
     \end{bmatrix}
     \begin{bmatrix}
     0 \\
-    -0.293
-    \end{bmatrix} = -0.007325
-\end{equation}<p>esfuerzo normal</p>
+    0.002
+    \end{bmatrix} = 0.004
+\end{equation}<p>esfuerzo</p>
 \begin{equation}
-    \sigma = E \varepsilon = -14.65 \ \text{Kg}/\text{cm}^{2}
+    \sigma = E \ \varepsilon = 0.8 \ [\text{MPa}]
 \end{equation}
 </div>
 </div>
@@ -315,7 +362,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><img align="left" src="imagenes/012_ejemplo_barra_3.svg"></p>
+<p><img align="left" src="imagenes/010_ejemplo_barra_3.svg"></p>
 
 </div>
 </div>
@@ -326,132 +373,193 @@ div#notebook {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 \begin{equation}
-    \int_{0}^{L} B^{T} D \ B \ dx \ u = \int_{0}^{L} q \ N^{T} dx + f
+    \int_{x_{1}}^{x_{2}} \boldsymbol{B^{T} D \ B} \ dx \ \boldsymbol{u}
+    = \int_{x_{1}}^{x_{2}} q \ \boldsymbol{N^{T}} dx + \boldsymbol{F}
 \end{equation}<p><strong>Elemento 1</strong></p>
-<p>desplazamientos</p>
+<p>interpolación de desplazamientos</p>
 \begin{equation}
-    N =
+    \boldsymbol{N} =
     \begin{bmatrix}
-        1 - \frac{1}{20} x & \frac{1}{20} x
+        \frac{0.25}{0.25 - 0} - \frac{1}{0.25 - 0} x &
+        -\frac{0}{0.25 - 0} + \frac{1}{0.25 - 0} x
+    \end{bmatrix} =
+    \begin{bmatrix}
+        1 - 4 x & 4 x
     \end{bmatrix}
-\end{equation}<p>deformaciones</p>
+\end{equation}<p>interpolación de deformaciones</p>
 \begin{equation}
-    B = \frac{d N}{d x} =
+    \boldsymbol{B} = \frac{d \boldsymbol{N}}{d x} =
     \begin{bmatrix}
-        -\frac{1}{20} & \frac{1}{20}
+        - \frac{1}{0.25 - 0} &
+        \frac{1}{0.25 - 0}
+    \end{bmatrix} =
+    \begin{bmatrix}
+        -4 & 4
     \end{bmatrix}
 \end{equation}<p>matriz constitutiva</p>
 \begin{equation}
-    D = E A = 50000 - 450 x
+    \boldsymbol{D} = E A = 1.25 \times 10^{5} \ [\text{N}]
 \end{equation}<p>reemplazando</p>
 \begin{equation}
-    \int_{0}^{20}
+    \int_{0}^{0.25}
     \begin{bmatrix}
-        -\frac{1}{20} \\
-        \frac{1}{20}
+        -4 \\
+        4
     \end{bmatrix}
     \begin{bmatrix}
-        50000 - 450 x
+        1.25 \times 10^{5}
     \end{bmatrix}
     \begin{bmatrix}
-        -\frac{1}{20} & \frac{1}{20}
+        -4 & 4
     \end{bmatrix} dx
     \begin{bmatrix}
-    0 \\
+    u_{1} \\
     u_{2}
-    \end{bmatrix} =
+    \end{bmatrix} = \int_{0}^{0.25} 1000
+    \begin{bmatrix}
+    1 - 4 x \\
+    4 x
+    \end{bmatrix} dx +
     \begin{bmatrix}
     F_{1} \\
-    0
+    F_{2}
     \end{bmatrix}
-\end{equation}<p>integrando y sumando</p>
+\end{equation}<p>integrando</p>
 \begin{equation}
     \begin{bmatrix}
-        2275 & -2275 \\
-        -2275 & 2275
+        5 \times 10^{5} & -5 \times 10^{5} \\
+        -5 \times 10^{5} & 5 \times 10^{5}
     \end{bmatrix}
-    \begin{bmatrix}
-    0 \\
-    u_{2}
-    \end{bmatrix} =
-    \begin{bmatrix}
-    F_{1} \\
-    0
-    \end{bmatrix}
-\end{equation}<p><strong>Elemento 2</strong></p>
-<p>desplazamientos</p>
-\begin{equation}
-    N =
-    \begin{bmatrix}
-        1 - \frac{1}{20} x & \frac{1}{20} x
-    \end{bmatrix}
-\end{equation}<p>deformaciones</p>
-\begin{equation}
-    B = \frac{d N}{d x} =
-    \begin{bmatrix}
-        -\frac{1}{20} & \frac{1}{20}
-    \end{bmatrix}
-\end{equation}<p>matriz constitutiva</p>
-\begin{equation}
-    D = E A = 50000 - 450 x
-\end{equation}<p>reemplazando</p>
-\begin{equation}
-    \int_{20}^{40}
-    \begin{bmatrix}
-        -\frac{1}{20} \\
-        \frac{1}{20}
-    \end{bmatrix}
-    \begin{bmatrix}
-        50000 - 450 x
-    \end{bmatrix}
-    \begin{bmatrix}
-        -\frac{1}{20} & \frac{1}{20}
-    \end{bmatrix} dx
     \begin{bmatrix}
     u_{1} \\
     u_{2}
     \end{bmatrix} =
     \begin{bmatrix}
-    0 \\
-    -300
+    125 \\
+    125
+    \end{bmatrix} +
+    \begin{bmatrix}
+    F_{1} \\
+    F_{2}
     \end{bmatrix}
-\end{equation}<p>integrando y sumando</p>
+\end{equation}<p><strong>Elemento 2</strong></p>
+<p>interpolación de desplazamientos</p>
+\begin{equation}
+    \boldsymbol{N} =
+    \begin{bmatrix}
+        \frac{0.5}{0.5 - 0.25} - \frac{1}{0.5 - 0.25} x &
+        -\frac{0.25}{0.5 - 0.25} + \frac{1}{0.5 - 0.25} x
+    \end{bmatrix} =
+    \begin{bmatrix}
+        2 - 4 x & -1 + 4 x
+    \end{bmatrix}
+\end{equation}<p>interpolación de deformaciones</p>
+\begin{equation}
+    \boldsymbol{B} = \frac{d \boldsymbol{N}}{d x} =
+    \begin{bmatrix}
+        - \frac{1}{0.5 - 0.25} &
+        \frac{1}{0.5 - 0.25}
+    \end{bmatrix} =
+    \begin{bmatrix}
+        -4 & 4
+    \end{bmatrix}
+\end{equation}<p>matriz constitutiva</p>
+\begin{equation}
+    \boldsymbol{D} = E A = 1.25 \times 10^{5} \ [\text{N}]
+\end{equation}<p>reemplazando</p>
+\begin{equation}
+    \int_{0.25}^{0.5}
+    \begin{bmatrix}
+        -4 \\
+        4
+    \end{bmatrix}
+    \begin{bmatrix}
+        1.25 \times 10^{5}
+    \end{bmatrix}
+    \begin{bmatrix}
+        -4 & 4
+    \end{bmatrix} dx
+    \begin{bmatrix}
+    u_{1} \\
+    u_{2}
+    \end{bmatrix} = \int_{0.25}^{0.5} 1000
+    \begin{bmatrix}
+    2 - 4 x \\
+    -1 + 4 x
+    \end{bmatrix} dx +
+    \begin{bmatrix}
+    F_{1} \\
+    F_{2}
+    \end{bmatrix}
+\end{equation}<p>integrando</p>
 \begin{equation}
     \begin{bmatrix}
-        1825 & -1825 \\
-        -1825 & 1825
+        5 \times 10^{5} & -5 \times 10^{5} \\
+        -5 \times 10^{5} & 5 \times 10^{5}
     \end{bmatrix}
     \begin{bmatrix}
-    0 \\
+    u_{1} \\
     u_{2}
     \end{bmatrix} =
     \begin{bmatrix}
-    0 \\
-    -300
-    \end{bmatrix}
-\end{equation}<p>ensamblando matriz global</p>
-\begin{equation}
-    \begin{bmatrix}
-        2275 & -2275 & 0 \\
-        -2275 & 2275+ 1825 & -1825 \\
-        0& -1825 & 1825
-    \end{bmatrix}
-    \begin{bmatrix}
-    0 \\
-    u_{2} \\
-    u_{3}
-    \end{bmatrix} =
+    125 \\
+    125
+    \end{bmatrix} +
     \begin{bmatrix}
     F_{1} \\
-    0 + 0 \\
-    -300
+    F_{2}
+    \end{bmatrix}
+\end{equation}<p><strong>Ensamblaje y solución</strong></p>
+<p>ensamblando matriz global</p>
+\begin{equation}
+    \begin{bmatrix}
+        5 \times 10^{5} & -5 \times 10^{5} & 0 \\
+        -5 \times 10^{5} & 5 \times 10^{5} + 5 \times 10^{5} & -5 \times 10^{5} \\
+        0 & -5 \times 10^{5} & 5 \times 10^{5}
+    \end{bmatrix}
+    \begin{bmatrix}
+    u_{1} \\
+    u_{2} + u_{1} \\
+    u_{2}
+    \end{bmatrix} =
+    \begin{bmatrix}
+    125 \\
+    125 + 125 \\
+    125
+    \end{bmatrix} +
+    \begin{bmatrix}
+    F_{1} \\
+    F_{2} + F_{1} \\
+    F_{2}
     \end{bmatrix}
 \end{equation}<p>sumando</p>
 \begin{equation}
     \begin{bmatrix}
-        2275 & -2275 & 0 \\
-        -2275 & 4100 & -1825 \\
-        0& -1825 & 1825
+        5 \times 10^{5} & -5 \times 10^{5} & 0 \\
+        -5 \times 10^{5} & 10 \times 10^{5} & -5 \times 10^{5} \\
+        0 & -5 \times 10^{5} & 5 \times 10^{5}
+    \end{bmatrix}
+    \begin{bmatrix}
+    u_{1} \\
+    u_{2} \\
+    u_{3}
+    \end{bmatrix} =
+    \begin{bmatrix}
+    125 \\
+    250 \\
+    125
+    \end{bmatrix} +
+    \begin{bmatrix}
+    F_{1} \\
+    F_{2} \\
+    F_{3}
+    \end{bmatrix}
+\end{equation}<p>reemplazando condiciones de contorno</p>
+\begin{equation}
+    \begin{bmatrix}
+        5 \times 10^{5} & -5 \times 10^{5} & 0 \\
+        -5 \times 10^{5} & 10 \times 10^{5} & -5 \times 10^{5} \\
+        0 & -5 \times 10^{5} & 5 \times 10^{5}
     \end{bmatrix}
     \begin{bmatrix}
     0 \\
@@ -459,63 +567,85 @@ div#notebook {
     u_{3}
     \end{bmatrix} =
     \begin{bmatrix}
+    125 \\
+    250 \\
+    125
+    \end{bmatrix} +
+    \begin{bmatrix}
     F_{1} \\
     0 \\
-    -300
+    250
+    \end{bmatrix}
+\end{equation}<p>sumando</p>
+\begin{equation}
+    \begin{bmatrix}
+        5 \times 10^{5} & -5 \times 10^{5} & 0 \\
+        -5 \times 10^{5} & 10 \times 10^{5} & -5 \times 10^{5} \\
+        0 & -5 \times 10^{5} & 5 \times 10^{5}
+    \end{bmatrix}
+    \begin{bmatrix}
+    0 \\
+    u_{2} \\
+    u_{3}
+    \end{bmatrix} =
+    \begin{bmatrix}
+    F_{1} + 125 \\
+    250 \\
+    375
     \end{bmatrix}
 \end{equation}<p>resolviendo</p>
 \begin{align}
-    F_{1} &= 300 \ \text{Kg} \\
-    u_{2} &= -0.132 \ \text{m} \\
-    u_{3} &= -0.296 \ \text{m}
-\end{align}<p><strong>Elemento 1</strong></p>
+    F_{1} &= -750 \ [\text{N}] \\
+    u_{2} &= 0.00125 \ [\text{m}] \\
+    u_{3} &= 0.002 \ [\text{m}]
+\end{align}<h3 id="Desplazamientos,-deformaciones-y-esfuerzos">Desplazamientos, deformaciones y esfuerzos<a class="anchor-link" href="#Desplazamientos,-deformaciones-y-esfuerzos">&#182;</a></h3><p><strong>Elemento 1</strong></p>
 <p>desplazamientos</p>
 \begin{equation}
-    u = N u =
+    u = \boldsymbol{N \ u} =
     \begin{bmatrix}
-        1 - \frac{1}{20} x & \frac{1}{20} x
+        1 - 4 x & 4 x
     \end{bmatrix}
     \begin{bmatrix}
     0 \\
-    -0.132
-    \end{bmatrix} = -0.0066 x
-\end{equation}<p>deformación normal</p>
+    0.00125
+    \end{bmatrix} = 0.005 x \ [\text{m}]
+\end{equation}<p>deformaciones</p>
 \begin{equation}
-    \varepsilon = B u =
+    \varepsilon = \boldsymbol{B \ u} =
     \begin{bmatrix}
-        -\frac{1}{20} & \frac{1}{20}
+        -4 & 4
     \end{bmatrix}
     \begin{bmatrix}
     0 \\
-    -0.132
-    \end{bmatrix} = -0.0066
-\end{equation}<p>esfuerzo normal</p>
+    0.00125
+    \end{bmatrix} = 0.005
+\end{equation}<p>esfuerzo</p>
 \begin{equation}
-    \sigma = E \varepsilon = -13.2 \ \text{Kg}/\text{cm}^{2}
+    \sigma = E \ \varepsilon = 1 \ [\text{MPa}]
 \end{equation}<p><strong>Elemento 2</strong></p>
 <p>desplazamientos</p>
 \begin{equation}
-    u = N u =
+    u = \boldsymbol{N \ u} =
     \begin{bmatrix}
-        1 - \frac{1}{20} x & \frac{1}{20} x
+        2 - 4 x & -1 + 4 x
     \end{bmatrix}
     \begin{bmatrix}
-    -0.132 \\
-    -0.296
-    \end{bmatrix} = -0.132 - 0.0082 x
-\end{equation}<p>deformación normal</p>
+    0.00125 \\
+    0.002
+    \end{bmatrix} = 0.0005 + 0.003 x \ [\text{N}]
+\end{equation}<p>deformaciones</p>
 \begin{equation}
-    \varepsilon = B u =
+    \varepsilon = \boldsymbol{B \ u} =
     \begin{bmatrix}
-        -\frac{1}{20} & \frac{1}{20}
+        -4 & 4
     \end{bmatrix}
     \begin{bmatrix}
-    -0.132 \\
-    -0.296
-    \end{bmatrix} = -0.0082
-\end{equation}<p>esfuerzo normal</p>
+    0.00125 \\
+    0.002
+    \end{bmatrix} = 0.003
+\end{equation}<p>esfuerzo</p>
 \begin{equation}
-    \sigma = E \varepsilon = -16.4 \ \text{Kg}/\text{cm}^{2}
+    \sigma = E \ \varepsilon = 0.6 \ [\text{MPa}]
 \end{equation}
 </div>
 </div>

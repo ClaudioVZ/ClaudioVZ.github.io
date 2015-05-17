@@ -3,7 +3,7 @@
 <head>
 
 <meta charset="utf-8" />
-<title>009_elemento_barra</title>
+<title>023_coordenadas_naturales</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -177,7 +177,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Elemento-barra-en-tracci&#243;n-compresi&#243;n">Elemento barra en tracci&#243;n-compresi&#243;n<a class="anchor-link" href="#Elemento-barra-en-tracci&#243;n-compresi&#243;n">&#182;</a></h1>
+<h1 id="Elementos-barra">Elementos barra<a class="anchor-link" href="#Elementos-barra">&#182;</a></h1>
 </div>
 </div>
 </div>
@@ -186,126 +186,272 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Ecuación diferencial de una barra</p>
+<h3 id="Elemento-de-dos-nodos">Elemento de dos nodos<a class="anchor-link" href="#Elemento-de-dos-nodos">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 \begin{equation}
-    EA \frac{d^{2} u(x)}{d x^{2}} + q(x) = 0
-\end{equation}<p>usando el método de Galerkin</p>
-\begin{equation}
-    \int_{0}^{L} R(x) W(x) \ dx = \int_{0}^{L} \bigg( EA \frac{d^{2} u(x)}{d x^{2}} + q(x) \bigg) W(x) \ dx = 0
-\end{equation}<p>puede escribirse como la suma de integrales</p>
-\begin{equation}
-    \int_{0}^{L} EA \frac{d^{2} u(x)}{d x^{2}} W(x) \ dx + \int_{0}^{L} q(x) W(x) \ dx = 0
-\end{equation}<p>integrando por partes para reducir el orden de la derivada</p>
+    u = \alpha_{0} + \alpha_{1} \xi  =
+    \begin{bmatrix}
+        1 & \xi
+    \end{bmatrix}
+    \begin{bmatrix}
+        \alpha_{0} \\
+        \alpha_{1}
+    \end{bmatrix}
+\end{equation}<p>reemplazando los valores $\xi = -1$ y $\xi = 1$</p>
 \begin{align}
-    \int u \ dv &= uv - \int v \ du \\
-    \int_{0}^{L} W(x) E A \frac{d^{2} u(x)}{d x^{2}} \ dx &= \bigg( W(x) E A \frac{d u(x)}{d x} \bigg) \bigg|_{0}^{L} - \int_{0}^{L} E A \frac{d u(x)}{d x} \frac{d W(x)}{d x} \ dx
-\end{align}<p>reemplazando</p>
-\begin{equation}
-    \bigg( E A \frac{d u(x)}{d x} W(x) \bigg) \bigg|_{0}^{L} - \int_{0}^{L} E A \frac{d u(x)}{d x} \frac{d W(x)}{d x}\ dx + \int_{0}^{L} q(x) W(x) \ dx = 0
-\end{equation}<p>reordenando</p>
-\begin{equation}
-    \int_{0}^{L} E A \frac{d u(x)}{d x} \frac{d W(x)}{d x} \ dx = \int_{0}^{L} q(x) W(x) \ dx + \bigg( E A \frac{d u(x)}{d x} W(x) \bigg) \bigg|_{0}^{L}
-\end{equation}<p>para la solución se usará un elemento de dos nodos</p>
+    \alpha_{0} + \alpha_{1}(-1) &= u_{1} \\
+    \alpha_{0} + \alpha_{1}(1) &= u_{2}
+\end{align}<p>simplificando</p>
 \begin{align}
-    u(x) &= N_{1} u_{1} + N_{2} u_{2} \\ 
-    \frac{d u(x)}{d x} &= \frac{d N_{1}}{d x} u_{1} + \frac{d N_{2}}{d x} u_{2} \\
-    W(x) &= N_{1} \delta u_{1} + N_{2} \delta u_{2} \\
-    \frac{d W(x)}{d x} &= \frac{d N_{1}}{d x} \delta u_{1} + \frac{d N_{2}}{d x} \delta u_{2}
-\end{align}<p>reemplazando</p>
-\begin{equation}
-    \int_{0}^{L} E A \bigg( \frac{d N_{1}}{d x} u_{1} + \frac{d N_{2}}{d x} u_{2} \bigg) \bigg( \frac{d N_{1}}{d x} \delta u_{1} + \frac{d N_{2}}{d x} \delta u_{2} \bigg) \ dx = \int_{0}^{L} q(x) (N_{1} \delta u_{1} + N_{2} \delta u_{2}) \ dx + \bigg[ E A \frac{d u(x)}{d x} (N_{1} \delta u_{1} + N_{2} \delta u_{2}) \bigg] \bigg|_{0}^{L}
-\end{equation}<p>reemplazando $E A \frac{d u(x)}{d x} = F(x)$</p>
-\begin{equation}
-    \int_{0}^{L} E A \bigg( \frac{d N_{1}}{d x} u_{1} + \frac{d N_{2}}{d x} u_{2} \bigg) \bigg( \frac{d N_{1}}{d x} \delta u_{1} + \frac{d N_{2}}{d x} \delta u_{2} \bigg) \ dx = \int_{0}^{L} q(x) (N_{1} \delta u_{1} + N_{2} \delta u_{2}) \ dx + \bigg[ F(x) (N_{1} \delta u_{1} + N_{2} \delta u_{2}) \bigg] \bigg|_{0}^{L}
-\end{equation}<p>multiplicando</p>
-\begin{equation}
-    \int_{0}^{L} E A \frac{d N_{1}}{d x} \frac{d N_{1}}{d x} u_{1} \delta u_{1} + E A \frac{d N_{1}}{d x} \frac{d N_{2}}{d x} u_{2} \delta u_{1} + E A \frac{d N_{2}}{d x} \frac{d N_{1}}{d x} u_{1} \delta u_{2} + E A \frac{d N_{2}}{d x} \frac{d N_{2}}{d x} u_{2} \delta u_{2} \ dx = \int_{0}^{L} q(x) N_{1} \delta u_{1} + q(x) N_{2} \delta u_{2} \ dx + \bigg( F(x) N_{1} \delta u_{1} + F(x) N_{2} \delta u_{2} \bigg) \bigg|_{0}^{L}
-\end{equation}<p>reemplazando los límites de integración en el lado derecho</p>
-\begin{equation}
-    \int_{0}^{L} E A \frac{d N_{1}}{d x} \frac{d N_{1}}{d x} u_{1} \delta u_{1} + E A \frac{d N_{1}}{d x} \frac{d N_{2}}{d x} u_{2} \delta u_{1} + E A \frac{d N_{2}}{d x} \frac{d N_{1}}{d x} u_{1} \delta u_{2} + E A \frac{d N_{2}}{d x} \frac{d N_{2}}{d x} u_{2} \delta u_{2} \ dx = \int_{0}^{L} q(x) N_{1} \delta u_{1} + q(x) N_{2} \delta u_{2} \ dx + ( F(L) N_{1}(L) \delta u_{1} + F(L) N_{2}(L) \delta u_{2} ) - ( F(0) N_{1}(0) \delta u_{1} + F(0) N_{2}(0) \delta u_{2} )
-\end{equation}<p>reordenando y agrupando</p>
-\begin{equation}
-    \int_{0}^{L} E A \bigg( \frac{d N_{1}}{d x} \frac{d N_{1}}{d x} u_{1} + \frac{d N_{1}}{d x} \frac{d N_{2}}{d x} u_{2} \bigg) \delta u_{1} + E A \bigg( \frac{d N_{2}}{d x} \frac{d N_{1}}{d x} u_{1} + \frac{d N_{2}}{d x} \frac{d N_{2}}{d x} u_{2} \bigg) \delta u_{2} \ dx = \int_{0}^{L} q(x) N_{1} \delta u_{1} + q(x) N_{2} \delta u_{2} \ dx + ( F(L) N_{1}(L) - F(0) N_{1}(0) ) \delta u_{1} + ( F(L) N_{2}(L) - F(0) N_{2}(0) ) \delta u_{2}
-\end{equation}<p>formando un sistema de ecuaciones</p>
-\begin{align}
-    \int_{0}^{L} E A \bigg( \frac{d N_{1}}{d x} \frac{d N_{1}}{d x} u_{1} + \frac{d N_{1}}{d x} \frac{d N_{2}}{d x} u_{2} \bigg) \delta u_{1} \ dx &= \int_{0}^{L} q(x) N_{1} \delta u_{1} \ dx + ( F(L) N_{1}(L) - F(0) N_{1}(0) ) \delta u_{1} \\
-    \int_{0}^{L} E A \bigg( \frac{d N_{2}}{d x} \frac{d N_{1}}{d x} u_{1} + \frac{d N_{2}}{d x} \frac{d N_{2}}{d x} u_{2} \bigg) \delta u_{2} \ dx &= \int_{0}^{L} q(x) N_{2} \delta u_{2} \ dx + ( F(L) N_{2}(L) - F(0) N_{2}(0) ) \delta u_{2}
-\end{align}<p>las constantes se simplifican en ambos lados</p>
-\begin{align}
-    \int_{0}^{L} E A \bigg( \frac{d N_{1}}{d x} \frac{d N_{1}}{d x} u_{1} + \frac{d N_{1}}{d x} \frac{d N_{2}}{d x} u_{2} \bigg) \ dx &= \int_{0}^{L} q(x) N_{1} \ dx + F(L) N_{1}(L) - F(0) N_{1}(0) \\
-    \int_{0}^{L} E A \bigg( \frac{d N_{2}}{d x} \frac{d N_{1}}{d x} u_{1} + \frac{d N_{2}}{d x} \frac{d N_{2}}{d x} u_{2} \bigg) \ dx &= \int_{0}^{L} q(x) N_{2} \ dx + F(L) N_{2}(L) - F(0) N_{2}(0)
-\end{align}<p>las funciones de forma tienen los siguientes valores</p>
-\begin{matrix}
-    N_{1}(L) = 0 & N_{1}(0) = 1 \\
-    N_{2}(L) = 1 & N_{2}(0) = 0
-\end{matrix}<p>reemplazando</p>
-\begin{align}
-    \int_{0}^{L} E A \bigg( \frac{d N_{1}}{d x} \frac{d N_{1}}{d x} u_{1} + \frac{d N_{1}}{d x} \frac{d N_{2}}{d x} u_{2} \bigg) \ dx &= \int_{0}^{L} q(x) N_{1} \ dx - F(0) \\
-    \int_{0}^{L} E A \bigg( \frac{d N_{2}}{d x} \frac{d N_{1}}{d x} u_{1} + \frac{d N_{2}}{d x} \frac{d N_{2}}{d x} u_{2} \bigg) \ dx &= \int_{0}^{L} q(x) N_{2} \ dx + F(L)
+    \alpha_{0} - \alpha_{1} &= u_{1} \\
+    \alpha_{0} + \alpha_{1} &= u_{2}
 \end{align}<p>en forma matricial</p>
 \begin{equation}
-    \int_{0}^{L} E A
     \begin{bmatrix}
-        \frac{d N_{1}}{d x} \frac{d N_{1}}{d x} & \frac{d N_{1}}{d x} \frac{d N_{2}}{d x} \\
-        \frac{d N_{2}}{d x} \frac{d N_{1}}{d x} & \frac{d N_{2}}{d x} \frac{d N_{2}}{d x}
-    \end{bmatrix} dx
-    \begin{bmatrix}
-    u_{1} \\
-    u_{2}
-    \end{bmatrix} = \int_{0}^{L} q(x)
-    \begin{bmatrix}
-    N_{1} \\
-    N_{2}
-    \end{bmatrix} dx +
-    \begin{bmatrix}
-    -F(0) \\
-    F(L)
+        1 & -1 \\
+        1 & 1
     \end{bmatrix}
-\end{equation}<p>cambiando $-F(0)$ y $F(L)$ por fuerzas en los nodos 1 y 2</p>
-\begin{equation}
-    \int_{0}^{L} E A
     \begin{bmatrix}
-        \frac{d N_{1}}{d x} \frac{d N_{1}}{d x} & \frac{d N_{1}}{d x} \frac{d N_{2}}{d x} \\
-        \frac{d N_{2}}{d x} \frac{d N_{1}}{d x} & \frac{d N_{2}}{d x} \frac{d N_{2}}{d x}
-    \end{bmatrix} dx
+        \alpha_{0} \\
+        \alpha_{1}
+    \end{bmatrix} =
     \begin{bmatrix}
-    u_{1} \\
-    u_{2}
-    \end{bmatrix} = \int_{0}^{L} q(x)
-    \begin{bmatrix}
-    N_{1} \\
-    N_{2}
-    \end{bmatrix} dx +
-    \begin{bmatrix}
-    F_{1} \\
-    F_{2}
+        u_{1} \\
+        u_{2}
     \end{bmatrix}
-\end{equation}<p>factorizando matrices</p>
+\end{equation}<p>resolviendo</p>
 \begin{equation}
-    \int_{0}^{L}
     \begin{bmatrix}
-        \frac{d N_{1}}{d x} \\
-        \frac{d N_{2}}{d x}
-    \end{bmatrix} E A
+        \alpha_{0} \\
+        \alpha_{1}
+    \end{bmatrix} =
     \begin{bmatrix}
-        \frac{d N_{1}}{d x} & \frac{d N_{2}}{d x}
-    \end{bmatrix} dx
-    \begin{bmatrix}
-    u_{1} \\
-    u_{2}
-    \end{bmatrix} = \int_{0}^{L} q(x)
-    \begin{bmatrix}
-    N_{1} \\
-    N_{2}
-    \end{bmatrix} dx +
-    \begin{bmatrix}
-    F_{1} \\
-    F_{2}
+        \frac{1}{2} & \frac{1}{2} \\
+        -\frac{1}{2} & \frac{1}{2}
     \end{bmatrix}
-\end{equation}<p>en forma compacta</p>
+    \begin{bmatrix}
+        u_{1} \\
+        u_{2}
+    \end{bmatrix}
+\end{equation}<p>reemplazando</p>
 \begin{equation}
-    \int_{0}^{L} B^{T} D \ B \ dx \ u = \int_{0}^{L} q \ N^{T} dx + f
+    u =
+    \begin{bmatrix}
+        1 & \xi
+    \end{bmatrix}
+    \begin{bmatrix}
+        \alpha_{0} \\
+        \alpha_{1}
+    \end{bmatrix} =
+    \begin{bmatrix}
+        1 & \xi
+    \end{bmatrix}
+    \begin{bmatrix}
+        \frac{1}{2} & \frac{1}{2} \\
+        -\frac{1}{2} & \frac{1}{2}
+    \end{bmatrix}
+    \begin{bmatrix}
+        u_{1} \\
+        u_{2}
+    \end{bmatrix} =
+    \begin{bmatrix}
+        \frac{1}{2} - \frac{1}{2} \xi  & \frac{1}{2} + \frac{1}{2} \xi
+    \end{bmatrix}
+    \begin{bmatrix}
+        u_{1} \\
+        u_{2}
+    \end{bmatrix}
+\end{equation}<p>reescribiendo $u$</p>
+\begin{equation}
+    u = \bigg( \frac{1}{2} - \frac{1}{2} \xi \bigg) u_{1} +
+    \bigg( \frac{1}{2} + \frac{1}{2} \xi \bigg) u_{2} =
+    N_{1} u_{1} + N_{2} u_{2}
 \end{equation}
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Elemento-de-tres-nodos">Elemento de tres nodos<a class="anchor-link" href="#Elemento-de-tres-nodos">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+\begin{equation}
+    u = \alpha_{0} + \alpha_{1} \xi + \alpha_{2} \xi^{2} =
+    \begin{bmatrix}
+        1 & \xi & \xi^{2}
+    \end{bmatrix}
+    \begin{bmatrix}
+        \alpha_{0} \\
+        \alpha_{1} \\
+        \alpha_{2}
+    \end{bmatrix}
+\end{equation}<p>reemplazando los valores $\xi = -1$, $\xi = 0$ y $\xi = 1$</p>
+\begin{align}
+    \alpha_{0} + \alpha_{1}(-1) + \alpha_{2}(-1)^{2} &= u_{1} \\
+    \alpha_{0} + \alpha_{1}(0) + \alpha_{2}(0)^{2} &= u_{2} \\
+    \alpha_{0} + \alpha_{1}(1) + \alpha_{2}(1)^{2} &= u_{3}
+\end{align}<p>simplificando</p>
+\begin{align}
+    \alpha_{0} - \alpha_{1} + \alpha_{1} &= u_{1} \\
+    \alpha_{0} &= u_{2}\\
+    \alpha_{0} + \alpha_{1} + \alpha_{1}&= u_{3}
+\end{align}<p>en forma matricial</p>
+\begin{equation}
+    \begin{bmatrix}
+        1 & -1 & 1 \\
+        1 & 0 & 0 \\
+        1 & 1 & 1
+    \end{bmatrix}
+    \begin{bmatrix}
+        \alpha_{0} \\
+        \alpha_{1} \\
+        \alpha_{2}
+    \end{bmatrix} =
+    \begin{bmatrix}
+        u_{1} \\
+        u_{2} \\
+        u_{3}
+    \end{bmatrix}
+\end{equation}<p>resolviendo</p>
+\begin{equation}
+    \begin{bmatrix}
+        \alpha_{0} \\
+        \alpha_{1} \\
+        \alpha_{2}
+    \end{bmatrix} =
+    \begin{bmatrix}
+        0 & 1 & 0 \\
+        -\frac{1}{2} & 0 & \frac{1}{2} \\
+        \frac{1}{2} & -1 & \frac{1}{2}
+    \end{bmatrix}
+    \begin{bmatrix}
+        u_{1} \\
+        u_{2} \\
+        u_{3}
+    \end{bmatrix}
+\end{equation}<p>reemplazando</p>
+\begin{equation}
+    u =
+    \begin{bmatrix}
+        1 & \xi & \xi^{2}
+    \end{bmatrix}
+    \begin{bmatrix}
+        \alpha_{0} \\
+        \alpha_{1} \\
+        \alpha_{2}
+    \end{bmatrix} =
+    \begin{bmatrix}
+        1 & \xi & \xi^{2}
+    \end{bmatrix}
+    \begin{bmatrix}
+        0 & 1 & 0 \\
+        -\frac{1}{2} & 0 & \frac{1}{2} \\
+        \frac{1}{2} & -1 & \frac{1}{2}
+    \end{bmatrix}
+    \begin{bmatrix}
+        u_{1} \\
+        u_{2} \\
+        u_{3}
+    \end{bmatrix} =
+    \begin{bmatrix}
+        -\frac{1}{2} \xi + \frac{1}{2} \xi^{2} &
+        1 - \xi^{2} &
+        \frac{1}{2} \xi + \frac{1}{2} \xi^{2}
+    \end{bmatrix}
+    \begin{bmatrix}
+        u_{1} \\
+        u_{2} \\
+        u_{3}
+    \end{bmatrix}
+\end{equation}<p>reescribiendo $u$</p>
+\begin{equation}
+    u = \bigg( -\frac{1}{2} \xi + \frac{1}{2} \xi^{2} \bigg) u_{1} +
+    (1 - \xi^{2}) u_{2} +
+    \bigg( \frac{1}{2} \xi + \frac{1}{2} \xi^{2} \bigg) u_{3} =
+    N_{1} u_{1} + N_{2} u_{2} + N_{3} u_{3}
+\end{equation}
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Elementos-barra-de-mayor-grado-polinomial">Elementos barra de mayor grado polinomial<a class="anchor-link" href="#Elementos-barra-de-mayor-grado-polinomial">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Los elementos de mayor grado pueden obtenerse mediante polinomios de Lagrange:</p>
+\begin{equation}
+    \ell = \prod_{i=0, i \neq j}^{k} \frac{\xi - \xi_{i}}{\xi_{j} - \xi_{i}}
+\end{equation}
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Elemento-de-dos-nodos">Elemento de dos nodos<a class="anchor-link" href="#Elemento-de-dos-nodos">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Usando la fórmula:</p>
+\begin{align}
+    N_{1} &= \frac{\xi - 1}{-1 - 1} = \frac{1}{2} - \frac{1}{2} \xi \\
+    N_{2} &= \frac{\xi - (-1)}{1 - (-1)} = \frac{1}{2} + \frac{1}{2} \xi
+\end{align}
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Elemento-de-tres-nodos">Elemento de tres nodos<a class="anchor-link" href="#Elemento-de-tres-nodos">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Usando la fórmula:</p>
+\begin{align}
+    N_{1} &= \frac{\xi - 0}{-1 - 0} \frac{\xi - 1}{-1 - 1} = -\frac{1}{2} \xi + \frac{1}{2} \xi^{2} \\
+    N_{2} &= \frac{\xi - (-1)}{0 - (-1)} \frac{\xi - 1}{0 - 1} = 1 - \xi^{2} \\
+    N_{3} &= \frac{\xi - 0}{1 - 0} \frac{\xi - 1}{1 - 1} = \frac{1}{2} \xi + \frac{1}{2} \xi^{2}
+\end{align}
 </div>
 </div>
 </div>
