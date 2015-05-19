@@ -3,7 +3,7 @@
 <head>
 
 <meta charset="utf-8" />
-<title>028_esfuerzo_plano</title>
+<title>027_coordenadas_naturales</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -177,447 +177,377 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Elementos-bidimensionales">Elementos bidimensionales<a class="anchor-link" href="#Elementos-bidimensionales">&#182;</a></h1><p>Ecuaciones de equilibrio interno del esfuerzo plano en función de los desplazamientos</p>
-\begin{align}
-    \frac{E}{1 - \nu^{2}} \bigg[
-    \frac{\partial^{2} u}{\partial x^{2}}
-    + \nu \frac{\partial^{2} v}{\partial x \ \partial y}
-    + \frac{1 - \nu}{2} \bigg(
-    \frac{\partial^{2} u}{\partial y^{2}}
-    + \frac{\partial^{2} v}{\partial y \ \partial x} \bigg)
-    \bigg] + F_{x} &= 0 \\
-    \frac{E}{1 - \nu^{2}} \bigg[
-    \nu \frac{\partial^{2} u}{\partial y \ \partial x}
-    + \frac{\partial^{2} v}{\partial y^{2}}
-    + \frac{1 - \nu}{2} \bigg(
-    \frac{\partial^{2} u}{\partial x \ \partial y}
-    + \frac{\partial^{2} v}{\partial x^{2}} \bigg)
-    \bigg] + F_{y} &= 0
-\end{align}<p>Usando el método de Galerkin</p>
-\begin{align}
-    \int_{0}^{t} \int_{0}^{h} \int_{0}^{b} \bigg\{
-    \frac{E}{1 - \nu^{2}} \bigg[
-    \frac{\partial^{2} u}{\partial x^{2}}
-    + \nu \frac{\partial^{2} v}{\partial x \ \partial y}
-    + \frac{1 - \nu}{2} \bigg(
-    \frac{\partial^{2} u}{\partial y^{2}}
-    + \frac{\partial^{2} v}{\partial y \ \partial x} \bigg)
-    \bigg] + F_{x} \bigg\} (N_{1} + N_{2} + N_{3} + N_{4}) \ dx \ dy \ dz &= 0 \\
-    \int_{0}^{t} \int_{0}^{h} \int_{0}^{b} \bigg\{
-    \frac{E}{1 - \nu^{2}} \bigg[
-    \nu \frac{\partial^{2} u}{\partial y \ \partial x}
-    + \frac{\partial^{2} v}{\partial y^{2}}
-    + \frac{1 - \nu}{2} \bigg(
-    \frac{\partial^{2} u}{\partial x \ \partial y}
-    + \frac{\partial^{2} v}{\partial x^{2}} \bigg)
-    \bigg] + F_{y} \bigg\} (N_{1} + N_{2} + N_{3} + N_{4}) \ dx \ dy \ dz &= 0
-\end{align}<p>El espesor es constante</p>
-\begin{align}
-    t \int_{0}^{h} \int_{0}^{b} \bigg\{
-    \frac{E}{1 - \nu^{2}} \bigg[
-    \frac{\partial^{2} u}{\partial x^{2}}
-    + \nu \frac{\partial^{2} v}{\partial x \ \partial y}
-    + \frac{1 - \nu}{2} \bigg(
-    \frac{\partial^{2} u}{\partial y^{2}}
-    + \frac{\partial^{2} v}{\partial y \ \partial x} \bigg)
-    \bigg] + F_{x} \bigg\} (N_{1} + N_{2} + N_{3} + N_{4}) \ dx \ dy &= 0 \\
-    t \int_{0}^{h} \int_{0}^{b} \bigg\{
-    \frac{E}{1 - \nu^{2}} \bigg[
-    \nu \frac{\partial^{2} u}{\partial y \ \partial x}
-    + \frac{\partial^{2} v}{\partial y^{2}}
-    + \frac{1 - \nu}{2} \bigg(
-    \frac{\partial^{2} u}{\partial x \ \partial y}
-    + \frac{\partial^{2} v}{\partial x^{2}} \bigg)
-    \bigg] + F_{y} \bigg\} (N_{1} + N_{2} + N_{3} + N_{4}) \ dx \ dy &= 0
-\end{align}<p>Para reducir el tamaño de la ecuación se usara $N_{i}$</p>
-\begin{align}
-    t \int_{0}^{h} \int_{0}^{b}
-    \bigg\{ \frac{E}{1 - \nu^{2}} \bigg[
-    \frac{\partial^{2} u}{\partial x^{2}}
-    + \nu \frac{\partial^{2} v}{\partial x \ \partial y}
-    + \frac{1 - \nu}{2} \bigg(
-    \frac{\partial^{2} u}{\partial y^{2}}
-    + \frac{\partial^{2} v}{\partial y \ \partial x} \bigg)
-    \bigg] + F_{x} \bigg\} N_{i} \ dx \ dy &= 0 \\
-    t \int_{0}^{h} \int_{0}^{b}
-    \bigg\{ \frac{E}{1 - \nu^{2}} \bigg[
-    \nu \frac{\partial^{2} u}{\partial y \ \partial x}
-    + \frac{\partial^{2} v}{\partial y^{2}}
-    + \frac{1 - \nu}{2} \bigg(
-    \frac{\partial^{2} u}{\partial x \ \partial y}
-    + \frac{\partial^{2} v}{\partial x^{2}} \bigg)
-    \bigg] + F_{y} \bigg\} N_{i} \ dx \ dy &= 0
-\end{align}<p>Expandiendo términos</p>
-\begin{align}
-    t \frac{E}{1 - \nu^{2}} \int_{0}^{h} \int_{0}^{b}
-    N_{i} \frac{\partial^{2} u}{\partial x^{2}}
-    + \nu N_{i} \frac{\partial^{2} v}{\partial x \ \partial y}
-    + \frac{1 - \nu}{2} \bigg(
-    N_{i} \frac{\partial^{2} u}{\partial y^{2}}
-    + N_{i} \frac{\partial^{2} v}{\partial y \ \partial x} \bigg) \ dx \ dy
-    + t \int_{0}^{h} \int_{0}^{b} N_{i} F_{x} \ dx \ dy &= 0 \\
-    t \frac{E}{1 - \nu^{2}} \int_{0}^{h} \int_{0}^{b}
-    \nu N_{i} \frac{\partial^{2} u}{\partial y \ \partial x}
-    + N_{i} \frac{\partial^{2} v}{\partial y^{2}}
-    + \frac{1 - \nu}{2} \bigg(
-    N_{i} \frac{\partial^{2} u}{\partial x \ \partial y}
-    + N_{i} \frac{\partial^{2} v}{\partial x^{2}} \bigg) \ dx \ dy
-    + t \int_{0}^{h} \int_{0}^{b} N_{i} F_{y} \ dx \ dy &= 0
-\end{align}<p>Se reducira el orden de las derivadas parciales mediante integración por partes</p>
+<h1 id="Elementos-viga-Euler-Bernoulli">Elementos viga Euler-Bernoulli<a class="anchor-link" href="#Elementos-viga-Euler-Bernoulli">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Elemento-de-dos-nodos">Elemento de dos nodos<a class="anchor-link" href="#Elemento-de-dos-nodos">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 \begin{equation}
-    \int \alpha \ d\beta = \alpha \beta - \int \beta \ d\alpha
-\end{equation}<p>Para $u_{xx}$</p>
-\begin{equation}
-    \int_{0}^{h} \int_{0}^{b} N_{i} \frac{\partial^{2} u}{\partial x^{2}} \ dx \ dy =
-    \int_{0}^{h} \bigg( \int_{0}^{b} N_{i} \frac{\partial^{2} u}{\partial x^{2}} \ dx \bigg) \ dy
-\end{equation}<p>identificando variables</p>
-\begin{matrix}
-    \alpha = N_{i} & d\beta = \frac{\partial^{2} u}{\partial x^{2}} \ dx \\
-    d\alpha = \frac{\partial N_{i}}{\partial x} \ dx & \beta = \frac{\partial u}{\partial x}
-\end{matrix}<p>reemplazando</p>
-\begin{equation}
-    \int ( \alpha \beta - \int \beta \ d\alpha ) \ dy =
-    \int_{0}^{h} \bigg(
-    N_{i} \frac{\partial u}{\partial x}
-    - \int_{0}^{b} \frac{\partial u}{\partial x} \frac{\partial N_{i}}{\partial x} \ dx \bigg) \ dy =
-    \int_{0}^{h} N_{i} \frac{\partial u}{\partial x} \ dy
-    - \int_{0}^{h} \int_{0}^{b} \frac{\partial N_{i}}{\partial x} \frac{\partial u}{\partial x} \ dx \ dy
-\end{equation}<p>Para $v_{xy}$</p>
-\begin{equation}
-    \int_{0}^{h} \int_{0}^{b} N_{i} \frac{\partial^{2} v}{\partial x \ \partial y} \ dx \ dy =
-    \int_{0}^{h} \bigg( \int_{0}^{b} N_{i} \frac{\partial^{2} v}{\partial x \ \partial y} \ dx \bigg) \ dy
-\end{equation}<p>identificando variables</p>
-\begin{matrix}
-    \alpha = N_{i} & d\beta = \frac{\partial^{2} v}{\partial x \ \partial y} \ dx \\
-    d\alpha = \frac{\partial N_{i}}{\partial x} \ dx & \beta = \frac{\partial v}{\partial y}
-\end{matrix}<p>reemplazando</p>
-\begin{equation}
-    \int ( \alpha \beta - \int \beta \ d\alpha ) \ dy =
-    \int_{0}^{h} \bigg(
-    N_{i} \frac{\partial v}{\partial y}
-    - \int_{0}^{b} \frac{\partial v}{\partial y} \frac{\partial N_{i}}{\partial x} \ dx \bigg) \ dy =
-    \int_{0}^{b} N_{i} \frac{\partial v}{\partial y} \ dy
-    - \int_{0}^{h} \int_{0}^{b} \frac{\partial N_{i}}{\partial x} \frac{\partial v}{\partial y} \ dx \ dy
-\end{equation}<p>Para $u_{yy}$</p>
-\begin{equation}
-    \int_{0}^{h} \int_{0}^{b} N_{i} \frac{\partial^{2} u}{\partial y^{2}} \ dx \ dy =
-    \int_{0}^{b} \bigg( \int_{0}^{h} N_{i} \frac{\partial^{2} u}{\partial y^{2}} \ dy \bigg) \ dx
-\end{equation}<p>identificando variables</p>
-\begin{matrix}
-    \alpha = N_{i} & d\beta = \frac{\partial^{2} u}{\partial y^{2}} \ dy \\
-    d\alpha = \frac{\partial N_{i}}{\partial y} \ dy & \beta = \frac{\partial u}{\partial y}
-\end{matrix}<p>reemplazando</p>
-\begin{equation}
-    \int ( \alpha \beta - \int \beta \ d\alpha ) \ dx =
-    \int_{0}^{b} \bigg(
-    N_{i} \frac{\partial u}{\partial y}
-    - \int_{0}^{h} \frac{\partial u}{\partial y} \frac{\partial N_{i}}{\partial y} \ dy \bigg) \ dx =
-    \int_{0}^{b} N_{i} \frac{\partial u}{\partial y} \ dx
-    - \int_{0}^{h} \int_{0}^{b} \frac{\partial N_{i}}{\partial y} \frac{\partial u}{\partial y} \ dx \ dy
-\end{equation}<p>Para $v_{yx}$</p>
-\begin{equation}
-    \int_{0}^{h} \int_{0}^{b} N_{i} \frac{\partial^{2} v}{\partial y \ \partial x} \ dx \ dy =
-    \int_{0}^{b} \bigg( \int_{0}^{h} N_{i} \frac{\partial^{2} v}{\partial y \ \partial x} \ dy \bigg) \ dx
-\end{equation}<p>identificando variables</p>
-\begin{matrix}
-    \alpha = N_{i} & d\beta = \frac{\partial^{2} v}{\partial y \ \partial x} \ dy \\
-    d\alpha = \frac{\partial N_{i}}{\partial y} \ dy & \beta = \frac{\partial v}{\partial x}
-\end{matrix}<p>reemplazando</p>
-\begin{equation}
-    \int ( \alpha \beta - \int \beta \ d\alpha ) \ dx =
-    \int_{0}^{b} \bigg(
-    N_{i} \frac{\partial v}{\partial x}
-    - \int_{0}^{h} \frac{\partial v}{\partial x} \frac{\partial N_{i}}{\partial y} \ dy \bigg) \ dx =
-    \int_{0}^{b} N_{i} \frac{\partial v}{\partial x} \ dx
-    - \int_{0}^{h} \int_{0}^{b} \frac{\partial N_{i}}{\partial y} \frac{\partial v}{\partial x} \ dx \ dy
-\end{equation}<p>Para $u_{yx}$</p>
-\begin{equation}
-    \int_{0}^{h} \int_{0}^{b} N_{i} \frac{\partial^{2} u}{\partial y \ \partial x} \ dx \ dy =
-    \int_{0}^{b} \bigg( \int_{0}^{h} N_{i} \frac{\partial^{2} u}{\partial y \ \partial x} \ dy \bigg) \ dx
-\end{equation}<p>identificando variables</p>
-\begin{matrix}
-    \alpha = N_{i} & d\beta = \frac{\partial^{2} u}{\partial y \ \partial x} \ dy \\
-    d\alpha = \frac{\partial N_{i}}{\partial y} \ dy & \beta = \frac{\partial u}{\partial x}
-\end{matrix}<p>reemplazando</p>
-\begin{equation}
-    \int ( \alpha \beta - \int \beta \ d\alpha ) \ dx =
-    \int_{0}^{b} \bigg(
-    N_{i} \frac{\partial u}{\partial x}
-    - \int_{0}^{h} \frac{\partial u}{\partial x} \frac{\partial N_{i}}{\partial y} \ dy \bigg) \ dx =
-    \int_{0}^{b} N_{i} \frac{\partial u}{\partial x} \ dx
-    - \int_{0}^{h} \int_{0}^{b} \frac{\partial N_{i}}{\partial y} \frac{\partial u}{\partial x} \ dx \ dy
-\end{equation}<p>Para $v_{yy}$</p>
-\begin{equation}
-    \int_{0}^{h} \int_{0}^{b} N_{i} \frac{\partial^{2} v}{\partial y^{2}} \ dx \ dy =
-    \int_{0}^{b} \bigg( \int_{0}^{h} N_{i} \frac{\partial^{2} v}{\partial y^{2}} \ dy \bigg) \ dx
-\end{equation}<p>identificando variables</p>
-\begin{matrix}
-    \alpha = N_{i} & d\beta = \frac{\partial^{2} v}{\partial y^{2}} \ dy \\
-    d\alpha = \frac{\partial N_{i}}{\partial y} \ dy & \beta = \frac{\partial v}{\partial y}
-\end{matrix}<p>reemplazando</p>
-\begin{equation}
-    \int ( \alpha \beta - \int \beta \ d\alpha ) \ dx =
-    \int_{0}^{b} \bigg(
-    N_{i} \frac{\partial v}{\partial y}
-    - \int_{0}^{h} \frac{\partial v}{\partial y} \frac{\partial N_{i}}{\partial y} \ dy \bigg) \ dx =
-    \int_{0}^{b} N_{i} \frac{\partial v}{\partial y} \ dx
-    - \int_{0}^{h} \int_{0}^{b} \frac{\partial N_{i}}{\partial y} \frac{\partial v}{\partial y} \ dx \ dy
-\end{equation}<p>Para $u_{xy}$</p>
-\begin{equation}
-    \int_{0}^{h} \int_{0}^{b} N_{i} \frac{\partial^{2} u}{\partial x \ \partial y} \ dx \ dy =
-    \int_{0}^{h} \bigg( \int_{0}^{b} N_{i} \frac{\partial^{2} u}{\partial x \ \partial y} \ dx \bigg) \ dy
-\end{equation}<p>identificando variables</p>
-\begin{matrix}
-    \alpha = N_{i} & d\beta = \frac{\partial^{2} u}{\partial x \ \partial y} \ dx \\
-    d\alpha = \frac{\partial N_{i}}{\partial x} \ dx & \beta = \frac{\partial u}{\partial y}
-\end{matrix}<p>reemplazando</p>
-\begin{equation}
-    \int ( \alpha \beta - \int \beta \ d\alpha ) \ dy =
-    \int_{0}^{h} \bigg(
-    N_{i} \frac{\partial u}{\partial y}
-    - \int_{0}^{b} \frac{\partial u}{\partial y} \frac{\partial N_{i}}{\partial x} \ dx \bigg) \ dy =
-    \int_{0}^{b} N_{i} \frac{\partial u}{\partial y} \ dy
-    - \int_{0}^{h} \int_{0}^{b} \frac{\partial N_{i}}{\partial x} \frac{\partial u}{\partial y} \ dx \ dy
-\end{equation}<p>Para $v_{xx}$</p>
-\begin{equation}
-    \int_{0}^{h} \int_{0}^{b} N_{i} \frac{\partial^{2} v}{\partial x^{2}} \ dx \ dy =
-    \int_{0}^{h} \bigg( \int_{0}^{b} N_{i} \frac{\partial^{2} v}{\partial x^{2}} \ dx \bigg) \ dy
-\end{equation}<p>identificando variables</p>
-\begin{matrix}
-    \alpha = N_{i} & d\beta = \frac{\partial^{2} v}{\partial x^{2}} \ dx \\
-    d\alpha = \frac{\partial N_{i}}{\partial x} \ dx & \beta = \frac{\partial v}{\partial x}
-\end{matrix}<p>reemplazando</p>
-\begin{equation}
-    \int ( \alpha \beta - \int \beta \ d\alpha ) \ dy =
-    \int_{0}^{h} \bigg(
-    N_{i} \frac{\partial v}{\partial x}
-    - \int_{0}^{b} \frac{\partial v}{\partial x} \frac{\partial N_{i}}{\partial x} \ dx \bigg) \ dy =
-    \int_{0}^{h} N_{i} \frac{\partial v}{\partial x} \ dy
-    - \int_{0}^{h} \int_{0}^{b} \frac{\partial N_{i}}{\partial x} \frac{\partial v}{\partial x} \ dx \ dy
-\end{equation}<p>Reemplazando y reordenando</p>
-\begin{align}
-    t \frac{E}{1 - \nu^{2}} \int_{0}^{h} \int_{0}^{b}
-    \frac{\partial N_{i}}{\partial x} \frac{\partial u}{\partial x}
-    + \nu \frac{\partial N_{i}}{\partial x} \frac{\partial v}{\partial y}
-    + \frac{1 - \nu}{2} \bigg(
-    \frac{\partial N_{i}}{\partial y} \frac{\partial u}{\partial y}
-    + \frac{\partial N_{i}}{\partial y} \frac{\partial v}{\partial x} \bigg) \ dx \ dy &=
-    t \frac{E}{1 - \nu^{2}} \bigg[ \int_{0}^{h}
-    N_{i} \frac{\partial u}{\partial x}
-    + \nu N_{i} \frac{\partial v}{\partial y} \ dy
-    + \frac{1 - \nu}{2} \int_{0}^{b}
-    N_{i} \frac{\partial u}{\partial y}
-    + N_{i} \frac{\partial v}{\partial x} \ dx \bigg]
-    + t \int_{0}^{h} \int_{0}^{b} N_{i} F_{x} \ dx \ dy \\
-    t \frac{E}{1 - \nu^{2}} \int_{0}^{h} \int_{0}^{b}
-    \nu \frac{\partial N_{i}}{\partial y} \frac{\partial u}{\partial x}
-    + \frac{\partial N_{i}}{\partial y} \frac{\partial v}{\partial y}
-    + \frac{1 - \nu}{2} \bigg(
-    \frac{\partial N_{i}}{\partial x} \frac{\partial u}{\partial y}
-    + \frac{\partial N_{i}}{\partial x} \frac{\partial v}{\partial x} \bigg) \ dx \ dy &=
-    t \frac{E}{1 - \nu^{2}} \bigg[ \int_{0}^{b}
-    \nu N_{i} \frac{\partial u}{\partial x}
-    + N_{i} \frac{\partial v}{\partial y} \ dx
-    + \frac{1 - \nu}{2} \int_{0}^{h}
-    N_{i} \frac{\partial u}{\partial y}
-    + N_{i} \frac{\partial v}{\partial x} \ dy \bigg]
-    + t \int_{0}^{h} \int_{0}^{b} N_{i} F_{y} \ dx \ dy
-\end{align}<p>El lado derecho es reemplazado por su equivalente nodal $F_{j}$</p>
-\begin{align}
-    t \frac{E}{1 - \nu^{2}} \int_{0}^{h} \int_{0}^{b}
-    \frac{\partial N_{i}}{\partial x} \frac{\partial u}{\partial x}
-    + \nu \frac{\partial N_{i}}{\partial x} \frac{\partial v}{\partial y}
-    + \frac{1 - \nu}{2} \bigg(
-    \frac{\partial N_{i}}{\partial y} \frac{\partial u}{\partial y}
-    + \frac{\partial N_{i}}{\partial y} \frac{\partial v}{\partial x} \bigg) \ dx \ dy &=
-    F_{jx} \\
-    t \frac{E}{1 - \nu^{2}} \int_{0}^{h} \int_{0}^{b}
-    \nu \frac{\partial N_{i}}{\partial y} \frac{\partial u}{\partial x}
-    + \frac{\partial N_{i}}{\partial y} \frac{\partial v}{\partial y}
-    + \frac{1 - \nu}{2} \bigg(
-    \frac{\partial N_{i}}{\partial x} \frac{\partial u}{\partial y}
-    + \frac{\partial N_{i}}{\partial x} \frac{\partial v}{\partial x} \bigg) \ dx \ dy &=
-    F_{jy}
-\end{align}<p>El desplazamiento horizontal es</p>
-\begin{equation}
-    u =
+    v = \alpha_{0} + \alpha_{1} \xi + \alpha_{2} \xi^{2} + \alpha_{3} \xi^{3} =
     \begin{bmatrix}
-    N_{1} & N_{2} & N_{3} & N_{4}
+        1 & \xi & \xi^{2} & \xi^{3}
     \end{bmatrix}
     \begin{bmatrix}
-    u_{1} \\
-    u_{2} \\
-    u_{3} \\
-    u_{4}
+        \alpha_{0} \\
+        \alpha_{1} \\
+        \alpha_{2} \\
+        \alpha_{3}
     \end{bmatrix}
-\end{equation}<p>El desplazamiento vertical es</p>
+\end{equation}<p>reemplazando los valores $\xi_{1} = -1$ y $\xi_{2} = 1$</p>
+\begin{align}
+    \alpha_{0} + \alpha_{1} (-1) + \alpha_{2} (-1)^{2} + \alpha_{3} (-1)^{3} &= v_{1} \\
+    \alpha_{1} + 2 \alpha_{2} (-1) + 3 \alpha_{3} (-1)^{2} &= \theta_{1} \\
+    \alpha_{0} + \alpha_{1} (1) + \alpha_{2} (1)^{2} + \alpha_{3} (1)^{3} &= v_{2} \\
+    \alpha_{1} + 2 \alpha_{2} (1) + 3 \alpha_{3} (1)^{2} &= \theta_{2}
+\end{align}<p>simplificando</p>
+\begin{align}
+    \alpha_{0} - \alpha_{1} + \alpha_{2} - \alpha_{3} &= v_{1} \\
+    \alpha_{1} - 2 \alpha_{2} + 3 \alpha_{3} &= \theta_{1} \\
+    \alpha_{0} + \alpha_{1} + \alpha_{2} + \alpha_{3} &= v_{2} \\
+    \alpha_{1} + 2 \alpha_{2} + 3 \alpha_{3} &= \theta_{2}
+\end{align}<p>en forma matricial</p>
+\begin{equation}
+    \begin{bmatrix}
+        1 & -1 & 1 & -1 \\
+        0 & 1 & -2 & 3 \\
+        1 & 1 & 1 & 1 \\
+        0 & 1 & 2 & 3
+    \end{bmatrix}
+    \begin{bmatrix}
+        \alpha_{0} \\
+        \alpha_{1} \\
+        \alpha_{2} \\
+        \alpha_{3}
+    \end{bmatrix} =
+    \begin{bmatrix}
+        v_{1} \\
+        \theta_{1} \\
+        v_{2} \\
+        \theta_{2}
+    \end{bmatrix}
+\end{equation}<p>resolviendo</p>
+\begin{equation}
+    \begin{bmatrix}
+        \alpha_{0} \\
+        \alpha_{1} \\
+        \alpha_{2} \\
+        \alpha_{3}
+    \end{bmatrix} =
+    \begin{bmatrix}
+        \frac{1}{2} & \frac{1}{4} & \frac{1}{2} & -\frac{1}{4} \\
+        -\frac{3}{4} & -\frac{1}{4} & \frac{3}{4} & -\frac{1}{4} \\
+        0 & -\frac{1}{4} & 0 & \frac{1}{4} \\
+        \frac{1}{4} & \frac{1}{4} & -\frac{1}{4} & \frac{1}{4}
+    \end{bmatrix}
+    \begin{bmatrix}
+        v_{1} \\
+        \theta_{1} \\
+        v_{2} \\
+        \theta_{2}
+    \end{bmatrix}
+\end{equation}<p>reemplazando</p>
 \begin{equation}
     v =
     \begin{bmatrix}
-    N_{1} & N_{2} & N_{3} & N_{4}
+        1 & \xi & \xi^{2} & \xi^{3}
     \end{bmatrix}
     \begin{bmatrix}
-    v_{1} \\
-    v_{2} \\
-    v_{3} \\
-    v_{4}
-    \end{bmatrix}
-\end{equation}<p>Para reducir el tamaño de la ecuación $u = N_{j} u_{j}$ y $v = N_{j} v_{j}$; sus derivadas serán</p>
-\begin{equation}
-    \begin{matrix}
-        \frac{\partial u}{\partial x} = \frac{\partial N_{j}}{\partial x} u_{j} &
-        \frac{\partial u}{\partial y} = \frac{\partial N_{j}}{\partial y} u_{j} \\
-        \frac{\partial v}{\partial x} = \frac{\partial N_{j}}{\partial x} v_{j} &
-        \frac{\partial v}{\partial y} = \frac{\partial N_{j}}{\partial y} v_{j}
-    \end{matrix}
-\end{equation}<p>Reemplazando</p>
-\begin{align}
-    t \frac{E}{1 - \nu^{2}} \int_{0}^{h} \int_{0}^{b}
-    \frac{\partial N_{i}}{\partial x} \frac{\partial N_{j}}{\partial x} u_{j}
-    + \nu \frac{\partial N_{i}}{\partial x} \frac{\partial N_{j}}{\partial y} v_{j}
-    + \frac{1 - \nu}{2} \bigg(
-    \frac{\partial N_{i}}{\partial y} \frac{\partial N_{j}}{\partial y} u_{j}
-    + \frac{\partial N_{i}}{\partial y} \frac{\partial N_{j}}{\partial x} v_{j} \bigg) \ dx \ dy &=
-    F_{jx} \\
-    t \frac{E}{1 - \nu^{2}} \int_{0}^{h} \int_{0}^{b}
-    \nu \frac{\partial N_{i}}{\partial y} \frac{\partial N_{j}}{\partial x} u_{j}
-    + \frac{\partial N_{i}}{\partial y} \frac{\partial N_{j}}{\partial y} v_{j}
-    + \frac{1 - \nu}{2} \bigg(
-    \frac{\partial N_{i}}{\partial x} \frac{\partial N_{j}}{\partial y} u_{j}
-    + \frac{\partial N_{i}}{\partial x} \frac{\partial N_{j}}{\partial x} v_{j} \bigg) \ dx \ dy &=
-    F_{jy}
-\end{align}<p>En forma matricial</p>
-\begin{equation}
-    t \frac{E}{1 - \nu^{2}} \int_{0}^{h} \int_{0}^{b}
-    \begin{bmatrix}
-    \frac{\partial N_{i}}{\partial x} \frac{\partial N_{j}}{\partial x} u_{j}
-    + \nu \frac{\partial N_{i}}{\partial x} \frac{\partial N_{j}}{\partial y} v_{j}
-    + \frac{1 - \nu}{2} \bigg(
-    \frac{\partial N_{i}}{\partial y} \frac{\partial N_{j}}{\partial y} u_{j}
-    + \frac{\partial N_{i}}{\partial y} \frac{\partial N_{j}}{\partial x} v_{j} \bigg)\\
-    \nu \frac{\partial N_{i}}{\partial y} \frac{\partial N_{j}}{\partial x} u_{j}
-    + \frac{\partial N_{i}}{\partial y} \frac{\partial N_{j}}{\partial y} v_{j}
-    + \frac{1 - \nu}{2} \bigg(
-    \frac{\partial N_{i}}{\partial x} \frac{\partial N_{j}}{\partial y} u_{j}
-    + \frac{\partial N_{i}}{\partial x} \frac{\partial N_{j}}{\partial x} v_{j} \bigg)
-    \end{bmatrix} \ dx \ dy =
-    \begin{bmatrix}
-    F_{jx} \\
-    F_{jy}
-    \end{bmatrix}
-\end{equation}<p>Factorizando y reordenando</p>
-\begin{equation}
-    \int_{0}^{h} \int_{0}^{b}
-    \begin{bmatrix}
-        \frac{\partial N_{i}}{\partial x} & 0 & \frac{\partial N_{i}}{\partial y} \\
-        0 & \frac{\partial N_{i}}{\partial y} & \frac{\partial N_{i}}{\partial x} \\
-    \end{bmatrix} \frac{E}{1 - \nu^{2}}
-    \begin{bmatrix}
-        1 & \nu & 0 \\
-        \nu & 1 & 0 \\
-        0 & 0 & \frac{1 - \nu}{2}
-    \end{bmatrix}
-    \begin{bmatrix}
-        \frac{\partial N_{j}}{\partial x} & 0 \\
-        0 & \frac{\partial N_{j}}{\partial y} \\
-        \frac{\partial N_{j}}{\partial y} & \frac{\partial N_{j}}{\partial x}
-    \end{bmatrix} \ t \ dx \ dy
-    \begin{bmatrix}
-    u_{j} \\
-    v_{j}
+        \alpha_{0} \\
+        \alpha_{1} \\
+        \alpha_{2} \\
+        \alpha_{3}
     \end{bmatrix} =
     \begin{bmatrix}
-    F_{jx} \\
-    F_{jy}
-    \end{bmatrix}
-\end{equation}<p>Reemplazando las cuatro funciones de forma</p>
-\begin{equation}
-    \int_{0}^{h} \int_{0}^{b}
-    \begin{bmatrix}
-        \frac{\partial N_{1}}{\partial x} & 0 & \frac{\partial N_{1}}{\partial y} \\
-        0 & \frac{\partial N_{1}}{\partial y} & \frac{\partial N_{1}}{\partial x} \\
-        \frac{\partial N_{2}}{\partial x} & 0 & \frac{\partial N_{2}}{\partial y} \\
-        0 & \frac{\partial N_{2}}{\partial y} & \frac{\partial N_{2}}{\partial x} \\
-        \frac{\partial N_{3}}{\partial x} & 0 & \frac{\partial N_{3}}{\partial y} \\
-        0 & \frac{\partial N_{3}}{\partial y} & \frac{\partial N_{3}}{\partial x} \\
-        \frac{\partial N_{4}}{\partial x} & 0 & \frac{\partial N_{4}}{\partial y} \\
-        0 & \frac{\partial N_{4}}{\partial y} & \frac{\partial N_{4}}{\partial x}
-    \end{bmatrix} \frac{E}{1 - \nu^{2}}
-    \begin{bmatrix}
-        1 & \nu & 0 \\
-        \nu & 1 & 0 \\
-        0 & 0 & \frac{1 - \nu}{2}
+        1 & \xi & \xi^{2} & \xi^{3}
     \end{bmatrix}
     \begin{bmatrix}
-        \frac{\partial N_{1}}{\partial x} & 0 &
-        \frac{\partial N_{2}}{\partial x} & 0 &
-        \frac{\partial N_{3}}{\partial x} & 0 &
-        \frac{\partial N_{4}}{\partial x} & 0 \\
-        0 & \frac{\partial N_{1}}{\partial y} &
-        0 & \frac{\partial N_{2}}{\partial y} &
-        0 & \frac{\partial N_{3}}{\partial y} &
-        0 & \frac{\partial N_{4}}{\partial y} \\
-        \frac{\partial N_{1}}{\partial y} & \frac{\partial N_{1}}{\partial x} &
-        \frac{\partial N_{2}}{\partial y} & \frac{\partial N_{2}}{\partial x} &
-        \frac{\partial N_{3}}{\partial y} & \frac{\partial N_{3}}{\partial x} &
-        \frac{\partial N_{4}}{\partial y} & \frac{\partial N_{4}}{\partial x}
-    \end{bmatrix} \ t \ dx \ dy
+        \frac{1}{2} & \frac{1}{4} & \frac{1}{2} & -\frac{1}{4} \\
+        -\frac{3}{4} & -\frac{1}{4} & \frac{3}{4} & -\frac{1}{4} \\
+        0 & -\frac{1}{4} & 0 & \frac{1}{4} \\
+        \frac{1}{4} & \frac{1}{4} & -\frac{1}{4} & \frac{1}{4}
+    \end{bmatrix}
     \begin{bmatrix}
-    u_{1} \\
-    v_{1} \\
-    u_{2} \\
-    v_{2} \\
-    u_{3} \\
-    v_{3} \\
-    u_{4} \\
-    v_{4}
+        v_{1} \\
+        \theta_{1} \\
+        v_{2} \\
+        \theta_{2}
     \end{bmatrix} =
     \begin{bmatrix}
-    F_{1x} \\
-    F_{1y} \\
-    F_{2x} \\
-    F_{2y} \\
-    F_{3x} \\
-    F_{3y} \\
-    F_{4x} \\
-    F_{4y}
-    \end{bmatrix}
-\end{equation}<p>Puede reescribirse como</p>
-\begin{equation}
-    \int_{0}^{h} \int_{0}^{b}
-    \begin{bmatrix}
-        B_{1} \\
-        B_{2} \\
-        B_{3} \\
-        B_{4}
-    \end{bmatrix} \frac{E}{1 - \nu^{2}}
-    \begin{bmatrix}
-        1 & \nu & 0 \\
-        \nu & 1 & 0 \\
-        0 & 0 & \frac{1 - \nu}{2}
+        \frac{1}{4} (\xi + 2) (\xi - 1)^{2} &
+        \frac{1}{4} (\xi + 1) (\xi - 1)^{2} &
+        -\frac{1}{4} (\xi - 2) (\xi + 1)^{2} &
+        \frac{1}{4} (\xi - 1) (\xi + 1)^{2}
     \end{bmatrix}
     \begin{bmatrix}
-        B_{1} & B_{2} & B_{3} & B_{4}
-    \end{bmatrix} \ t \ dx \ dy
-    \begin{bmatrix}
-        d_{1} \\
-        d_{2} \\
-        d_{3} \\
-        d_{4}
-    \end{bmatrix} =
-    \begin{bmatrix}
-        F_{1} \\
-        F_{2} \\
-        F_{3} \\
-        F_{4}
+        v_{1} \\
+        \theta_{1} \\
+        v_{2} \\
+        \theta_{2}
     \end{bmatrix}
-\end{equation}<p>y en forma compacta</p>
+\end{equation}<p>Reescribiendo $v$:</p>
 \begin{equation}
-    \iint \limits_{A} B^{T} \ D \ B \ t \ dA \ d = F
-\end{equation}<p>o en forma general</p>
-\begin{equation}
-    K \ d = F
+    v = \bigg[ \frac{1}{4} (\xi + 2) (\xi - 1)^{2} \bigg] v_{1} +
+    \bigg[ \frac{1}{4} (\xi + 1) (\xi - 1)^{2} \bigg] \theta_{1} +
+    \bigg[ -\frac{1}{4} (\xi - 2) (\xi + 1)^{2} \bigg] v_{2} +
+    \bigg[ \frac{1}{4} (\xi - 1) (\xi + 1)^{2} \bigg] \theta_{2} =
+    N_{1} v_{1} + N_{2} \theta_{1} + N_{3} v_{2} + N_{4} \theta_{2}
 \end{equation}
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Elemento-de-tres-nodos">Elemento de tres nodos<a class="anchor-link" href="#Elemento-de-tres-nodos">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+\begin{equation}
+    v = \alpha_{0} + \alpha_{1} \xi + \alpha_{2} \xi^{2} + \alpha_{3} \xi^{3} + \alpha_{4} \xi^{4} + \alpha_{5} \xi^{5} =
+    \begin{bmatrix}
+        1 & \xi & \xi^{2} & \xi^{3} & \xi^{4} & \xi^{5}
+    \end{bmatrix}
+    \begin{bmatrix}
+        \alpha_{0} \\
+        \alpha_{1} \\
+        \alpha_{2} \\
+        \alpha_{3} \\
+        \alpha_{4} \\
+        \alpha_{5}
+    \end{bmatrix}
+\end{equation}<p>reemplazando los valores $\xi_{1} = -1$, $\xi_{2} = 0$ y $\xi_{3} = 1$</p>
+\begin{align}
+    \alpha_{0} + \alpha_{1} (-1) + \alpha_{2} (-1)^{2} + \alpha_{3} (-1)^{3} + \alpha_{4} (-1)^{4} + \alpha_{5} (-1)^{5} &= v_{1} \\
+    \alpha_{1} + 2 \alpha_{2} (-1) + 3 \alpha_{3} (-1)^{2} + 4 \alpha_{4} (-1)^{3} + 5 \alpha_{5} (-1)^{4} &= \theta_{1} \\
+    \alpha_{0} + \alpha_{1} (0) + \alpha_{2} (0)^{2} + \alpha_{3} (0)^{3} + \alpha_{4} (0)^{4} + \alpha_{5} (0)^{5} &= v_{2} \\
+    \alpha_{1} + 2 \alpha_{2} (0) + 3 \alpha_{3} (0)^{2} + 4 \alpha_{4} (0)^{3} + 5 \alpha_{5} (0)^{4} &= \theta_{2} \\
+    \alpha_{0} + \alpha_{1} (1) + \alpha_{2} (1)^{2} + \alpha_{3} (1)^{3} + \alpha_{4} (1)^{4} + \alpha_{5} (1)^{5} &= v_{3} \\
+    \alpha_{1} + 2 \alpha_{2} (1) + 3 \alpha_{3} (1)^{2} + 4 \alpha_{4} (1)^{3} + 5 \alpha_{5} (1)^{4} &= \theta_{3}
+\end{align}<p>simplificando</p>
+\begin{align}
+    \alpha_{0} - \alpha_{1} + \alpha_{2} - \alpha_{3} + \alpha_{4} - \alpha_{5} &= v_{1} \\
+    \alpha_{1} - 2 \alpha_{2} + 3 \alpha_{3} - 4 \alpha_{4} + 5 \alpha_{5} &= \theta_{1} \\
+    \alpha_{0} &= v_{2} \\
+    \alpha_{1} &= \theta_{2} \\
+    \alpha_{0} + \alpha_{1} + \alpha_{2} + \alpha_{3} + \alpha_{4} + \alpha_{5} &= v_{3} \\
+    \alpha_{1} + 2 \alpha_{2} + 3 \alpha_{3} + 4 \alpha_{4} + 5 \alpha_{5} &= \theta_{3}
+\end{align}<p>en forma matricial</p>
+\begin{equation}
+    \begin{bmatrix}
+        1 & -1 & 1 & -1 & 1 & -1 \\
+        0 & 1 & -2 & 3 & -4 & 5 \\
+        1 & 0 & 0 & 0 & 0 & 0 \\
+        0 & 1 & 0 & 0 & 0 & 0 \\
+        1 & 1 & 1 & 1 & 1 & 1 \\
+        0 & 1 & 2 & 3 & 4 & 5
+    \end{bmatrix}
+    \begin{bmatrix}
+        \alpha_{0} \\
+        \alpha_{1} \\
+        \alpha_{2} \\
+        \alpha_{3} \\
+        \alpha_{4} \\
+        \alpha_{5}
+    \end{bmatrix} =
+    \begin{bmatrix}
+        v_{1} \\
+        \theta_{1} \\
+        v_{2} \\
+        \theta_{2} \\
+        v_{3} \\
+        \theta_{3}
+    \end{bmatrix}
+\end{equation}<p>resolviendo</p>
+\begin{equation}
+    \begin{bmatrix}
+        \alpha_{0} \\
+        \alpha_{1} \\
+        \alpha_{2} \\
+        \alpha_{3} \\
+        \alpha_{4} \\
+        \alpha_{5}
+    \end{bmatrix} =
+    \begin{bmatrix}
+        0 & 0 & 1 & 0 & 0 & 0 \\
+        0 & 0 & 0 & 1 & 0 & 0 \\
+        1 & \frac{1}{4} & -2 & 0 & 1 & -\frac{1}{4} \\
+        -\frac{5}{4} & -\frac{1}{4} & 0 & -2 & \frac{5}{4} & -\frac{1}{4} \\
+        -\frac{1}{2} & -\frac{1}{4} & 1 & 0 & -\frac{1}{2} & \frac{1}{4} \\
+        \frac{3}{4} & \frac{1}{4} & 0 & 1 & -\frac{3}{4} & \frac{1}{4}
+    \end{bmatrix}
+    \begin{bmatrix}
+        v_{1} \\
+        \theta_{1} \\
+        v_{2} \\
+        \theta_{2} \\
+        v_{3} \\
+        \theta_{3}
+    \end{bmatrix}
+\end{equation}<p>reemplazando</p>
+\begin{equation}
+    v =
+    \begin{bmatrix}
+        1 & \xi & \xi^{2} & \xi^{3} & \xi^{4} & \xi^{5}
+    \end{bmatrix}
+    \begin{bmatrix}
+        \alpha_{0} \\
+        \alpha_{1} \\
+        \alpha_{2} \\
+        \alpha_{3} \\
+        \alpha_{4} \\
+        \alpha_{5}
+    \end{bmatrix} =
+    \begin{bmatrix}
+        1 & \xi & \xi^{2} & \xi^{3} & \xi^{4} & \xi^{5}
+    \end{bmatrix}
+    \begin{bmatrix}
+        0 & 0 & 1 & 0 & 0 & 0 \\
+        0 & 0 & 0 & 1 & 0 & 0 \\
+        1 & \frac{1}{4} & -2 & 0 & 1 & -\frac{1}{4} \\
+        -\frac{5}{4} & -\frac{1}{4} & 0 & -2 & \frac{5}{4} & -\frac{1}{4} \\
+        -\frac{1}{2} & -\frac{1}{4} & 1 & 0 & -\frac{1}{2} & \frac{1}{4} \\
+        \frac{3}{4} & \frac{1}{4} & 0 & 1 & -\frac{3}{4} & \frac{1}{4}
+    \end{bmatrix}
+    \begin{bmatrix}
+        v_{1} \\
+        \theta_{1} \\
+        v_{2} \\
+        \theta_{2} \\
+        v_{3} \\
+        \theta_{3}
+    \end{bmatrix} =
+    \begin{bmatrix}
+        \frac{1}{4} \xi^{2} (3 \xi + 4) (\xi - 1)^{2} &
+        \frac{1}{4} \xi^{2} (\xi + 1) (\xi - 1)^{2} &
+        (\xi - 1)^{2} (\xi + 1)^{2} &
+        \xi (\xi - 1)^{2} (\xi + 1)^{2} &
+        -\frac{1}{4} \xi^{2} (3 \xi - 4) (\xi + 1)^{2} &
+        \frac{1}{4} \xi^{2} (\xi - 1) (\xi + 1)^{2}
+    \end{bmatrix}
+    \begin{bmatrix}
+        v_{1} \\
+        \theta_{1} \\
+        v_{2} \\
+        \theta_{2} \\
+        v_{3} \\
+        \theta_{3}
+    \end{bmatrix}
+\end{equation}<p>Reescribiendo $v$:</p>
+\begin{equation}
+    v = \bigg[ \frac{1}{4} \xi^{2} (3 \xi + 4) (\xi - 1)^{2} \bigg] v_{1} +
+    \bigg[ \frac{1}{4} \xi^{2} (\xi + 1) (\xi - 1)^{2} \bigg] \theta_{1} +
+    \bigg[ (\xi - 1)^{2} (\xi + 1)^{2} \bigg] v_{2} +
+    \bigg[ \xi (\xi - 1)^{2} (\xi + 1)^{2} \bigg] \theta_{2} +
+    \bigg[ -\frac{1}{4} \xi^{2} (3 \xi - 4) (\xi + 1)^{2} \bigg] v_{3} +
+    \bigg[ \frac{1}{4} \xi^{2} (\xi - 1) (\xi + 1)^{2} \bigg] \theta_{3} =
+    N_{1} v_{1} + N_{2} \theta_{1} + N_{3} v_{2} + N_{4} \theta_{2} + N_{5} v_{3} + N_{6} \theta_{3}
+\end{equation}
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Elementos-viga-Euler-Bernoulli-de-mayor-grado-polinomial">Elementos viga Euler-Bernoulli de mayor grado polinomial<a class="anchor-link" href="#Elementos-viga-Euler-Bernoulli-de-mayor-grado-polinomial">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Los elementos de mayor grado pueden obtenerse mediante polinomios de Hermite:</p>
+\begin{align}
+    H_{0i} &= [1 - 2 \ \ell_{(\xi_{i})}^{\prime} (\xi - \xi_{i})] [\ell_{(\xi)}]^{2} \\
+    H_{1i} &= (\xi - \xi_{i}) [\ell_{(\xi)}]^{2}
+\end{align}
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Elemento-de-dos-nodos">Elemento de dos nodos<a class="anchor-link" href="#Elemento-de-dos-nodos">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Usando la fórmula para polinomios de Lagrange:</p>
+\begin{align}
+    \ell_{1} &= \frac{\xi - 1}{-1 - 1} = \frac{1}{2} - \frac{1}{2} \xi \\
+    \ell_{1}^{\prime} &= - \frac{1}{2} \\
+    \ell_{2} &= \frac{\xi - (-1)}{1 - (-1)} = \frac{1}{2} + \frac{1}{2} \xi \\
+    \ell_{2}^{\prime} &= \frac{1}{2}
+\end{align}<p>Usando la fórmula para polinomios de Hermite:</p>
+\begin{align}
+    H_{01} &= \bigg\{ 1 - 2 \bigg[ -\frac{1}{2} \bigg] [\xi - (-1)] \bigg\} \bigg( \frac{1}{2} - \frac{1}{2} \xi \bigg)^{2} = \frac{1}{4} (\xi + 2) (\xi - 1)^{2} \\
+    H_{11} &= [\xi - (-1)] \bigg( \frac{1}{2} - \frac{1}{2} \xi \bigg)^{2} = \frac{1}{4} (\xi + 1) (\xi - 1)^{2} \\
+    H_{02} &= \bigg[ 1 - 2 \bigg( \frac{1}{2} \bigg) (\xi - 1) \bigg] \bigg( \frac{1}{2} + \frac{1}{2} \xi \bigg)^{2} = -\frac{1}{4} (\xi - 2) (\xi + 1)^{2} \\
+    H_{12} &= (\xi - 1) \bigg( \frac{1}{2} + \frac{1}{2} \xi \bigg)^{2} = \frac{1}{4} (\xi - 1) (\xi + 1)^{2}
+\end{align}
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Elemento-de-tres-nodos">Elemento de tres nodos<a class="anchor-link" href="#Elemento-de-tres-nodos">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Usando la fórmula para polinomios de Lagrange:</p>
+\begin{align}
+    \ell_{1} &= \frac{\xi - 0}{-1 - 0} \frac{\xi - 1}{-1 - 1} = -\frac{1}{2} \xi + \frac{1}{2} \xi^{2} \\
+    \ell_{1}^{\prime} &= -\frac{1}{2} + \xi \\
+    \ell_{2} &= \frac{\xi - (-1)}{0 - (-1)} \frac{\xi - 1}{0 - 1} = 1 - \xi^{2} \\
+    \ell_{2}^{\prime} &= - 2 \xi \\
+    \ell_{3} &= \frac{\xi - 0}{1 - 0} \frac{\xi - 1}{1 - 1} = \frac{1}{2} \xi + \frac{1}{2} \xi^{2} \\
+    \ell_{3}^{\prime} &= \frac{1}{2} + \xi
+\end{align}<p>Usando la fórmula para polinomios de Hermite:</p>
+\begin{align}
+    H_{01} &= \bigg\{ 1 - 2 \bigg[ -\frac{1}{2} + (-1) \bigg] [\xi - (-1)] \bigg\} \bigg( -\frac{1}{2} \xi + \frac{1}{2} \xi^{2} \bigg)^{2} = \frac{1}{4} \xi^{2} (3 \xi + 4) (\xi - 1)^{2} \\
+    H_{11} &= [\xi - (-1)] \bigg( -\frac{1}{2} \xi + \frac{1}{2} \xi^{2} \bigg)^{2} = \frac{1}{4} \xi^{2} (\xi + 1) (\xi - 1)^{2} \\
+    H_{02} &= \bigg\{ 1 - 2 \bigg[ - 2 (0) \bigg] (\xi - 0) \bigg\} \bigg( 1 - \xi^{2} \bigg)^{2} = (\xi - 1)^{2} (\xi + 1)^{2} \\
+    H_{12} &= (\xi - 0) \bigg( 1 - \xi^{2} \bigg)^{2} = \xi (\xi - 1)^{2} (\xi + 1)^{2} \\
+    H_{03} &= \bigg\{ 1 - 2 \bigg[ \frac{1}{2} + (1) \bigg] \bigg\} \bigg( \frac{1}{2} \xi + \frac{1}{2} \xi^{2} \bigg)^{2} = -\frac{1}{4} \xi^{2} (3 \xi - 4) (\xi + 1)^{2} \\
+    H_{13} &= [\xi - (1)] \bigg( \frac{1}{2} \xi + \frac{1}{2} \xi^{2} \bigg)^{2} = \frac{1}{4} \xi^{2} (\xi - 1) (\xi + 1)^{2}
+\end{align}
 </div>
 </div>
 </div>

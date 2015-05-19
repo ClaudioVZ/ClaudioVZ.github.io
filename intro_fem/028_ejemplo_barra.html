@@ -3,7 +3,7 @@
 <head>
 
 <meta charset="utf-8" />
-<title>024_coordenadas_naturales</title>
+<title>028_ejemplo_barra</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -177,7 +177,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Elementos-viga-Euler-Bernoulli">Elementos viga Euler-Bernoulli<a class="anchor-link" href="#Elementos-viga-Euler-Bernoulli">&#182;</a></h1>
+<h1 id="Ejemplo-1">Ejemplo 1<a class="anchor-link" href="#Ejemplo-1">&#182;</a></h1>
 </div>
 </div>
 </div>
@@ -186,124 +186,37 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Elemento-de-dos-nodos">Elemento de dos nodos<a class="anchor-link" href="#Elemento-de-dos-nodos">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
+<p>$L = 40 \ \text{cm}$, $A_{1} = 16 \ \text{cm}^{2}$, $A_{2} = 25 \ \text{cm}^{2}$ y $E = 2000 \ \text{Kg}/\text{cm}^{2}$</p>
 \begin{equation}
-    v = \alpha_{0} + \alpha_{1} \xi + \alpha_{2} \xi^{2} + \alpha_{3} \xi^{3} =
-    \begin{bmatrix}
-        1 & \xi & \xi^{2} & \xi^{3}
-    \end{bmatrix}
-    \begin{bmatrix}
-        \alpha_{0} \\
-        \alpha_{1} \\
-        \alpha_{2} \\
-        \alpha_{3}
-    \end{bmatrix}
-\end{equation}<p>reemplazando los valores $\xi_{1} = -1$ y $\xi_{2} = 1$</p>
-\begin{align}
-    \alpha_{0} + \alpha_{1} (-1) + \alpha_{2} (-1)^{2} + \alpha_{3} (-1)^{3} &= v_{1} \\
-    \alpha_{1} + 2 \alpha_{2} (-1) + 3 \alpha_{3} (-1)^{2} &= \theta_{1} \\
-    \alpha_{0} + \alpha_{1} (1) + \alpha_{2} (1)^{2} + \alpha_{3} (1)^{3} &= v_{2} \\
-    \alpha_{1} + 2 \alpha_{2} (1) + 3 \alpha_{3} (1)^{2} &= \theta_{2}
-\end{align}<p>simplificando</p>
-\begin{align}
-    \alpha_{0} - \alpha_{1} + \alpha_{2} - \alpha_{3} &= v_{1} \\
-    \alpha_{1} - 2 \alpha_{2} + 3 \alpha_{3} &= \theta_{1} \\
-    \alpha_{0} + \alpha_{1} + \alpha_{2} + \alpha_{3} &= v_{2} \\
-    \alpha_{1} + 2 \alpha_{2} + 3 \alpha_{3} &= \theta_{2}
-\end{align}<p>en forma matricial</p>
+    A(x) = 25 - \frac{9}{40} x
+\end{equation}<p>la función que interpola la geometría es</p>
 \begin{equation}
-    \begin{bmatrix}
-        1 & -1 & 1 & -1 \\
-        0 & 1 & -2 & 3 \\
-        1 & 1 & 1 & 1 \\
-        0 & 1 & 2 & 3
-    \end{bmatrix}
-    \begin{bmatrix}
-        \alpha_{0} \\
-        \alpha_{1} \\
-        \alpha_{2} \\
-        \alpha_{3}
-    \end{bmatrix} =
-    \begin{bmatrix}
-        v_{1} \\
-        \theta_{1} \\
-        v_{2} \\
-        \theta_{2}
-    \end{bmatrix}
-\end{equation}<p>resolviendo</p>
-\begin{equation}
-    \begin{bmatrix}
-        \alpha_{0} \\
-        \alpha_{1} \\
-        \alpha_{2} \\
-        \alpha_{3}
-    \end{bmatrix} =
-    \begin{bmatrix}
-        \frac{1}{2} & \frac{1}{4} & \frac{1}{2} & -\frac{1}{4} \\
-        -\frac{3}{4} & -\frac{1}{4} & \frac{3}{4} & -\frac{1}{4} \\
-        0 & -\frac{1}{4} & 0 & \frac{1}{4} \\
-        \frac{1}{4} & \frac{1}{4} & -\frac{1}{4} & \frac{1}{4}
-    \end{bmatrix}
-    \begin{bmatrix}
-        v_{1} \\
-        \theta_{1} \\
-        v_{2} \\
-        \theta_{2}
-    \end{bmatrix}
+    x = \bigg( \frac{1}{2} - \frac{1}{2} \xi \bigg) x_{1} + \bigg( \frac{1}{2} + \frac{1}{2} \xi \bigg) x_{2}
 \end{equation}<p>reemplazando</p>
 \begin{equation}
-    v =
-    \begin{bmatrix}
-        1 & \xi & \xi^{2} & \xi^{3}
-    \end{bmatrix}
-    \begin{bmatrix}
-        \alpha_{0} \\
-        \alpha_{1} \\
-        \alpha_{2} \\
-        \alpha_{3}
-    \end{bmatrix} =
-    \begin{bmatrix}
-        1 & \xi & \xi^{2} & \xi^{3}
-    \end{bmatrix}
-    \begin{bmatrix}
-        \frac{1}{2} & \frac{1}{4} & \frac{1}{2} & -\frac{1}{4} \\
-        -\frac{3}{4} & -\frac{1}{4} & \frac{3}{4} & -\frac{1}{4} \\
-        0 & -\frac{1}{4} & 0 & \frac{1}{4} \\
-        \frac{1}{4} & \frac{1}{4} & -\frac{1}{4} & \frac{1}{4}
-    \end{bmatrix}
-    \begin{bmatrix}
-        v_{1} \\
-        \theta_{1} \\
-        v_{2} \\
-        \theta_{2}
-    \end{bmatrix} =
-    \begin{bmatrix}
-        \frac{1}{4} (\xi + 2) (\xi - 1)^{2} &
-        \frac{1}{4} (\xi + 1) (\xi - 1)^{2} &
-        -\frac{1}{4} (\xi - 2) (\xi + 1)^{2} &
-        \frac{1}{4} (\xi - 1) (\xi + 1)^{2}
-    \end{bmatrix}
-    \begin{bmatrix}
-        v_{1} \\
-        \theta_{1} \\
-        v_{2} \\
-        \theta_{2}
-    \end{bmatrix}
-\end{equation}<p>Reescribiendo $v$:</p>
+    A(\xi) = 25 - \frac{9}{40} \bigg[ \bigg( \frac{1}{2} - \frac{1}{2} \xi \bigg) x_{1} + \bigg( \frac{1}{2} + \frac{1}{2} \xi \bigg) x_{2} \bigg]
+\end{equation}<p>agrupando</p>
 \begin{equation}
-    v = \bigg[ \frac{1}{4} (\xi + 2) (\xi - 1)^{2} \bigg] v_{1} +
-    \bigg[ \frac{1}{4} (\xi + 1) (\xi - 1)^{2} \bigg] \theta_{1} +
-    \bigg[ -\frac{1}{4} (\xi - 2) (\xi + 1)^{2} \bigg] v_{2} +
-    \bigg[ \frac{1}{4} (\xi - 1) (\xi + 1)^{2} \bigg] \theta_{2} =
-    N_{1} v_{1} + N_{2} \theta_{1} + N_{3} v_{2} + N_{4} \theta_{2}
+    A(\xi) = 25 - \frac{9}{40} \bigg[ \frac{x_{1} + x_{2}}{2} + \bigg( \frac{x_{2} - x_{1}}{2} \bigg) \xi \bigg]
+\end{equation}<p>reemplazando $x_{2} - x_{1} = l$ y $x_{1} + x_{2} = (2 n + 1) l$</p>
+\begin{equation}
+    A(\xi) = 25 - \frac{9}{40} \bigg[ \frac{(2 n + 1) l}{2} + \frac{l}{2} \xi \bigg]
+\end{equation}<p>donde $l$ es la longitud del elemento y $n = 0, 1, 2, \ldots$; las funciones de forma son</p>
+\begin{equation}
+    N =
+    \begin{bmatrix}
+        \frac{1}{2} - \frac{1}{2} \xi & \frac{1}{2} + \frac{1}{2} \xi
+    \end{bmatrix}
+\end{equation}<p>deformaciones</p>
+\begin{equation}
+    B = \frac{d N}{d x} = \frac{d N}{d \xi} \frac{d \xi}{d x} =
+    \begin{bmatrix}
+        -\frac{1}{2} & \frac{1}{2}
+    \end{bmatrix}
+    \frac{2}{l} =
+    \begin{bmatrix}
+        -\frac{1}{l} & \frac{1}{l}
+    \end{bmatrix}
 \end{equation}
 </div>
 </div>
@@ -313,7 +226,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Elemento-de-tres-nodos">Elemento de tres nodos<a class="anchor-link" href="#Elemento-de-tres-nodos">&#182;</a></h3>
+<h3 id="Un-elemento-de-dos-nodos">Un elemento de dos nodos<a class="anchor-link" href="#Un-elemento-de-dos-nodos">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -323,144 +236,90 @@ div#notebook {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 \begin{equation}
-    v = \alpha_{0} + \alpha_{1} \xi + \alpha_{2} \xi^{2} + \alpha_{3} \xi^{3} + \alpha_{4} \xi^{4} + \alpha_{5} \xi^{5} =
-    \begin{bmatrix}
-        1 & \xi & \xi^{2} & \xi^{3} & \xi^{4} & \xi^{5}
-    \end{bmatrix}
-    \begin{bmatrix}
-        \alpha_{0} \\
-        \alpha_{1} \\
-        \alpha_{2} \\
-        \alpha_{3} \\
-        \alpha_{4} \\
-        \alpha_{5}
-    \end{bmatrix}
-\end{equation}<p>reemplazando los valores $\xi_{1} = -1$, $\xi_{2} = 0$ y $\xi_{3} = 1$</p>
-\begin{align}
-    \alpha_{0} + \alpha_{1} (-1) + \alpha_{2} (-1)^{2} + \alpha_{3} (-1)^{3} + \alpha_{4} (-1)^{4} + \alpha_{5} (-1)^{5} &= v_{1} \\
-    \alpha_{1} + 2 \alpha_{2} (-1) + 3 \alpha_{3} (-1)^{2} + 4 \alpha_{4} (-1)^{3} + 5 \alpha_{5} (-1)^{4} &= \theta_{1} \\
-    \alpha_{0} + \alpha_{1} (0) + \alpha_{2} (0)^{2} + \alpha_{3} (0)^{3} + \alpha_{4} (0)^{4} + \alpha_{5} (0)^{5} &= v_{2} \\
-    \alpha_{1} + 2 \alpha_{2} (0) + 3 \alpha_{3} (0)^{2} + 4 \alpha_{4} (0)^{3} + 5 \alpha_{5} (0)^{4} &= \theta_{2} \\
-    \alpha_{0} + \alpha_{1} (1) + \alpha_{2} (1)^{2} + \alpha_{3} (1)^{3} + \alpha_{4} (1)^{4} + \alpha_{5} (1)^{5} &= v_{3} \\
-    \alpha_{1} + 2 \alpha_{2} (1) + 3 \alpha_{3} (1)^{2} + 4 \alpha_{4} (1)^{3} + 5 \alpha_{5} (1)^{4} &= \theta_{3}
-\end{align}<p>simplificando</p>
-\begin{align}
-    \alpha_{0} - \alpha_{1} + \alpha_{2} - \alpha_{3} + \alpha_{4} - \alpha_{5} &= v_{1} \\
-    \alpha_{1} - 2 \alpha_{2} + 3 \alpha_{3} - 4 \alpha_{4} + 5 \alpha_{5} &= \theta_{1} \\
-    \alpha_{0} &= v_{2} \\
-    \alpha_{1} &= \theta_{2} \\
-    \alpha_{0} + \alpha_{1} + \alpha_{2} + \alpha_{3} + \alpha_{4} + \alpha_{5} &= v_{3} \\
-    \alpha_{1} + 2 \alpha_{2} + 3 \alpha_{3} + 4 \alpha_{4} + 5 \alpha_{5} &= \theta_{3}
-\end{align}<p>en forma matricial</p>
+    \int_{-1}^{+1} B^{T} D \ B \ J \ d\xi \ u = \int_{-1}^{+1} q \ N^{T} J \ d\xi + f
+\end{equation}<p>para $l = 40$ y $n = 0$</p>
 \begin{equation}
-    \begin{bmatrix}
-        1 & -1 & 1 & -1 & 1 & -1 \\
-        0 & 1 & -2 & 3 & -4 & 5 \\
-        1 & 0 & 0 & 0 & 0 & 0 \\
-        0 & 1 & 0 & 0 & 0 & 0 \\
-        1 & 1 & 1 & 1 & 1 & 1 \\
-        0 & 1 & 2 & 3 & 4 & 5
-    \end{bmatrix}
-    \begin{bmatrix}
-        \alpha_{0} \\
-        \alpha_{1} \\
-        \alpha_{2} \\
-        \alpha_{3} \\
-        \alpha_{4} \\
-        \alpha_{5}
-    \end{bmatrix} =
-    \begin{bmatrix}
-        v_{1} \\
-        \theta_{1} \\
-        v_{2} \\
-        \theta_{2} \\
-        v_{3} \\
-        \theta_{3}
-    \end{bmatrix}
-\end{equation}<p>resolviendo</p>
+    A(\xi) = \frac{41}{2} - \frac{9}{2} \xi
+\end{equation}<p>desplazamientos</p>
 \begin{equation}
+    N =
     \begin{bmatrix}
-        \alpha_{0} \\
-        \alpha_{1} \\
-        \alpha_{2} \\
-        \alpha_{3} \\
-        \alpha_{4} \\
-        \alpha_{5}
-    \end{bmatrix} =
-    \begin{bmatrix}
-        0 & 0 & 1 & 0 & 0 & 0 \\
-        0 & 0 & 0 & 1 & 0 & 0 \\
-        1 & \frac{1}{4} & -2 & 0 & 1 & -\frac{1}{4} \\
-        -\frac{5}{4} & -\frac{1}{4} & 0 & -2 & \frac{5}{4} & -\frac{1}{4} \\
-        -\frac{1}{2} & -\frac{1}{4} & 1 & 0 & -\frac{1}{2} & \frac{1}{4} \\
-        \frac{3}{4} & \frac{1}{4} & 0 & 1 & -\frac{3}{4} & \frac{1}{4}
+        \frac{1}{2} - \frac{1}{2} \xi & \frac{1}{2} + \frac{1}{2} \xi
     \end{bmatrix}
+\end{equation}<p>deformaciones</p>
+\begin{equation}
+    B =
     \begin{bmatrix}
-        v_{1} \\
-        \theta_{1} \\
-        v_{2} \\
-        \theta_{2} \\
-        v_{3} \\
-        \theta_{3}
+        -\frac{1}{40} & \frac{1}{40}
     \end{bmatrix}
+\end{equation}<p>matriz constitutiva</p>
+\begin{equation}
+    D = E A = 41000 - 9000 \xi
+\end{equation}<p>jacobiano</p>
+\begin{equation}
+    J = \frac{dx}{d\xi} = \frac{l}{2} = \frac{40}{2} = 20
 \end{equation}<p>reemplazando</p>
 \begin{equation}
-    v =
+    \int_{-1}^{+1}
     \begin{bmatrix}
-        1 & \xi & \xi^{2} & \xi^{3} & \xi^{4} & \xi^{5}
+        -\frac{1}{40} \\
+        \frac{1}{40}
     \end{bmatrix}
     \begin{bmatrix}
-        \alpha_{0} \\
-        \alpha_{1} \\
-        \alpha_{2} \\
-        \alpha_{3} \\
-        \alpha_{4} \\
-        \alpha_{5}
+        41000 - 9000 \xi
+    \end{bmatrix}
+    \begin{bmatrix}
+        -\frac{1}{40} & \frac{1}{40}
+    \end{bmatrix} 20 \ d\xi
+    \begin{bmatrix}
+    0 \\
+    u_{2}
     \end{bmatrix} =
     \begin{bmatrix}
-        1 & \xi & \xi^{2} & \xi^{3} & \xi^{4} & \xi^{5}
+    F_{1} \\
+    -300
     \end{bmatrix}
-    \begin{bmatrix}
-        0 & 0 & 1 & 0 & 0 & 0 \\
-        0 & 0 & 0 & 1 & 0 & 0 \\
-        1 & \frac{1}{4} & -2 & 0 & 1 & -\frac{1}{4} \\
-        -\frac{5}{4} & -\frac{1}{4} & 0 & -2 & \frac{5}{4} & -\frac{1}{4} \\
-        -\frac{1}{2} & -\frac{1}{4} & 1 & 0 & -\frac{1}{2} & \frac{1}{4} \\
-        \frac{3}{4} & \frac{1}{4} & 0 & 1 & -\frac{3}{4} & \frac{1}{4}
-    \end{bmatrix}
-    \begin{bmatrix}
-        v_{1} \\
-        \theta_{1} \\
-        v_{2} \\
-        \theta_{2} \\
-        v_{3} \\
-        \theta_{3}
-    \end{bmatrix} =
-    \begin{bmatrix}
-        \frac{1}{4} \xi^{2} (3 \xi + 4) (\xi - 1)^{2} &
-        \frac{1}{4} \xi^{2} (\xi + 1) (\xi - 1)^{2} &
-        (\xi - 1)^{2} (\xi + 1)^{2} &
-        \xi (\xi - 1)^{2} (\xi + 1)^{2} &
-        -\frac{1}{4} \xi^{2} (3 \xi - 4) (\xi + 1)^{2} &
-        \frac{1}{4} \xi^{2} (\xi - 1) (\xi + 1)^{2}
-    \end{bmatrix}
-    \begin{bmatrix}
-        v_{1} \\
-        \theta_{1} \\
-        v_{2} \\
-        \theta_{2} \\
-        v_{3} \\
-        \theta_{3}
-    \end{bmatrix}
-\end{equation}<p>Reescribiendo $v$:</p>
+\end{equation}<p>integrando y sumando</p>
 \begin{equation}
-    v = \bigg[ \frac{1}{4} \xi^{2} (3 \xi + 4) (\xi - 1)^{2} \bigg] v_{1} +
-    \bigg[ \frac{1}{4} \xi^{2} (\xi + 1) (\xi - 1)^{2} \bigg] \theta_{1} +
-    \bigg[ (\xi - 1)^{2} (\xi + 1)^{2} \bigg] v_{2} +
-    \bigg[ \xi (\xi - 1)^{2} (\xi + 1)^{2} \bigg] \theta_{2} +
-    \bigg[ -\frac{1}{4} \xi^{2} (3 \xi - 4) (\xi + 1)^{2} \bigg] v_{3} +
-    \bigg[ \frac{1}{4} \xi^{2} (\xi - 1) (\xi + 1)^{2} \bigg] \theta_{3} =
-    N_{1} v_{1} + N_{2} \theta_{1} + N_{3} v_{2} + N_{4} \theta_{2} + N_{5} v_{3} + N_{6} \theta_{3}
+    \begin{bmatrix}
+        1025 & -1025 \\
+        -1025 & 1025
+    \end{bmatrix}
+    \begin{bmatrix}
+    0 \\
+    u_{2}
+    \end{bmatrix} =
+    \begin{bmatrix}
+    F_{1} \\
+    -300
+    \end{bmatrix}
+\end{equation}<p>resolviendo</p>
+\begin{align}
+    F_{1} &= 300 \ \text{Kg} \\
+    u_{2} &= -0.293 \ \text{cm}
+\end{align}<p>desplazamientos</p>
+\begin{equation}
+    u = N u =
+    \begin{bmatrix}
+        \frac{1}{2} - \frac{1}{2} \xi & \frac{1}{2} + \frac{1}{2} \xi
+    \end{bmatrix}
+    \begin{bmatrix}
+    0 \\
+    -0.293
+    \end{bmatrix} = ???
+\end{equation}<p>deformación normal</p>
+\begin{equation}
+    \varepsilon = B u =
+    \begin{bmatrix}
+        -\frac{1}{40} & \frac{1}{40}
+    \end{bmatrix}
+    \begin{bmatrix}
+    0 \\
+    -0.293
+    \end{bmatrix} = -0.007325
+\end{equation}<p>esfuerzo normal</p>
+\begin{equation}
+    \sigma = E \varepsilon = -14.65 \ \text{Kg}/\text{cm}^{2}
 \end{equation}
 </div>
 </div>
@@ -470,7 +329,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Elementos-viga-Euler-Bernoulli-de-mayor-grado-polinomial">Elementos viga Euler-Bernoulli de mayor grado polinomial<a class="anchor-link" href="#Elementos-viga-Euler-Bernoulli-de-mayor-grado-polinomial">&#182;</a></h3>
+<h3 id="Dos-elementos-de-dos-nodos">Dos elementos de dos nodos<a class="anchor-link" href="#Dos-elementos-de-dos-nodos">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -479,77 +338,356 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Los elementos de mayor grado pueden obtenerse mediante polinomios de Hermite:</p>
+\begin{equation}
+    \int_{-1}^{+1} B^{T} D \ B \ J \ d\xi \ u = \int_{-1}^{+1} q \ N^{T} J \ d\xi + f
+\end{equation}<p><strong>Elemento 1</strong></p>
+<p>para $l = 20$ y $n = 0$</p>
+\begin{equation}
+    A(\xi) = \frac{91}{4} - \frac{9}{4} \xi
+\end{equation}<p>desplazamientos</p>
+\begin{equation}
+    N =
+    \begin{bmatrix}
+        \frac{1}{2} - \frac{1}{2} \xi & \frac{1}{2} + \frac{1}{2} \xi
+    \end{bmatrix}
+\end{equation}<p>deformaciones</p>
+\begin{equation}
+    B =
+    \begin{bmatrix}
+        -\frac{1}{20} & \frac{1}{20}
+    \end{bmatrix}
+\end{equation}<p>matriz constitutiva</p>
+\begin{equation}
+    D = E A = 45500 - 4500 \xi
+\end{equation}<p>jacobiano</p>
+\begin{equation}
+    J = \frac{dx}{d\xi} = \frac{l}{2} = \frac{20}{2} = 10
+\end{equation}<p>reemplazando</p>
+\begin{equation}
+    \int_{-1}^{+1}
+    \begin{bmatrix}
+        -\frac{1}{20} \\
+        \frac{1}{20}
+    \end{bmatrix}
+    \begin{bmatrix}
+        45500 - 4500 \xi
+    \end{bmatrix}
+    \begin{bmatrix}
+        -\frac{1}{20} & \frac{1}{20}
+    \end{bmatrix} 10 \ d\xi
+    \begin{bmatrix}
+    0 \\
+    u_{2}
+    \end{bmatrix} =
+    \begin{bmatrix}
+    F_{1} \\
+    0
+    \end{bmatrix}
+\end{equation}<p>integrando y sumando</p>
+\begin{equation}
+    \begin{bmatrix}
+        2275 & -2275 \\
+        -2275 & 2275
+    \end{bmatrix}
+    \begin{bmatrix}
+    0 \\
+    u_{2}
+    \end{bmatrix} =
+    \begin{bmatrix}
+    F_{1} \\
+    0
+    \end{bmatrix}
+\end{equation}<p><strong>Elemento 2</strong></p>
+<p>para $l = 20$ y $n = 1$</p>
+\begin{equation}
+    A(\xi) = \frac{73}{4} - \frac{9}{4} \xi
+\end{equation}<p>desplazamientos</p>
+\begin{equation}
+    N =
+    \begin{bmatrix}
+        \frac{1}{2} - \frac{1}{2} \xi & \frac{1}{2} + \frac{1}{2} \xi
+    \end{bmatrix}
+\end{equation}<p>deformaciones</p>
+\begin{equation}
+    B =
+    \begin{bmatrix}
+        -\frac{1}{20} & \frac{1}{20}
+    \end{bmatrix}
+\end{equation}<p>matriz constitutiva</p>
+\begin{equation}
+    D = E A = 36500 - 4500 \xi
+\end{equation}<p>jacobiano</p>
+\begin{equation}
+    J = \frac{dx}{d\xi} = \frac{l}{2} = \frac{20}{2} = 10
+\end{equation}<p>reemplazando</p>
+\begin{equation}
+    \int_{-1}^{+1}
+    \begin{bmatrix}
+        -\frac{1}{20} \\
+        \frac{1}{20}
+    \end{bmatrix}
+    \begin{bmatrix}
+        36500 - 4500 \xi
+    \end{bmatrix}
+    \begin{bmatrix}
+        -\frac{1}{20} & \frac{1}{20}
+    \end{bmatrix} 10 \ d\xi
+    \begin{bmatrix}
+    u_{1} \\
+    u_{2}
+    \end{bmatrix} =
+    \begin{bmatrix}
+    0 \\
+    -300
+    \end{bmatrix}
+\end{equation}<p>integrando y sumando</p>
+\begin{equation}
+    \begin{bmatrix}
+        1825 & -1825 \\
+        -1825 & 1825
+    \end{bmatrix}
+    \begin{bmatrix}
+    u_{1} \\
+    u_{2}
+    \end{bmatrix} =
+    \begin{bmatrix}
+    0 \\
+    -300
+    \end{bmatrix}
+\end{equation}<p>ensamblando matriz global</p>
+\begin{equation}
+    \begin{bmatrix}
+        2275 & -2275 & 0 \\
+        -2275 & 2275+ 1825 & -1825 \\
+        0& -1825 & 1825
+    \end{bmatrix}
+    \begin{bmatrix}
+    0 \\
+    u_{2} \\
+    u_{3}
+    \end{bmatrix} =
+    \begin{bmatrix}
+    F_{1} \\
+    0 + 0 \\
+    -300
+    \end{bmatrix}
+\end{equation}<p>sumando</p>
+\begin{equation}
+    \begin{bmatrix}
+        2275 & -2275 & 0 \\
+        -2275 & 4100 & -1825 \\
+        0& -1825 & 1825
+    \end{bmatrix}
+    \begin{bmatrix}
+    0 \\
+    u_{2} \\
+    u_{3}
+    \end{bmatrix} =
+    \begin{bmatrix}
+    F_{1} \\
+    0 \\
+    -300
+    \end{bmatrix}
+\end{equation}<p>resolviendo</p>
 \begin{align}
-    H_{0i} &= [1 - 2 \ \ell_{(\xi_{i})}^{\prime} (\xi - \xi_{i})] [\ell_{(\xi)}]^{2} \\
-    H_{1i} &= (\xi - \xi_{i}) [\ell_{(\xi)}]^{2}
-\end{align}
+    F_{1} &= 300 \ \text{Kg} \\
+    u_{2} &= -0.132 \ \text{m} \\
+    u_{3} &= -0.296 \ \text{m}
+\end{align}<p><strong>Elemento 1</strong></p>
+<p>desplazamientos</p>
+\begin{equation}
+    u = N u =
+    \begin{bmatrix}
+        \frac{1}{2} - \frac{1}{2} \xi & \frac{1}{2} + \frac{1}{2} \xi
+    \end{bmatrix}
+    \begin{bmatrix}
+    0 \\
+    -0.132
+    \end{bmatrix} = ???
+\end{equation}<p>deformación normal</p>
+\begin{equation}
+    \varepsilon = B u =
+    \begin{bmatrix}
+        -\frac{1}{20} & \frac{1}{20}
+    \end{bmatrix}
+    \begin{bmatrix}
+    0 \\
+    -0.132
+    \end{bmatrix} = -0.0066
+\end{equation}<p>esfuerzo normal</p>
+\begin{equation}
+    \sigma = E \varepsilon = -13.2 \ \text{Kg}/\text{cm}^{2}
+\end{equation}<p><strong>Elemento 2</strong></p>
+<p>desplazamientos</p>
+\begin{equation}
+    u = N u =
+    \begin{bmatrix}
+        \frac{1}{2} - \frac{1}{2} \xi & \frac{1}{2} + \frac{1}{2} \xi
+    \end{bmatrix}
+    \begin{bmatrix}
+    -0.132 \\
+    -0.296
+    \end{bmatrix} = ???
+\end{equation}<p>deformación normal</p>
+\begin{equation}
+    \varepsilon = B u =
+    \begin{bmatrix}
+        -\frac{1}{20} & \frac{1}{20}
+    \end{bmatrix}
+    \begin{bmatrix}
+    -0.132 \\
+    -0.296
+    \end{bmatrix} = -0.0082
+\end{equation}<p>esfuerzo normal</p>
+\begin{equation}
+    \sigma = E \varepsilon = -16.4 \ \text{Kg}/\text{cm}^{2}
+\end{equation}
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Elemento-de-dos-nodos">Elemento de dos nodos<a class="anchor-link" href="#Elemento-de-dos-nodos">&#182;</a></h3>
+    <div class="input_area">
+<div class=" highlight hl-julia"><pre><span class="k">function</span><span class="nf"> f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[1]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>f (generic function with 1 method)</pre>
 </div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Usando la fórmula para polinomios de Lagrange:</p>
-\begin{align}
-    \ell_{1} &= \frac{\xi - 1}{-1 - 1} = \frac{1}{2} - \frac{1}{2} \xi \\
-    \ell_{1}^{\prime} &= - \frac{1}{2} \\
-    \ell_{2} &= \frac{\xi - (-1)}{1 - (-1)} = \frac{1}{2} + \frac{1}{2} \xi \\
-    \ell_{2}^{\prime} &= \frac{1}{2}
-\end{align}<p>Usando la fórmula para polinomios de Hermite:</p>
-\begin{align}
-    H_{01} &= \bigg\{ 1 - 2 \bigg[ -\frac{1}{2} \bigg] [\xi - (-1)] \bigg\} \bigg( \frac{1}{2} - \frac{1}{2} \xi \bigg)^{2} = \frac{1}{4} (\xi + 2) (\xi - 1)^{2} \\
-    H_{11} &= [\xi - (-1)] \bigg( \frac{1}{2} - \frac{1}{2} \xi \bigg)^{2} = \frac{1}{4} (\xi + 1) (\xi - 1)^{2} \\
-    H_{02} &= \bigg[ 1 - 2 \bigg( \frac{1}{2} \bigg) (\xi - 1) \bigg] \bigg( \frac{1}{2} + \frac{1}{2} \xi \bigg)^{2} = -\frac{1}{4} (\xi - 2) (\xi + 1)^{2} \\
-    H_{12} &= (\xi - 1) \bigg( \frac{1}{2} + \frac{1}{2} \xi \bigg)^{2} = \frac{1}{4} (\xi - 1) (\xi + 1)^{2}
-\end{align}
+    <div class="input_area">
+<div class=" highlight hl-julia"><pre><span class="n">quadgk</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">pi</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[2]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>0.521606959131886</pre>
 </div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Elemento-de-tres-nodos">Elemento de tres nodos<a class="anchor-link" href="#Elemento-de-tres-nodos">&#182;</a></h3>
+    <div class="input_area">
+<div class=" highlight hl-julia"><pre><span class="k">using</span> <span class="n">Polynomials</span>
+</pre></div>
+
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+
 </div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Usando la fórmula para polinomios de Lagrange:</p>
-\begin{align}
-    \ell_{1} &= \frac{\xi - 0}{-1 - 0} \frac{\xi - 1}{-1 - 1} = -\frac{1}{2} \xi + \frac{1}{2} \xi^{2} \\
-    \ell_{1}^{\prime} &= -\frac{1}{2} + \xi \\
-    \ell_{2} &= \frac{\xi - (-1)}{0 - (-1)} \frac{\xi - 1}{0 - 1} = 1 - \xi^{2} \\
-    \ell_{2}^{\prime} &= - 2 \xi \\
-    \ell_{3} &= \frac{\xi - 0}{1 - 0} \frac{\xi - 1}{1 - 1} = \frac{1}{2} \xi + \frac{1}{2} \xi^{2} \\
-    \ell_{3}^{\prime} &= \frac{1}{2} + \xi
-\end{align}<p>Usando la fórmula para polinomios de Hermite:</p>
-\begin{align}
-    H_{01} &= \bigg\{ 1 - 2 \bigg[ -\frac{1}{2} + (-1) \bigg] [\xi - (-1)] \bigg\} \bigg( -\frac{1}{2} \xi + \frac{1}{2} \xi^{2} \bigg)^{2} = \frac{1}{4} \xi^{2} (3 \xi + 4) (\xi - 1)^{2} \\
-    H_{11} &= [\xi - (-1)] \bigg( -\frac{1}{2} \xi + \frac{1}{2} \xi^{2} \bigg)^{2} = \frac{1}{4} \xi^{2} (\xi + 1) (\xi - 1)^{2} \\
-    H_{02} &= \bigg\{ 1 - 2 \bigg[ - 2 (0) \bigg] (\xi - 0) \bigg\} \bigg( 1 - \xi^{2} \bigg)^{2} = (\xi - 1)^{2} (\xi + 1)^{2} \\
-    H_{12} &= (\xi - 0) \bigg( 1 - \xi^{2} \bigg)^{2} = \xi (\xi - 1)^{2} (\xi + 1)^{2} \\
-    H_{03} &= \bigg\{ 1 - 2 \bigg[ \frac{1}{2} + (1) \bigg] \bigg\} \bigg( \frac{1}{2} \xi + \frac{1}{2} \xi^{2} \bigg)^{2} = -\frac{1}{4} \xi^{2} (3 \xi - 4) (\xi + 1)^{2} \\
-    H_{13} &= [\xi - (1)] \bigg( \frac{1}{2} \xi + \frac{1}{2} \xi^{2} \bigg)^{2} = \frac{1}{4} \xi^{2} (\xi - 1) (\xi + 1)^{2}
-\end{align}
+    <div class="input_area">
+<div class=" highlight hl-julia"><pre><span class="n">p</span> <span class="o">=</span> <span class="n">Poly</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">])</span>
+</pre></div>
+
 </div>
 </div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[4]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Poly(1.0 + 2.0x + 3.0x^2 + 4.0x^3 + 5.0x^4)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-julia"><pre><span class="nb">typeof</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[5]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Poly{Float64} (constructor with 1 method)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-julia"><pre>
+</pre></div>
+
+</div>
+</div>
+</div>
+
 </div>
 
     </div>

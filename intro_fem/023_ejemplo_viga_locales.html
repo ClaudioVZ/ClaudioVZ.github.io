@@ -3,7 +3,7 @@
 <head>
 
 <meta charset="utf-8" />
-<title>019_polinomios_hermite_locales</title>
+<title>023_ejemplo_viga_locales</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -177,270 +177,642 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Funciones-de-forma-para-elementos-viga">Funciones de forma para elementos viga<a class="anchor-link" href="#Funciones-de-forma-para-elementos-viga">&#182;</a></h1><h3 id="Elementos-de-dos-nodos">Elementos de dos nodos<a class="anchor-link" href="#Elementos-de-dos-nodos">&#182;</a></h3>\begin{equation}
-    v = N_{1} v_{1} + N_{2} \theta_{1} + N_{3} v_{2} + N_{4} \theta_{2}
-    = \sum_{i = 0}^{3} \alpha_{i} x^{i}
-    = \alpha_{0} + \alpha_{1} x + \alpha_{2} x^{2} + \alpha_{3} x^{3}
-\end{equation}<p>en forma matricial</p>
+<h1 id="Ejemplo-1">Ejemplo 1<a class="anchor-link" href="#Ejemplo-1">&#182;</a></h1><p>$L = 5 \ \text{m}$, $b = 200 \ \text{mm}$, $h = 300 \ \text{mm}$ y $E = 200 \ \text{GPa}$</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img align="left" src="imagenes/020_ejemplo_viga_1.svg"></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Un-elemento-de-dos-nodos">Un elemento de dos nodos<a class="anchor-link" href="#Un-elemento-de-dos-nodos">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img align="left" src="imagenes/020_ejemplo_viga_2.svg"></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 \begin{equation}
-    v = \alpha_{0} + \alpha_{1} x + \alpha_{2} x^{2} + \alpha_{3} x^{3} =
+    \int_{0}^{L} \boldsymbol{B^{T} D \ B} \ dx \ \boldsymbol{v}
+    = \int_{0}^{L} q \ \boldsymbol{N^{T}} dx + \boldsymbol{F}
+\end{equation}<p>interpolación de desplazamientos verticales</p>
+\begin{equation}
+    \boldsymbol{N} =
     \begin{bmatrix}
-        1 & x & x^{2} & x^{3}
+        1 - \frac{3}{25} x^{2} + \frac{2}{125} x^{3} &
+        x - \frac{2}{5} x^{2} + \frac{1}{25} x^{3} &
+        \frac{3}{25} x^{2} - \frac{2}{125} x^{3} &
+        -\frac{1}{5} x^{2} + \frac{1}{25} x^{3}
+    \end{bmatrix}
+\end{equation}<p>interpolación de curvatura</p>
+\begin{equation}
+    \boldsymbol{B} = \frac{d^{2} \boldsymbol{N}}{d x^{2}} =
+    \begin{bmatrix}
+        -\frac{6}{25} + \frac{12}{125} x &
+        -\frac{4}{5} + \frac{6}{25} x &
+        \frac{6}{25} - \frac{12}{125} x &
+        -\frac{2}{5} + \frac{6}{25} x
+    \end{bmatrix}
+\end{equation}<p>matriz constitutiva</p>
+\begin{equation}
+    \boldsymbol{D} = E I = 9 \times 10^{7} \ [\text{N} \cdot \text{m}^{2}]
+\end{equation}<p>reemplazando</p>
+\begin{equation}
+    \int_{0}^{5}
+    \begin{bmatrix}
+        -\frac{6}{25} + \frac{12}{125} x \\
+        -\frac{4}{5} + \frac{6}{25} x \\
+        \frac{6}{25} - \frac{12}{125} x \\
+        -\frac{2}{5} + \frac{6}{25} x
     \end{bmatrix}
     \begin{bmatrix}
-        \alpha_{0} \\
-        \alpha_{1} \\
-        \alpha_{2} \\
-        \alpha_{3}
+        9 \times 10^{7}
     \end{bmatrix}
-\end{equation}<p>la deformación angular es</p>
+    \begin{bmatrix}
+        -\frac{6}{25} + \frac{12}{125} x &
+        -\frac{4}{5} + \frac{6}{25} x &
+        \frac{6}{25} - \frac{12}{125} x &
+        -\frac{2}{5} + \frac{6}{25} x
+    \end{bmatrix} dx
+    \begin{bmatrix}
+    v_{1} \\
+    \theta_{1} \\
+    v_{2} \\
+    \theta_{2}
+    \end{bmatrix} = \int_{0}^{5} -12000
+    \begin{bmatrix}
+        1 - \frac{3}{25} x^{2} + \frac{2}{125} x^{3} \\
+        x - \frac{2}{5} x^{2} + \frac{1}{25} x^{3} \\
+        \frac{3}{25} x^{2} - \frac{2}{125} x^{3} \\
+        -\frac{1}{5} x^{2} + \frac{1}{25} x^{3}
+    \end{bmatrix} dx +
+    \begin{bmatrix}
+    F_{1} \\
+    M_{1} \\
+    F_{2} \\
+    M_{2}
+    \end{bmatrix}
+\end{equation}<p>integrando</p>
 \begin{equation}
-    \theta = \frac{d v}{ d x} = \alpha_{1} + 2 \alpha_{2} x + 3 \alpha_{3} x^{2}
-\end{equation}<p>reemplazando $x_{1} = 0$ y $x_{2} = L$</p>
+    \begin{bmatrix}
+        8.64 \times 10^{6} & 2.16 \times 10^{7} & -8.64 \times 10^{6} & 2.16 \times 10^{7} \\
+        2.16 \times 10^{7} & 7.2 \times 10^{7} & -2.16 \times 10^{7} & 3.6 \times 10^{7} \\
+        -8.64 \times 10^{6} & -2.16 \times 10^{7} & 8.64 \times 10^{6} & -2.16 \times 10^{7} \\
+        2.16 \times 10^{7} & 3.6 \times 10^{7} & -2.16 \times 10^{7} & 7.2 \times 10^{7}
+    \end{bmatrix}
+    \begin{bmatrix}
+    v_{1} \\
+    \theta_{1} \\
+    v_{2} \\
+    \theta_{2}
+    \end{bmatrix} =
+    \begin{bmatrix}
+        -30000 \\
+        -25000 \\
+        -30000 \\
+        25000
+    \end{bmatrix} + 
+    \begin{bmatrix}
+    F_{1} \\
+    M_{1} \\
+    F_{2} \\
+    M_{2}
+    \end{bmatrix}
+\end{equation}<p>reemplazando las condiciones de contorno</p>
+\begin{equation}
+    \begin{bmatrix}
+        8.64 \times 10^{6} & 2.16 \times 10^{7} & -8.64 \times 10^{6} & 2.16 \times 10^{7} \\
+        2.16 \times 10^{7} & 7.2 \times 10^{7} & -2.16 \times 10^{7} & 3.6 \times 10^{7} \\
+        -8.64 \times 10^{6} & -2.16 \times 10^{7} & 8.64 \times 10^{6} & -2.16 \times 10^{7} \\
+        2.16 \times 10^{7} & 3.6 \times 10^{7} & -2.16 \times 10^{7} & 7.2 \times 10^{7}
+    \end{bmatrix}
+    \begin{bmatrix}
+    0 \\
+    0 \\
+    v_{2} \\
+    \theta_{2}
+    \end{bmatrix} =
+    \begin{bmatrix}
+    -30000 \\
+    -25000 \\
+    -30000 \\
+    25000
+    \end{bmatrix} + 
+    \begin{bmatrix}
+    F_{1} \\
+    M_{1} \\
+    0 \\
+    0
+    \end{bmatrix}
+\end{equation}<p>sumando</p>
+\begin{equation}
+    \begin{bmatrix}
+        8.64 \times 10^{6} & 2.16 \times 10^{7} & -8.64 \times 10^{6} & 2.16 \times 10^{7} \\
+        2.16 \times 10^{7} & 7.2 \times 10^{7} & -2.16 \times 10^{7} & 3.6 \times 10^{7} \\
+        -8.64 \times 10^{6} & -2.16 \times 10^{7} & 8.64 \times 10^{6} & -2.16 \times 10^{7} \\
+        2.16 \times 10^{7} & 3.6 \times 10^{7} & -2.16 \times 10^{7} & 7.2 \times 10^{7}
+    \end{bmatrix}
+    \begin{bmatrix}
+    0 \\
+    0 \\
+    v_{2} \\
+    \theta_{2}
+    \end{bmatrix} =
+    \begin{bmatrix}
+    F_{1} - 30000 \\
+    M_{1} - 25000 \\
+    -30000 \\
+    25000
+    \end{bmatrix}
+\end{equation}<p>resolviendo</p>
 \begin{align}
-    \alpha_{0} + \alpha_{1} (0) + \alpha_{2} (0)^{2} + \alpha_{3} (0)^{3} &= v_{1} \\
-    \alpha_{1} + 2 \alpha_{2} (0) + 3 \alpha_{3} (0)^{2} &= \theta_{1} \\
-    \alpha_{0} + \alpha_{1} (L) + \alpha_{2} (L)^{2} + \alpha_{3} (L)^{3} &= v_{2} \\
-    \alpha_{1} + 2 \alpha_{2} (L) + 3 \alpha_{3} (L)^{2} &= \theta_{2}
-\end{align}<p>simplificando</p>
+    F_{1} &= 60000 \ [\text{N}] \\
+    M_{1} &= 150000 \ [\text{N} \cdot \text{m}] \\
+    v_{2} &= -1.04 \times 10^{-2} \ [\text{m}] \\
+    \theta_{2} &= -2.78 \times 10^{-3} \ [\text{rad}]
+\end{align}<h3 id="Desplazamientos,-deformaciones,-esfuerzos,-etc.">Desplazamientos, deformaciones, esfuerzos, etc.<a class="anchor-link" href="#Desplazamientos,-deformaciones,-esfuerzos,-etc.">&#182;</a></h3><p>Las funciones de forma en coordenadas locales se transforman a coordenadas globales usando:</p>
+\begin{equation}
+    x = X - x_{0}
+\end{equation}<p>desplazamientos verticales</p>
+\begin{equation}
+    v = \boldsymbol{N \ v} =
+    \begin{bmatrix}
+        1 - \frac{3}{25} (X - 0)^{2} + \frac{2}{125} (X - 0)^{3} &
+        (X - 0) - \frac{2}{5} (X - 0)^{2} + \frac{1}{25} (X - 0)^{3} &
+        \frac{3}{25} (X - 0)^{2} - \frac{2}{125} (X - 0)^{3} &
+        -\frac{1}{5} (X - 0)^{2} + \frac{1}{25} (X - 0)^{3}
+    \end{bmatrix}
+    \begin{bmatrix}
+    0 \\
+    0 \\
+    -1.04 \times 10^{-2} \\
+    -2.78 \times 10^{-3} 
+    \end{bmatrix} = -\frac{1}{1440} X^{2} + \frac{1}{18000} X^{3} \ [\text{m}]
+\end{equation}<p>desplazamientos horizontales</p>
+\begin{equation}
+    u = y \frac{d v}{d x} =
+    0.15 \bigg[ -\frac{1}{720} X + \frac{1}{6000} X^{2} \bigg] =
+    -\frac{1}{4800} X + \frac{1}{40000} X^{2} \ [\text{m}]
+\end{equation}<p>deformación normal</p>
+\begin{equation}
+    \varepsilon_{x} = \frac{d u}{d x} =
+    -\frac{1}{4800} + \frac{1}{20000} X
+\end{equation}<p>momentos flectores</p>
+\begin{equation}
+    M = E I \frac{d^{2} v}{d x^{2}} =
+    -125000 + 30000 X \ [\text{N} \cdot \text{m}]
+\end{equation}<p>cortante</p>
+\begin{equation}
+    V = \frac{d M}{d x} =
+    30000 \ [\text{N}]
+\end{equation}<p>esfuerzo normal</p>
+\begin{equation}
+    \sigma_{x} = E \ \varepsilon_{x} = -\frac{125}{3} + 10 X \ [\text{MPa}]
+\end{equation}<p>esfuerzo cortante</p>
+\begin{equation}
+    \tau_{yz} = \frac{V Q}{I \ b} = 0.75 \ [\text{MPa}]
+\end{equation}
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Dos-elementos-de-dos-nodos">Dos elementos de dos nodos<a class="anchor-link" href="#Dos-elementos-de-dos-nodos">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img align="left" src="imagenes/020_ejemplo_viga_3.svg"></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+\begin{equation}
+    \int_{0}^{L} \boldsymbol{B^{T} D \ B} \ dx \ \boldsymbol{v}
+    = \int_{0}^{L} q \ \boldsymbol{N^{T}} dx + \boldsymbol{F}
+\end{equation}<p><strong>Elemento 1</strong></p>
+<p>interpolación de desplazamientos verticales</p>
+\begin{equation}
+    \boldsymbol{N} =
+    \begin{bmatrix}
+        1 - \frac{12}{25} x^{2} + \frac{16}{125} x^{3} &
+        x - \frac{4}{5} x^{2} + \frac{4}{25} x^{3} &
+        \frac{12}{25} x^{2} - \frac{16}{125} x^{3} &
+        -\frac{2}{5} x^{2} + \frac{4}{25} x^{3}
+    \end{bmatrix}
+\end{equation}<p>interpolación de curvatura</p>
+\begin{equation}
+    \boldsymbol{B} = \frac{d^{2} \boldsymbol{N}}{d x^{2}} =
+    \begin{bmatrix}
+        -\frac{24}{25} + \frac{96}{125} x &
+        -\frac{8}{5} + \frac{24}{25} x &
+        \frac{24}{25} - \frac{96}{125} x &
+        -\frac{4}{5} + \frac{24}{25} x
+    \end{bmatrix}
+\end{equation}<p>matriz constitutiva</p>
+\begin{equation}
+    \boldsymbol{D} = E I = 9 \times 10^{7} \ [\text{N} \cdot \text{m}^{2}]
+\end{equation}<p>reemplazando</p>
+\begin{equation}
+    \int_{0}^{2.5}
+    \begin{bmatrix}
+        -\frac{24}{25} + \frac{96}{125} x \\
+        -\frac{8}{5} + \frac{24}{25} x \\
+        \frac{24}{25} - \frac{96}{125} x \\
+        -\frac{4}{5} + \frac{24}{25} x
+    \end{bmatrix}
+    \begin{bmatrix}
+        9 \times 10^{7}
+    \end{bmatrix}
+    \begin{bmatrix}
+        -\frac{24}{25} + \frac{96}{125} x &
+        -\frac{8}{5} + \frac{24}{25} x &
+        \frac{24}{25} - \frac{96}{125} x &
+        -\frac{4}{5} + \frac{24}{25} x
+    \end{bmatrix} dx
+    \begin{bmatrix}
+    v_{1} \\
+    \theta_{1} \\
+    v_{2} \\
+    \theta_{2}
+    \end{bmatrix} = \int_{0}^{2.5} -12000
+    \begin{bmatrix}
+        1 - \frac{12}{25} x^{2} + \frac{16}{125} x^{3} \\
+        x - \frac{4}{5} x^{2} + \frac{4}{25} x^{3} \\
+        \frac{12}{25} x^{2} - \frac{16}{125} x^{3} \\
+        -\frac{2}{5} x^{2} + \frac{4}{25} x^{3}
+    \end{bmatrix} dx +
+    \begin{bmatrix}
+    F_{1} \\
+    M_{1} \\
+    F_{2} \\
+    M_{2}
+    \end{bmatrix}
+\end{equation}<p>integrando</p>
+\begin{equation}
+    \begin{bmatrix}
+        6.91 \times 10^{7} & 8.64 \times 10^{7} & -6.91 \times 10^{7} & 8.64 \times 10^{7} \\
+        8.64 \times 10^{7} & 1.44 \times 10^{8} & -8.64 \times 10^{7} & 7.2 \times 10^{7} \\
+        -6.91 \times 10^{7} & -8.64 \times 10^{7} & 6.91 \times 10^{7} & -8.64 \times 10^{7} \\
+        8.64 \times 10^{7} & 7.2 \times 10^{7} & -8.64 \times 10^{7} & 1.44 \times 10^{8}
+    \end{bmatrix}
+    \begin{bmatrix}
+    v_{1} \\
+    \theta_{1} \\
+    v_{2} \\
+    \theta_{2}
+    \end{bmatrix} =
+    \begin{bmatrix}
+        -15000 \\
+        -6250 \\
+        -15000 \\
+        6250
+    \end{bmatrix} + 
+    \begin{bmatrix}
+    F_{1} \\
+    M_{1} \\
+    F_{2} \\
+    M_{2}
+    \end{bmatrix}
+\end{equation}<p><strong>Elemento 2</strong></p>
+<p>interpolación de desplazamientos verticales</p>
+\begin{equation}
+    \boldsymbol{N} =
+    \begin{bmatrix}
+        1 - \frac{12}{25} x^{2} + \frac{16}{125} x^{3} &
+        x - \frac{4}{5} x^{2} + \frac{4}{25} x^{3} &
+        \frac{12}{25} x^{2} - \frac{16}{125} x^{3} &
+        -\frac{2}{5} x^{2} + \frac{4}{25} x^{3}
+    \end{bmatrix}
+\end{equation}<p>interpolación de curvatura</p>
+\begin{equation}
+    \boldsymbol{B} = \frac{d^{2} \boldsymbol{N}}{d x^{2}} =
+    \begin{bmatrix}
+        -\frac{24}{25} + \frac{96}{125} x &
+        -\frac{8}{5} + \frac{24}{25} x &
+        \frac{24}{25} - \frac{96}{125} x &
+        -\frac{4}{5} + \frac{24}{25} x
+    \end{bmatrix}
+\end{equation}<p>matriz constitutiva</p>
+\begin{equation}
+    \boldsymbol{D} = E I = 9 \times 10^{7} \ [\text{N} \cdot \text{m}^{2}]
+\end{equation}<p>reemplazando</p>
+\begin{equation}
+    \int_{0}^{2.5}
+    \begin{bmatrix}
+        -\frac{24}{25} + \frac{96}{125} x \\
+        -\frac{8}{5} + \frac{24}{25} x \\
+        \frac{24}{25} - \frac{96}{125} x \\
+        -\frac{4}{5} + \frac{24}{25} x
+    \end{bmatrix}
+    \begin{bmatrix}
+        9 \times 10^{7}
+    \end{bmatrix}
+    \begin{bmatrix}
+        -\frac{24}{25} + \frac{96}{125} x &
+        -\frac{8}{5} + \frac{24}{25} x &
+        \frac{24}{25} - \frac{96}{125} x &
+        -\frac{4}{5} + \frac{24}{25} x
+    \end{bmatrix} dx
+    \begin{bmatrix}
+    v_{1} \\
+    \theta_{1} \\
+    v_{2} \\
+    \theta_{2}
+    \end{bmatrix} = \int_{0}^{2.5} -12000
+    \begin{bmatrix}
+        1 - \frac{12}{25} x^{2} + \frac{16}{125} x^{3} \\
+        x - \frac{4}{5} x^{2} + \frac{4}{25} x^{3} \\
+        \frac{12}{25} x^{2} - \frac{16}{125} x^{3} \\
+        -\frac{2}{5} x^{2} + \frac{4}{25} x^{3}
+    \end{bmatrix} dx +
+    \begin{bmatrix}
+    F_{1} \\
+    M_{1} \\
+    F_{2} \\
+    M_{2}
+    \end{bmatrix}
+\end{equation}<p>integrando</p>
+\begin{equation}
+    \begin{bmatrix}
+        6.91 \times 10^{7} & 8.64 \times 10^{7} & -6.91 \times 10^{7} & 8.64 \times 10^{7} \\
+        8.64 \times 10^{7} & 1.44 \times 10^{8} & -8.64 \times 10^{7} & 7.2 \times 10^{7} \\
+        -6.91 \times 10^{7} & -8.64 \times 10^{7} & 6.91 \times 10^{7} & -8.64 \times 10^{7} \\
+        8.64 \times 10^{7} & 7.2 \times 10^{7} & -8.64 \times 10^{7} & 1.44 \times 10^{8}
+    \end{bmatrix}
+    \begin{bmatrix}
+    v_{1} \\
+    \theta_{1} \\
+    v_{2} \\
+    \theta_{2}
+    \end{bmatrix} =
+    \begin{bmatrix}
+        -15000 \\
+        -6250 \\
+        -15000 \\
+        6250
+    \end{bmatrix} + 
+    \begin{bmatrix}
+    F_{1} \\
+    M_{1} \\
+    F_{2} \\
+    M_{2}
+    \end{bmatrix}
+\end{equation}<p><strong>Ensamblaje y solución</strong></p>
+<p>ensamblando matriz global</p>
+\begin{equation}
+    \begin{bmatrix}
+        6.91 \times 10^{7} & 8.64 \times 10^{7} & -6.91 \times 10^{7} & 8.64 \times 10^{7} & 0 & 0 \\
+        8.64 \times 10^{7} & 1.44 \times 10^{8} & -8.64 \times 10^{7} & 7.2 \times 10^{7} & 0 & 0 \\
+        -6.91 \times 10^{7} & -8.64 \times 10^{7} & 6.91 \times 10^{7} + 6.91 \times 10^{7} & 8.64 \times 10^{7} - 8.64 \times 10^{7} & -6.91 \times 10^{7} & 8.64 \times 10^{7} \\
+        8.64 \times 10^{7} & 7.2 \times 10^{7} & 8.64 \times 10^{7} - 8.64 \times 10^{7} & 1.44 \times 10^{8} + 1.44 \times 10^{8} & -8.64 \times 10^{7} & 7.2 \times 10^{7} \\
+        0 & 0 & -6.91 \times 10^{7} & -8.64 \times 10^{7} & 6.91 \times 10^{7} & -8.64 \times 10^{7} \\
+        0 & 0 & 8.64 \times 10^{7} & 7.2 \times 10^{7} & -8.64 \times 10^{7} & 1.44 \times 10^{8}
+    \end{bmatrix}
+    \begin{bmatrix}
+    v_{1} \\
+    \theta_{1} \\
+    v_{2} + v_{1} \\
+    \theta_{2} + \theta_{1} \\
+    v_{2} \\
+    \theta_{2}
+    \end{bmatrix} =
+    \begin{bmatrix}
+        -15000 \\
+        -6250 \\
+        -15000 - 15000 \\
+        6250 - 6250 \\
+        -15000 \\
+        6250
+    \end{bmatrix} + 
+    \begin{bmatrix}
+    F_{1} \\
+    M_{1} \\
+    F_{2} + F_{1} \\
+    M_{2} + M_{1} \\
+    F_{2} \\
+    M_{2}
+    \end{bmatrix}
+\end{equation}<p>sumando</p>
+\begin{equation}
+    \begin{bmatrix}
+        6.91 \times 10^{7} & 8.64 \times 10^{7} & -6.91 \times 10^{7} & 8.64 \times 10^{7} & 0 & 0 \\
+        8.64 \times 10^{7} & 1.44 \times 10^{8} & -8.64 \times 10^{7} & 7.2 \times 10^{7} & 0 & 0 \\
+        -6.91 \times 10^{7} & -8.64 \times 10^{7} & 1.38 \times 10^{8} & 0 & -6.91 \times 10^{7} & 8.64 \times 10^{7} \\
+        8.64 \times 10^{7} & 7.2 \times 10^{7} & 0 & 2.88 \times 10^{8} & -8.64 \times 10^{7} & 7.2 \times 10^{7} \\
+        0 & 0 & -6.91 \times 10^{7} & -8.64 \times 10^{7} & 6.91 \times 10^{7} & -8.64 \times 10^{7} \\
+        0 & 0 & 8.64 \times 10^{7} & 7.2 \times 10^{7} & -8.64 \times 10^{7} & 1.44 \times 10^{8}
+    \end{bmatrix}
+    \begin{bmatrix}
+    v_{1} \\
+    \theta_{1} \\
+    v_{2} \\
+    \theta_{2} \\
+    v_{3} \\
+    \theta_{3}
+    \end{bmatrix} =
+    \begin{bmatrix}
+        -15000 \\
+        -6250 \\
+        -30000 \\
+        0 \\
+        -15000 \\
+        6250
+    \end{bmatrix} + 
+    \begin{bmatrix}
+    F_{1} \\
+    M_{1} \\
+    F_{2} \\
+    M_{2} \\
+    F_{3} \\
+    M_{3}
+    \end{bmatrix}
+\end{equation}<p>reemplazando las condiciones de contorno</p>
+\begin{equation}
+    \begin{bmatrix}
+        6.91 \times 10^{7} & 8.64 \times 10^{7} & -6.91 \times 10^{7} & 8.64 \times 10^{7} & 0 & 0 \\
+        8.64 \times 10^{7} & 1.44 \times 10^{8} & -8.64 \times 10^{7} & 7.2 \times 10^{7} & 0 & 0 \\
+        -6.91 \times 10^{7} & -8.64 \times 10^{7} & 1.38 \times 10^{8} & 0 & -6.91 \times 10^{7} & 8.64 \times 10^{7} \\
+        8.64 \times 10^{7} & 7.2 \times 10^{7} & 0 & 2.88 \times 10^{8} & -8.64 \times 10^{7} & 7.2 \times 10^{7} \\
+        0 & 0 & -6.91 \times 10^{7} & -8.64 \times 10^{7} & 6.91 \times 10^{7} & -8.64 \times 10^{7} \\
+        0 & 0 & 8.64 \times 10^{7} & 7.2 \times 10^{7} & -8.64 \times 10^{7} & 1.44 \times 10^{8}
+    \end{bmatrix}
+    \begin{bmatrix}
+    0 \\
+    0 \\
+    v_{2} \\
+    \theta_{2} \\
+    v_{3} \\
+    \theta_{3}
+    \end{bmatrix} =
+    \begin{bmatrix}
+        -15000 \\
+        -6250 \\
+        -30000 \\
+        0 \\
+        -15000 \\
+        6250
+    \end{bmatrix} + 
+    \begin{bmatrix}
+    F_{1} \\
+    M_{1} \\
+    0 \\
+    0 \\
+    0 \\
+    0
+    \end{bmatrix}
+\end{equation}<p>sumando</p>
+\begin{equation}
+    \begin{bmatrix}
+        6.91 \times 10^{7} & 8.64 \times 10^{7} & -6.91 \times 10^{7} & 8.64 \times 10^{7} & 0 & 0 \\
+        8.64 \times 10^{7} & 1.44 \times 10^{8} & -8.64 \times 10^{7} & 7.2 \times 10^{7} & 0 & 0 \\
+        -6.91 \times 10^{7} & -8.64 \times 10^{7} & 1.38 \times 10^{8} & 0 & -6.91 \times 10^{7} & 8.64 \times 10^{7} \\
+        8.64 \times 10^{7} & 7.2 \times 10^{7} & 0 & 2.88 \times 10^{8} & -8.64 \times 10^{7} & 7.2 \times 10^{7} \\
+        0 & 0 & -6.91 \times 10^{7} & -8.64 \times 10^{7} & 6.91 \times 10^{7} & -8.64 \times 10^{7} \\
+        0 & 0 & 8.64 \times 10^{7} & 7.2 \times 10^{7} & -8.64 \times 10^{7} & 1.44 \times 10^{8}
+    \end{bmatrix}
+    \begin{bmatrix}
+    0 \\
+    0 \\
+    v_{2} \\
+    \theta_{2} \\
+    v_{3} \\
+    \theta_{3}
+    \end{bmatrix} = 
+    \begin{bmatrix}
+    F_{1} - 15000 \\
+    M_{1} - 6250 \\
+    -30000 \\
+    0 \\
+    -15000 \\
+    6250
+    \end{bmatrix}
+\end{equation}<p>resolviendo</p>
 \begin{align}
-    \alpha_{0} &= v_{1} \\
-    \alpha_{1} &= \theta_{1} \\
-    \alpha_{0} + L \alpha_{1} + L^{2} \alpha_{2} + L^{3} \alpha_{3} &= v_{2} \\
-    \alpha_{1} + 2 L \alpha_{2} + 3 L^{2} \alpha_{3} &= \theta_{2}
-\end{align}<p>en forma matricial</p>
+    F_{1} &= 60000 \ [\text{N}] \\
+    M_{1} &= 150000 \ [\text{N} \cdot \text{m}] \\
+    v_{2} &= -3.69 \times 10^{-3} \ [\text{m}] \\
+    \theta_{2} &= -2.43 \times 10^{-3} \ [\text{rad}] \\
+    v_{3} &= -1.04 \times 10^{-2} \ [\text{m}] \\
+    \theta_{3} &= -2.78 \times 10^{-3} \ [\text{rad}]
+\end{align}<h3 id="Desplazamientos,-deformaciones,-esfuerzos,-etc.">Desplazamientos, deformaciones, esfuerzos, etc.<a class="anchor-link" href="#Desplazamientos,-deformaciones,-esfuerzos,-etc.">&#182;</a></h3><p>Las funciones de forma en coordenadas locales se transforman a coordenadas globales usando:</p>
 \begin{equation}
+    x = X - x_{0}
+\end{equation}<p><strong>Elemento 1</strong></p>
+<p>desplazamientos verticales</p>
+\begin{equation}
+    v = \boldsymbol{N \ v} =
     \begin{bmatrix}
-    1 & 0 & 0 & 0 \\
-    0 & 1 & 0 & 0 \\
-    1 & L & L^{2} & L^{3} \\
-    0 & 1 & 2 L & 3 L^{2}
+        1 - \frac{12}{25} (X - 0)^{2} + \frac{16}{125} (X - 0)^{3} &
+        x - \frac{4}{5} (X - 0)^{2} + \frac{4}{25} (X - 0)^{3} &
+        \frac{12}{25} (X - 0)^{2} - \frac{16}{125} (X - 0)^{3} &
+        -\frac{2}{5} (X - 0)^{2} + \frac{4}{25} (X - 0)^{3}
     \end{bmatrix}
     \begin{bmatrix}
-        \alpha_{0} \\
-        \alpha_{1} \\
-        \alpha_{2} \\
-        \alpha_{3}
+    0 \\
+    0 \\
+    -3.69 \times 10^{-3} \\
+    -2.43 \times 10^{-3} 
+    \end{bmatrix} = -\frac{23}{28800} X^{2} + \frac{1}{12000} X^{3} \ [\text{m}]
+\end{equation}<p>desplazamientos horizontales</p>
+\begin{equation}
+    u = y \frac{d v}{d x} =
+    0.15 \bigg[ -\frac{23}{14400} X + \frac{1}{4000} X^{2} \bigg] =
+    -\frac{23}{96000} X + \frac{3}{80000} X^{2} \ [\text{m}]
+\end{equation}<p>deformación normal</p>
+\begin{equation}
+    \varepsilon_{x} = \frac{d u}{d x} =
+    -\frac{23}{96000} + \frac{3}{40000} X
+\end{equation}<p>momentos flectores</p>
+\begin{equation}
+    M = E I \frac{d^{2} v}{d x^{2}} =
+    -143750 + 45000 X \ [\text{N} \cdot \text{m}]
+\end{equation}<p>cortante</p>
+\begin{equation}
+    V = \frac{d M}{d x} =
+    45000 \ [\text{N}]
+\end{equation}<p>esfuerzo normal</p>
+\begin{equation}
+    \sigma_{x} = E \ \varepsilon_{x} = -\frac{575}{12} + 15 X \ [\text{MPa}]
+\end{equation}<p>esfuerzo cortante</p>
+\begin{equation}
+    \tau_{yz} = \frac{V Q}{I \ b} = 1.125 \ [\text{MPa}]
+\end{equation}<p><strong>Elemento 2</strong></p>
+<p>desplazamientos verticales</p>
+\begin{equation}
+    v = \boldsymbol{N \ v} =
+    \begin{bmatrix}
+        1 - \frac{12}{25} (X - 2.5)^{2} + \frac{16}{125} (X - 2.5)^{3} &
+        x - \frac{4}{5} (X - 2.5)^{2} + \frac{4}{25} (X - 2.5)^{3} &
+        \frac{12}{25} (X - 2.5)^{2} - \frac{16}{125} (X - 2.5)^{3} &
+        -\frac{2}{5} (X - 2.5)^{2} + \frac{4}{25} (X - 2.5)^{3}
+    \end{bmatrix}
+    \begin{bmatrix}
+    -3.69 \times 10^{-3} \\
+    -2.43 \times 10^{-3} \\
+    -1.04 \times 10^{-2} \\
+    -2.78 \times 10^{-3} 
     \end{bmatrix} =
-    \begin{bmatrix}
-        v_{1} \\
-        \theta_{1} \\
-        v_{2} \\
-        \theta_{2}
-    \end{bmatrix}
-\end{equation}<p>resolviendo el sistema</p>
+    \frac{1}{1152} - \frac{1}{960} X - \frac{11}{28800} X^{2} + \frac{1}{36000} X^{3} \ [\text{m}]
+\end{equation}<p>desplazamientos horizontales</p>
 \begin{equation}
-    \begin{bmatrix}
-        \alpha_{0} \\
-        \alpha_{1} \\
-        \alpha_{2} \\
-        \alpha_{3}
-    \end{bmatrix} =
-    \begin{bmatrix}
-        1 & 0 & 0 & 0 \\
-        0 & 1 & 0 & 0 \\
-        -\frac{3}{L^{2}} & -\frac{2}{L} & \frac{3}{L^{2}} & -\frac{1}{L} \\
-        \frac{2}{L^{3}} & \frac{1}{L^{2}} & -\frac{2}{L^{3}} & \frac{1}{L^{2}}
-    \end{bmatrix}
-    \begin{bmatrix}
-        v_{1} \\
-        \theta_{1} \\
-        v_{2} \\
-        \theta_{2}
-    \end{bmatrix}
-\end{equation}<p>reemplazando las incógnitas</p>
+    u = y \frac{d v}{d x} =
+    0.15 \bigg[ - \frac{1}{960} -\frac{11}{14400} X + \frac{1}{12000} X^{2} \bigg] =
+    -\frac{1}{6400} - \frac{11}{96000} X - \frac{1}{80000} X^{2} \ [\text{m}]
+\end{equation}<p>deformación normal</p>
 \begin{equation}
-    v =
-    \begin{bmatrix}
-        1 & x & x^{2} & x^{3}
-    \end{bmatrix}
-    \begin{bmatrix}
-        \alpha_{0} \\
-        \alpha_{1} \\
-        \alpha_{2} \\
-        \alpha_{3}
-    \end{bmatrix} =
-    \begin{bmatrix}
-        1 & x & x^{2} & x^{3}
-    \end{bmatrix}
-    \begin{bmatrix}
-        1 & 0 & 0 & 0 \\
-        0 & 1 & 0 & 0 \\
-        -\frac{3}{L^{2}} & -\frac{2}{L} & \frac{3}{L^{2}} & -\frac{1}{L} \\
-        \frac{2}{L^{3}} & \frac{1}{L^{2}} & -\frac{2}{L^{3}} & \frac{1}{L^{2}}
-    \end{bmatrix}
-    \begin{bmatrix}
-        v_{1} \\
-        \theta_{1} \\
-        v_{2} \\
-        \theta_{2}
-    \end{bmatrix} =
-    \begin{bmatrix}
-    1 - \frac{3}{L^{2}} x^{2} + \frac{2}{L^{3}} x^{3} &
-    x - \frac{2}{L} x^{2} + \frac{1}{L^{2}} x^{3} &
-    \frac{3}{L^{2}} x^{2} - \frac{2}{L^{3}} x^{3} &
-    -\frac{1}{L} x^{2} + \frac{1}{L^{2}} x^{3}
-    \end{bmatrix}
-    \begin{bmatrix}
-        v_{1} \\
-        \theta_{1} \\
-        v_{2} \\
-        \theta_{2}
-    \end{bmatrix}
-\end{equation}<p>Reescribiendo $v$</p>
+    \varepsilon_{x} = \frac{d u}{d x} =
+    -\frac{11}{96000} + \frac{1}{40000} X
+\end{equation}<p>momentos flectores</p>
 \begin{equation}
-    v = \bigg( 1 - \frac{3}{L^{2}} x^{2} + \frac{2}{L^{3}} x^{3} \bigg) v_{1}
-    + \bigg( x - \frac{2}{L} x^{2} + \frac{1}{L^{2}} x^{3} \bigg) \theta_{1}
-    + \bigg( \frac{3}{L^{2}} x^{2} - \frac{2}{L^{3}} x^{3} \bigg) v_{2}
-    + \bigg( -\frac{1}{L} x^{2} + \frac{1}{L^{2}} x^{3} \bigg) \theta_{2}
-    = N_{1} v_{1} + N_{2} \theta_{1} + N_{3} v_{2} + N_{4} \theta_{2}
-\end{equation}<h3 id="Elemento-de-tres-nodos">Elemento de tres nodos<a class="anchor-link" href="#Elemento-de-tres-nodos">&#182;</a></h3>\begin{equation}
-    v = N_{1} v_{1} + N_{2} \theta_{1} + N_{3} v_{2} + N_{4} \theta_{2} + N_{5} v_{3} + N_{6} \theta_{3}
-    = \sum_{i = 0}^{5} \alpha_{i} x^{i}
-    = \alpha_{0} + \alpha_{1} x + \alpha_{2} x^{2} + \alpha_{3} x^{3} + \alpha_{4} x^{4} + \alpha_{5} x^{5}
-\end{equation}<p>en forma matricial</p>
+    M = E I \frac{d^{2} v}{d x^{2}} =
+    -68750 + 15000 X \ [\text{N} \cdot \text{m}]
+\end{equation}<p>cortante</p>
 \begin{equation}
-    v = \alpha_{0} + \alpha_{1} x + \alpha_{2} x^{2} + \alpha_{3} x^{3} + \alpha_{4} x^{4} + \alpha_{5} x^{5} =
-    \begin{bmatrix}
-        1 & x & x^{2} & x^{3} & x^{4} & x^{5}
-    \end{bmatrix}
-    \begin{bmatrix}
-        \alpha_{0} \\
-        \alpha_{1} \\
-        \alpha_{2} \\
-        \alpha_{3} \\
-        \alpha_{4} \\
-        \alpha_{5}
-    \end{bmatrix}
-\end{equation}<p>la deformación angular es</p>
+    V = \frac{d M}{d x} =
+    15000 \ [\text{N}]
+\end{equation}<p>esfuerzo normal</p>
 \begin{equation}
-    \theta = \frac{d v}{ d x} = \alpha_{1} + 2 \alpha_{2} x + 3 \alpha_{3} x^{2} + 4 \alpha_{4} x^{3} + 5 \alpha_{5} x^{4}
-\end{equation}<p>reemplazando $x_{1} = 0$, $x_{2} = \frac{L}{2}$ y $x_{3} = L$</p>
-\begin{align}
-    \alpha_{0} + \alpha_{1} (0) + \alpha_{2} (0)^{2} + \alpha_{3} (0)^{3} + \alpha_{4} (0)^{4} + \alpha_{5} (0)^{5} &= v_{1} \\
-    \alpha_{1} + 2 \alpha_{2} (0) + 3 \alpha_{3} (0)^{2} + 4 \alpha_{4} (0)^{3} + 5 \alpha_{5} (0)^{4} &= \theta_{1} \\
-    \alpha_{0} + \alpha_{1} \bigg( \frac{L}{2} \bigg) + \alpha_{2} \bigg( \frac{L}{2} \bigg)^{2} + \alpha_{3} \bigg( \frac{L}{2} \bigg)^{3} + \alpha_{4} \bigg( \frac{L}{2} \bigg)^{4} + \alpha_{5} \bigg( \frac{L}{2} \bigg)^{5} &= v_{2} \\
-    \alpha_{1} + 2 \alpha_{2} \bigg( \frac{L}{2} \bigg) + 3 \alpha_{3} \bigg( \frac{L}{2} \bigg)^{2} + 4 \alpha_{4} \bigg( \frac{L}{2} \bigg)^{3} + 5 \alpha_{5} \bigg( \frac{L}{2} \bigg)^{4} &= \theta_{2} \\
-    \alpha_{0} + \alpha_{1} (L) + \alpha_{2} (L)^{2} + \alpha_{3} (L)^{3} + \alpha_{4} (L)^{4} + \alpha_{5} (L)^{5} &= v_{3} \\
-    \alpha_{1} + 2 \alpha_{2} (L) + 3 \alpha_{3} (L)^{2} + 4 \alpha_{4} (L)^{3} + 5 \alpha_{5} (L)^{4} &= \theta_{3}
-\end{align}<p>simplificando</p>
-\begin{align}
-    \alpha_{0} &= v_{1} \\
-    \alpha_{1} &= \theta_{1} \\
-    \alpha_{0} + \frac{L}{2} \alpha_{1} + \frac{L^{2}}{4} \alpha_{2} + \frac{L^{3}}{8} \alpha_{3} + \frac{L^{4}}{16} \alpha_{4} + \frac{L^{5}}{32} \alpha_{5} &= v_{2} \\
-    \alpha_{1} + L \alpha_{2} + \frac{3 L^{2}}{4} \alpha_{3} + \frac{L^{3}}{2} \alpha_{4} + \frac{5 L^{4}}{16} \alpha_{5} &= \theta_{2} \\
-    \alpha_{0} + L \alpha_{1} + L^{2} \alpha_{2} + L^{3} \alpha_{3} + L^{4} \alpha_{4} + L^{5} \alpha_{5} &= v_{3} \\
-    \alpha_{1} + 2 L \alpha_{2} + 3 L^{2} \alpha_{3} + 4 L^{3} \alpha_{4} + 5 L^{4} \alpha_{5} &= \theta_{3}
-\end{align}<p>en forma matricial</p>
+    \sigma_{x} = E \ \varepsilon_{x} = -\frac{275}{12} + 5 X \ [\text{MPa}]
+\end{equation}<p>esfuerzo cortante</p>
 \begin{equation}
-    \begin{bmatrix}
-    1 & 0 & 0 & 0 & 0 & 0 \\
-    0 & 1 & 0 & 0 & 0 & 0 \\
-    1 & \frac{L}{2} & \frac{L^{2}}{4} & \frac{L^{3}}{8} & \frac{L^{4}}{16} & \frac{L^{5}}{32} \\
-    0 & 1 & L & \frac{3 L^{2}}{4} & \frac{L^{3}}{2} & \frac{5 L^{4}}{16} \\
-    1 & L & L^{2} & L^{3} & L^{4} & L^{5} \\
-    0 & 1 & 2 L & 3 L^{2} & 4 L^{3} & 5 L^{4}
-    \end{bmatrix}
-    \begin{bmatrix}
-        \alpha_{0} \\
-        \alpha_{1} \\
-        \alpha_{2} \\
-        \alpha_{3} \\
-        \alpha_{4} \\
-        \alpha_{5}
-    \end{bmatrix} =
-    \begin{bmatrix}
-        v_{1} \\
-        \theta_{1} \\
-        v_{2} \\
-        \theta_{2} \\
-        v_{3} \\
-        \theta_{3}
-    \end{bmatrix}
-\end{equation}<p>resolviendo el sistema</p>
-\begin{equation}
-    \begin{bmatrix}
-        \alpha_{0} \\
-        \alpha_{1} \\
-        \alpha_{2} \\
-        \alpha_{3} \\
-        \alpha_{4} \\
-        \alpha_{5}
-    \end{bmatrix} =
-    \begin{bmatrix}
-        1 & 0 & 0 & 0 & 0 & 0 \\
-        0 & 1 & 0 & 0 & 0 & 0 \\
-        -\frac{23}{L^{2}} & -\frac{6}{L} & \frac{16}{L^{2}} & -\frac{8}{L} & \frac{7}{L^{2}} & -\frac{1}{L} \\
-        \frac{66}{L^{3}} & \frac{13}{L^{2}} & -\frac{32}{L^{3}} & \frac{32}{L^{2}} & -\frac{34}{L^{3}} & \frac{5}{L^{2}} \\
-        -\frac{68}{L^{4}} & -\frac{12}{L^{3}} & \frac{16}{L^{4}} & -\frac{40}{L^{3}} & \frac{52}{L^{4}} & -\frac{8}{L^{3}} \\
-        \frac{24}{L^{5}} & \frac{4}{L^{4}} & 0 & \frac{16}{L^{4}} & -\frac{24}{L^{5}} & \frac{4}{L^{4}}
-    \end{bmatrix}
-    \begin{bmatrix}
-        v_{1} \\
-        \theta_{1} \\
-        v_{2} \\
-        \theta_{2} \\
-        v_{3} \\
-        \theta_{3}
-    \end{bmatrix}
-\end{equation}<p>reemplazando las incógnitas</p>
-\begin{equation}
-    v =
-    \begin{bmatrix}
-        1 & x & x^{2} & x^{3} & x^{4} & x^{5}
-    \end{bmatrix}
-    \begin{bmatrix}
-        \alpha_{0} \\
-        \alpha_{1} \\
-        \alpha_{2} \\
-        \alpha_{3} \\
-        \alpha_{4} \\
-        \alpha_{5}
-    \end{bmatrix} =
-    \begin{bmatrix}
-        1 & x & x^{2} & x^{3} & x^{4} & x^{5}
-    \end{bmatrix}
-    \begin{bmatrix}
-        1 & 0 & 0 & 0 & 0 & 0 \\
-        0 & 1 & 0 & 0 & 0 & 0 \\
-        -\frac{23}{L^{2}} & -\frac{6}{L} & \frac{16}{L^{2}} & -\frac{8}{L} & \frac{7}{L^{2}} & -\frac{1}{L} \\
-        \frac{66}{L^{3}} & \frac{13}{L^{2}} & -\frac{32}{L^{3}} & \frac{32}{L^{2}} & -\frac{34}{L^{3}} & \frac{5}{L^{2}} \\
-        -\frac{68}{L^{4}} & -\frac{12}{L^{3}} & \frac{16}{L^{4}} & -\frac{40}{L^{3}} & \frac{52}{L^{4}} & -\frac{8}{L^{3}} \\
-        \frac{24}{L^{5}} & \frac{4}{L^{4}} & 0 & \frac{16}{L^{4}} & -\frac{24}{L^{5}} & \frac{4}{L^{4}}
-    \end{bmatrix}
-    \begin{bmatrix}
-        v_{1} \\
-        \theta_{1} \\
-        v_{2} \\
-        \theta_{2} \\
-        v_{3} \\
-        \theta_{3}
-    \end{bmatrix} =
-    \begin{bmatrix}
-    1 - \frac{23}{L^{2}} {x}^{2} + \frac{66}{L^{3}} x^{3} - \frac {68}{L^{4}} x^{4} + \frac {24}{L^{5}} x^{5} &
-    x - \frac{6}{L} x^{2} + \frac{13}{L^{2}} x^{3} - \frac{12}{L^{3}} x^{4} + \frac{4}{L^{4}} x^{5} &
-    \frac{16}{L^{2}} x^{2} - \frac{32}{L^{3}} x^{3} + \frac{16}{L^{4}} x^{4} &
-    -\frac{8}{L} x^{2} + \frac{32}{L^{2}} x^{3} - \frac{40}{L^{3}} x^{4} + \frac{16}{L^{4}} x^{5} &
-    \frac{7}{L^{2}} x^{2} - \frac{34}{L^{3}} x^{3} + \frac{52}{L^{4}} x^{4} - \frac{24}{L^{5}} x^{5} &
-    -\frac{1}{L} x^{2} + \frac{5}{L^{2}} x^{3} - \frac{8}{L^{3}} x^{4} + \frac{4}{L^{4}} x^{5}
-    \end{bmatrix}
-    \begin{bmatrix}
-        v_{1} \\
-        \theta_{1} \\
-        v_{2} \\
-        \theta_{2} \\
-        v_{3} \\
-        \theta_{3}
-    \end{bmatrix}
-\end{equation}<p>Reescribiendo $v$</p>
-\begin{equation}
-    v = \bigg( 1 - \frac{23}{L^{2}} {x}^{2} + \frac{66}{L^{3}} x^{3} - \frac {68}{L^{4}} x^{4} + \frac {24}{L^{5}} x^{5} \bigg) v_{1}
-    + \bigg( x - \frac{6}{L} x^{2} + \frac{13}{L^{2}} x^{3} - \frac{12}{L^{3}} x^{4} + \frac{4}{L^{4}} x^{5} \bigg) \theta_{1}
-    + \bigg( \frac{16}{L^{2}} x^{2} - \frac{32}{L^{3}} x^{3} + \frac{16}{L^{4}} x^{4} \bigg) v_{2}
-    + \bigg( -\frac{8}{L} x^{2} + \frac{32}{L^{2}} x^{3} - \frac{40}{L^{3}} x^{4} + \frac{16}{L^{4}} x^{5} \bigg) \theta_{2}
-    + \bigg( \frac{7}{L^{2}} x^{2} - \frac{34}{L^{3}} x^{3} + \frac{52}{L^{4}} x^{4} - \frac{24}{L^{5}} x^{5} \bigg) v_{3}
-    + \bigg( -\frac{1}{L} x^{2} + \frac{5}{L^{2}} x^{3} - \frac{8}{L^{3}} x^{4} + \frac{4}{L^{4}} x^{5} \bigg) \theta_{3}
-    = N_{1} v_{1} + N_{2} \theta_{1} + N_{3} v_{2} + N_{4} \theta_{2} + N_{5} v_{3} + N_{6} \theta_{3}
+    \tau_{yz} = \frac{V Q}{I \ b} = 0.425 \ [\text{MPa}]
 \end{equation}
 </div>
 </div>
