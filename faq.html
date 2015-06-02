@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+	<title>
+		FAQ
+	</title>
+	<link rel="stylesheet" href="./css/uvm2013rwd.css" media="screen" />
+	<link rel="stylesheet" href="./css/uvm2013print.css" media="print" />
+	<link rel="stylesheet" href="./css/html_templates/template10rwd.css" type="text/css" media="screen" />
+	<link rel="shortcut icon" href="./images/icono.ico" />
+	<base href="page0.html" />
+</head>
+
+<body>	
+	<div id="frame">
+		<header>
+			<nav id="topnav">
+				<div id="mid-wrapper">
+					<div id="tools_and_search">
+						<ul>
+							<li class="apply"><a href="https://github.com/ClaudioVZ?tab=repositories">GitHub</a></li>
+							<li class="myuvm"><a href="cv.html">CV</a></li>
+							<li class="myuvm"><a>FAQ</a></li>
+						</ul>
+					</div>
+				</div>
+				<div id="toolswrapper"></div>
+			</nav>
+			<div class="wrapper1200">
+				<div class="imagewrapper1200">
+					<img class="uvmbanner" src="./images/nubes.jpg" alt="" />
+				</div>
+			</div>
+			<h2 id="subbanner">Apuntes de métodos numéricos</h2>
+		</header>
+		
+		<div class="contentwrapper">
+			<nav class="localnav" id="local">
+				<div class="homelink"><a href="page0.html">Inicio</a></div>
+					
+				<ul>
+					<li><a href="page1.html">scipy-lecture-notes-ES</a></li>
+					<li><a href="page2.html">Teoria-FEM-Python</a></li>
+					<li><a href="page3.html">Ecuaciones diferenciales ordinarias</a></li>
+					<li><a href="page4.html">Diferencias finitas</a></li>
+					<li><a href="page5.html">Volumenes finitos</a></li>
+					<li><a href="page6.html">Cálculo variacional</a></li>
+					<li><a href="page7.html">Elementos finitos</a></li>
+					<li><a href="page8.html">Publicaciones</a></li>
+					<li><a href="page9.html">Contacto</a></li>
+				</ul>
+			</nav>
+			
+			<section class="maincontent">
+				<article id="uvmmaincontent">
+					<h3>FAQ</h3> 
+					<ol>
+						<li>Porqué las páginas con ecuaciones son lentas?
+							<br> Eso depende del navegador y la computadora.
+						</li>
+						<li>Porqué las ecuaciones no se ven sin internet?
+							<br> En Linux usar from IPython.external.mathjax import install_mathjax install_mathjax()
+							<br> En Windows&reg; instalar manualmente <a href="https://www.mathjax.org/">MathJax</a>.
+						</li>
+						<li>Porqué en IJulia las ecuaciones no se ven bien?
+							<br> Se debe incluir la hoja de estilos adjunta en ~/.ipython/profile_julia/static/custom/custom.css 
+						</li>
+						<li>Puedo usar IJulia en Windows&reg;?
+							<br> Posiblemente usando <a href="https://www.cygwin.com/">Cygwin</a>
+						</li>
+						<li>Puedo usar IPython en Windows&reg;?
+							<br> Instalando <a href="https://code.google.com/p/pythonxy/">Python(x,y)</a> en
+							un sistema 32bits
+							<br> Posiblemente usando <a href="http://www.continuum.io/">Anaconda</a> en
+							un sistema 64bits
+						</li>
+						<li>Cómo se actualiza los paquetes de Julia?
+							<br>Pkg.update()
+						</li>
+						<li>Cómo se actualiza los paquetes de Python?
+							<br> En Linux revisar los requerimientos y usar sudo pip install paquete --upgrade
+							<br> En Windows&reg; depende del proveedor
+						</li>
+					</ol>                    
+				</article>
+			</section>
+		</div>
+	</div>
+   
+   <footer>
+   	<address>
+   		<div class="link"><a>&copy; 2015</a></div>
+   		<div class="clear-fix"></div>
+   	</address>
+   </footer>
+</body>
+</html>

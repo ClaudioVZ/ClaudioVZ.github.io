@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="135.5px" height="133.5px" viewBox="-15.5 2.5 135.5 133.5" enable-background="new -15.5 2.5 135.5 133.5"
+	 xml:space="preserve">
+<rect class="behind" x="-15.5" y="2.5" fill="#999999" width="135.5" height="133.5"/>
+<polyline fill="#FFFFFF" points="19.887,76.912 19.783,59.996 56.573,59.996 40.601,32.377 56.573,27.12 85.436,68.652 
+	56.677,109.894 40.291,104.947 56.573,76.807 "/>
+<style>
+rect.behind{
+	fill:#62855b;
+	}
+</style>
+
+</svg>

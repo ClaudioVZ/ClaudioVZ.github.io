@@ -1,0 +1,112 @@
+#frame {
+	min-width:970px;
+}
+#topnav {
+	background-color: #ffffff;
+}
+.cse input.gsc-search-button {
+	filter: none !important;	
+	background-color: #cccccc;
+}
+#audience  {
+	padding-left: 1.5em;
+	margin-top: -.15em;
+}
+/* home page */
+#links {
+	margin: 1em 5%;
+	width:80%;
+}
+#uvmacclaim h2 {
+	font-family: Georgia;
+}
+#home3 {
+	width:35% !important;
+}
+/*******************/
+/* IE 7 Only Styles*/
+/*******************/
+* + html #topnav {
+	max-width: 1200px;
+	margin: 0 auto;
+	background:transparent;
+}
+* + html #mid-wrapper {	
+	float:right;
+	width:100%;
+}
+* + html #audience  {
+	padding-left: .6em;
+	margin-top: -4px;
+}
+* + html header input.gsc-search-button-v2 {
+	margin-top:0;
+}
+* + html header #search {
+	margin-top:7px;
+}
+* + html #pagebanner {
+	display:none;
+}
+* + html header h1 a {
+	text-indent:0;
+	font-size:0;
+	position:relative;
+	top:-16px;
+	z-index:30;
+}
+* + html section.maincontent {
+}
+* + html #uvmcustomnav {
+	margin-bottom:10px;
+	margin-top:-20px;
+	position:relative;
+	width: auto;
+}
+* + html .subnav {
+	margin-left: -8.67%;
+}
+* + html address {
+	display:inline;
+}
+* + html footer div.logo, * + html footer div.address_phone, * + html footer div.link {
+    float: left;
+}
+* + html footer div.address_phone, * + html footer div.link {
+	margin-top:5px;
+	margin-left:1em;
+}
+* + html #uvmmaincontent #rightcolumn, * + html #uvmmaincontent #rightcolumn_float, * + html #uvmmaincontent div.rightcolumn_float {
+	margin-right: -3.74%;
+}
+* + html .maincontent #shortcuts {
+	margin-right: -3.74% !important;
+}
+* + html .maincontent #hasQL #shortcuts {
+}
+* + html .maincontent #shortcuts ul {
+	margin-left:0;
+}
+* + html #box li img {
+	text-align: top;
+}
+* + html .maincontent img {
+	border:0;
+}
+/* home */
+* + html #audience-list {
+	float:left;
+	margin-top:-3em;
+	margin-left: 400px;
+	text-align:right;
+}
+* + html #home1, * + html .wrapper  {
+	float:left;
+}
+* + html #uvmnews li {
+	padding: .25em 0;
+}
+* + html #uvmnews li a {
+	display: inline;
+	padding:0;
+}

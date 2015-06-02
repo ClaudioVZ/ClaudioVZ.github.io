@@ -1,0 +1,323 @@
+/* global */
+#uvmcustombanner p a.more {
+	color: #b85b32 !important;
+	text-transform: uppercase;
+	font-size: 0.7em; 
+}
+#sidebar object {
+	margin-top: 1em;
+	margin-left: 0;
+}
+#uvmmaincontent .boxquote{
+   padding:1em 0;
+   border-top:1px solid #e8e8e8;
+   border-bottom:1px solid #e8e8e8;
+   background:#fff;
+}
+#uvmmaincontent .boxquote p {
+   margin-top:0;
+   font-size: 1.0em;
+   line-height:1.8;
+}
+#uvmmaincontent .boxquote .caption{
+   font-size:0.8em;
+   font-style: italic;
+   line-height: 1.6;
+}
+/* home page */
+#multi_column_wrapper{
+	margin-top:1em;
+}
+.multi_column ul{
+	padding-left:1em;
+	margin-left:0;
+}
+#bottom_section{
+	border-top:10px solid #74a856;
+	position:relative;
+	clear:both;
+	padding-top:1.3em;
+}
+#bottom_left h4{
+	font-family:georgia, serif;
+	margin-bottom:0;
+	margin-top:0;
+}
+#bottom_right{
+	margin:0 0 1.4em 0;
+	background:#5f8ca9;
+	color:#fff;
+	padding:0 0 .8em 0;
+}
+#bottom_right p{
+	font-family:Georgia, serif;
+	margin:1em 0;
+	text-align:center;
+	padding:0px;
+}
+#bottom_right h5{
+	color:#fff;
+	font-family:Georgia, serif;
+	margin-top:.5em;
+	padding:.5em;
+	text-align:center;
+	border-bottom:1px dashed #fff;
+}
+/* news style calls (home page also) */
+#uvmmaincontent div.basic ul {
+	padding-right:.5em !important;
+	padding-left:1.5em !important;
+	margin-right:0;
+}
+#uvmmaincontent div.basic ul li{ 
+	text-indent: 0;
+	margin:0;
+	padding:0;
+	font-weight:normal;
+	list-style-type:none;
+}
+#uvmmaincontent div.basic ul li a{
+	text-decoration:none;
+	font-weight:bold;
+	display:block;
+}
+#uvmmaincontent p.newsnav a {
+	text-decoration:underline !important;
+	text-transform:uppercase;
+}
+.photo_bar {
+	padding-right: 2em;
+}
+/* faculty calls */
+#uvmmaincontent #faculty_wrapper #rightcolumn {
+	border:none;
+	background:none;
+	margin:0 -5.56%;
+	padding:0;
+	float:none;
+	width:auto;
+}
+#uvmmaincontent #faculty_wrapper #rightcolumn h4{
+	font-family: georgia, serif;
+	padding: .5em 5%;
+	border-top: 1px solid #ccc;
+	border-bottom: 1px dashed #ccc;
+}
+#faculty_bio h3{
+	font-family: georgia, serif;
+	font-size: 1.5em;
+	font-weight: lighter;
+	margin-bottom: .4em;
+}
+#faculty_bio h4{
+	background: #fff url("../../images/rwd/bg_direction_nav3.png") no-repeat 0 50%;
+	padding-left: 1em;
+}
+#faculty_bio h5{
+	margin-bottom: -.8em;
+	color: #5f5f5f;
+}
+#summary_box{
+	background: #f2f4e4;
+	border: 1px solid #edefd9;
+	margin-bottom: 1em;
+	font-size:90%;
+}
+#summary_box img{
+	display:block;
+	float: left;
+	width:30%;
+	padding:.5em 2.5%;
+}
+#summary_box #summary_text{
+	border-left: 1px dashed #ccc;
+	float: right;
+	margin-left:-1px;
+	width:60%;
+	padding:1em 2.5%;
+}
+#uvmmaincontent #summary_box #summary_text ul{
+	padding-left: 1em;
+	margin: 0;
+}
+#summary_box #summary_text p, #summary_box #summary_text h4, #summary_box #summary_text h6 { 
+	margin: 0; 	
+}
+#faculty_bio #summary_box h4{
+	color: #617f21;
+	font-family: georgia, serif;
+	padding-left: 0;
+	background: none;
+	margin-top: 0;
+}
+span.title {
+	font-size: 95%;
+	display: block;
+	margin-bottom:.5em;
+}
+#rightcolumn p em { 
+	color: #b0afad; 
+}
+/* folding faculty list for profiles */
+#uvmmaincontent #rightcolumn #folding_list{
+	padding: 0 5%;
+}
+#uvmmaincontent #rightcolumn #folding_list h5{
+	padding:0;
+	padding-left:1em;
+	line-height:1;
+	margin:2em 0;
+	color:#5f5f5f;
+}
+#uvmmaincontent #rightcolumn #folding_list ul {
+	padding-bottom: .5em;
+	margin-right:0;
+	border-bottom: 1px dashed #ccc;
+}
+#uvmmaincontent #rightcolumn #folding_list ul li {
+	padding: .5em 1em;
+}
+#uvmmaincontent #rightcolumn #folding_list li a{
+	color:#70706f;
+}
+#uvmmaincontent #rightcolumn #folding_list li:hover ul li a{
+	color:#70706f;
+	font-weight:normal;
+}
+/* gallery */
+.flexsliderwrapper {
+	overflow:hidden;
+	max-width:640px;
+	margin: 0 auto;
+}
+.flexsliderwrapper .flex-direction-nav a {
+	height:46px;
+}
+.flexsliderwrapper .flex-direction-nav .flex-next {
+	background-image: url(../../images/rwd/forward-arrow.png);
+}
+.flexsliderwrapper .flex-direction-nav .flex-prev {
+    background-image: url(../../images/rwd/back-arrow.png);
+}
+/* media queries */
+@media only screen and (min-width : 600px) { 
+	#multi_column_wrapper_t2{
+		float:left;
+		margin:0 0 0 -1.5%;
+	}
+	.multi_column{
+		float:left;
+		width:30.33333%;
+		padding:0 1.5%;
+		padding-bottom:1em;
+	}
+	#uvmmaincontent #rightcolumn, #uvmmaincontent #leftcolumn {
+		float:left;
+	}
+	#uvmmaincontent #leftcolumn {
+		width:72.5%;
+		padding-right:2.5%;
+	}
+	#uvmmaincontent #rightcolumn {
+		width:25%;
+		margin-left:0;
+	}
+	#uvmmaincontent #rightcolumn h4 {
+		margin-top:0;
+	}
+	#uvmmaincontent #faculty_wrapper #rightcolumn {
+		float:right;
+		margin:0;
+		width:25%;
+	}
+	#uvmmaincontent .boxquote{
+	   padding:1em;
+	   margin-right: 1.5em;
+	   float:left;
+	   width:30%;
+	}
+}
+
+@media only screen and (min-width : 600px) {
+	#multi_column_wrapper {
+		background-image: url("../../images/rwd/dashedrule-ccc.gif"), url("../../images/rwd/dashedrule-ccc.gif"), url("../../images/rwd/dashedrule-ccc.gif");
+		background-position: 22.5%, 47.5%, 72.5%;
+		background-repeat: repeat-y;
+	}
+	.multi_column{
+		float:left;
+		width:20%;
+		padding:0 2.5% .5em 2.5%;
+	}
+	.multi_column:first-child {
+		background:none;
+	}
+	.multi_column h3:first-child {
+		margin-top:0;
+	}
+	.last_column{
+	}
+	.first_column{
+		padding-left:0;
+	}	
+	#bottom_left, #bottom_right{
+		float:left;
+		width:45%;
+		padding:0 2.5%;
+	}
+	#uvmmaincontent #rightcolumn, #uvmmaincontent #leftcolumn {
+		float:left;
+	}
+	#uvmmaincontent #leftcolumn {
+		width:72.5%;
+		padding-right:2.5%;
+	}
+	#uvmmaincontent #rightcolumn {
+		width:25%;
+		margin-left:0;
+	}
+	#uvmmaincontent #rightcolumn h4 {
+		margin-top:0;
+	}
+	#uvmmaincontent #faculty_wrapper #rightcolumn {
+		float:right;
+		margin:0;
+		width:25%;
+	}
+	#uvmmaincontent .boxquote{
+	   padding:1em;
+	   margin-right: 1.5em;
+	   float:left;
+	   width:30%;
+	}
+}
+/* IE 7 HACKS */
+* html #bottom_section{
+	margin-right:-40px;
+}
+* html #box p{
+	width:200px;
+}
+* html #multi_column_wrapper{
+    margin-right:-15px;
+    background:#fff url("../../images/templates/four_column_tile381.jpg") repeat-y 180px 20px; 
+    padding-bottom:20px;
+}
+* html .multi_column{
+	width:143px;
+}
+* html .multi_column ul li{
+	margin-left:-35px;
+}	
+* html #bottom_section{
+margin-top:-20px;}
+
+
+*+html #uvmcustombanner{
+	overflow:hidden;
+	height:200px;
+}
+
+*+html #uvmcontent #uvmmaincontent div#box{
+	width:650px;
+}

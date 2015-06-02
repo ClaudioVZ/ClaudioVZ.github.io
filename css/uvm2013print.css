@@ -1,0 +1,35 @@
+body {color: black; background: white;}
+a:link, a:visited {background: white; color: #666; text-decoration: underline; font-weight: bold;}
+h1,h2,h3,h4,h5,h6 {background: white; color: black;}
+h3 {font-size:larger;font-family:Georgia, serif;}
+#skip, #topnav, #bannermenu, #local, #uvmcustomnav, #uvmsocialmedia, footer, video, object, embed {display: none;}
+#logo {overflow:hidden;border-bottom:1px solid #ccc;padding-bottom:10px;}
+#logo img { width:300px;height:61px;}
+#uvmmaincontent { border:0;margin-left:0;padding:0; }
+#mainframe {border:0;width:auto !important;}
+header h1 img {float:left;}
+header h1 a:link, header h1 a:visited {font-size:0pt;}
+p.modify {text-align:right;color:#666;font-size:smaller;}
+/** news **/
+#storyShare, #storyMore {display:none;}
+#storyInfo ul {padding:0;}
+#storyInfo li {list-style: none;display:inline;padding-right:.25in;}
+.storyCaption {font-size:smaller;color:#787878;font-style: italic;}
+#storyPrimaryMedia {float:left;width:3in;margin:0 .25in .25in 0;}
+#storyPrimaryMedia img {max-width:3in;}
+#storyExtras img {max-width:2.5in;}
+#storyExtras {clear:left;float:right;width:2.5in;margin:.25in 0 .25in .25in;}
+#storyQuote {overflow: hidden;border-top:1px #ccc solid;border-bottom:1px #ccc solid;padding:.25in 0;font-size:larger;font-family:Georgia, serif;line-height: 150%;color:#787878;margin-bottom:.125in;}
+#storyQuote:before {display: block;float: left;margin: .25in .125in 0 0;font-size: 500%;content: open-quote; color:#ababab;}
+/** custom calls **/
+.rightcolumn_float {float:right;width:2in;margin:.25in 0 .25in .25in;border-left:1px #ccc solid;padding-left:.125in;}
+.rightcolumn_float img {max-width:2in;}
+.uvmtable {border:1px #ccc solid;border-collapse: collapse;}
+.uvmtable th {border:1px #666 solid;padding:.125in;}
+.uvmtable td {border:1px #ccc solid;padding:.125in;}
+#box {border-top:1px #ccc solid;border-bottom:1px #ccc solid;}
+.imageleft {float:left;margin-right:.125in;}
+.imageright {float:right;margin-left:.125in;}
+ul.with_img {padding:0;}
+ul.with_img li {list-style: none;overflow:hidden;margin-bottom:.125in;}
+ul.with_img li img {float:left;margin-right:.125in;}
