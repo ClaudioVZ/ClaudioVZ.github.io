@@ -1,0 +1,271 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Introducción al método de elementos finitos">
+
+<title>Introducción al método de elementos finitos</title>
+
+<!-- Bootstrap style: bootswatch_cosmo -->
+<link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/cosmo/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 0,
+ 'sections': [(u'M\xe9todos anal\xedticos aproximados', 0, None, '___sec0'),
+              (u'M\xe9todo de Galerkin', 1, None, '___sec1'),
+              (u'Ejemplo 1', 2, None, '___sec2'),
+              (u'Ejemplo 2', 2, None, '___sec3'),
+              (u'Forma alternativa', 2, None, '___sec4'),
+              (u'Ejemplo 3', 2, None, '___sec5'),
+              (u'Soluci\xf3n general', 2, None, '___sec6'),
+              (u'Elementos unidimensionales', 0, None, '___sec7'),
+              (u'Polinomios de Lagrange', 1, None, '___sec8'),
+              (u'Coordenadas globales', 2, None, '___sec9'),
+              (u'Elemento de dos nodos', 3, None, '___sec10'),
+              (u'Elemento de tres nodos', 3, None, '___sec11'),
+              (u'Coordenadas locales', 2, None, '___sec12'),
+              (u'Elemento de dos nodos', 3, None, '___sec13'),
+              (u'Elemento de tres nodos', 3, None, '___sec14'),
+              (u'Polinomios de Hermite', 1, None, '___sec15'),
+              (u'Coordenadas globales', 2, None, '___sec16'),
+              (u'Elementos de dos nodos', 3, None, '___sec17'),
+              (u'Elemento de tres nodos', 3, None, '___sec18'),
+              (u'Coordenadas locales', 2, None, '___sec19'),
+              (u'Elementos de dos nodos', 3, None, '___sec20'),
+              (u'Elemento de tres nodos', 3, None, '___sec21'),
+              (u'Elemento barra en tracci\xf3n-compresi\xf3n',
+               0,
+               None,
+               '___sec22'),
+              (u'Coordenadas globales', 1, None, '___sec23'),
+              (u'Ejemplo 1', 2, None, '___sec24'),
+              (u'Un elemento de dos nodos', 3, None, '___sec25'),
+              (u'Dos elementos de dos nodos', 3, None, '___sec26'),
+              (u'Ejemplo 2', 2, None, '___sec27'),
+              (u'Un elemento de tres nodos', 3, None, '___sec28'),
+              (u'Dos elementos de tres nodos', 3, None, '___sec29'),
+              (u'Ejemplo 3', 2, None, '___sec30'),
+              (u'Un elemento de dos nodos', 3, None, '___sec31'),
+              (u'Dos elementos de dos nodos', 3, None, '___sec32'),
+              (u'Coordenadas locales', 1, None, '___sec33'),
+              (u'Ejemplo 1', 2, None, '___sec34'),
+              (u'Un elemento de dos nodos', 3, None, '___sec35'),
+              (u'Dos elementos de dos nodos', 3, None, '___sec36'),
+              (u'Ejemplo 2', 2, None, '___sec37'),
+              (u'Un elemento de tres nodos', 3, None, '___sec38'),
+              (u'Dos elementos de tres nodos', 3, None, '___sec39'),
+              (u'Ejemplo 3', 2, None, '___sec40'),
+              (u'Un elemento de dos nodos', 3, None, '___sec41'),
+              (u'Dos elementos de dos nodos', 3, None, '___sec42'),
+              (u'Elemento barra en torsi\xf3n', 0, None, '___sec43'),
+              (u'Elemento viga Euler-Bernoulli', 0, None, '___sec44'),
+              (u'Coordenadas globales', 1, None, '___sec45'),
+              (u'Ejemplo 1', 2, None, '___sec46'),
+              (u'Un elemento de dos nodos', 3, None, '___sec47'),
+              (u'Dos elementos de dos nodos', 3, None, '___sec48'),
+              (u'Ejemplo 2', 2, None, '___sec49'),
+              (u'Un elemento de tres nodos', 3, None, '___sec50'),
+              (u'Dos elementos de tres nodos', 3, None, '___sec51'),
+              (u'Coordenadas locales', 1, None, '___sec52'),
+              (u'Ejemplo 1', 2, None, '___sec53'),
+              (u'Un elemento de dos nodos', 3, None, '___sec54'),
+              (u'Dos elementos de dos nodos', 3, None, '___sec55'),
+              (u'Ejemplo 2', 2, None, '___sec56'),
+              (u'Un elemento de tres nodos', 3, None, '___sec57'),
+              (u'Dos elementos de tres nodos', 3, None, '___sec58'),
+              (u'Elementos unidimensionales mapeados', 0, None, '___sec59'),
+              (u'Elemento barra', 1, None, '___sec60'),
+              (u'Elemento de dos nodos', 2, None, '___sec61'),
+              (u'Elemento de tres nodos', 2, None, '___sec62'),
+              (u'Elementos de mayor grado polinomial', 2, None, '___sec63'),
+              (u'Elemento de dos nodos', 3, None, '___sec64'),
+              (u'Elemento de tres nodos', 3, None, '___sec65'),
+              (u'Ejemplo 1', 2, None, '___sec66'),
+              (u'Un elemento de dos nodos', 3, None, '___sec67'),
+              (u'Dos elementos de dos nodos', 3, None, '___sec68'),
+              (u'Elemento viga Euler-Bernoulli', 1, None, '___sec69'),
+              (u'Elemento de dos nodos', 2, None, '___sec70'),
+              (u'Elemento de tres nodos', 2, None, '___sec71'),
+              (u'Elementos de mayor grado polinomial', 2, None, '___sec72'),
+              (u'Elemento de dos nodos', 3, None, '___sec73'),
+              (u'Elemento de tres nodos', 3, None, '___sec74'),
+              (u'Elementos bidimensionales', 0, None, '___sec75'),
+              (u'Elementos triangulares', 1, None, '___sec76'),
+              (u'Coordenadas globales', 2, None, '___sec77'),
+              (u'Elemento de tres nodos', 3, None, '___sec78'),
+              (u'Elasticidad plana', 0, None, '___sec79'),
+              (u'Esfuerzo plano', 2, None, '___sec80')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="fem.html">Introducción al método de elementos finitos</a>
+  </div>
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="._fem001.html#___sec0" style="font-size: 80%;">Métodos analíticos aproximados</a></li>
+     <!-- navigation toc: --> <li><a href="._fem002.html#___sec7" style="font-size: 80%;">Elementos unidimensionales</a></li>
+     <!-- navigation toc: --> <li><a href="._fem006.html#___sec22" style="font-size: 80%;">Elemento barra en tracción-compresión</a></li>
+     <!-- navigation toc: --> <li><a href="._fem013.html#___sec43" style="font-size: 80%;">Elemento barra en torsión</a></li>
+     <!-- navigation toc: --> <li><a href="._fem014.html#___sec44" style="font-size: 80%;">Elemento viga Euler-Bernoulli</a></li>
+     <!-- navigation toc: --> <li><a href="._fem019.html#___sec59" style="font-size: 80%;">Elementos unidimensionales mapeados</a></li>
+     <!-- navigation toc: --> <li><a href="._fem022.html#___sec75" style="font-size: 80%;">Elementos bidimensionales</a></li>
+     <!-- navigation toc: --> <li><a href="._fem023.html#___sec79" style="font-size: 80%;">Elasticidad plana</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0000"></a>
+<!-- ------------------- main content ---------------------- -->
+
+
+
+<div class="jumbotron">
+<center><h1>Introducción al método de elementos finitos</h1></center>  <!-- document title -->
+
+<p>
+<!-- author(s): ClaudioVZ -->
+
+<center>
+<b>ClaudioVZ</b> 
+</center>
+
+<p>
+<!-- institution(s) -->
+
+<br>
+<b>Resumen.</b>
+Introducción al método de elementos finitos
+<p>
+<center><h4>Nov 11, 2015</h4></center> <!-- date -->
+<br>
+
+<h2>Table of contents</h2>
+
+<p>
+<a href="._fem001.html#___sec0"> Métodos analíticos aproximados </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._fem001.html#___sec1"> Método de Galerkin </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._fem001.html#___sec2"> Ejemplo 1 </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._fem001.html#___sec3"> Ejemplo 2 </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._fem001.html#___sec4"> Forma alternativa </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._fem001.html#___sec5"> Ejemplo 3 </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._fem001.html#___sec6"> Solución general </a><br>
+<a href="._fem002.html#___sec7"> Elementos unidimensionales </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._fem002.html#___sec8"> Polinomios de Lagrange </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._fem002.html#___sec9"> Coordenadas globales </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._fem003.html#___sec12"> Coordenadas locales </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._fem004.html#___sec15"> Polinomios de Hermite </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._fem004.html#___sec16"> Coordenadas globales </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._fem005.html#___sec19"> Coordenadas locales </a><br>
+<a href="._fem006.html#___sec22"> Elemento barra en tracción-compresión </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._fem007.html#___sec23"> Coordenadas globales </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._fem007.html#___sec24"> Ejemplo 1 </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._fem008.html#___sec27"> Ejemplo 2 </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._fem009.html#___sec30"> Ejemplo 3 </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._fem010.html#___sec33"> Coordenadas locales </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._fem010.html#___sec34"> Ejemplo 1 </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._fem011.html#___sec37"> Ejemplo 2 </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._fem012.html#___sec40"> Ejemplo 3 </a><br>
+<a href="._fem013.html#___sec43"> Elemento barra en torsión </a><br>
+<a href="._fem014.html#___sec44"> Elemento viga Euler-Bernoulli </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._fem015.html#___sec45"> Coordenadas globales </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._fem015.html#___sec46"> Ejemplo 1 </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._fem016.html#___sec49"> Ejemplo 2 </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._fem017.html#___sec52"> Coordenadas locales </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._fem017.html#___sec53"> Ejemplo 1 </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._fem018.html#___sec56"> Ejemplo 2 </a><br>
+<a href="._fem019.html#___sec59"> Elementos unidimensionales mapeados </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._fem019.html#___sec60"> Elemento barra </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._fem019.html#___sec61"> Elemento de dos nodos </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._fem019.html#___sec62"> Elemento de tres nodos </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._fem019.html#___sec63"> Elementos de mayor grado polinomial </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._fem020.html#___sec66"> Ejemplo 1 </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._fem021.html#___sec69"> Elemento viga Euler-Bernoulli </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._fem021.html#___sec70"> Elemento de dos nodos </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._fem021.html#___sec71"> Elemento de tres nodos </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._fem021.html#___sec72"> Elementos de mayor grado polinomial </a><br>
+<a href="._fem022.html#___sec75"> Elementos bidimensionales </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._fem022.html#___sec76"> Elementos triangulares </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._fem022.html#___sec77"> Coordenadas globales </a><br>
+<a href="._fem023.html#___sec79"> Elasticidad plana </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._fem023.html#___sec80"> Esfuerzo plano </a><br>
+</p>
+<p>
+
+
+<p><a href="._fem001.html" class="btn btn-primary btn-lg">Read &raquo;</a></p>
+
+
+</div> <!-- end jumbotron -->
+
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="next">
+    <a href="._fem001.html">Next &rarr;</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

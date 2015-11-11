@@ -1,0 +1,770 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Introducción al método de elementos finitos">
+
+<title>Introducción al método de elementos finitos</title>
+
+<!-- Bootstrap style: bootswatch_cosmo -->
+<link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/cosmo/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 0,
+ 'sections': [(u'M\xe9todos anal\xedticos aproximados', 0, None, '___sec0'),
+              (u'M\xe9todo de Galerkin', 1, None, '___sec1'),
+              (u'Ejemplo 1', 2, None, '___sec2'),
+              (u'Ejemplo 2', 2, None, '___sec3'),
+              (u'Forma alternativa', 2, None, '___sec4'),
+              (u'Ejemplo 3', 2, None, '___sec5'),
+              (u'Soluci\xf3n general', 2, None, '___sec6'),
+              (u'Elementos unidimensionales', 0, None, '___sec7'),
+              (u'Polinomios de Lagrange', 1, None, '___sec8'),
+              (u'Coordenadas globales', 2, None, '___sec9'),
+              (u'Elemento de dos nodos', 3, None, '___sec10'),
+              (u'Elemento de tres nodos', 3, None, '___sec11'),
+              (u'Coordenadas locales', 2, None, '___sec12'),
+              (u'Elemento de dos nodos', 3, None, '___sec13'),
+              (u'Elemento de tres nodos', 3, None, '___sec14'),
+              (u'Polinomios de Hermite', 1, None, '___sec15'),
+              (u'Coordenadas globales', 2, None, '___sec16'),
+              (u'Elementos de dos nodos', 3, None, '___sec17'),
+              (u'Elemento de tres nodos', 3, None, '___sec18'),
+              (u'Coordenadas locales', 2, None, '___sec19'),
+              (u'Elementos de dos nodos', 3, None, '___sec20'),
+              (u'Elemento de tres nodos', 3, None, '___sec21'),
+              (u'Elemento barra en tracci\xf3n-compresi\xf3n',
+               0,
+               None,
+               '___sec22'),
+              (u'Coordenadas globales', 1, None, '___sec23'),
+              (u'Ejemplo 1', 2, None, '___sec24'),
+              (u'Un elemento de dos nodos', 3, None, '___sec25'),
+              (u'Dos elementos de dos nodos', 3, None, '___sec26'),
+              (u'Ejemplo 2', 2, None, '___sec27'),
+              (u'Un elemento de tres nodos', 3, None, '___sec28'),
+              (u'Dos elementos de tres nodos', 3, None, '___sec29'),
+              (u'Ejemplo 3', 2, None, '___sec30'),
+              (u'Un elemento de dos nodos', 3, None, '___sec31'),
+              (u'Dos elementos de dos nodos', 3, None, '___sec32'),
+              (u'Coordenadas locales', 1, None, '___sec33'),
+              (u'Ejemplo 1', 2, None, '___sec34'),
+              (u'Un elemento de dos nodos', 3, None, '___sec35'),
+              (u'Dos elementos de dos nodos', 3, None, '___sec36'),
+              (u'Ejemplo 2', 2, None, '___sec37'),
+              (u'Un elemento de tres nodos', 3, None, '___sec38'),
+              (u'Dos elementos de tres nodos', 3, None, '___sec39'),
+              (u'Ejemplo 3', 2, None, '___sec40'),
+              (u'Un elemento de dos nodos', 3, None, '___sec41'),
+              (u'Dos elementos de dos nodos', 3, None, '___sec42'),
+              (u'Elemento barra en torsi\xf3n', 0, None, '___sec43'),
+              (u'Elemento viga Euler-Bernoulli', 0, None, '___sec44'),
+              (u'Coordenadas globales', 1, None, '___sec45'),
+              (u'Ejemplo 1', 2, None, '___sec46'),
+              (u'Un elemento de dos nodos', 3, None, '___sec47'),
+              (u'Dos elementos de dos nodos', 3, None, '___sec48'),
+              (u'Ejemplo 2', 2, None, '___sec49'),
+              (u'Un elemento de tres nodos', 3, None, '___sec50'),
+              (u'Dos elementos de tres nodos', 3, None, '___sec51'),
+              (u'Coordenadas locales', 1, None, '___sec52'),
+              (u'Ejemplo 1', 2, None, '___sec53'),
+              (u'Un elemento de dos nodos', 3, None, '___sec54'),
+              (u'Dos elementos de dos nodos', 3, None, '___sec55'),
+              (u'Ejemplo 2', 2, None, '___sec56'),
+              (u'Un elemento de tres nodos', 3, None, '___sec57'),
+              (u'Dos elementos de tres nodos', 3, None, '___sec58'),
+              (u'Elementos unidimensionales mapeados', 0, None, '___sec59'),
+              (u'Elemento barra', 1, None, '___sec60'),
+              (u'Elemento de dos nodos', 2, None, '___sec61'),
+              (u'Elemento de tres nodos', 2, None, '___sec62'),
+              (u'Elementos de mayor grado polinomial', 2, None, '___sec63'),
+              (u'Elemento de dos nodos', 3, None, '___sec64'),
+              (u'Elemento de tres nodos', 3, None, '___sec65'),
+              (u'Ejemplo 1', 2, None, '___sec66'),
+              (u'Un elemento de dos nodos', 3, None, '___sec67'),
+              (u'Dos elementos de dos nodos', 3, None, '___sec68'),
+              (u'Elemento viga Euler-Bernoulli', 1, None, '___sec69'),
+              (u'Elemento de dos nodos', 2, None, '___sec70'),
+              (u'Elemento de tres nodos', 2, None, '___sec71'),
+              (u'Elementos de mayor grado polinomial', 2, None, '___sec72'),
+              (u'Elemento de dos nodos', 3, None, '___sec73'),
+              (u'Elemento de tres nodos', 3, None, '___sec74'),
+              (u'Elementos bidimensionales', 0, None, '___sec75'),
+              (u'Elementos triangulares', 1, None, '___sec76'),
+              (u'Coordenadas globales', 2, None, '___sec77'),
+              (u'Elemento de tres nodos', 3, None, '___sec78'),
+              (u'Elasticidad plana', 0, None, '___sec79'),
+              (u'Esfuerzo plano', 2, None, '___sec80')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="fem.html">Introducción al método de elementos finitos</a>
+  </div>
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="._fem001.html#___sec0" style="font-size: 80%;">Métodos analíticos aproximados</a></li>
+     <!-- navigation toc: --> <li><a href="._fem002.html#___sec7" style="font-size: 80%;">Elementos unidimensionales</a></li>
+     <!-- navigation toc: --> <li><a href="._fem006.html#___sec22" style="font-size: 80%;">Elemento barra en tracción-compresión</a></li>
+     <!-- navigation toc: --> <li><a href="._fem013.html#___sec43" style="font-size: 80%;">Elemento barra en torsión</a></li>
+     <!-- navigation toc: --> <li><a href="._fem014.html#___sec44" style="font-size: 80%;">Elemento viga Euler-Bernoulli</a></li>
+     <!-- navigation toc: --> <li><a href="._fem019.html#___sec59" style="font-size: 80%;">Elementos unidimensionales mapeados</a></li>
+     <!-- navigation toc: --> <li><a href="._fem022.html#___sec75" style="font-size: 80%;">Elementos bidimensionales</a></li>
+     <!-- navigation toc: --> <li><a href="._fem023.html#___sec79" style="font-size: 80%;">Elasticidad plana</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0009"></a>
+<!-- !split -->
+
+<h2 id="___sec30">Ejemplo 3 </h2>
+
+<p>
+\( L = 40 \ \text{cm} \), \( A_{1} = 25 \ \text{cm}^{2} \), \( A_{2} = 16 \ \text{cm}^{2} \) y \( E = 2000 \ \text{Kg}/\text{cm}^{2} \)
+
+<p>
+<center><p><img src="imagenes/012_ejemplo_barra_1.svg" align="bottom" width=500></p></center>
+
+<h3 id="___sec31">Un elemento de dos nodos </h3>
+
+<p>
+<center><p><img src="imagenes/012_ejemplo_barra_2.svg" align="bottom" width=500></p></center>
+
+$$
+\begin{equation*}
+    \int_{0}^{L} \mathbf{B}^{\mathrm{T}} \mathbf{D} \ \mathbf{B} \ dx \ \mathbf{u} = \int_{0}^{L} q \ \mathbf{N}^{\mathrm{T}} dx + \mathbf{F}
+\end{equation*}
+$$
+
+<p>
+área
+
+$$
+\begin{equation*}
+    A(x) = 25 - \frac{9}{40} x
+\end{equation*}
+$$
+
+<p>
+desplazamientos
+
+$$
+\begin{align*}
+    \mathbf{N}
+    &= \begin{bmatrix}
+        \frac{x_{2}}{x_{2} - x_{1}} - \frac{1}{x_{2} - x_{1}} x &
+        -\frac{x_{1}}{x_{2} - x_{1}} + \frac{1}{x_{2} - x_{1}} x
+    \end{bmatrix} \\
+    &= \begin{bmatrix}
+        \frac{40}{40 - 0} - \frac{1}{40 - 0} x &
+        -\frac{0}{40 - 0} + \frac{1}{40 - 0} x
+    \end{bmatrix} \\
+    &= \begin{bmatrix}
+        1 - \frac{1}{40} x & \frac{1}{40} x
+    \end{bmatrix}
+\end{align*}
+$$
+
+<p>
+deformaciones
+
+$$
+\begin{equation*}
+    \mathbf{B} = \frac{d \mathbf{N}}{d x} =
+    \begin{bmatrix}
+        -\frac{1}{40} & \frac{1}{40}
+    \end{bmatrix}
+\end{equation*}
+$$
+
+<p>
+matriz constitutiva
+
+$$
+\begin{equation*}
+    \mathbf{D} = E \ A = 50000 - 450 x
+\end{equation*}
+$$
+
+<p>
+reemplazando
+
+$$
+\begin{equation*}
+    \int_{0}^{40}
+    \begin{bmatrix}
+        -\frac{1}{40} \\
+        \frac{1}{40}
+    \end{bmatrix}
+    \begin{bmatrix}
+        50000 - 450 x
+    \end{bmatrix}
+    \begin{bmatrix}
+        -\frac{1}{40} & \frac{1}{40}
+    \end{bmatrix} dx
+    \begin{bmatrix}
+    u_{1} \\
+    u_{2}
+    \end{bmatrix} =
+    \begin{bmatrix}
+    F_{1} \\
+    F_{2}
+    \end{bmatrix}
+\end{equation*}
+$$
+
+<p>
+integrando
+
+$$
+\begin{equation*}
+    \begin{bmatrix}
+        1025 & -1025 \\
+        -1025 & 1025
+    \end{bmatrix}
+    \begin{bmatrix}
+    u_{1} \\
+    u_{2}
+    \end{bmatrix} =
+    \begin{bmatrix}
+    F_{1} \\
+    F_{2}
+    \end{bmatrix}
+\end{equation*}
+$$
+
+<p>
+reemplazando las condiciones de contorno
+
+$$
+\begin{equation*}
+    \begin{bmatrix}
+        1025 & -1025 \\
+        -1025 & 1025
+    \end{bmatrix}
+    \begin{bmatrix}
+    0 \\
+    u_{2}
+    \end{bmatrix} =
+    \begin{bmatrix}
+    F_{1} \\
+    -300
+    \end{bmatrix}
+\end{equation*}
+$$
+
+<p>
+resolviendo
+
+$$
+\begin{align*}
+    F_{1} &= 300 \ \text{Kg} \\
+    u_{2} &= -0.293 \ \text{cm}
+\end{align*}
+$$
+
+<p>
+<b>Desplazamientos, deformaciones y esfuerzos</b>
+
+<p>
+desplazamientos
+
+$$
+\begin{equation*}
+    u = \mathbf{N} \ \mathbf{u} =
+    \begin{bmatrix}
+        1 - \frac{1}{40} x & \frac{1}{40} x
+    \end{bmatrix}
+    \begin{bmatrix}
+    0 \\
+    -0.293
+    \end{bmatrix} = -0.007325 x
+\end{equation*}
+$$
+
+<p>
+deformación normal
+
+$$
+\begin{equation*}
+    \varepsilon = \mathbf{B} \ \mathbf{u} =
+    \begin{bmatrix}
+        -\frac{1}{40} & \frac{1}{40}
+    \end{bmatrix}
+    \begin{bmatrix}
+    0 \\
+    -0.293
+    \end{bmatrix} = -0.007325
+\end{equation*}
+$$
+
+<p>
+esfuerzo normal
+
+$$
+\begin{equation*}
+    \sigma = E \varepsilon = -14.65 \ \text{Kg}/\text{cm}^{2}
+\end{equation*}
+$$
+
+<h3 id="___sec32">Dos elementos de dos nodos </h3>
+
+<p>
+<center><p><img src="imagenes/012_ejemplo_barra_3.svg" align="bottom" width=500></p></center>
+
+$$
+\begin{equation*}
+    \int_{0}^{L} \mathbf{B}^{\mathrm{T}} \mathbf{D} \ \mathbf{B} \ dx \ \mathbf{u} = \int_{0}^{L} q \ \mathbf{N}^{\mathrm{T}} dx + \mathbf{F}
+\end{equation*}
+$$
+
+<p>
+<em>Elemento 1</em>
+
+<p>
+área
+
+$$
+\begin{equation*}
+    A(x) = 25 - \frac{9}{40} x
+\end{equation*}
+$$
+
+<p>
+desplazamientos
+
+$$
+\begin{align*}
+    \mathbf{N}
+    &= \begin{bmatrix}
+        \frac{x_{2}}{x_{2} - x_{1}} - \frac{1}{x_{2} - x_{1}} x &
+        -\frac{x_{1}}{x_{2} - x_{1}} + \frac{1}{x_{2} - x_{1}} x
+    \end{bmatrix} \\
+    &= \begin{bmatrix}
+        \frac{20}{20 - 0} - \frac{1}{20 - 0} x &
+        -\frac{0}{20 - 0} + \frac{1}{20 - 0} x
+    \end{bmatrix} \\
+    &= \begin{bmatrix}
+        1 - \frac{1}{20} x & \frac{1}{20} x
+    \end{bmatrix}
+\end{align*}
+$$
+
+<p>
+deformaciones
+
+$$
+\begin{equation*}
+    \mathbf{B} = \frac{d \mathbf{N}}{d x} =
+    \begin{bmatrix}
+        -\frac{1}{20} & \frac{1}{20}
+    \end{bmatrix}
+\end{equation*}
+$$
+
+<p>
+matriz constitutiva
+
+$$
+\begin{equation*}
+    \mathbf{D} = E \ A = 50000 - 450 x
+\end{equation*}
+$$
+
+<p>
+reemplazando
+
+$$
+\begin{equation*}
+    \int_{0}^{20}
+    \begin{bmatrix}
+        -\frac{1}{20} \\
+        \frac{1}{20}
+    \end{bmatrix}
+    \begin{bmatrix}
+        50000 - 450 x
+    \end{bmatrix}
+    \begin{bmatrix}
+        -\frac{1}{20} & \frac{1}{20}
+    \end{bmatrix} dx
+    \begin{bmatrix}
+    u_{1} \\
+    u_{2}
+    \end{bmatrix} =
+    \begin{bmatrix}
+    F_{1} \\
+    F_{2}
+    \end{bmatrix}
+\end{equation*}
+$$
+
+<p>
+integrando
+
+$$
+\begin{equation*}
+    \begin{bmatrix}
+        2275 & -2275 \\
+        -2275 & 2275
+    \end{bmatrix}
+    \begin{bmatrix}
+    u_{1} \\
+    u_{2}
+    \end{bmatrix} =
+    \begin{bmatrix}
+    F_{1} \\
+    F_{2}
+    \end{bmatrix}
+\end{equation*}
+$$
+
+<p>
+<em>Elemento 2</em>
+
+<p>
+área
+
+$$
+\begin{equation*}
+    A(x) = 25 - \frac{9}{40} x
+\end{equation*}
+$$
+
+<p>
+desplazamientos
+
+$$
+\begin{align*}
+    \mathbf{N}
+    &= \begin{bmatrix}
+        \frac{x_{2}}{x_{2} - x_{1}} - \frac{1}{x_{2} - x_{1}} x &
+        -\frac{x_{1}}{x_{2} - x_{1}} + \frac{1}{x_{2} - x_{1}} x
+    \end{bmatrix} \\
+    &= \begin{bmatrix}
+        \frac{40}{40 - 20} - \frac{1}{40 - 20} x &
+        -\frac{20}{40 - 20} + \frac{1}{40 - 20} x
+    \end{bmatrix} \\
+    &= \begin{bmatrix}
+        2 - \frac{1}{20} x & -1 + \frac{1}{20} x
+    \end{bmatrix}
+\end{align*}
+$$
+
+<p>
+deformaciones
+
+$$
+\begin{equation*}
+    \mathbf{B} = \frac{d \mathbf{N}}{d x} =
+    \begin{bmatrix}
+        -\frac{1}{20} & \frac{1}{20}
+    \end{bmatrix}
+\end{equation*}
+$$
+
+<p>
+matriz constitutiva
+
+$$
+\begin{equation*}
+    \mathbf{D} = E \ A = 50000 - 450 x
+\end{equation*}
+$$
+
+<p>
+reemplazando
+
+$$
+\begin{equation*}
+    \int_{20}^{40}
+    \begin{bmatrix}
+        -\frac{1}{20} \\
+        \frac{1}{20}
+    \end{bmatrix}
+    \begin{bmatrix}
+        50000 - 450 x
+    \end{bmatrix}
+    \begin{bmatrix}
+        -\frac{1}{20} & \frac{1}{20}
+    \end{bmatrix} dx
+    \begin{bmatrix}
+    u_{1} \\
+    u_{2}
+    \end{bmatrix} =
+    \begin{bmatrix}
+    F_{1} \\
+    F_{2}
+    \end{bmatrix}
+\end{equation*}
+$$
+
+<p>
+integrando
+
+$$
+\begin{equation*}
+    \begin{bmatrix}
+        1825 & -1825 \\
+        -1825 & 1825
+    \end{bmatrix}
+    \begin{bmatrix}
+    u_{1} \\
+    u_{2}
+    \end{bmatrix} =
+    \begin{bmatrix}
+    F_{1} \\
+    F_{2}
+    \end{bmatrix}
+\end{equation*}
+$$
+
+<p>
+<b>Ensamblaje y solución</b>
+
+<p>
+ensamblando matriz global
+
+$$
+\begin{equation*}
+    \begin{bmatrix}
+        2275 & -2275 & 0 \\
+        -2275 & 2275+ 1825 & -1825 \\
+        0& -1825 & 1825
+    \end{bmatrix}
+    \begin{bmatrix}
+    u_{1} \\
+    u_{2} + u_{1} \\
+    u_{2}
+    \end{bmatrix} =
+    \begin{bmatrix}
+    F_{1} \\
+    F_{2} + F_{1} \\
+    F_{2}
+    \end{bmatrix}
+\end{equation*}
+$$
+
+<p>
+sumando
+
+$$
+\begin{equation*}
+    \begin{bmatrix}
+        2275 & -2275 & 0 \\
+        -2275 & 4100 & -1825 \\
+        0& -1825 & 1825
+    \end{bmatrix}
+    \begin{bmatrix}
+    u_{1} \\
+    u_{2} \\
+    u_{3}
+    \end{bmatrix} =
+    \begin{bmatrix}
+    F_{1} \\
+    F_{2} \\
+    F_{3}
+    \end{bmatrix}
+\end{equation*}
+$$
+
+<p>
+reemplazando condiciones de contorno
+
+$$
+\begin{equation*}
+    \begin{bmatrix}
+        2275 & -2275 & 0 \\
+        -2275 & 4100 & -1825 \\
+        0& -1825 & 1825
+    \end{bmatrix}
+    \begin{bmatrix}
+    0 \\
+    u_{2} \\
+    u_{3}
+    \end{bmatrix} =
+    \begin{bmatrix}
+    F_{1} \\
+    0 \\
+    -300
+    \end{bmatrix}
+\end{equation*}
+$$
+
+<p>
+resolviendo
+
+$$
+\begin{align*}
+    F_{1} &= 300 \ \text{Kg} \\
+    u_{2} &= -0.132 \ \text{m} \\
+    u_{3} &= -0.296 \ \text{m}
+\end{align*}
+$$
+
+<p>
+<b>Desplazamientos, deformaciones y esfuerzos</b>
+
+<p>
+<em>Elemento 1</em>
+
+<p>
+desplazamientos
+
+$$
+\begin{equation*}
+    u = \mathbf{N} \ \mathbf{u} =
+    \begin{bmatrix}
+        1 - \frac{1}{20} x & \frac{1}{20} x
+    \end{bmatrix}
+    \begin{bmatrix}
+    0 \\
+    -0.132
+    \end{bmatrix} = -0.0066 x
+\end{equation*}
+$$
+
+<p>
+deformación normal
+
+$$
+\begin{equation*}
+    \varepsilon = \mathbf{B} \ \mathbf{u} =
+    \begin{bmatrix}
+        -\frac{1}{20} & \frac{1}{20}
+    \end{bmatrix}
+    \begin{bmatrix}
+    0 \\
+    -0.132
+    \end{bmatrix} = -0.0066
+\end{equation*}
+$$
+
+<p>
+esfuerzo normal
+
+$$
+\begin{equation*}
+    \sigma = E \ \varepsilon = -13.2 \ \text{Kg}/\text{cm}^{2}
+\end{equation*}
+$$
+
+<p>
+<em>Elemento 2</em>
+
+<p>
+desplazamientos
+
+$$
+\begin{equation*}
+    u = \mathbf{N} \ \mathbf{u} =
+    \begin{bmatrix}
+        2 - \frac{1}{20} x & -1 + \frac{1}{20} x
+    \end{bmatrix}
+    \begin{bmatrix}
+    -0.132 \\
+    -0.296
+    \end{bmatrix} = 0.032 - 0.0082 x
+\end{equation*}
+$$
+
+<p>
+deformación normal
+
+$$
+\begin{equation*}
+    \varepsilon = \mathbf{B} \ \mathbf{u} =
+    \begin{bmatrix}
+        -\frac{1}{20} & \frac{1}{20}
+    \end{bmatrix}
+    \begin{bmatrix}
+    -0.132 \\
+    -0.296
+    \end{bmatrix} = -0.0082
+\end{equation*}
+$$
+
+<p>
+esfuerzo normal
+
+$$
+\begin{equation*}
+    \sigma = E \ \varepsilon = -16.4 \ \text{Kg}/\text{cm}^{2}
+\end{equation*}
+$$
+
+<p>
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="previous">
+    <a href="._fem008.html">&larr; Prev</a>
+  </li>
+  <li class="next">
+    <a href="._fem010.html">Next &rarr;</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+
