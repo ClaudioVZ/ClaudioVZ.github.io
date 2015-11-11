@@ -1,0 +1,283 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Ecuaciones diferenciales ordinarias">
+
+<title>Ecuaciones diferenciales ordinarias</title>
+
+<!-- Bootstrap style: bootswatch_cosmo -->
+<link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/cosmo/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 0,
+ 'sections': [(u'Introducci\xf3n', 0, None, '___sec0'),
+              (u'Modelos matem\xe1ticos', 1, None, '___sec1'),
+              (u'Soluci\xf3n anal\xedtica de modelos matem\xe1ticos',
+               2,
+               None,
+               '___sec2'),
+              (u'Soluci\xf3n num\xe9rica aproximada de modelos matem\xe1ticos',
+               2,
+               None,
+               '___sec3'),
+              (u'Aproximaciones y errores de redondeo', 1, None, '___sec4'),
+              (u'Definiciones de error', 2, None, '___sec5'),
+              (u'Estimaci\xf3n del error con m\xe9todos iterativos',
+               2,
+               None,
+               '___sec6'),
+              (u'Primera aproximaci\xf3n', 3, None, '___sec7'),
+              (u'Segunda aproximaci\xf3n', 3, None, '___sec8'),
+              (u'Implementaci\xf3n', 3, None, '___sec9'),
+              (u'Seudoc\xf3digo para c\xe1lculos iterativos',
+               3,
+               None,
+               '___sec10'),
+              (u'Implementaci\xf3n para calcular $e^{x}$',
+               3,
+               None,
+               '___sec11'),
+              (u'Errores de redondeo', 2, None, '___sec12'),
+              (u'Representaci\xf3n de n\xfameros en la computadora',
+               3,
+               None,
+               '___sec13'),
+              (u'\xc9psilon de m\xe1quina', 3, None, '___sec14'),
+              (u'Aproximaciones cuando se realiza un gran n\xfamero de c\xe1lculos',
+               3,
+               None,
+               '___sec15'),
+              (u'Cancelaci\xf3n por resta', 3, None, '___sec16'),
+              (u'Convergencia', 3, None, '___sec17'),
+              (u'M\xe9todos', 0, None, '___sec18'),
+              (u'M\xe9todo de Euler', 1, None, '___sec19'),
+              (u'M\xe9todo de Euler hacia adelante', 2, None, '___sec20'),
+              (u'Ejemplo', 3, None, '___sec21'),
+              (u'Seudoc\xf3digo', 3, None, '___sec22'),
+              (u'Implementaci\xf3n', 3, None, '___sec23'),
+              (u'M\xe9todo de Euler modificado', 2, None, '___sec24'),
+              (u'Ejemplo', 3, None, '___sec25'),
+              (u'M\xe9todo de Euler hacia atr\xe1s', 2, None, '___sec26'),
+              (u'Ejemplo', 3, None, '___sec27'),
+              (u'M\xe9todo de Heun', 2, None, '___sec28'),
+              (u'Ejemplo', 3, None, '___sec29'),
+              (u'Seudoc\xf3digo', 3, None, '___sec30'),
+              (u'Implementaci\xf3n', 3, None, '___sec31'),
+              (u'M\xe9todos impl\xedcitos de Runge-Kutta (RK)',
+               1,
+               None,
+               '___sec32'),
+              (u'Clasificaci\xf3n', 2, None, '___sec33'),
+              (u'M\xe9todos de primer orden', 2, None, '___sec34'),
+              (u'M\xe9todos de segundo orden', 2, None, '___sec35'),
+              (u'M\xe9todos de tercer orden', 2, None, '___sec36'),
+              (u'M\xe9todos de cuarto orden', 2, None, '___sec37'),
+              (u'M\xe9todos de quinto orden', 2, None, '___sec38')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="ode.html">Ecuaciones diferenciales ordinarias</a>
+  </div>
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="._ode001.html#___sec0" style="font-size: 80%;"><b>Introducción</b></a></li>
+     <!-- navigation toc: --> <li><a href="._ode001.html#___sec1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Modelos matemáticos</a></li>
+     <!-- navigation toc: --> <li><a href="._ode004.html#___sec4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Aproximaciones y errores de redondeo</a></li>
+     <!-- navigation toc: --> <li><a href="._ode008.html#___sec18" style="font-size: 80%;"><b>Métodos</b></a></li>
+     <!-- navigation toc: --> <li><a href="._ode008.html#___sec19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Método de Euler</a></li>
+     <!-- navigation toc: --> <li><a href="._ode012.html#___sec32" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Métodos implícitos de Runge-Kutta (RK)</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0003"></a>
+<!-- !split -->
+
+<h2 id="___sec3">Solución numérica aproximada de modelos matemáticos </h2>
+
+<p>
+El modelo anterior se resolverá mediante el <em>método de Euler</em>
+
+$$
+\begin{equation*}
+    \frac{d v}{d t} \approx \frac{\Delta v}{\Delta t} = \frac{v(t_{i+1}) - v(t_{i})}{t_{i+1} - t_{i}}
+\end{equation*}
+$$
+
+<p>
+reemplazando en la ecuación diferencial
+
+$$
+\begin{equation*}
+    \frac{v(t_{i+1}) - v(t_{i})}{t_{i+1} - t_{i}} = g - \frac{c v(t_{i})}{m}
+\end{equation*}
+$$
+
+<p>
+despejando \( v(t_{i+1}) \)
+
+$$
+\begin{equation*}
+    v(t_{i+1}) = v(t_{i}) + (g - \frac{c}{m} v(t_{i})) (t_{i+1} - t_{i})
+\end{equation*}
+$$
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">m <span style="color: #666666">=</span> <span style="color: #666666">68.1</span>
+c <span style="color: #666666">=</span> <span style="color: #666666">12.5</span>
+g <span style="color: #666666">=</span> <span style="color: #666666">9.81</span>
+ti <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+vi <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+
+println(<span style="color: #BA2121">&quot;t&quot;</span>, <span style="color: #BA2121">&#39;</span><span style="color: #BB6622; font-weight: bold">\t</span><span style="color: #BA2121">&#39;</span>, <span style="color: #BA2121">&quot;v&quot;</span>)
+println(ti, <span style="color: #BA2121">&#39;</span><span style="color: #BB6622; font-weight: bold">\t</span><span style="color: #BA2121">&#39;</span>, vi)
+
+<span style="color: #008000; font-weight: bold">for</span> i <span style="color: #666666">=</span> <span style="color: #666666">1</span>:<span style="color: #666666">20</span>
+    tf <span style="color: #666666">=</span> ti <span style="color: #666666">+</span> <span style="color: #666666">1</span>
+    vf <span style="color: #666666">=</span> vi <span style="color: #666666">+</span> ((g <span style="color: #666666">-</span> ((c <span style="color: #666666">/</span> m) <span style="color: #666666">*</span> vi)) <span style="color: #666666">*</span> (tf  <span style="color: #666666">-</span> ti))
+    println(tf, <span style="color: #BA2121">&#39;</span><span style="color: #BB6622; font-weight: bold">\t</span><span style="color: #BA2121">&#39;</span>, vf)
+    vi <span style="color: #666666">=</span> vf
+    ti <span style="color: #666666">=</span> tf
+end
+
+    t	v
+    <span style="color: #666666">0</span>	<span style="color: #666666">0</span>
+    <span style="color: #666666">1</span>	<span style="color: #666666">9.81</span>
+    <span style="color: #666666">2</span>	<span style="color: #666666">17.819339207048458</span>
+    <span style="color: #666666">3</span>	<span style="color: #666666">24.358535387839858</span>
+    <span style="color: #666666">4</span>	<span style="color: #666666">29.697438583904496</span>
+    <span style="color: #666666">5</span>	<span style="color: #666666">34.05636689082364</span>
+    <span style="color: #666666">6</span>	<span style="color: #666666">37.615198225107115</span>
+    <span style="color: #666666">7</span>	<span style="color: #666666">40.52079326455148</span>
+    <span style="color: #666666">8</span>	<span style="color: #666666">42.89305588119034</span>
+    <span style="color: #666666">9</span>	<span style="color: #666666">44.82988115997332</span>
+    <span style="color: #666666">10</span>	<span style="color: #666666">46.41119519081522</span>
+    <span style="color: #666666">11</span>	<span style="color: #666666">47.702253342280855</span>
+    <span style="color: #666666">12</span>	<span style="color: #666666">48.75633312526895</span>
+    <span style="color: #666666">13</span>	<span style="color: #666666">49.61693277187891</span>
+    <span style="color: #666666">14</span>	<span style="color: #666666">50.31956625721685</span>
+    <span style="color: #666666">15</span>	<span style="color: #666666">50.89322883849129</span>
+    <span style="color: #666666">16</span>	<span style="color: #666666">51.361593589135325</span>
+    <span style="color: #666666">17</span>	<span style="color: #666666">51.74398830478596</span>
+    <span style="color: #666666">18</span>	<span style="color: #666666">52.05619309465638</span>
+    <span style="color: #666666">19</span>	<span style="color: #666666">52.31109157214236</span>
+    <span style="color: #666666">20</span>	<span style="color: #666666">52.51920251705015</span>
+</pre></div>
+<p>
+Comparamos las soluciones:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">using PyCall
+using PyPlot
+
+m <span style="color: #666666">=</span> <span style="color: #666666">68.1</span>
+c <span style="color: #666666">=</span> <span style="color: #666666">12.5</span>
+g <span style="color: #666666">=</span> <span style="color: #666666">9.81</span>
+
+ta <span style="color: #666666">=</span> linspace(<span style="color: #666666">0</span>,<span style="color: #666666">20</span>,<span style="color: #666666">21</span>)
+va <span style="color: #666666">=</span> zeros(<span style="color: #666666">21</span>)
+
+<span style="color: #008000; font-weight: bold">for</span> i <span style="color: #666666">=</span> <span style="color: #666666">1</span>:<span style="color: #666666">21</span>
+    va[i] <span style="color: #666666">=</span> ((g <span style="color: #666666">*</span> m) <span style="color: #666666">/</span> c) <span style="color: #666666">*</span> (<span style="color: #666666">1</span> <span style="color: #666666">-</span> exp(<span style="color: #666666">-</span>ta[i] <span style="color: #666666">*</span> (c<span style="color: #666666">/</span>m)))
+end
+
+tn <span style="color: #666666">=</span> zeros(<span style="color: #666666">21</span>)
+vn <span style="color: #666666">=</span> zeros(<span style="color: #666666">21</span>)
+
+<span style="color: #008000; font-weight: bold">for</span> i <span style="color: #666666">=</span> <span style="color: #666666">1</span>:<span style="color: #666666">20</span>
+    tn[i<span style="color: #666666">+1</span>] <span style="color: #666666">=</span> tn[i] <span style="color: #666666">+</span> <span style="color: #666666">1</span>
+    vn[i<span style="color: #666666">+1</span>] <span style="color: #666666">=</span> vn[i] <span style="color: #666666">+</span> ((g <span style="color: #666666">-</span> ((c <span style="color: #666666">/</span> m) <span style="color: #666666">*</span> vn[i])) <span style="color: #666666">*</span> (tn[i<span style="color: #666666">+1</span>]  <span style="color: #666666">-</span> tn[i]))
+end
+
+plot(ta, va, color<span style="color: #666666">=</span><span style="color: #BA2121">&quot;blue&quot;</span>, linewidth<span style="color: #666666">=2.0</span>,label<span style="color: #666666">=</span><span style="color: #BA2121">&quot;Solución exacta&quot;</span>)
+plot(tn, vn, color<span style="color: #666666">=</span><span style="color: #BA2121">&quot;red&quot;</span>, linewidth<span style="color: #666666">=2.0</span>,label<span style="color: #666666">=</span><span style="color: #BA2121">&quot;Solución numérica&quot;</span>)
+xlabel(L<span style="color: #BA2121">&quot;$t$&quot;</span>)
+ylabel(L<span style="color: #BA2121">&quot;$v$&quot;</span>)
+legend(loc<span style="color: #666666">=</span><span style="color: #BA2121">&quot;upper left&quot;</span>,fancybox<span style="color: #666666">=</span><span style="color: #BA2121">&quot;true&quot;</span>)
+title(<span style="color: #BA2121">&quot;Caída libre&quot;</span>)
+grid(<span style="color: #BA2121">&quot;on&quot;</span>)
+</pre></div>
+<p>
+<center><p><img src="imagenes/01_intro_5_0.png" align="bottom" width=500></p></center>
+
+<p>
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="previous">
+    <a href="._ode002.html">&larr; Prev</a>
+  </li>
+  <li class="next">
+    <a href="._ode004.html">Next &rarr;</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

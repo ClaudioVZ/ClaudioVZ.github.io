@@ -1,0 +1,279 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Ecuaciones diferenciales ordinarias">
+
+<title>Ecuaciones diferenciales ordinarias</title>
+
+<!-- Bootstrap style: bootswatch_cosmo -->
+<link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/cosmo/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 0,
+ 'sections': [(u'Introducci\xf3n', 0, None, '___sec0'),
+              (u'Modelos matem\xe1ticos', 1, None, '___sec1'),
+              (u'Soluci\xf3n anal\xedtica de modelos matem\xe1ticos',
+               2,
+               None,
+               '___sec2'),
+              (u'Soluci\xf3n num\xe9rica aproximada de modelos matem\xe1ticos',
+               2,
+               None,
+               '___sec3'),
+              (u'Aproximaciones y errores de redondeo', 1, None, '___sec4'),
+              (u'Definiciones de error', 2, None, '___sec5'),
+              (u'Estimaci\xf3n del error con m\xe9todos iterativos',
+               2,
+               None,
+               '___sec6'),
+              (u'Primera aproximaci\xf3n', 3, None, '___sec7'),
+              (u'Segunda aproximaci\xf3n', 3, None, '___sec8'),
+              (u'Implementaci\xf3n', 3, None, '___sec9'),
+              (u'Seudoc\xf3digo para c\xe1lculos iterativos',
+               3,
+               None,
+               '___sec10'),
+              (u'Implementaci\xf3n para calcular $e^{x}$',
+               3,
+               None,
+               '___sec11'),
+              (u'Errores de redondeo', 2, None, '___sec12'),
+              (u'Representaci\xf3n de n\xfameros en la computadora',
+               3,
+               None,
+               '___sec13'),
+              (u'\xc9psilon de m\xe1quina', 3, None, '___sec14'),
+              (u'Aproximaciones cuando se realiza un gran n\xfamero de c\xe1lculos',
+               3,
+               None,
+               '___sec15'),
+              (u'Cancelaci\xf3n por resta', 3, None, '___sec16'),
+              (u'Convergencia', 3, None, '___sec17'),
+              (u'M\xe9todos', 0, None, '___sec18'),
+              (u'M\xe9todo de Euler', 1, None, '___sec19'),
+              (u'M\xe9todo de Euler hacia adelante', 2, None, '___sec20'),
+              (u'Ejemplo', 3, None, '___sec21'),
+              (u'Seudoc\xf3digo', 3, None, '___sec22'),
+              (u'Implementaci\xf3n', 3, None, '___sec23'),
+              (u'M\xe9todo de Euler modificado', 2, None, '___sec24'),
+              (u'Ejemplo', 3, None, '___sec25'),
+              (u'M\xe9todo de Euler hacia atr\xe1s', 2, None, '___sec26'),
+              (u'Ejemplo', 3, None, '___sec27'),
+              (u'M\xe9todo de Heun', 2, None, '___sec28'),
+              (u'Ejemplo', 3, None, '___sec29'),
+              (u'Seudoc\xf3digo', 3, None, '___sec30'),
+              (u'Implementaci\xf3n', 3, None, '___sec31'),
+              (u'M\xe9todos impl\xedcitos de Runge-Kutta (RK)',
+               1,
+               None,
+               '___sec32'),
+              (u'Clasificaci\xf3n', 2, None, '___sec33'),
+              (u'M\xe9todos de primer orden', 2, None, '___sec34'),
+              (u'M\xe9todos de segundo orden', 2, None, '___sec35'),
+              (u'M\xe9todos de tercer orden', 2, None, '___sec36'),
+              (u'M\xe9todos de cuarto orden', 2, None, '___sec37'),
+              (u'M\xe9todos de quinto orden', 2, None, '___sec38')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="ode.html">Ecuaciones diferenciales ordinarias</a>
+  </div>
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="._ode001.html#___sec0" style="font-size: 80%;"><b>Introducción</b></a></li>
+     <!-- navigation toc: --> <li><a href="._ode001.html#___sec1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Modelos matemáticos</a></li>
+     <!-- navigation toc: --> <li><a href="._ode004.html#___sec4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Aproximaciones y errores de redondeo</a></li>
+     <!-- navigation toc: --> <li><a href="._ode008.html#___sec18" style="font-size: 80%;"><b>Métodos</b></a></li>
+     <!-- navigation toc: --> <li><a href="._ode008.html#___sec19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Método de Euler</a></li>
+     <!-- navigation toc: --> <li><a href="._ode012.html#___sec32" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Métodos implícitos de Runge-Kutta (RK)</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0017"></a>
+<!-- !split -->
+
+<h2 id="___sec38">Métodos de quinto orden </h2>
+
+<p>
+Para \( s = 6 \)
+
+$$
+\begin{align*}
+    k_{1} &= f(t_{n}, y_{n}) \\
+    k_{2} &= f(t_{n} + c_{2} h, y_{n} + h(a_{21} k_{1})) \\
+    k_{3} &= f(t_{n} + c_{3} h, y_{n} + h(a_{31} k_{1} + a_{32} k_{2})) \\
+    k_{4} &= f(t_{n} + c_{4} h, y_{n} + h(a_{41} k_{1} + a_{42} k_{2} + a_{43} k_{3})) \\
+    k_{5} &= f(t_{n} + c_{5} h, y_{n} + h(a_{51} k_{1} + a_{52} k_{2} + a_{53} k_{3} + a_{54} k_{3})) \\
+    k_{6} &= f(t_{n} + c_{6} h, y_{n} + h(a_{61} k_{1} + a_{62} k_{2} + a_{63} k_{3} + a_{64} k_{3} + a_{65} k_{3})) \\
+    y_{n+1} &= y_{n} + h (b_{1} k_{1} + b_{2} k_{2} + b_{3} k_{3} + b_{4} k_{4} + b_{5} k_{5} + b_{6} k_{6})
+\end{align*}
+$$
+
+<p>
+Método RK de quinto orden de Butcher (1964)
+
+<p>
+\begin{array}{c|c c c c}
+0 & & & & & & \\
+\frac{1}{4} & \frac{1}{4} & & & & & \\
+\frac{1}{4} & \frac{1}{8} & \frac{1}{8} & & & & \\
+\frac{1}{2} & 0 & -\frac{1}{2} & 1 & & & \\
+\frac{3}{4} & \frac{3}{16} & 0 &amp; 0 & \frac{9}{16} & & \\
+1 & -\frac{3}{7} & \frac{2}{7} & \frac{12}{7} & -\frac{12}{7} & \frac{8}{7} & \\
+\hline
+& \frac{7}{90} & 0 & \frac{16}{45} & \frac{2}{15} & \frac{16}{15} & \frac{7}{90}
+\end{array}
+
+<p>
+reemplazando se obtiene
+
+$$
+\begin{align*}
+    k_{1} &= f(t_{n}, y_{n}) \\
+    k_{2} &= f \left( t_{n} + \frac{1}{4} h, y_{n} + h \left( \frac{1}{4} k_{1} \right) \right) \\
+    k_{3} &= f \left( t_{n} + \frac{1}{4} h, y_{n} + h \left( \frac{1}{8} k_{1} + \frac{1}{8} k_{2} \right) \right) \\
+    k_{4} &= f \left( t_{n} + \frac{1}{2} h, y_{n} + h \left( -\frac{1}{2} k_{2} + k_{3} \right) \right) \\
+    k_{5} &= f \left( t_{n} + \frac{3}{4} h, y_{n} + h \left( \frac{3}{16} k_{1} + \frac{9}{16} k_{4} \right) \right) \\
+    k_{6} &= f \left( t_{n} + h, y_{n} + h \left( -\frac{3}{7} k_{1} + \frac{2}{7} k_{2} + \frac{12}{7} k_{3} - \frac{12}{7} k_{4} + \frac{8}{7} k_{5} \right) \right) \\
+    y_{n+1} &= y_{n} + h \left( \frac{7}{90} k_{1} + \frac{32}{90} k_{3} + \frac{12}{90} k_{4} + \frac{32}{90} k_{5} + \frac{7}{90} k_{6} \right)
+\end{align*}
+$$
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">function prueba5(f::Function, n, xi, yi, xf)
+    h <span style="color: #666666">=</span> (xf <span style="color: #666666">-</span> xi)<span style="color: #666666">/</span>n
+    y <span style="color: #666666">=</span> yi
+    x <span style="color: #666666">=</span> xi
+    c2 <span style="color: #666666">=</span> <span style="color: #666666">1/4</span>
+    a21 <span style="color: #666666">=</span> <span style="color: #666666">1/4</span>
+    c3 <span style="color: #666666">=</span> <span style="color: #666666">1/4</span>
+    a31 <span style="color: #666666">=</span> <span style="color: #666666">1/8</span>
+    a32 <span style="color: #666666">=</span> <span style="color: #666666">1/8</span>
+    c4 <span style="color: #666666">=</span> <span style="color: #666666">1/2</span>
+    a41 <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+    a42 <span style="color: #666666">=</span> <span style="color: #666666">-1/2</span>
+    a43 <span style="color: #666666">=</span> <span style="color: #666666">1</span>
+    c5 <span style="color: #666666">=</span> <span style="color: #666666">3/4</span>
+    a51 <span style="color: #666666">=</span> <span style="color: #666666">3/16</span>
+    a52 <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+    a53 <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+    a54 <span style="color: #666666">=</span> <span style="color: #666666">9/16</span>
+    c6 <span style="color: #666666">=</span> <span style="color: #666666">1</span>
+    a61 <span style="color: #666666">=</span> <span style="color: #666666">-3/7</span>
+    a62 <span style="color: #666666">=</span> <span style="color: #666666">2/7</span>
+    a63 <span style="color: #666666">=</span> <span style="color: #666666">12/7</span>
+    a64 <span style="color: #666666">=</span> <span style="color: #666666">-12/7</span>
+    a65 <span style="color: #666666">=</span> <span style="color: #666666">8/7</span>
+    b1 <span style="color: #666666">=</span> <span style="color: #666666">7/90</span>
+    b2 <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+    b3 <span style="color: #666666">=</span> <span style="color: #666666">16/45</span>
+    b4 <span style="color: #666666">=</span> <span style="color: #666666">2/15</span>
+    b5 <span style="color: #666666">=</span> <span style="color: #666666">16/45</span>
+    b6 <span style="color: #666666">=</span> <span style="color: #666666">7/90</span>
+    <span style="color: #AA22FF">@printf</span>(<span style="color: #BA2121">&quot;</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">  </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">  </span><span style="color: #BB6688; font-weight: bold">%8s</span><span style="color: #BA2121">  </span><span style="color: #BB6688; font-weight: bold">%8s</span><span style="color: #BA2121">  </span><span style="color: #BB6688; font-weight: bold">%8s</span><span style="color: #BA2121">  </span><span style="color: #BB6688; font-weight: bold">%8s</span><span style="color: #BA2121">  </span><span style="color: #BB6688; font-weight: bold">%8s</span><span style="color: #BA2121">  </span><span style="color: #BB6688; font-weight: bold">%7s</span><span style="color: #BA2121">  </span><span style="color: #BB6688; font-weight: bold">%8s</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>, <span style="color: #BA2121">&quot;i&quot;</span>, <span style="color: #BA2121">&quot;k1&quot;</span>, <span style="color: #BA2121">&quot;k2&quot;</span>, <span style="color: #BA2121">&quot;k3&quot;</span>, <span style="color: #BA2121">&quot;k4&quot;</span>, <span style="color: #BA2121">&quot;k5&quot;</span>, <span style="color: #BA2121">&quot;k6&quot;</span>, <span style="color: #BA2121">&quot;x&quot;</span>, <span style="color: #BA2121">&quot;y&quot;</span>)
+    <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #666666">=</span> <span style="color: #666666">1</span>:n
+        k1 <span style="color: #666666">=</span> f(x,y)
+        k2 <span style="color: #666666">=</span> f(x <span style="color: #666666">+</span> (c2 <span style="color: #666666">*</span> h), y <span style="color: #666666">+</span> (h <span style="color: #666666">*</span> a21 <span style="color: #666666">*</span> k1))
+        k3 <span style="color: #666666">=</span> f(x <span style="color: #666666">+</span> (c3 <span style="color: #666666">*</span> h), y <span style="color: #666666">+</span> (h <span style="color: #666666">*</span> ((a31 <span style="color: #666666">*</span> k1) <span style="color: #666666">+</span> (a32 <span style="color: #666666">*</span> k2))))
+        k4 <span style="color: #666666">=</span> f(x <span style="color: #666666">+</span> (c4 <span style="color: #666666">*</span> h), y <span style="color: #666666">+</span> (h <span style="color: #666666">*</span> ((a41 <span style="color: #666666">*</span> k1) <span style="color: #666666">+</span> (a42 <span style="color: #666666">*</span> k2) <span style="color: #666666">+</span> (a43 <span style="color: #666666">*</span> k3))))
+        k5 <span style="color: #666666">=</span> f(x <span style="color: #666666">+</span> (c5 <span style="color: #666666">*</span> h), y <span style="color: #666666">+</span> (h <span style="color: #666666">*</span> ((a51 <span style="color: #666666">*</span> k1) <span style="color: #666666">+</span> (a52 <span style="color: #666666">*</span> k2) <span style="color: #666666">+</span> (a53 <span style="color: #666666">*</span> k3) <span style="color: #666666">+</span> (a54 <span style="color: #666666">*</span> k4))))
+        k6 <span style="color: #666666">=</span> f(x <span style="color: #666666">+</span> (c6 <span style="color: #666666">*</span> h), y <span style="color: #666666">+</span> (h <span style="color: #666666">*</span> ((a61 <span style="color: #666666">*</span> k1) <span style="color: #666666">+</span> (a62 <span style="color: #666666">*</span> k2) <span style="color: #666666">+</span> (a63 <span style="color: #666666">*</span> k3) <span style="color: #666666">+</span> (a64 <span style="color: #666666">*</span> k4) <span style="color: #666666">+</span> (a65 <span style="color: #666666">*</span> k5))))
+        y <span style="color: #666666">=</span> y <span style="color: #666666">+</span> (h <span style="color: #666666">*</span> ((b1 <span style="color: #666666">*</span> k1) <span style="color: #666666">+</span> (b2 <span style="color: #666666">*</span> k2) <span style="color: #666666">+</span> (b3 <span style="color: #666666">*</span> k3) <span style="color: #666666">+</span> (b4 <span style="color: #666666">*</span> k4) <span style="color: #666666">+</span> (b5 <span style="color: #666666">*</span> k5) <span style="color: #666666">+</span> (b6 <span style="color: #666666">*</span> k6)))
+        x <span style="color: #666666">=</span> x <span style="color: #666666">+</span> h
+        <span style="color: #AA22FF">@printf</span>(<span style="color: #BA2121">&quot;</span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121">  </span><span style="color: #BB6688; font-weight: bold">%f</span><span style="color: #BA2121">  </span><span style="color: #BB6688; font-weight: bold">%f</span><span style="color: #BA2121">  </span><span style="color: #BB6688; font-weight: bold">%f</span><span style="color: #BA2121">  </span><span style="color: #BB6688; font-weight: bold">%f</span><span style="color: #BA2121">  </span><span style="color: #BB6688; font-weight: bold">%f</span><span style="color: #BA2121">  </span><span style="color: #BB6688; font-weight: bold">%f</span><span style="color: #BA2121">  </span><span style="color: #BB6688; font-weight: bold">%f</span><span style="color: #BA2121">  </span><span style="color: #BB6688; font-weight: bold">%f</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>, i, k1, k2, k3, k4, k5, k6, x, y)
+    end
+    println(<span style="color: #BA2121">&quot;x = $x&quot;</span>)
+    println(<span style="color: #BA2121">&quot;y = $y&quot;</span>)
+end
+
+    prueba5 (generic function <span style="color: #008000; font-weight: bold">with</span> <span style="color: #666666">1</span> method)
+</pre></div>
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">prueba5(f,<span style="color: #666666">2</span>,<span style="color: #666666">0</span>,<span style="color: #666666">2</span>,<span style="color: #666666">1</span>)
+
+    i  k1        k2        k3        k4        k5        k6        x         y
+    <span style="color: #666666">1</span>  <span style="color: #666666">3.000000</span>  <span style="color: #666666">3.233184</span>  <span style="color: #666666">3.225897</span>  <span style="color: #666666">3.483285</span>  <span style="color: #666666">3.768973</span>  <span style="color: #666666">4.091245</span>  <span style="color: #666666">0.500000</span>  <span style="color: #666666">3.751522</span>
+    <span style="color: #666666">2</span>  <span style="color: #666666">4.091538</span>  <span style="color: #666666">4.463403</span>  <span style="color: #666666">4.451782</span>  <span style="color: #666666">4.857694</span>  <span style="color: #666666">5.304346</span>  <span style="color: #666666">5.804402</span>  <span style="color: #666666">1.000000</span>  <span style="color: #666666">6.194633</span>
+    x <span style="color: #666666">=</span> <span style="color: #666666">1.0</span>
+    y <span style="color: #666666">=</span> <span style="color: #666666">6.194633188434668</span>
+</pre></div>
+<p>
+
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="previous">
+    <a href="._ode016.html">&larr; Prev</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

@@ -1,0 +1,333 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Ecuaciones diferenciales ordinarias">
+
+<title>Ecuaciones diferenciales ordinarias</title>
+
+<!-- Bootstrap style: bootswatch_cosmo -->
+<link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/cosmo/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 0,
+ 'sections': [(u'Introducci\xf3n', 0, None, '___sec0'),
+              (u'Modelos matem\xe1ticos', 1, None, '___sec1'),
+              (u'Soluci\xf3n anal\xedtica de modelos matem\xe1ticos',
+               2,
+               None,
+               '___sec2'),
+              (u'Soluci\xf3n num\xe9rica aproximada de modelos matem\xe1ticos',
+               2,
+               None,
+               '___sec3'),
+              (u'Aproximaciones y errores de redondeo', 1, None, '___sec4'),
+              (u'Definiciones de error', 2, None, '___sec5'),
+              (u'Estimaci\xf3n del error con m\xe9todos iterativos',
+               2,
+               None,
+               '___sec6'),
+              (u'Primera aproximaci\xf3n', 3, None, '___sec7'),
+              (u'Segunda aproximaci\xf3n', 3, None, '___sec8'),
+              (u'Implementaci\xf3n', 3, None, '___sec9'),
+              (u'Seudoc\xf3digo para c\xe1lculos iterativos',
+               3,
+               None,
+               '___sec10'),
+              (u'Implementaci\xf3n para calcular $e^{x}$',
+               3,
+               None,
+               '___sec11'),
+              (u'Errores de redondeo', 2, None, '___sec12'),
+              (u'Representaci\xf3n de n\xfameros en la computadora',
+               3,
+               None,
+               '___sec13'),
+              (u'\xc9psilon de m\xe1quina', 3, None, '___sec14'),
+              (u'Aproximaciones cuando se realiza un gran n\xfamero de c\xe1lculos',
+               3,
+               None,
+               '___sec15'),
+              (u'Cancelaci\xf3n por resta', 3, None, '___sec16'),
+              (u'Convergencia', 3, None, '___sec17'),
+              (u'M\xe9todos', 0, None, '___sec18'),
+              (u'M\xe9todo de Euler', 1, None, '___sec19'),
+              (u'M\xe9todo de Euler hacia adelante', 2, None, '___sec20'),
+              (u'Ejemplo', 3, None, '___sec21'),
+              (u'Seudoc\xf3digo', 3, None, '___sec22'),
+              (u'Implementaci\xf3n', 3, None, '___sec23'),
+              (u'M\xe9todo de Euler modificado', 2, None, '___sec24'),
+              (u'Ejemplo', 3, None, '___sec25'),
+              (u'M\xe9todo de Euler hacia atr\xe1s', 2, None, '___sec26'),
+              (u'Ejemplo', 3, None, '___sec27'),
+              (u'M\xe9todo de Heun', 2, None, '___sec28'),
+              (u'Ejemplo', 3, None, '___sec29'),
+              (u'Seudoc\xf3digo', 3, None, '___sec30'),
+              (u'Implementaci\xf3n', 3, None, '___sec31'),
+              (u'M\xe9todos impl\xedcitos de Runge-Kutta (RK)',
+               1,
+               None,
+               '___sec32'),
+              (u'Clasificaci\xf3n', 2, None, '___sec33'),
+              (u'M\xe9todos de primer orden', 2, None, '___sec34'),
+              (u'M\xe9todos de segundo orden', 2, None, '___sec35'),
+              (u'M\xe9todos de tercer orden', 2, None, '___sec36'),
+              (u'M\xe9todos de cuarto orden', 2, None, '___sec37'),
+              (u'M\xe9todos de quinto orden', 2, None, '___sec38')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="ode.html">Ecuaciones diferenciales ordinarias</a>
+  </div>
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="._ode001.html#___sec0" style="font-size: 80%;"><b>Introducción</b></a></li>
+     <!-- navigation toc: --> <li><a href="._ode001.html#___sec1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Modelos matemáticos</a></li>
+     <!-- navigation toc: --> <li><a href="._ode004.html#___sec4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Aproximaciones y errores de redondeo</a></li>
+     <!-- navigation toc: --> <li><a href="._ode008.html#___sec18" style="font-size: 80%;"><b>Métodos</b></a></li>
+     <!-- navigation toc: --> <li><a href="._ode008.html#___sec19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Método de Euler</a></li>
+     <!-- navigation toc: --> <li><a href="._ode012.html#___sec32" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Métodos implícitos de Runge-Kutta (RK)</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0005"></a>
+<!-- !split -->
+
+<h2 id="___sec6">Estimación del error con métodos iterativos </h2>
+
+<p>
+Calcular \( e^{x} \) usando series de Maclaurin para \( x = 0.5 \) usando tres cifras significativas:
+
+$$
+\begin{equation*}
+    e^{x} = \frac{x^{0}}{0!} + \frac{x^{1}}{1!} + \frac{x^{2}}{2!} + \frac{x^{3}}{3!} + \cdots
+\end{equation*}
+$$
+
+<p>
+El error prefijado \( \epsilon_{s} \) será:
+
+$$
+\begin{equation*}
+    \epsilon_{s} = \frac{10^{2 - 3}}{2} \cdot 100\% = 0.05\%
+\end{equation*}
+$$
+
+<h3 id="___sec7">Primera aproximación </h3>
+
+$$
+\begin{equation*}
+    e^{0.5} = 1
+\end{equation*}
+$$
+
+<p>
+Calculando \( \epsilon_{t} \)
+
+$$
+\begin{equation*}
+    \epsilon_{t} = \frac{1.648721 - 1}{1.648721} \cdot 100\% = 39.35\%
+\end{equation*}
+$$
+
+<p>
+Calculando \( \epsilon_{a} \)
+
+$$
+\begin{equation*}
+    \epsilon_{a} = \frac{1 - 0}{1} \cdot 100\% = 100\%
+\end{equation*}
+$$
+
+<h3 id="___sec8">Segunda aproximación </h3>
+
+$$
+\begin{equation*}
+    e^{0.5} = 1 + 0.5 = 1.5
+\end{equation*}
+$$
+
+<p>
+Calculamos \( \epsilon_{t} \)
+
+$$
+\begin{equation*}
+    \epsilon_{t} = \frac{1.648721 - 1.5}{1.648721} \cdot 100\% = 9.02\%
+\end{equation*}
+$$
+
+<p>
+Calculamos \( \epsilon_{a} \)
+
+$$
+\begin{equation*}
+    \epsilon_{a} = \frac{1.5 - 1}{1.5} \cdot 100\% = 33.33\%
+\end{equation*}
+$$
+
+<h3 id="___sec9">Implementación </h3>
+
+<p>
+Mediante el siguiente programa se calculará los errores de aproximación:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">x <span style="color: #666666">=</span> <span style="color: #666666">0.5</span>
+valor_actual <span style="color: #666666">=</span> <span style="color: #666666">0.0</span>
+
+<span style="color: #AA22FF">@printf</span>(<span style="color: #BA2121">&quot;</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"> </span><span style="color: #BB6622; font-weight: bold">\t</span><span style="color: #BA2121"> </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"> </span><span style="color: #BB6622; font-weight: bold">\t</span><span style="color: #BA2121"> </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"> </span><span style="color: #BB6622; font-weight: bold">\t</span><span style="color: #BA2121"> </span><span style="color: #BB6688; font-weight: bold">%12s</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>, <span style="color: #BA2121">&quot;iteración&quot;</span>, <span style="color: #BA2121">&quot;exp(0.5)&quot;</span>, <span style="color: #BA2121">&quot;ϵₜ %&quot;</span>, <span style="color: #BA2121">&quot;ϵₐ %&quot;</span>)
+
+<span style="color: #008000; font-weight: bold">for</span> i <span style="color: #666666">=</span> <span style="color: #666666">0</span>:<span style="color: #666666">5</span>
+    valor_anterior <span style="color: #666666">=</span> valor_actual
+    valor_actual <span style="color: #666666">=</span> valor_actual <span style="color: #666666">+</span> (x<span style="color: #666666">^</span>i)<span style="color: #666666">/</span>factorial(i)
+    et <span style="color: #666666">=</span> ((exp(x) <span style="color: #666666">-</span> valor_actual)<span style="color: #666666">/</span>exp(x))<span style="color: #666666">*100</span>
+    ea <span style="color: #666666">=</span> ((valor_actual <span style="color: #666666">-</span> valor_anterior) <span style="color: #666666">/</span> valor_actual)<span style="color: #666666">*100</span>
+    <span style="color: #AA22FF">@printf</span>(<span style="color: #BA2121">&quot;</span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121"> </span><span style="color: #BB6622; font-weight: bold">\t</span><span style="color: #BA2121"> </span><span style="color: #BB6688; font-weight: bold">%16f</span><span style="color: #BA2121"> </span><span style="color: #BB6622; font-weight: bold">\t</span><span style="color: #BA2121"> </span><span style="color: #BB6688; font-weight: bold">%f</span><span style="color: #BA2121"> </span><span style="color: #BB6622; font-weight: bold">\t</span><span style="color: #BA2121"> </span><span style="color: #BB6688; font-weight: bold">%f</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>, i<span style="color: #666666">+1</span>, valor_actual, et, ea)
+
+    iteración 	 exp(<span style="color: #666666">0.5</span>) 	 ϵₜ <span style="color: #666666">%</span> 	         ϵₐ <span style="color: #666666">%</span>
+    <span style="color: #666666">1</span> 	         <span style="color: #666666">1.000000</span> 	 <span style="color: #666666">39.346934</span> 	 <span style="color: #666666">100.000000</span>
+    <span style="color: #666666">2</span> 	         <span style="color: #666666">1.500000</span> 	 <span style="color: #666666">9.020401</span> 	 <span style="color: #666666">33.333333</span>
+    <span style="color: #666666">3</span> 	         <span style="color: #666666">1.625000</span> 	 <span style="color: #666666">1.438768</span> 	 <span style="color: #666666">7.692308</span>
+    <span style="color: #666666">4</span> 	         <span style="color: #666666">1.645833</span> 	 <span style="color: #666666">0.175162</span> 	 <span style="color: #666666">1.265823</span>
+    <span style="color: #666666">5</span> 	         <span style="color: #666666">1.648438</span> 	 <span style="color: #666666">0.017212</span> 	 <span style="color: #666666">0.157978</span>
+    <span style="color: #666666">6</span> 	         <span style="color: #666666">1.648698</span> 	 <span style="color: #666666">0.001416</span> 	 <span style="color: #666666">0.015795</span>
+</pre></div>
+
+<h3 id="___sec10">Seudocódigo para cálculos iterativos </h3>
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">función MetodoIterativo(valor, es, iteración_máxima)
+    iteración <span style="color: #666666">=</span> <span style="color: #666666">1</span>
+    solución_actual <span style="color: #666666">=</span> valor
+    ea <span style="color: #666666">=</span> <span style="color: #666666">100</span>
+    hacer
+        iteración <span style="color: #666666">=</span> iteración <span style="color: #666666">+</span> <span style="color: #666666">1</span>
+        solución_anterior <span style="color: #666666">=</span> solución_actual
+        solución_actual <span style="color: #666666">=</span> <span style="color: #666666">...</span>
+        si solución_actual <span style="color: #666666">!=</span> <span style="color: #666666">0</span>
+            ea <span style="color: #666666">=</span> <span style="color: #008000">abs</span>((solución_actual <span style="color: #666666">-</span> solución_anterior) <span style="color: #666666">/</span> solución_actual) <span style="color: #666666">*</span> <span style="color: #666666">100</span>
+        fin si
+    hasta (ea <span style="color: #666666">&lt;=</span> es) o (iteración <span style="color: #666666">&gt;=</span> iteración_máxima)
+    fin hacer
+    MetodoIterativo <span style="color: #666666">=</span> solución_actual
+fin MetodoIterativo
+</pre></div>
+
+<h3 id="___sec11">Implementación para calcular \( e^{x} \) </h3>
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">function exponencial(x, es, i_max)
+    i <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+    valor_actual <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+    <span style="color: #008000; font-weight: bold">while</span> true
+        valor_anterior <span style="color: #666666">=</span> valor_actual
+        valor_actual <span style="color: #666666">=</span> valor_actual <span style="color: #666666">+</span> (x<span style="color: #666666">^</span>i)<span style="color: #666666">/</span>factorial(i)
+        i <span style="color: #666666">=</span> i <span style="color: #666666">+</span> <span style="color: #666666">1</span>
+        <span style="color: #008000; font-weight: bold">if</span> valor_actual <span style="color: #666666">!=</span> <span style="color: #666666">0</span>
+            ea <span style="color: #666666">=</span> ((valor_actual <span style="color: #666666">-</span> valor_anterior) <span style="color: #666666">/</span> valor_actual)<span style="color: #666666">*100</span>
+        end
+        <span style="color: #008000; font-weight: bold">if</span> (ea <span style="color: #666666">&lt;=</span> es) <span style="color: #666666">||</span> (i <span style="color: #666666">&gt;=</span> i_max)
+            println(<span style="color: #BA2121">&quot;iteración = &quot;</span>, i) <span style="color: #408080; font-style: italic"># solo para comprobar</span>
+            println(<span style="color: #BA2121">&quot;ea = &quot;</span>, ea) <span style="color: #408080; font-style: italic"># solo para comprobar</span>
+            println(<span style="color: #BA2121">&quot;et = &quot;</span>, ((exp(x) <span style="color: #666666">-</span> valor_actual)<span style="color: #666666">/</span>exp(x))<span style="color: #666666">*100</span>) <span style="color: #408080; font-style: italic"># solo para comprobar</span>
+            <span style="color: #008000; font-weight: bold">break</span>
+        end
+    end
+    <span style="color: #008000; font-weight: bold">return</span> valor_actual
+end
+
+    exponencial (generic function <span style="color: #008000; font-weight: bold">with</span> <span style="color: #666666">1</span> method)
+</pre></div>
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">exponencial(<span style="color: #666666">1</span>, <span style="color: #666666">1e-6</span>, <span style="color: #666666">100</span>)
+
+    iteración <span style="color: #666666">=</span> <span style="color: #666666">12</span>
+    ea <span style="color: #666666">=</span> <span style="color: #666666">9.216155641522974e-7</span>
+    et <span style="color: #666666">=</span> <span style="color: #666666">8.316106763523326e-8</span>
+
+    <span style="color: #666666">2.718281826198493</span>
+</pre></div>
+<p>
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="previous">
+    <a href="._ode004.html">&larr; Prev</a>
+  </li>
+  <li class="next">
+    <a href="._ode006.html">Next &rarr;</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

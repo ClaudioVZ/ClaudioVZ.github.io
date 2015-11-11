@@ -1,0 +1,256 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Ecuaciones diferenciales ordinarias">
+
+<title>Ecuaciones diferenciales ordinarias</title>
+
+<!-- Bootstrap style: bootswatch_cosmo -->
+<link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/cosmo/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 0,
+ 'sections': [(u'Introducci\xf3n', 0, None, '___sec0'),
+              (u'Modelos matem\xe1ticos', 1, None, '___sec1'),
+              (u'Soluci\xf3n anal\xedtica de modelos matem\xe1ticos',
+               2,
+               None,
+               '___sec2'),
+              (u'Soluci\xf3n num\xe9rica aproximada de modelos matem\xe1ticos',
+               2,
+               None,
+               '___sec3'),
+              (u'Aproximaciones y errores de redondeo', 1, None, '___sec4'),
+              (u'Definiciones de error', 2, None, '___sec5'),
+              (u'Estimaci\xf3n del error con m\xe9todos iterativos',
+               2,
+               None,
+               '___sec6'),
+              (u'Primera aproximaci\xf3n', 3, None, '___sec7'),
+              (u'Segunda aproximaci\xf3n', 3, None, '___sec8'),
+              (u'Implementaci\xf3n', 3, None, '___sec9'),
+              (u'Seudoc\xf3digo para c\xe1lculos iterativos',
+               3,
+               None,
+               '___sec10'),
+              (u'Implementaci\xf3n para calcular $e^{x}$',
+               3,
+               None,
+               '___sec11'),
+              (u'Errores de redondeo', 2, None, '___sec12'),
+              (u'Representaci\xf3n de n\xfameros en la computadora',
+               3,
+               None,
+               '___sec13'),
+              (u'\xc9psilon de m\xe1quina', 3, None, '___sec14'),
+              (u'Aproximaciones cuando se realiza un gran n\xfamero de c\xe1lculos',
+               3,
+               None,
+               '___sec15'),
+              (u'Cancelaci\xf3n por resta', 3, None, '___sec16'),
+              (u'Convergencia', 3, None, '___sec17'),
+              (u'M\xe9todos', 0, None, '___sec18'),
+              (u'M\xe9todo de Euler', 1, None, '___sec19'),
+              (u'M\xe9todo de Euler hacia adelante', 2, None, '___sec20'),
+              (u'Ejemplo', 3, None, '___sec21'),
+              (u'Seudoc\xf3digo', 3, None, '___sec22'),
+              (u'Implementaci\xf3n', 3, None, '___sec23'),
+              (u'M\xe9todo de Euler modificado', 2, None, '___sec24'),
+              (u'Ejemplo', 3, None, '___sec25'),
+              (u'M\xe9todo de Euler hacia atr\xe1s', 2, None, '___sec26'),
+              (u'Ejemplo', 3, None, '___sec27'),
+              (u'M\xe9todo de Heun', 2, None, '___sec28'),
+              (u'Ejemplo', 3, None, '___sec29'),
+              (u'Seudoc\xf3digo', 3, None, '___sec30'),
+              (u'Implementaci\xf3n', 3, None, '___sec31'),
+              (u'M\xe9todos impl\xedcitos de Runge-Kutta (RK)',
+               1,
+               None,
+               '___sec32'),
+              (u'Clasificaci\xf3n', 2, None, '___sec33'),
+              (u'M\xe9todos de primer orden', 2, None, '___sec34'),
+              (u'M\xe9todos de segundo orden', 2, None, '___sec35'),
+              (u'M\xe9todos de tercer orden', 2, None, '___sec36'),
+              (u'M\xe9todos de cuarto orden', 2, None, '___sec37'),
+              (u'M\xe9todos de quinto orden', 2, None, '___sec38')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="ode.html">Ecuaciones diferenciales ordinarias</a>
+  </div>
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="._ode001.html#___sec0" style="font-size: 80%;"><b>Introducción</b></a></li>
+     <!-- navigation toc: --> <li><a href="._ode001.html#___sec1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Modelos matemáticos</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Aproximaciones y errores de redondeo</a></li>
+     <!-- navigation toc: --> <li><a href="._ode008.html#___sec18" style="font-size: 80%;"><b>Métodos</b></a></li>
+     <!-- navigation toc: --> <li><a href="._ode008.html#___sec19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Método de Euler</a></li>
+     <!-- navigation toc: --> <li><a href="._ode012.html#___sec32" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Métodos implícitos de Runge-Kutta (RK)</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0004"></a>
+<!-- !split -->
+
+<h1 id="___sec4">Aproximaciones y errores de redondeo </h1>
+
+<h2 id="___sec5">Definiciones de error </h2>
+
+<p>
+La relación entre valor exacto o verdadero y el valor aproximado es la siguiente:
+
+$$
+\begin{equation*}
+\text{valor verdadero} = \text{valor aproximado} + \text{error}
+\end{equation*}
+$$
+
+<p>
+Despejando el error de la anterior ecuación:
+
+$$
+\begin{equation*}
+E_{t} = \text{valor verdadero} - \text{valor aproximado}
+\end{equation*}
+$$
+
+<p>
+donde \( E_{t} \) representa el valor exacto del error o error "verdadero"
+
+<p>
+Una desventaja de la anterior fórmula es que no toma en cuenta el orden de la magnitud del valor aproximado, una manera de tomar en cuenta la magnitud de la aproximación consiste en normalizar el error verdadero respecto al valor verdadero:
+
+$$
+\begin{equation}
+\text{Error relativo verdadero} = \frac{\text{error verdadero}}{\text{valor verdadero}}
+\tag{2}
+\end{equation}
+$$
+
+<p>
+si multiplicamos por 100%:
+
+$$
+\begin{equation}
+\epsilon_{t} = \frac{\text{error verdadero}}{\text{valor verdadero}} \cdot 100 \%
+\tag{3}
+\end{equation}
+$$
+
+<p>
+donde \( \epsilon_{t} \) representa error relativo porcentual verdadero.
+
+<p>
+En muchas aplicaciones reales no se conoce el valor verdadero, una alternativa es normalizar la mejor estimación posible del error verdadero:
+
+$$
+\begin{equation*}
+\epsilon_{a} = \frac{\text{error aproximado}}{\text{valor aproximado}} \cdot 100 \%
+\end{equation*}
+$$
+
+<p>
+donde \( \epsilon_{a} \) representa error relativo porcentual aproximado, ciertos métodos numéricos usan un método iterativo para calcular en forma sucesiva aproximaciones para tal caso la anterior forma expresada en forma iterativa es:
+
+$$
+\begin{equation*}
+\epsilon_{a} = \frac{\text{error aproximado actual - error aproximado anterior}}{\text{valor aproximado actual}} \cdot 100 \%
+\end{equation*}
+$$
+
+<p>
+A menudo cuando se realizan cálculos no importa mucho el signo de \( \epsilon_{a} \), sino que el valor absoluto relativo porcentual sea menor que una tolerancia porcentual prefijada.
+
+$$
+\begin{equation*}
+    | \epsilon_{a} | < \epsilon_{s}
+\end{equation*}
+$$
+
+<p>
+Es conveniente relacionar estos errores con el número de \( n \) cifras significativas:
+
+$$
+\begin{equation*}
+    \epsilon_{s} = \frac{10^{2 - n}}{2} \cdot 100\%
+\end{equation*}
+$$
+
+<p>
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="previous">
+    <a href="._ode003.html">&larr; Prev</a>
+  </li>
+  <li class="next">
+    <a href="._ode005.html">Next &rarr;</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

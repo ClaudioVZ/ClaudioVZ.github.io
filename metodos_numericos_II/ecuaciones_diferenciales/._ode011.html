@@ -1,0 +1,494 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Ecuaciones diferenciales ordinarias">
+
+<title>Ecuaciones diferenciales ordinarias</title>
+
+<!-- Bootstrap style: bootswatch_cosmo -->
+<link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/cosmo/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 0,
+ 'sections': [(u'Introducci\xf3n', 0, None, '___sec0'),
+              (u'Modelos matem\xe1ticos', 1, None, '___sec1'),
+              (u'Soluci\xf3n anal\xedtica de modelos matem\xe1ticos',
+               2,
+               None,
+               '___sec2'),
+              (u'Soluci\xf3n num\xe9rica aproximada de modelos matem\xe1ticos',
+               2,
+               None,
+               '___sec3'),
+              (u'Aproximaciones y errores de redondeo', 1, None, '___sec4'),
+              (u'Definiciones de error', 2, None, '___sec5'),
+              (u'Estimaci\xf3n del error con m\xe9todos iterativos',
+               2,
+               None,
+               '___sec6'),
+              (u'Primera aproximaci\xf3n', 3, None, '___sec7'),
+              (u'Segunda aproximaci\xf3n', 3, None, '___sec8'),
+              (u'Implementaci\xf3n', 3, None, '___sec9'),
+              (u'Seudoc\xf3digo para c\xe1lculos iterativos',
+               3,
+               None,
+               '___sec10'),
+              (u'Implementaci\xf3n para calcular $e^{x}$',
+               3,
+               None,
+               '___sec11'),
+              (u'Errores de redondeo', 2, None, '___sec12'),
+              (u'Representaci\xf3n de n\xfameros en la computadora',
+               3,
+               None,
+               '___sec13'),
+              (u'\xc9psilon de m\xe1quina', 3, None, '___sec14'),
+              (u'Aproximaciones cuando se realiza un gran n\xfamero de c\xe1lculos',
+               3,
+               None,
+               '___sec15'),
+              (u'Cancelaci\xf3n por resta', 3, None, '___sec16'),
+              (u'Convergencia', 3, None, '___sec17'),
+              (u'M\xe9todos', 0, None, '___sec18'),
+              (u'M\xe9todo de Euler', 1, None, '___sec19'),
+              (u'M\xe9todo de Euler hacia adelante', 2, None, '___sec20'),
+              (u'Ejemplo', 3, None, '___sec21'),
+              (u'Seudoc\xf3digo', 3, None, '___sec22'),
+              (u'Implementaci\xf3n', 3, None, '___sec23'),
+              (u'M\xe9todo de Euler modificado', 2, None, '___sec24'),
+              (u'Ejemplo', 3, None, '___sec25'),
+              (u'M\xe9todo de Euler hacia atr\xe1s', 2, None, '___sec26'),
+              (u'Ejemplo', 3, None, '___sec27'),
+              (u'M\xe9todo de Heun', 2, None, '___sec28'),
+              (u'Ejemplo', 3, None, '___sec29'),
+              (u'Seudoc\xf3digo', 3, None, '___sec30'),
+              (u'Implementaci\xf3n', 3, None, '___sec31'),
+              (u'M\xe9todos impl\xedcitos de Runge-Kutta (RK)',
+               1,
+               None,
+               '___sec32'),
+              (u'Clasificaci\xf3n', 2, None, '___sec33'),
+              (u'M\xe9todos de primer orden', 2, None, '___sec34'),
+              (u'M\xe9todos de segundo orden', 2, None, '___sec35'),
+              (u'M\xe9todos de tercer orden', 2, None, '___sec36'),
+              (u'M\xe9todos de cuarto orden', 2, None, '___sec37'),
+              (u'M\xe9todos de quinto orden', 2, None, '___sec38')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="ode.html">Ecuaciones diferenciales ordinarias</a>
+  </div>
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="._ode001.html#___sec0" style="font-size: 80%;"><b>Introducción</b></a></li>
+     <!-- navigation toc: --> <li><a href="._ode001.html#___sec1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Modelos matemáticos</a></li>
+     <!-- navigation toc: --> <li><a href="._ode004.html#___sec4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Aproximaciones y errores de redondeo</a></li>
+     <!-- navigation toc: --> <li><a href="._ode008.html#___sec18" style="font-size: 80%;"><b>Métodos</b></a></li>
+     <!-- navigation toc: --> <li><a href="._ode008.html#___sec19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Método de Euler</a></li>
+     <!-- navigation toc: --> <li><a href="._ode012.html#___sec32" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Métodos implícitos de Runge-Kutta (RK)</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0011"></a>
+<!-- !split -->
+
+<h2 id="___sec28">Método de Heun </h2>
+
+<p>
+El método de Heun es un método implícito
+
+$$
+\begin{equation*}
+    y_{n+1} = y_{n} + \frac{h}{2} [f(t_{n}, y_{n}) + f(t_{n+1}, y_{n+1})]
+\end{equation*}
+$$
+
+<p>
+Puede hacerse una aproximación en forma iterativa con el corrector
+
+$$
+\begin{align*}
+    \tilde{y}_{n+1} &= y_{n} + h f(t_{n}, y_{n}) & \mbox{predictor} \\
+    y_{n+1} &= y_{n} + \frac{h}{2} [f(t_{n}, y_{n}) + f(t_{n+1}, \tilde{y}_{n+1})] & \mbox{corrector}
+\end{align*}
+$$
+
+<h3 id="___sec29">Ejemplo </h3>
+
+<p>
+Resolver
+
+$$
+\begin{align*}
+    y' &= 4 e^{0.8 x} - 0.5 y \\
+    y(0) &= 2 \\
+    y(4) &= ?
+\end{align*}
+$$
+
+<p>
+La solución analítica es
+
+$$
+\begin{align*}
+    y &= \frac{4}{1.3} (e^{0.8 x} - e^{-0.5 x}) + 2 e^{-0.5 x} \\
+    y(4) &= \frac{4}{1.3} [e^{0.8 (4)} - e^{-0.5 (4)}] + 2 e^{-0.5 (4)} = 75.33
+\end{align*}
+$$
+
+<p>
+Para la solución numérica elegimos \( n = 4 \)
+
+$$
+\begin{equation*}
+    h = \frac{x_{f} - x_{i}}{n} = \frac{4 - 0}{4} = 1
+\end{equation*}
+$$
+
+<p>
+<b>Iteracion 0</b>
+
+$$
+\begin{align*}
+    y_{0} &= 2 \\
+    x_{0} &= 0
+\end{align*}
+$$
+
+<p>
+<b>Iteración 1</b>
+
+<p>
+Se calculará una iteración con el corrector
+
+$$
+\begin{align*}
+    \tilde{y}_{1} &= y_{0} + h f(x_{0}, y_{0}) = 2 + 1[4 e^{0.8 (0)} - 0.5 (2)] = 5 \\
+    x_{1} &= x_{0} + h = 0 + 1 = 1 \\
+    y_{1} &= y_{0} + \frac{h}{2} [f(x_{0}, y_{0}) + f(x_{1}, \tilde{y}_{1})] = 2 + \frac{1}{2} [4 e^{0.8 (0)} - 0.5 (2) + 4 e^{0.8 (1)} - 0.5 (5)] = 6.701
+\end{align*}
+$$
+
+<p>
+<b>Iteración 2</b>
+
+$$
+\begin{align*}
+    \tilde{y}_{2} &= y_{1} + h f(x_{1}, y_{1}) = 6.701 + 1[4 e^{0.8 (1)} - 0.5 (6.701)] = 12.253 \\
+    x_{2} &= x_{1} + h = 1 + 1 = 2 \\
+    y_{2} &= y_{1} + \frac{h}{2} [f(x_{1}, y_{1}) + f(x_{2}, \tilde{y}_{2})] = 6.701 + \frac{1}{2} [4 e^{0.8 (1)} - 0.5 (6.701) + 4 e^{0.8 (2)} - 0.5 (12.253)] = 16.320
+\end{align*}
+$$
+
+<p>
+<b>Iteración 3</b>
+
+$$
+\begin{align*}
+    \tilde{y}_{3} &= y_{2} + h f(x_{2}, y_{2}) = 16.320 + 1[4 e^{0.8 (2)} - 0.5 (16.320)] = 27.972 \\
+    x_{3} &= x_{2} + h = 2 + 1 = 3 \\
+    y_{3} &= y_{2} + \frac{h}{2} [f(x_{2}, y_{2}) + f(x_{3}, \tilde{y}_{3})] = 16.320 + \frac{1}{2} [4 e^{0.8 (2)} - 0.5 (16.320) + 4 e^{0.8 (3)} - 0.5 (27.972)] = 37.199
+\end{align*}
+$$
+
+<p>
+<b>Iteración 4</b>
+
+$$
+\begin{align*}
+    \tilde{y}_{4} &= y_{3} + h f(x_{3}, y_{3}) = 37.199 + 1[4 e^{0.8 (3)} - 0.5 (37.199)] = 62.692 \\
+    x_{4} &= x_{3} + h = 3 + 1 = 4 \\
+    y_{4} &= y_{3} + \frac{h}{2} [f(x_{3}, y_{3}) + f(x_{4}, \tilde{y}_{4})] = 37.199 + \frac{1}{2} [4 e^{0.8 (3)} - 0.5 (37.199) + 4 e^{0.8 (4)} - 0.5 (62.692)] = 83.338
+\end{align*}
+$$
+
+<h3 id="___sec30">Seudocódigo </h3>
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">xi <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+yi <span style="color: #666666">=</span> <span style="color: #666666">2</span>
+xf <span style="color: #666666">=</span> <span style="color: #666666">4</span>
+n <span style="color: #666666">=</span> <span style="color: #666666">4</span>
+
+h <span style="color: #666666">=</span> (xf <span style="color: #666666">-</span> xi)<span style="color: #666666">/</span>n
+y <span style="color: #666666">=</span> yi
+x <span style="color: #666666">=</span> xi
+
+<span style="color: #008000; font-weight: bold">for</span> i<span style="color: #666666">=1</span> to n do
+    ya <span style="color: #666666">=</span> y <span style="color: #666666">+</span> h<span style="color: #666666">*</span>(<span style="color: #666666">4*</span>exp(<span style="color: #666666">0.8*</span>x) <span style="color: #666666">-</span> <span style="color: #666666">0.5*</span>y)
+    xa <span style="color: #666666">=</span> x <span style="color: #666666">+</span> h
+    y <span style="color: #666666">=</span> y <span style="color: #666666">+</span> (h<span style="color: #666666">/2</span>)<span style="color: #666666">*</span>(<span style="color: #666666">4*</span>exp(<span style="color: #666666">0.8*</span>x) <span style="color: #666666">-</span> <span style="color: #666666">0.5*</span>y <span style="color: #666666">+</span> <span style="color: #666666">4*</span>exp(<span style="color: #666666">0.8*</span>xa) <span style="color: #666666">-</span> <span style="color: #666666">0.5*</span>ya)
+    x <span style="color: #666666">=</span> xa
+end <span style="color: #008000; font-weight: bold">for</span>
+</pre></div>
+
+<h3 id="___sec31">Implementación </h3>
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">function g(x, y)
+    <span style="color: #666666">4*</span>exp(<span style="color: #666666">0.8*</span>x) <span style="color: #666666">-</span> <span style="color: #666666">0.5*</span>y
+end
+
+    g (generic function <span style="color: #008000; font-weight: bold">with</span> <span style="color: #666666">1</span> method)
+</pre></div>
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">function MétodoHeun(xi, yi, h)
+    yf <span style="color: #666666">=</span> yi <span style="color: #666666">+</span> h<span style="color: #666666">*</span>g(xi, yi)
+    x <span style="color: #666666">=</span> xi <span style="color: #666666">+</span> h
+    y <span style="color: #666666">=</span> yi <span style="color: #666666">+</span> (h<span style="color: #666666">/2</span>)<span style="color: #666666">*</span>(g(xi, yi) <span style="color: #666666">+</span> g(x, yf))
+    <span style="color: #008000; font-weight: bold">return</span> x, y
+end
+
+    MétodoHeun (generic function <span style="color: #008000; font-weight: bold">with</span> <span style="color: #666666">1</span> method)
+</pre></div>
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">xi <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+yi <span style="color: #666666">=</span> <span style="color: #666666">2</span>
+xf <span style="color: #666666">=</span> <span style="color: #666666">4</span>
+n <span style="color: #666666">=</span> <span style="color: #666666">50</span>
+
+h <span style="color: #666666">=</span> (xf <span style="color: #666666">-</span> xi) <span style="color: #666666">/</span> n
+y <span style="color: #666666">=</span> yi
+x <span style="color: #666666">=</span> xi
+<span style="color: #AA22FF">@printf</span>(<span style="color: #BA2121">&quot;</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"> </span><span style="color: #BB6622; font-weight: bold">\t</span><span style="color: #BA2121"> </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"> </span><span style="color: #BB6622; font-weight: bold">\t</span><span style="color: #BA2121"> </span><span style="color: #BB6688; font-weight: bold">%17s</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>, <span style="color: #BA2121">&quot;i&quot;</span>, <span style="color: #BA2121">&quot;x&quot;</span>, <span style="color: #BA2121">&quot;y&quot;</span>)
+<span style="color: #AA22FF">@printf</span>(<span style="color: #BA2121">&quot;</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"> </span><span style="color: #BB6622; font-weight: bold">\t</span><span style="color: #BA2121"> </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"> </span><span style="color: #BB6622; font-weight: bold">\t</span><span style="color: #BA2121"> </span><span style="color: #BB6688; font-weight: bold">%17s</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>, <span style="color: #666666">0</span>, x, y)
+
+<span style="color: #008000; font-weight: bold">for</span> i<span style="color: #666666">=</span> <span style="color: #666666">1</span>:n
+    x, y <span style="color: #666666">=</span> MétodoHeun(x, y, h)
+    <span style="color: #AA22FF">@printf</span>(<span style="color: #BA2121">&quot;</span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121"> </span><span style="color: #BB6622; font-weight: bold">\t</span><span style="color: #BA2121"> </span><span style="color: #BB6688; font-weight: bold">%0.15f</span><span style="color: #BA2121"> </span><span style="color: #BB6622; font-weight: bold">\t</span><span style="color: #BA2121"> </span><span style="color: #BB6688; font-weight: bold">%0.15f</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>,i , x, y)
+end
+
+    i 	 x 	                 y
+    <span style="color: #666666">0</span> 	 <span style="color: #666666">0</span> 	                 <span style="color: #666666">2</span>
+    <span style="color: #666666">1</span> 	 <span style="color: #666666">0.080000000000000</span> 	 <span style="color: #666666">2.245774783801841</span>
+    <span style="color: #666666">2</span> 	 <span style="color: #666666">0.160000000000000</span> 	 <span style="color: #666666">2.503340685158105</span>
+    <span style="color: #666666">3</span> 	 <span style="color: #666666">0.240000000000000</span> 	 <span style="color: #666666">2.773651554228560</span>
+    <span style="color: #666666">4</span> 	 <span style="color: #666666">0.320000000000000</span> 	 <span style="color: #666666">3.057717441178962</span>
+    <span style="color: #666666">5</span> 	 <span style="color: #666666">0.400000000000000</span> 	 <span style="color: #666666">3.356608578790039</span>
+    <span style="color: #666666">6</span> 	 <span style="color: #666666">0.480000000000000</span> 	 <span style="color: #666666">3.671459617772590</span>
+    <span style="color: #666666">7</span> 	 <span style="color: #666666">0.560000000000000</span> 	 <span style="color: #666666">4.003474131902822</span>
+    <span style="color: #666666">8</span> 	 <span style="color: #666666">0.640000000000000</span> 	 <span style="color: #666666">4.353929411206959</span>
+    <span style="color: #666666">9</span> 	 <span style="color: #666666">0.720000000000000</span> 	 <span style="color: #666666">4.724181562613496</span>
+    <span style="color: #666666">10</span> 	 <span style="color: #666666">0.800000000000000</span> 	 <span style="color: #666666">5.115670938759900</span>
+    <span style="color: #666666">11</span> 	 <span style="color: #666666">0.880000000000000</span> 	 <span style="color: #666666">5.529927916993519</span>
+    <span style="color: #666666">12</span> 	 <span style="color: #666666">0.960000000000000</span> 	 <span style="color: #666666">5.968579052049326</span>
+    <span style="color: #666666">13</span> 	 <span style="color: #666666">1.040000000000000</span> 	 <span style="color: #666666">6.433353627425923</span>
+    <span style="color: #666666">14</span> 	 <span style="color: #666666">1.120000000000000</span> 	 <span style="color: #666666">6.926090632122263</span>
+    <span style="color: #666666">15</span> 	 <span style="color: #666666">1.200000000000000</span> 	 <span style="color: #666666">7.448746191147498</span>
+    <span style="color: #666666">16</span> 	 <span style="color: #666666">1.280000000000000</span> 	 <span style="color: #666666">8.003401480082484</span>
+    <span style="color: #666666">17</span> 	 <span style="color: #666666">1.360000000000000</span> 	 <span style="color: #666666">8.592271155961400</span>
+    <span style="color: #666666">18</span> 	 <span style="color: #666666">1.440000000000000</span> 	 <span style="color: #666666">9.217712338863757</span>
+    <span style="color: #666666">19</span> 	 <span style="color: #666666">1.520000000000000</span> 	 <span style="color: #666666">9.882234180869657</span>
+    <span style="color: #666666">20</span> 	 <span style="color: #666666">1.600000000000000</span> 	 <span style="color: #666666">10.588508061443616</span>
+    <span style="color: #666666">21</span> 	 <span style="color: #666666">1.680000000000000</span> 	 <span style="color: #666666">11.339378450884560</span>
+    <span style="color: #666666">22</span> 	 <span style="color: #666666">1.760000000000000</span> 	 <span style="color: #666666">12.137874486222342</span>
+    <span style="color: #666666">23</span> 	 <span style="color: #666666">1.840000000000001</span> 	 <span style="color: #666666">12.987222306865421</span>
+    <span style="color: #666666">24</span> 	 <span style="color: #666666">1.920000000000001</span> 	 <span style="color: #666666">13.890858200422342</span>
+    <span style="color: #666666">25</span> 	 <span style="color: #666666">2.000000000000000</span> 	 <span style="color: #666666">14.852442612443983</span>
+    <span style="color: #666666">26</span> 	 <span style="color: #666666">2.080000000000001</span> 	 <span style="color: #666666">15.875875077377975</span>
+    <span style="color: #666666">27</span> 	 <span style="color: #666666">2.160000000000001</span> 	 <span style="color: #666666">16.965310131805623</span>
+    <span style="color: #666666">28</span> 	 <span style="color: #666666">2.240000000000001</span> 	 <span style="color: #666666">18.125174275060736</span>
+    <span style="color: #666666">29</span> 	 <span style="color: #666666">2.320000000000001</span> 	 <span style="color: #666666">19.360184046625317</span>
+    <span style="color: #666666">30</span> 	 <span style="color: #666666">2.400000000000001</span> 	 <span style="color: #666666">20.675365294276887</span>
+    <span style="color: #666666">31</span> 	 <span style="color: #666666">2.480000000000001</span> 	 <span style="color: #666666">22.076073711844899</span>
+    <span style="color: #666666">32</span> 	 <span style="color: #666666">2.560000000000001</span> 	 <span style="color: #666666">23.568016730639457</span>
+    <span style="color: #666666">33</span> 	 <span style="color: #666666">2.640000000000001</span> 	 <span style="color: #666666">25.157276854165467</span>
+    <span style="color: #666666">34</span> 	 <span style="color: #666666">2.720000000000001</span> 	 <span style="color: #666666">26.850336531652445</span>
+    <span style="color: #666666">35</span> 	 <span style="color: #666666">2.800000000000001</span> 	 <span style="color: #666666">28.654104672238510</span>
+    <span style="color: #666666">36</span> 	 <span style="color: #666666">2.880000000000001</span> 	 <span style="color: #666666">30.575944908372595</span>
+    <span style="color: #666666">37</span> 	 <span style="color: #666666">2.960000000000001</span> 	 <span style="color: #666666">32.623705724169042</span>
+    <span style="color: #666666">38</span> 	 <span style="color: #666666">3.040000000000001</span> 	 <span style="color: #666666">34.805752572093120</span>
+    <span style="color: #666666">39</span> 	 <span style="color: #666666">3.120000000000001</span> 	 <span style="color: #666666">37.131002109505609</span>
+    <span style="color: #666666">40</span> 	 <span style="color: #666666">3.200000000000002</span> 	 <span style="color: #666666">39.608958695283206</span>
+    <span style="color: #666666">41</span> 	 <span style="color: #666666">3.280000000000002</span> 	 <span style="color: #666666">42.249753295994395</span>
+    <span style="color: #666666">42</span> 	 <span style="color: #666666">3.360000000000002</span> 	 <span style="color: #666666">45.064184960985713</span>
+    <span style="color: #666666">43</span> 	 <span style="color: #666666">3.440000000000002</span> 	 <span style="color: #666666">48.063765036261614</span>
+    <span style="color: #666666">44</span> 	 <span style="color: #666666">3.520000000000002</span> 	 <span style="color: #666666">51.260764298265208</span>
+    <span style="color: #666666">45</span> 	 <span style="color: #666666">3.600000000000002</span> 	 <span style="color: #666666">54.668263200633277</span>
+    <span style="color: #666666">46</span> 	 <span style="color: #666666">3.680000000000002</span> 	 <span style="color: #666666">58.300205439756176</span>
+    <span style="color: #666666">47</span> 	 <span style="color: #666666">3.760000000000002</span> 	 <span style="color: #666666">62.171455058573692</span>
+    <span style="color: #666666">48</span> 	 <span style="color: #666666">3.840000000000002</span> 	 <span style="color: #666666">66.297857322537212</span>
+    <span style="color: #666666">49</span> 	 <span style="color: #666666">3.920000000000002</span> 	 <span style="color: #666666">70.696303617126731</span>
+    <span style="color: #666666">50</span> 	 <span style="color: #666666">4.000000000000002</span> 	 <span style="color: #666666">75.384800632790643</span>
+</pre></div>
+<p>
+Implementación iterativa del corrector:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">function MétodoHeunIterativo(xi, yi, h)
+    es <span style="color: #666666">=</span> <span style="color: #666666">0.01</span>
+    y <span style="color: #666666">=</span> yi <span style="color: #666666">+</span> h<span style="color: #666666">*</span>g(xi, yi)
+    x <span style="color: #666666">=</span> xi <span style="color: #666666">+</span> h
+    <span style="color: #008000; font-weight: bold">while</span> true
+        y_anterior <span style="color: #666666">=</span> y
+        y <span style="color: #666666">=</span> yi <span style="color: #666666">+</span> (h<span style="color: #666666">/2</span>)<span style="color: #666666">*</span>(g(xi, yi) <span style="color: #666666">+</span> g(x, y_anterior))
+        ea <span style="color: #666666">=</span> ((y <span style="color: #666666">-</span> y_anterior) <span style="color: #666666">/</span> y) <span style="color: #666666">*</span> <span style="color: #666666">100</span>
+        <span style="color: #008000; font-weight: bold">if</span> ea <span style="color: #666666">&lt;=</span> es
+            <span style="color: #008000; font-weight: bold">break</span>
+        end
+    end
+    <span style="color: #008000; font-weight: bold">return</span> x, y
+end
+
+    MétodoHeunIterativo (generic function <span style="color: #008000; font-weight: bold">with</span> <span style="color: #666666">1</span> method)
+</pre></div>
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">xi <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+yi <span style="color: #666666">=</span> <span style="color: #666666">2</span>
+xf <span style="color: #666666">=</span> <span style="color: #666666">4</span>
+n <span style="color: #666666">=</span> <span style="color: #666666">50</span>
+
+h <span style="color: #666666">=</span> (xf <span style="color: #666666">-</span> xi) <span style="color: #666666">/</span> n
+y <span style="color: #666666">=</span> yi
+x <span style="color: #666666">=</span> xi
+<span style="color: #AA22FF">@printf</span>(<span style="color: #BA2121">&quot;</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"> </span><span style="color: #BB6622; font-weight: bold">\t</span><span style="color: #BA2121"> </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"> </span><span style="color: #BB6622; font-weight: bold">\t</span><span style="color: #BA2121"> </span><span style="color: #BB6688; font-weight: bold">%17s</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>, <span style="color: #BA2121">&quot;i&quot;</span>, <span style="color: #BA2121">&quot;x&quot;</span>, <span style="color: #BA2121">&quot;y&quot;</span>)
+<span style="color: #AA22FF">@printf</span>(<span style="color: #BA2121">&quot;</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"> </span><span style="color: #BB6622; font-weight: bold">\t</span><span style="color: #BA2121"> </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"> </span><span style="color: #BB6622; font-weight: bold">\t</span><span style="color: #BA2121"> </span><span style="color: #BB6688; font-weight: bold">%17s</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>, <span style="color: #666666">0</span>, x, y)
+
+<span style="color: #008000; font-weight: bold">for</span> i<span style="color: #666666">=</span> <span style="color: #666666">1</span>:n
+    x, y <span style="color: #666666">=</span> MétodoHeunIterativo(x, y, h)
+    <span style="color: #AA22FF">@printf</span>(<span style="color: #BA2121">&quot;</span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121"> </span><span style="color: #BB6622; font-weight: bold">\t</span><span style="color: #BA2121"> </span><span style="color: #BB6688; font-weight: bold">%0.15f</span><span style="color: #BA2121"> </span><span style="color: #BB6622; font-weight: bold">\t</span><span style="color: #BA2121"> </span><span style="color: #BB6688; font-weight: bold">%0.15f</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>, i, x, y)
+end
+
+    i 	 x 	                 y
+    <span style="color: #666666">0</span> 	 <span style="color: #666666">0</span> 	                 <span style="color: #666666">2</span>
+    <span style="color: #666666">1</span> 	 <span style="color: #666666">0.080000000000000</span> 	 <span style="color: #666666">2.245659288125804</span>
+    <span style="color: #666666">2</span> 	 <span style="color: #666666">0.160000000000000</span> 	 <span style="color: #666666">2.503104772258407</span>
+    <span style="color: #666666">3</span> 	 <span style="color: #666666">0.240000000000000</span> 	 <span style="color: #666666">2.773289942176862</span>
+    <span style="color: #666666">4</span> 	 <span style="color: #666666">0.320000000000000</span> 	 <span style="color: #666666">3.057224462431668</span>
+    <span style="color: #666666">5</span> 	 <span style="color: #666666">0.400000000000000</span> 	 <span style="color: #666666">3.355978153450947</span>
+    <span style="color: #666666">6</span> 	 <span style="color: #666666">0.480000000000000</span> 	 <span style="color: #666666">3.670685225242664</span>
+    <span style="color: #666666">7</span> 	 <span style="color: #666666">0.560000000000000</span> 	 <span style="color: #666666">4.002548780800291</span>
+    <span style="color: #666666">8</span> 	 <span style="color: #666666">0.640000000000000</span> 	 <span style="color: #666666">4.352845607433842</span>
+    <span style="color: #666666">9</span> 	 <span style="color: #666666">0.720000000000000</span> 	 <span style="color: #666666">4.722931275436943</span>
+    <span style="color: #666666">10</span> 	 <span style="color: #666666">0.800000000000000</span> 	 <span style="color: #666666">5.114245564768579</span>
+    <span style="color: #666666">11</span> 	 <span style="color: #666666">0.880000000000000</span> 	 <span style="color: #666666">5.528318241780513</span>
+    <span style="color: #666666">12</span> 	 <span style="color: #666666">0.960000000000000</span> 	 <span style="color: #666666">5.966775209463633</span>
+    <span style="color: #666666">13</span> 	 <span style="color: #666666">1.040000000000000</span> 	 <span style="color: #666666">6.431345056224662</span>
+    <span style="color: #666666">14</span> 	 <span style="color: #666666">1.120000000000000</span> 	 <span style="color: #666666">6.923866029844989</span>
+    <span style="color: #666666">15</span> 	 <span style="color: #666666">1.200000000000000</span> 	 <span style="color: #666666">7.446293465022624</span>
+    <span style="color: #666666">16</span> 	 <span style="color: #666666">1.280000000000000</span> 	 <span style="color: #666666">8.000707694763614</span>
+    <span style="color: #666666">17</span> 	 <span style="color: #666666">1.360000000000000</span> 	 <span style="color: #666666">8.589322477878358</span>
+    <span style="color: #666666">18</span> 	 <span style="color: #666666">1.440000000000000</span> 	 <span style="color: #666666">9.214493976959218</span>
+    <span style="color: #666666">19</span> 	 <span style="color: #666666">1.520000000000000</span> 	 <span style="color: #666666">9.878730323477448</span>
+    <span style="color: #666666">20</span> 	 <span style="color: #666666">1.600000000000000</span> 	 <span style="color: #666666">10.584701809048932</span>
+    <span style="color: #666666">21</span> 	 <span style="color: #666666">1.680000000000000</span> 	 <span style="color: #666666">11.335251744489456</span>
+    <span style="color: #666666">22</span> 	 <span style="color: #666666">1.760000000000000</span> 	 <span style="color: #666666">12.133408031021849</span>
+    <span style="color: #666666">23</span> 	 <span style="color: #666666">1.840000000000001</span> 	 <span style="color: #666666">12.982395490920409</span>
+    <span style="color: #666666">24</span> 	 <span style="color: #666666">1.920000000000001</span> 	 <span style="color: #666666">13.885649007994747</span>
+    <span style="color: #666666">25</span> 	 <span style="color: #666666">2.000000000000000</span> 	 <span style="color: #666666">14.846827531638148</span>
+    <span style="color: #666666">26</span> 	 <span style="color: #666666">2.080000000000001</span> 	 <span style="color: #666666">15.869829001708514</span>
+    <span style="color: #666666">27</span> 	 <span style="color: #666666">2.160000000000001</span> 	 <span style="color: #666666">16.958806255287346</span>
+    <span style="color: #666666">28</span> 	 <span style="color: #666666">2.240000000000001</span> 	 <span style="color: #666666">18.118183980389627</span>
+    <span style="color: #666666">29</span> 	 <span style="color: #666666">2.320000000000001</span> 	 <span style="color: #666666">19.352676785991239</span>
+    <span style="color: #666666">30</span> 	 <span style="color: #666666">2.400000000000001</span> 	 <span style="color: #666666">20.667308462318534</span>
+    <span style="color: #666666">31</span> 	 <span style="color: #666666">2.480000000000001</span> 	 <span style="color: #666666">22.067432510225302</span>
+    <span style="color: #666666">32</span> 	 <span style="color: #666666">2.560000000000001</span> 	 <span style="color: #666666">23.558754023686031</span>
+    <span style="color: #666666">33</span> 	 <span style="color: #666666">2.640000000000001</span> 	 <span style="color: #666666">25.147353014981977</span>
+    <span style="color: #666666">34</span> 	 <span style="color: #666666">2.720000000000001</span> 	 <span style="color: #666666">26.839709278071265</span>
+    <span style="color: #666666">35</span> 	 <span style="color: #666666">2.800000000000001</span> 	 <span style="color: #666666">28.642728891939893</span>
+    <span style="color: #666666">36</span> 	 <span style="color: #666666">2.880000000000001</span> 	 <span style="color: #666666">30.563772472453330</span>
+    <span style="color: #666666">37</span> 	 <span style="color: #666666">2.960000000000001</span> 	 <span style="color: #666666">32.610685288395544</span>
+    <span style="color: #666666">38</span> 	 <span style="color: #666666">3.040000000000001</span> 	 <span style="color: #666666">34.791829365023553</span>
+    <span style="color: #666666">39</span> 	 <span style="color: #666666">3.120000000000001</span> 	 <span style="color: #666666">37.116117706611860</span>
+    <span style="color: #666666">40</span> 	 <span style="color: #666666">3.200000000000002</span> 	 <span style="color: #666666">39.593050778146157</span>
+    <span style="color: #666666">41</span> 	 <span style="color: #666666">3.280000000000002</span> 	 <span style="color: #666666">42.232755395584817</span>
+    <span style="color: #666666">42</span> 	 <span style="color: #666666">3.360000000000002</span> 	 <span style="color: #666666">45.046026183977929</span>
+    <span style="color: #666666">43</span> 	 <span style="color: #666666">3.440000000000002</span> 	 <span style="color: #666666">48.044369773257522</span>
+    <span style="color: #666666">44</span> 	 <span style="color: #666666">3.520000000000002</span> 	 <span style="color: #666666">51.240051912732163</span>
+    <span style="color: #666666">45</span> 	 <span style="color: #666666">3.600000000000002</span> 	 <span style="color: #666666">54.646147697280405</span>
+    <span style="color: #666666">46</span> 	 <span style="color: #666666">3.680000000000002</span> 	 <span style="color: #666666">58.276595110989348</span>
+    <span style="color: #666666">47</span> 	 <span style="color: #666666">3.760000000000002</span> 	 <span style="color: #666666">62.146252107579599</span>
+    <span style="color: #666666">48</span> 	 <span style="color: #666666">3.840000000000002</span> 	 <span style="color: #666666">66.270957461451360</span>
+    <span style="color: #666666">49</span> 	 <span style="color: #666666">3.920000000000002</span> 	 <span style="color: #666666">70.667595638637934</span>
+    <span style="color: #666666">50</span> 	 <span style="color: #666666">4.000000000000002</span> 	 <span style="color: #666666">75.354165953425863</span>
+</pre></div>
+<p>
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="previous">
+    <a href="._ode010.html">&larr; Prev</a>
+  </li>
+  <li class="next">
+    <a href="._ode012.html">Next &rarr;</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

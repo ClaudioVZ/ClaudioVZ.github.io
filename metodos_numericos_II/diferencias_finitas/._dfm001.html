@@ -1,0 +1,967 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Introducción al método de diferencias finitas">
+
+<title>Introducción al método de diferencias finitas</title>
+
+<!-- Bootstrap style: bootswatch_cosmo -->
+<link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/cosmo/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 0,
+ 'sections': [(u'Introducci\xf3n', 0, None, '___sec0'),
+              (u'M\xe9todo de Liebmann', 1, None, '___sec1'),
+              (u'Ecuaci\xf3n de Laplace', 2, None, '___sec2'),
+              (u'Condiciones de frontera de Dirichlet', 3, None, '___sec3'),
+              (u'Condiciones de frontera de Neumann', 3, None, '___sec4'),
+              (u'M\xe9todo simple impl\xedcito', 1, None, '___sec5'),
+              (u'Ecuaci\xf3n de conducci\xf3n del calor', 2, None, '___sec6'),
+              (u'Ejemplo', 2, None, '___sec7')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="dfm.html">Introducción al método de diferencias finitas</a>
+  </div>
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="#___sec0" style="font-size: 80%;"><b>Introducción</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Método de Liebmann</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ecuación de Laplace</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Condiciones de frontera de Dirichlet</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Condiciones de frontera de Neumann</a></li>
+     <!-- navigation toc: --> <li><a href="._dfm002.html#___sec5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Método simple implícito</a></li>
+     <!-- navigation toc: --> <li><a href="._dfm002.html#___sec6" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ecuación de conducción del calor</a></li>
+     <!-- navigation toc: --> <li><a href="._dfm002.html#___sec7" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ejemplo</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0001"></a>
+<!-- !split -->
+
+<p>
+
+<center><h1 id="___sec0">Introducción </h1></center> <!-- chapter heading -->
+
+<h1 id="___sec1">Método de Liebmann </h1>
+
+<h2 id="___sec2">Ecuación de Laplace </h2>
+
+$$
+\begin{equation*}
+    \frac{\partial^{2} T}{\partial x^{2}} + \frac{\partial^{2} T}{\partial y^{2}} = 0
+\end{equation*}
+$$
+
+<p>
+Usando diferencias finitas centradas
+
+$$
+\begin{align*}
+    \frac{\partial^{2} T}{\partial x^{2}} &= \frac{T_{i+1, j} - 2 T_{i, j} + T_{i-1, j}}{\Delta x^{2}} \\
+    \frac{\partial^{2} T}{\partial y^{2}} &= \frac{T_{i, j+1} - 2 T_{i, j} + T_{i, j-1}}{\Delta y^{2}}
+\end{align*}
+$$
+
+<p>
+Sustituyendo
+
+$$
+\begin{equation*}
+    \frac{T_{i+1, j} - 2 T_{i, j} + T_{i-1, j}}{\Delta x^{2}} + \frac{T_{i, j+1} - 2 T_{i, j} + T_{i, j-1}}{\Delta y^{2}} = 0
+\end{equation*}
+$$
+
+<p>
+Para una malla cuadrada \( \Delta x^{2} = \Delta y^{2} \)
+
+$$
+\begin{equation*}
+    \frac{T_{i+1, j} - 2 T_{i, j} + T_{i-1, j}}{\Delta x^{2}} + \frac{T_{i, j+1} - 2 T_{i, j} + T_{i, j-1}}{\Delta x^{2}} = 0
+\end{equation*}
+$$
+
+<p>
+reordenando
+
+$$
+\begin{equation*}
+    T_{i-1, j} - 4 T_{i, j} + T_{i+1, j} + T_{i, j-1} + T_{i, j+1} = 0
+\end{equation*}
+$$
+
+<h3 id="___sec3">Condiciones de frontera de Dirichlet </h3>
+
+$$
+\begin{align*}
+    \frac{\partial^{2} T}{\partial x^{2}} + \frac{\partial^{2} T}{\partial y^{2}} &= 0 \\
+    T(0,y) &= 75 \\
+    T(4,y) &= 50 \\
+    T(x,4) &= 100 \\
+    T(x,0) &= 0
+\end{align*}
+$$
+
+<p>
+<em>Nodo (1,1)</em>
+
+$$
+\begin{align*}
+    T_{i-1, j} - 4 T_{i, j} + T_{i+1, j} + T_{i, j-1} + T_{i, j+1} &= 0 \\
+    T_{1-1, 1} - 4 T_{1, 1} + T_{1+1, 1} + T_{1, 1-1} + T_{1, 1+1} &= 0 \\
+    T_{0, 1} - 4 T_{1, 1} + T_{2, 1} + T_{1, 0} + T_{1, 2} &= 0
+\end{align*}
+$$
+
+<p>
+<center><p><img src="imagenes/005_DF01_1.svg" align="bottom" width=500></p></center>
+
+$$
+\begin{align*}
+    75 - 4 T_{1, 1} + T_{2, 1} + 0 + T_{1, 2} &= 0 \\
+    - 4 T_{1, 1} + T_{1, 2} + T_{2, 1} &= -75
+\end{align*}
+$$
+
+<p>
+<em>Nodo (2,1)</em>
+
+$$
+\begin{align*}
+    T_{i-1, j} - 4 T_{i, j} + T_{i+1, j} + T_{i, j-1} + T_{i, j+1} &= 0 \\
+    T_{2-1, 1} - 4 T_{2, 1} + T_{2+1, 1} + T_{2, 1-1} + T_{2, 1+1} &= 0 \\
+    T_{1, 1} - 4 T_{2, 1} + T_{3, 1} + T_{2, 0} + T_{2, 2} &= 0
+\end{align*}
+$$
+
+<p>
+<center><p><img src="imagenes/005_DF01_2.svg" align="bottom" width=500></p></center>
+
+$$
+\begin{align*}
+    T_{1, 1} - 4 T_{2, 1} + T_{3, 1} + 0 + T_{2, 2} &= 0 \\
+    T_{1, 1} - 4 T_{2, 1} + T_{2, 2} + T_{3, 1} &= 0
+\end{align*}
+$$
+
+<p>
+<em>Nodo (3,1)</em>
+
+$$
+\begin{align*}
+    T_{i-1, j} - 4 T_{i, j} + T_{i+1, j} + T_{i, j-1} + T_{i, j+1} &= 0 \\
+    T_{3-1, 1} - 4 T_{3, 1} + T_{3+1, 1} + T_{3, 1-1} + T_{3, 1+1} &= 0 \\
+    T_{2, 1} - 4 T_{3, 1} + T_{4, 1} + T_{3, 0} + T_{3, 2} &= 0
+\end{align*}
+$$
+
+<p>
+<center><p><img src="imagenes/005_DF01_3.svg" align="bottom" width=500></p></center>
+
+$$
+\begin{align*}
+    T_{2, 1} - 4 T_{3, 1} + 50 + 0 + T_{3, 2} &= 0 \\
+    T_{2, 1} - 4 T_{3, 1} + T_{3, 2} &= -50
+\end{align*}
+$$
+
+<p>
+<em>Nodo (1,2)</em>
+
+$$
+\begin{align*}
+    T_{i-1, j} - 4 T_{i, j} + T_{i+1, j} + T_{i, j-1} + T_{i, j+1} &= 0 \\
+    T_{1-1, 2} - 4 T_{1, 2} + T_{1+1, 2} + T_{1, 2-1} + T_{1, 2+1} &= 0 \\
+    T_{0, 2} - 4 T_{1, 2} + T_{2, 2} + T_{1, 1} + T_{1, 3} &= 0
+\end{align*}
+$$
+
+<p>
+<center><p><img src="imagenes/005_DF01_4.svg" align="bottom" width=500></p></center>
+
+$$
+\begin{align*}
+    75 - 4 T_{1, 2} + T_{2, 2} + T_{1, 1} + T_{1, 3} &= 0 \\
+    T_{1, 1} - 4 T_{1, 2} + T_{1, 3} + T_{2, 2} &= -75
+\end{align*}
+$$
+
+<p>
+<em>Nodo (2,2)</em>
+
+$$
+\begin{align*}
+    T_{i-1, j} - 4 T_{i, j} + T_{i+1, j} + T_{i, j-1} + T_{i, j+1} &= 0 \\
+    T_{2-1, 2} - 4 T_{2, 2} + T_{2+1, 2} + T_{2, 2-1} + T_{2, 2+1} &= 0 \\
+    T_{1, 2} - 4 T_{2, 2} + T_{3, 2} + T_{2, 1} + T_{2, 3} &= 0
+\end{align*}
+$$
+
+<p>
+<center><p><img src="imagenes/005_DF01_5.svg" align="bottom" width=500></p></center>
+
+$$
+\begin{align*}
+    T_{1, 2} + T_{2, 1} - 4 T_{2, 2} + T_{2, 3} + T_{3, 2} &= 0
+\end{align*}
+$$
+
+<p>
+<em>Nodo (3,2)</em>
+
+$$
+\begin{align*}
+    T_{i-1, j} - 4 T_{i, j} + T_{i+1, j} + T_{i, j-1} + T_{i, j+1} &= 0 \\
+    T_{3-1, 2} - 4 T_{3, 2} + T_{3+1, 2} + T_{3, 2-1} + T_{3, 2+1} &= 0 \\
+    T_{2, 2} - 4 T_{3, 2} + T_{4, 2} + T_{3, 1} + T_{3, 3} &= 0
+\end{align*}
+$$
+
+<p>
+<center><p><img src="imagenes/005_DF01_6.svg" align="bottom" width=500></p></center>
+
+$$
+\begin{align*}
+    T_{2, 2} - 4 T_{3, 2} + 50 + T_{3, 1} + T_{3, 3} &= 0 \\
+    T_{2, 2} + T_{3, 1} - 4 T_{3, 2} + T_{3, 3} &= -50
+\end{align*}
+$$
+
+<p>
+<em>Nodo (1,3)</em>
+
+$$
+\begin{align*}
+    T_{i-1, j} - 4 T_{i, j} + T_{i+1, j} + T_{i, j-1} + T_{i, j+1} &= 0 \\
+    T_{1-1, 3} - 4 T_{1, 3} + T_{1+1, 3} + T_{1, 3-1} + T_{1, 3+1} &= 0 \\
+    T_{0, 3} - 4 T_{1, 3} + T_{2, 3} + T_{1, 2} + T_{1, 4} &= 0
+\end{align*}
+$$
+
+<p>
+<center><p><img src="imagenes/005_DF01_7.svg" align="bottom" width=500></p></center>
+
+$$
+\begin{align*}
+    75 - 4 T_{1, 3} + T_{2, 3} + T_{1, 2} + 100 &= 0 \\
+    T_{1, 2} - 4 T_{1, 3} + T_{2, 3} &= -175
+\end{align*}
+$$
+
+<p>
+<em>Nodo (2,3)</em>
+
+$$
+\begin{align*}
+    T_{i-1, j} - 4 T_{i, j} + T_{i+1, j} + T_{i, j-1} + T_{i, j+1} &= 0 \\
+    T_{2-1, 3} - 4 T_{2, 3} + T_{2+1, 3} + T_{2, 3-1} + T_{2, 3+1} &= 0 \\
+    T_{1, 3} - 4 T_{2, 3} + T_{3, 3} + T_{2, 2} + T_{2, 4} &= 0
+\end{align*}
+$$
+
+<p>
+<center><p><img src="imagenes/005_DF01_8.svg" align="bottom" width=500></p></center>
+
+$$
+\begin{align*}
+    T_{1, 3} - 4 T_{2, 3} + T_{3, 3} + T_{2, 2} + 100 &= 0 \\
+    T_{1, 3} + T_{2, 2} - 4 T_{2, 3} + T_{3, 3} &= -100
+\end{align*}
+$$
+
+<p>
+<em>Nodo (3,3)</em>
+
+$$
+\begin{align*}
+    T_{i-1, j} - 4 T_{i, j} + T_{i+1, j} + T_{i, j-1} + T_{i, j+1} &= 0 \\
+    T_{3-1, 3} - 4 T_{3, 3} + T_{3+1, 3} + T_{3, 3-1} + T_{3, 3+1} &= 0 \\
+    T_{2, 3} - 4 T_{3, 3} + T_{4, 3} + T_{3, 2} + T_{3, 4} &= 0
+\end{align*}
+$$
+
+<p>
+<center><p><img src="imagenes/005_DF01_9.svg" align="bottom" width=500></p></center>
+
+$$
+\begin{align*}
+    T_{2, 3} - 4 T_{3, 3} + 50 + T_{3, 2} + 100 &= 0 \\
+    T_{2, 3} + T_{3, 2} - 4 T_{3, 3} &= -150
+\end{align*}
+$$
+
+<p>
+Sistema de ecuaciones del problema
+
+$$
+\begin{align*}
+    - 4 T_{1, 1} + T_{1, 2} + T_{2, 1} &= -75 \\
+    T_{1, 1} - 4 T_{2, 1} + T_{2, 2} + T_{3, 1} &= 0 \\
+    T_{2, 1} - 4 T_{3, 1} + T_{3, 2} &= -50 \\
+    T_{1, 1} - 4 T_{1, 2} + T_{1, 3} + T_{2, 2} &= -75 \\
+    T_{1, 2} + T_{2, 1} - 4 T_{2, 2} + T_{2, 3} + T_{3, 2} &= 0 \\
+    T_{2, 2} + T_{3, 1} - 4 T_{3, 2} + T_{3, 3} &= -50 \\
+    T_{1, 2} - 4 T_{1, 3} + T_{2, 3} &= -175 \\
+    T_{1, 3} + T_{2, 2} - 4 T_{2, 3} + T_{3, 3} &= -100 \\
+    T_{2, 3} + T_{3, 2} - 4 T_{3, 3} &= -150
+\end{align*}
+$$
+
+<p>
+en forma matricial presenta una matriz dispersa
+
+$$
+\begin{equation*}
+    \begin{bmatrix}
+    -4 & 1 & 0 & 1 & 0 & 0 & 0 & 0 & 0 \\
+    1 & 0 & 0 & -4 & 1 & 0 & 1 & 0 & 0 \\
+    0 & 0 & 0 & 1 & 0 & 0 & -4 & 1 & 0 \\
+    1 & -4 & 1 & 0 & 1 & 0 & 0 & 0 & 0 \\
+    0 & 1 & 0 & 1 & -4 & 1 & 0 & 1 & 0 \\
+    0 & 0 & 0 & 0 & 1 & 0 & 1 & -4 & 1 \\
+    0 & 1 & -4 & 0 & 0 & 1 & 0 & 0 & 0 \\
+    0 & 0 & 1 & 0 & 1 & -4 & 0 & 0 & 1 \\
+    0 & 0 & 0 & 0 & 0 & 1 & 0 & 1 & -4
+    \end{bmatrix}
+    \begin{bmatrix}
+    T_{1,1} \\
+    T_{1,2} \\
+    T_{1,3} \\
+    T_{2,1} \\
+    T_{2,2} \\
+    T_{2,3} \\
+    T_{3,1} \\
+    T_{3,2} \\
+    T_{3,3}
+    \end{bmatrix} =
+    \begin{bmatrix}
+    -75 \\
+    0 \\
+    -50 \\
+    -75 \\
+    0 \\
+    -50 \\
+    -175 \\
+    -100 \\
+    -150
+    \end{bmatrix}
+\end{equation*}
+$$
+
+<p>
+en forma reducida
+
+$$
+\begin{equation*}
+    Ax = B
+\end{equation*}
+$$
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">A <span style="color: #666666">=</span> [[<span style="color: #666666">-4</span> <span style="color: #666666">1</span> <span style="color: #666666">0</span> <span style="color: #666666">1</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span>],
+    [ <span style="color: #666666">1</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">-4</span> <span style="color: #666666">1</span> <span style="color: #666666">0</span> <span style="color: #666666">1</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span>],
+    [<span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">1</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">-4</span> <span style="color: #666666">1</span> <span style="color: #666666">0</span>],
+    [<span style="color: #666666">1</span> <span style="color: #666666">-4</span> <span style="color: #666666">1</span> <span style="color: #666666">0</span> <span style="color: #666666">1</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span>],
+    [<span style="color: #666666">0</span> <span style="color: #666666">1</span> <span style="color: #666666">0</span> <span style="color: #666666">1</span> <span style="color: #666666">-4</span> <span style="color: #666666">1</span> <span style="color: #666666">0</span> <span style="color: #666666">1</span> <span style="color: #666666">0</span>],
+    [<span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">1</span> <span style="color: #666666">0</span> <span style="color: #666666">1</span> <span style="color: #666666">-4</span> <span style="color: #666666">1</span>],
+    [<span style="color: #666666">0</span> <span style="color: #666666">1</span> <span style="color: #666666">-4</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">1</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span>],
+    [<span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">1</span> <span style="color: #666666">0</span> <span style="color: #666666">1</span> <span style="color: #666666">-4</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">1</span>],
+    [<span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">1</span> <span style="color: #666666">0</span> <span style="color: #666666">1</span> <span style="color: #666666">-4</span>]];
+</pre></div>
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">B <span style="color: #666666">=</span> [[<span style="color: #666666">-75</span>],
+    [<span style="color: #666666">0</span>],
+    [<span style="color: #666666">-50</span>],
+    [<span style="color: #666666">-75</span>],
+    [<span style="color: #666666">0</span>],
+    [<span style="color: #666666">-50</span>],
+    [<span style="color: #666666">-175</span>],
+    [<span style="color: #666666">-100</span>],
+    [<span style="color: #666666">-150</span>]];
+</pre></div>
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">x <span style="color: #666666">=</span> inv(A)<span style="color: #666666">*</span>B;
+</pre></div>
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">x <span style="color: #666666">=</span> transpose(reshape(x,<span style="color: #666666">3</span>,<span style="color: #666666">3</span>))
+
+<span style="color: #008000; font-weight: bold">for</span> i<span style="color: #666666">=1</span>:<span style="color: #666666">3</span>
+    <span style="color: #008000; font-weight: bold">for</span> j<span style="color: #666666">=1</span>:<span style="color: #666666">3</span>
+        println(<span style="color: #BA2121">&quot;T[$i,$j] = $(x[i,j])&quot;</span>)
+    end
+end
+
+    T[<span style="color: #666666">1</span>,<span style="color: #666666">1</span>] <span style="color: #666666">=</span> <span style="color: #666666">42.85714285714286</span>
+    T[<span style="color: #666666">1</span>,<span style="color: #666666">2</span>] <span style="color: #666666">=</span> <span style="color: #666666">63.16964285714287</span>
+    T[<span style="color: #666666">1</span>,<span style="color: #666666">3</span>] <span style="color: #666666">=</span> <span style="color: #666666">78.57142857142857</span>
+    T[<span style="color: #666666">2</span>,<span style="color: #666666">1</span>] <span style="color: #666666">=</span> <span style="color: #666666">33.25892857142858</span>
+    T[<span style="color: #666666">2</span>,<span style="color: #666666">2</span>] <span style="color: #666666">=</span> <span style="color: #666666">56.25000000000001</span>
+    T[<span style="color: #666666">2</span>,<span style="color: #666666">3</span>] <span style="color: #666666">=</span> <span style="color: #666666">76.11607142857143</span>
+    T[<span style="color: #666666">3</span>,<span style="color: #666666">1</span>] <span style="color: #666666">=</span> <span style="color: #666666">33.92857142857144</span>
+    T[<span style="color: #666666">3</span>,<span style="color: #666666">2</span>] <span style="color: #666666">=</span> <span style="color: #666666">52.45535714285715</span>
+    T[<span style="color: #666666">3</span>,<span style="color: #666666">3</span>] <span style="color: #666666">=</span> <span style="color: #666666">69.64285714285714</span>
+</pre></div>
+
+<h3 id="___sec4">Condiciones de frontera de Neumann </h3>
+
+$$
+\begin{align*}
+    \frac{\partial^{2} T}{\partial x^{2}} + \frac{\partial^{2} T}{\partial y^{2}} &= 0 \\
+    T(0,y) &= 75 \\
+    T(4,y) &= 50 \\
+    T(x,4) &= 100 \\
+    \frac{\partial}{\partial y} T(x,0) &= 0
+\end{align*}
+$$
+
+<p>
+<em>Nodo (1,0)</em>
+
+$$
+\begin{align*}
+    T_{i-1, j} - 4 T_{i, j} + T_{i+1, j} + T_{i, j-1} + T_{i, j+1} &= 0 \\
+    T_{1-1, 0} - 4 T_{1, 0} + T_{1+1, 0} + T_{1, 0-1} + T_{1, 0+1} &= 0 \\
+    T_{0, 0} - 4 T_{1, 0} + T_{2, 0} + T_{1, -1} + T_{1, 1} &= 0
+\end{align*}
+$$
+
+<p>
+aproximando \( T_{y} \) con una diferencia finita centrada
+
+$$
+\begin{equation*}
+    \frac{\partial T}{\partial y} = \frac{T_{i, j-1} - T_{i, j+1}}{2 \Delta y} = \frac{T_{1, 0-1} - T_{1, 0+1}}{2 \Delta y} = \frac{T_{1, -1} - T_{1, 1}}{2 \Delta y}
+\end{equation*}
+$$
+
+<p>
+despejando \( T_{1, -1} \)
+
+$$
+\begin{equation*}
+    T_{1, -1} = 2 \Delta y \frac{\partial T}{\partial y} + T_{1, 1}
+\end{equation*}
+$$
+
+<p>
+reemplazando
+
+$$
+\begin{align*}
+    T_{0, 0} - 4 T_{1, 0} + T_{2, 0} + 2 \Delta y \frac{\partial T}{\partial y} + T_{1, 1} + T_{1, 1} &= 0 \\
+    T_{0, 0} - 4 T_{1, 0} + T_{2, 0} + 2 \Delta y \frac{\partial T}{\partial y} + 2 T_{1, 1} &= 0
+\end{align*}
+$$
+
+<p>
+<center><p><img src="imagenes/005_DF01_10.svg" align="bottom" width=500></p></center>
+
+$$
+\begin{align*}
+    75 - 4 T_{1, 0} + T_{2, 0} + 2 (1) (0) + 2 T_{1, 1} &= 0 \\
+    - 4 T_{1, 0} + 2 T_{1, 1} + T_{2, 0} &= -75
+\end{align*}
+$$
+
+<p>
+<em>Nodo (2,0)</em>
+
+$$
+\begin{align*}
+    T_{i-1, j} - 4 T_{i, j} + T_{i+1, j} + T_{i, j-1} + T_{i, j+1} &= 0 \\
+    T_{2-1, 0} - 4 T_{2, 0} + T_{2+1, 0} + T_{2, 0-1} + T_{2, 0+1} &= 0 \\
+    T_{1, 0} - 4 T_{2, 0} + T_{3, 0} + T_{2, -1} + T_{2, 1} &= 0
+\end{align*}
+$$
+
+<p>
+aproximando \( T_{y} \) con una diferencia finita centrada
+
+$$
+\begin{equation*}
+    \frac{\partial T}{\partial y} = \frac{T_{i, j-1} - T_{i, j+1}}{2 \Delta y} = \frac{T_{2, 0-1} - T_{2, 0+1}}{2 \Delta y} = \frac{T_{2, -1} - T_{2, 1}}{2 \Delta y}
+\end{equation*}
+$$
+
+<p>
+despejando \( T_{2, -1} \)
+
+$$
+\begin{equation*}
+    T_{2, -1} = 2 \Delta y \frac{\partial T}{\partial y} + T_{2, 1}
+\end{equation*}
+$$
+
+<p>
+reemplazando
+
+$$
+\begin{align*}
+    T_{1, 0} - 4 T_{2, 0} + T_{3, 0} + 2 \Delta y \frac{\partial T}{\partial y} + T_{2, 1} + T_{2, 1} &= 0 \\
+    T_{1, 0} - 4 T_{2, 0} + T_{3, 0} + 2 \Delta y \frac{\partial T}{\partial y} + 2 T_{2, 1} &= 0
+\end{align*}
+$$
+
+<p>
+<center><p><img src="imagenes/005_DF01_11.svg" align="bottom" width=500></p></center>
+
+$$
+\begin{align*}
+    T_{1, 0} - 4 T_{2, 0} + T_{3, 0} + 2 (1) (0) + 2 T_{2, 1} &= 0 \\
+    T_{1, 0} - 4 T_{2, 0} + 2 T_{2, 1} + T_{3, 0} &= 0
+\end{align*}
+$$
+
+<p>
+<em>Nodo (3,0)</em>
+
+$$
+\begin{align*}
+    T_{i-1, j} - 4 T_{i, j} + T_{i+1, j} + T_{i, j-1} + T_{i, j+1} &= 0 \\
+    T_{3-1, 0} - 4 T_{3, 0} + T_{3+1, 0} + T_{3, 0-1} + T_{3, 0+1} &= 0 \\
+    T_{2, 0} - 4 T_{3, 0} + T_{4, 0} + T_{3, -1} + T_{3, 1} &= 0
+\end{align*}
+$$
+
+<p>
+aproximando \( T_{y} \) con una diferencia finita centrada
+
+$$
+\begin{equation*}
+    \frac{\partial T}{\partial y} = \frac{T_{i, j-1} - T_{i, j+1}}{2 \Delta y} = \frac{T_{3, 0-1} - T_{3, 0+1}}{2 \Delta y} = \frac{T_{3, -1} - T_{3, 1}}{2 \Delta y}
+\end{equation*}
+$$
+
+<p>
+despejando \( T_{3, -1} \)
+
+$$
+\begin{equation*}
+    T_{3, -1} = 2 \Delta y \frac{\partial T}{\partial y} + T_{3, 1}
+\end{equation*}
+$$
+
+<p>
+reemplazando
+
+$$
+\begin{align*}
+    T_{2, 0} - 4 T_{3, 0} + T_{4, 0} + 2 \Delta y \frac{\partial T}{\partial y} + T_{3, 1} + T_{3, 1} &= 0 \\
+    T_{2, 0} - 4 T_{3, 0} + T_{4, 0} + 2 \Delta y \frac{\partial T}{\partial y} + 2 T_{3, 1} &= 0
+\end{align*}
+$$
+
+<p>
+<center><p><img src="imagenes/005_DF01_12.svg" align="bottom" width=500></p></center>
+
+$$
+\begin{align*}
+    T_{2, 0} - 4 T_{3, 0} + 50 + 2 (1) (0) + 2 T_{3, 1} &= 0 \\
+    T_{2, 0} - 4 T_{3, 0} + 2 T_{3, 1} &= -50
+\end{align*}
+$$
+
+<p>
+<em>Nodo (1,1)</em>
+
+$$
+\begin{align*}
+    T_{i-1, j} - 4 T_{i, j} + T_{i+1, j} + T_{i, j-1} + T_{i, j+1} &= 0 \\
+    T_{1-1, 1} - 4 T_{1, 1} + T_{1+1, 1} + T_{1, 1-1} + T_{1, 1+1} &= 0 \\
+    T_{0, 1} - 4 T_{1, 1} + T_{2, 1} + T_{1, 0} + T_{1, 2} &= 0
+\end{align*}
+$$
+
+<p>
+<center><p><img src="imagenes/005_DF01_13.svg" align="bottom" width=500></p></center>
+
+$$
+\begin{align*}
+    75 - 4 T_{1, 1} + T_{2, 1} + T_{1, 0} + T_{1, 2} &= 0 \\
+    T_{1, 0} - 4 T_{1, 1} + T_{1, 2} + T_{2, 1} &= -75
+\end{align*}
+$$
+
+<p>
+<em>Nodo (2,1)</em>
+
+$$
+\begin{align*}
+    T_{i-1, j} - 4 T_{i, j} + T_{i+1, j} + T_{i, j-1} + T_{i, j+1} &= 0 \\
+    T_{2-1, 1} - 4 T_{2, 1} + T_{2+1, 1} + T_{2, 1-1} + T_{2, 1+1} &= 0 \\
+    T_{1, 1} - 4 T_{2, 1} + T_{3, 1} + T_{2, 0} + T_{2, 2} &= 0
+\end{align*}
+$$
+
+<p>
+<center><p><img src="imagenes/005_DF01_14.svg" align="bottom" width=500></p></center>
+
+$$
+\begin{align*}
+    T_{1, 1} + T_{2, 0} - 4 T_{2, 1} + T_{2, 2} + T_{3, 1} &= 0
+\end{align*}
+$$
+
+<p>
+<em>Nodo (3,1)</em>
+
+$$
+\begin{align*}
+    T_{i-1, j} - 4 T_{i, j} + T_{i+1, j} + T_{i, j-1} + T_{i, j+1} &= 0 \\
+    T_{3-1, 1} - 4 T_{3, 1} + T_{3+1, 1} + T_{3, 1-1} + T_{3, 1+1} &= 0 \\
+    T_{2, 1} - 4 T_{3, 1} + T_{4, 1} + T_{3, 0} + T_{3, 2} &= 0
+\end{align*}
+$$
+
+<p>
+<center><p><img src="imagenes/005_DF01_15.svg" align="bottom" width=500></p></center>
+
+$$
+\begin{align*}
+    T_{2, 1} - 4 T_{3, 1} + 50 + T_{3, 0} + T_{3, 2} &= 0 \\
+    T_{2, 1} + + T_{3, 0} - 4 T_{3, 1} + T_{3, 2} &= -50
+\end{align*}
+$$
+
+<p>
+<em>Nodo (1,2)</em>
+
+$$
+\begin{align*}
+    T_{i-1, j} - 4 T_{i, j} + T_{i+1, j} + T_{i, j-1} + T_{i, j+1} &= 0 \\
+    T_{1-1, 2} - 4 T_{1, 2} + T_{1+1, 2} + T_{1, 2-1} + T_{1, 2+1} &= 0 \\
+    T_{0, 2} - 4 T_{1, 2} + T_{2, 2} + T_{1, 1} + T_{1, 3} &= 0
+\end{align*}
+$$
+
+<p>
+<center><p><img src="imagenes/005_DF01_16.svg" align="bottom" width=500></p></center>
+
+$$
+\begin{align*}
+    75 - 4 T_{1, 2} + T_{2, 2} + T_{1, 1} + T_{1, 3} &= 0 \\
+    T_{1, 1} - 4 T_{1, 2} + T_{1, 3} + T_{2, 2} &= -75
+\end{align*}
+$$
+
+<p>
+<em>Nodo (2,2)</em>
+
+$$
+\begin{align*}
+    T_{i-1, j} - 4 T_{i, j} + T_{i+1, j} + T_{i, j-1} + T_{i, j+1} &= 0 \\
+    T_{2-1, 2} - 4 T_{2, 2} + T_{2+1, 2} + T_{2, 2-1} + T_{2, 2+1} &= 0 \\
+    T_{1, 2} - 4 T_{2, 2} + T_{3, 2} + T_{2, 1} + T_{2, 3} &= 0
+\end{align*}
+$$
+
+<p>
+<center><p><img src="imagenes/005_DF01_17.svg" align="bottom" width=500></p></center>
+
+$$
+\begin{align*}
+    T_{1, 2} + T_{2, 1} - 4 T_{2, 2} + T_{2, 3} + T_{3, 2} &= 0
+\end{align*}
+$$
+
+<p>
+<em>Nodo (3,2)</em>
+
+$$
+\begin{align*}
+    T_{i-1, j} - 4 T_{i, j} + T_{i+1, j} + T_{i, j-1} + T_{i, j+1} &= 0 \\
+    T_{3-1, 2} - 4 T_{3, 2} + T_{3+1, 2} + T_{3, 2-1} + T_{3, 2+1} &= 0 \\
+    T_{2, 2} - 4 T_{3, 2} + T_{4, 2} + T_{3, 1} + T_{3, 3} &= 0
+\end{align*}
+$$
+
+<p>
+<center><p><img src="imagenes/005_DF01_18.svg" align="bottom" width=500></p></center>
+
+$$
+\begin{align*}
+    T_{2, 2} - 4 T_{3, 2} + 50 + T_{3, 1} + T_{3, 3} &= 0 \\
+    T_{2, 2} + T_{3, 1} - 4 T_{3, 2} + T_{3, 3} &= -50
+\end{align*}
+$$
+
+<p>
+<em>Nodo (1,3)</em>
+
+$$
+\begin{align*}
+    T_{i-1, j} - 4 T_{i, j} + T_{i+1, j} + T_{i, j-1} + T_{i, j+1} &= 0 \\
+    T_{1-1, 3} - 4 T_{1, 3} + T_{1+1, 3} + T_{1, 3-1} + T_{1, 3+1} &= 0 \\
+    T_{0, 3} - 4 T_{1, 3} + T_{2, 3} + T_{1, 2} + T_{1, 4} &= 0
+\end{align*}
+$$
+
+<p>
+<center><p><img src="imagenes/005_DF01_19.svg" align="bottom" width=500></p></center>
+
+$$
+\begin{align*}
+    75 - 4 T_{1, 3} + T_{2, 3} + T_{1, 2} + 100 &= 0 \\
+    T_{1, 2} - 4 T_{1, 3} + T_{2, 3} &= -175
+\end{align*}
+$$
+
+<p>
+<em>Nodo (2,3)</em>
+
+$$
+\begin{align*}
+    T_{i-1, j} - 4 T_{i, j} + T_{i+1, j} + T_{i, j-1} + T_{i, j+1} &= 0 \\
+    T_{2-1, 3} - 4 T_{2, 3} + T_{2+1, 3} + T_{2, 3-1} + T_{2, 3+1} &= 0 \\
+    T_{1, 3} - 4 T_{2, 3} + T_{3, 3} + T_{2, 2} + T_{2, 4} &= 0
+\end{align*}
+$$
+
+<p>
+<center><p><img src="imagenes/005_DF01_20.svg" align="bottom" width=500></p></center>
+
+$$
+\begin{align*}
+    T_{1, 3} - 4 T_{2, 3} + T_{3, 3} + T_{2, 2} + 100 &= 0 \\
+    T_{1, 3} + T_{2, 2} - 4 T_{2, 3} + T_{3, 3} &= -100
+\end{align*}
+$$
+
+<p>
+<em>Nodo (3,3)</em>
+
+$$
+\begin{align*}
+    T_{i-1, j} - 4 T_{i, j} + T_{i+1, j} + T_{i, j-1} + T_{i, j+1} &= 0 \\
+    T_{3-1, 3} - 4 T_{3, 3} + T_{3+1, 3} + T_{3, 3-1} + T_{3, 3+1} &= 0 \\
+    T_{2, 3} - 4 T_{3, 3} + T_{4, 3} + T_{3, 2} + T_{3, 4} &= 0
+\end{align*}
+$$
+
+<p>
+<center><p><img src="imagenes/005_DF01_21.svg" align="bottom" width=500></p></center>
+
+$$
+\begin{align*}
+    T_{2, 3} - 4 T_{3, 3} + 50 + T_{3, 2} + 100 &= 0 \\
+    T_{2, 3} + T_{3, 2} - 4 T_{3, 3} &= -150
+\end{align*}
+$$
+
+<p>
+Sistema de ecuaciones del problema
+
+$$
+\begin{align*}
+    - 4 T_{1, 0} + 2 T_{1, 1} + T_{2, 0} &= -75 \\
+    T_{1, 0} - 4 T_{2, 0} + 2 T_{2, 1} + T_{3, 0} &= 0 \\
+    T_{2, 0} - 4 T_{3, 0} + 2 T_{3, 1} &= -50 \\
+    T_{1, 0} - 4 T_{1, 1} + T_{1, 2} + T_{2, 1} &= -75 \\
+    T_{1, 1} + T_{2, 0} - 4 T_{2, 1} + T_{2, 2} + T_{3, 1} &= 0 \\
+    T_{2, 1} + + T_{3, 0} - 4 T_{3, 1} + T_{3, 2} &= -50 \\
+    T_{1, 1} - 4 T_{1, 2} + T_{1, 3} + T_{2, 2} &= -75 \\
+    T_{1, 2} + T_{2, 1} - 4 T_{2, 2} + T_{2, 3} + T_{3, 2} &= 0 \\
+    T_{2, 2} + T_{3, 1} - 4 T_{3, 2} + T_{3, 3} &= -50 \\
+    T_{1, 2} - 4 T_{1, 3} + T_{2, 3} &= -175 \\
+    T_{1, 3} + T_{2, 2} - 4 T_{2, 3} + T_{3, 3} &= -100 \\
+    T_{2, 3} + T_{3, 2} - 4 T_{3, 3} &= -150
+\end{align*}
+$$
+
+<p>
+en forma matricial
+
+$$
+\begin{equation*}
+    \begin{bmatrix}
+    -4 & 2 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+    1 & 0 & 0 & 0 & -4 & 2 & 0 & 0 & 1 & 0 & 0 & 0 \\
+    0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & -4 & 2 & 0 & 0 \\
+    1 & -4 & 1 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 \\
+    0 & 1 & 0 & 0 & 1 & -4 & 1 & 0 & 0 & 1 & 0 & 0 \\
+    0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 1 & -4 & 1 & 0 \\
+    0 & 1 & -4 & 1 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 \\
+    0 & 0 & 1 & 0 & 0 & 1 & -4 & 1 & 0 & 0 & 1 & 0 \\
+    0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 1 & -4 & 1 \\
+    0 & 0 & 1 & -4 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 \\
+    0 & 0 & 0 & 1 & 0 & 0 & 1 & -4 & 0 & 0 & 0 & 1 \\
+    0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 1 & -4
+    \end{bmatrix}
+    \begin{bmatrix}
+    T_{1,0} \\
+    T_{1,1} \\
+    T_{1,2} \\
+    T_{1,3} \\
+    T_{2,0} \\
+    T_{2,1} \\
+    T_{2,2} \\
+    T_{2,3} \\
+    T_{3,0} \\
+    T_{3,1} \\
+    T_{3,2} \\
+    T_{3,3}
+    \end{bmatrix} =
+    \begin{bmatrix}
+    -75 \\
+    0 \\
+    -50 \\
+    -75 \\
+    0 \\
+    -50 \\
+    -75 \\
+    0 \\
+    -50 \\
+    -175 \\
+    -100 \\
+    -150
+    \end{bmatrix}
+\end{equation*}
+$$
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">C <span style="color: #666666">=</span> [[<span style="color: #666666">-4</span> <span style="color: #666666">2</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">1</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span>],
+    [<span style="color: #666666">1</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">-4</span> <span style="color: #666666">2</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">1</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span>],
+    [<span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">1</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">-4</span> <span style="color: #666666">2</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span>],
+    [<span style="color: #666666">1</span> <span style="color: #666666">-4</span> <span style="color: #666666">1</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">1</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span>],
+    [<span style="color: #666666">0</span> <span style="color: #666666">1</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">1</span> <span style="color: #666666">-4</span> <span style="color: #666666">1</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">1</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span>],
+    [<span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">1</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">1</span> <span style="color: #666666">-4</span> <span style="color: #666666">1</span> <span style="color: #666666">0</span>],
+    [<span style="color: #666666">0</span> <span style="color: #666666">1</span> <span style="color: #666666">-4</span> <span style="color: #666666">1</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">1</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span>],
+    [<span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">1</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">1</span> <span style="color: #666666">-4</span> <span style="color: #666666">1</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">1</span> <span style="color: #666666">0</span>],
+    [<span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">1</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">1</span> <span style="color: #666666">-4</span> <span style="color: #666666">1</span>],
+    [<span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">1</span> <span style="color: #666666">-4</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">1</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span>],
+    [<span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">1</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">1</span> <span style="color: #666666">-4</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">1</span>],
+    [<span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">1</span> <span style="color: #666666">0</span> <span style="color: #666666">0</span> <span style="color: #666666">1</span> <span style="color: #666666">-4</span>]];
+</pre></div>
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">D <span style="color: #666666">=</span> [[<span style="color: #666666">-75</span>],
+    [<span style="color: #666666">0</span>],
+    [<span style="color: #666666">-50</span>],
+    [<span style="color: #666666">-75</span>],
+    [<span style="color: #666666">0</span>],
+    [<span style="color: #666666">-50</span>],
+    [<span style="color: #666666">-75</span>],
+    [<span style="color: #666666">0</span>],
+    [<span style="color: #666666">-50</span>],
+    [<span style="color: #666666">-175</span>],
+    [<span style="color: #666666">-100</span>],
+    [<span style="color: #666666">-150</span>]];
+</pre></div>
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">u <span style="color: #666666">=</span> inv(C)<span style="color: #666666">*</span>D;
+</pre></div>
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">u <span style="color: #666666">=</span> transpose(reshape(u, <span style="color: #666666">4</span>,<span style="color: #666666">3</span>))
+
+<span style="color: #008000; font-weight: bold">for</span> i<span style="color: #666666">=1</span>:<span style="color: #666666">3</span>
+    <span style="color: #008000; font-weight: bold">for</span> j<span style="color: #666666">=1</span>:<span style="color: #666666">4</span>
+        println(<span style="color: #BA2121">&quot;T[$i,$(j-1)] = $(u[i,j])&quot;</span>)
+    end
+end
+
+    T[<span style="color: #666666">1</span>,<span style="color: #666666">0</span>] <span style="color: #666666">=</span> <span style="color: #666666">71.9073553216478</span>
+    T[<span style="color: #666666">1</span>,<span style="color: #666666">1</span>] <span style="color: #666666">=</span> <span style="color: #666666">72.8074388953829</span>
+    T[<span style="color: #666666">1</span>,<span style="color: #666666">2</span>] <span style="color: #666666">=</span> <span style="color: #666666">76.01510157957134</span>
+    T[<span style="color: #666666">1</span>,<span style="color: #666666">3</span>] <span style="color: #666666">=</span> <span style="color: #666666">83.41092594700703</span>
+    T[<span style="color: #666666">2</span>,<span style="color: #666666">0</span>] <span style="color: #666666">=</span> <span style="color: #666666">67.01454349582546</span>
+    T[<span style="color: #666666">2</span>,<span style="color: #666666">1</span>] <span style="color: #666666">=</span> <span style="color: #666666">68.3072986803124</span>
+    T[<span style="color: #666666">2</span>,<span style="color: #666666">2</span>] <span style="color: #666666">=</span> <span style="color: #666666">72.84204147589548</span>
+    T[<span style="color: #666666">2</span>,<span style="color: #666666">3</span>] <span style="color: #666666">=</span> <span style="color: #666666">82.62860220845677</span>
+    T[<span style="color: #666666">3</span>,<span style="color: #666666">0</span>] <span style="color: #666666">=</span> <span style="color: #666666">59.53622130102927</span>
+    T[<span style="color: #666666">3</span>,<span style="color: #666666">1</span>] <span style="color: #666666">=</span> <span style="color: #666666">60.565170854145784</span>
+    T[<span style="color: #666666">3</span>,<span style="color: #666666">2</span>] <span style="color: #666666">=</span> <span style="color: #666666">64.41716343524146</span>
+    T[<span style="color: #666666">3</span>,<span style="color: #666666">3</span>] <span style="color: #666666">=</span> <span style="color: #666666">74.26144141092456</span>
+</pre></div>
+<p>
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="previous">
+    <a href="._dfm000.html">&larr; Prev</a>
+  </li>
+  <li class="next">
+    <a href="._dfm002.html">Next &rarr;</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+
