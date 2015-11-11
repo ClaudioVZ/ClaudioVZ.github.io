@@ -1,0 +1,390 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Introducción al método de diferencias finitas">
+
+<title>Introducción al método de diferencias finitas</title>
+
+<!-- Bootstrap style: bootswatch_cosmo -->
+<link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/cosmo/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 0,
+ 'sections': [(u'Introducci\xf3n', 0, None, '___sec0'),
+              (u'M\xe9todo de Liebmann', 1, None, '___sec1'),
+              (u'Ecuaci\xf3n de Laplace', 2, None, '___sec2'),
+              (u'Condiciones de frontera de Dirichlet', 3, None, '___sec3'),
+              (u'Condiciones de frontera de Neumann', 3, None, '___sec4'),
+              (u'M\xe9todo simple impl\xedcito', 1, None, '___sec5'),
+              (u'Ecuaci\xf3n de conducci\xf3n del calor', 2, None, '___sec6'),
+              (u'Ejemplo', 2, None, '___sec7')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="dfm.html">Introducción al método de diferencias finitas</a>
+  </div>
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="._dfm001.html#___sec0" style="font-size: 80%;"><b>Introducción</b></a></li>
+     <!-- navigation toc: --> <li><a href="._dfm001.html#___sec1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Método de Liebmann</a></li>
+     <!-- navigation toc: --> <li><a href="._dfm001.html#___sec2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ecuación de Laplace</a></li>
+     <!-- navigation toc: --> <li><a href="._dfm002.html#___sec3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Condiciones de frontera de Dirichlet</a></li>
+     <!-- navigation toc: --> <li><a href="._dfm003.html#___sec4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Condiciones de frontera de Neumann</a></li>
+     <!-- navigation toc: --> <li><a href="._dfm004.html#___sec5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Método simple implícito</a></li>
+     <!-- navigation toc: --> <li><a href="._dfm004.html#___sec6" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ecuación de conducción del calor</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec7" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ejemplo</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0005"></a>
+<!-- !split -->
+
+<h2 id="___sec7">Ejemplo </h2>
+
+<p>
+Resolver
+
+$$
+\begin{equation*}
+    k \frac{\partial^{2} T}{\partial x^{2}} = \frac{\partial T}{\partial t}
+\end{equation*}
+$$
+
+<p>
+para
+
+$$
+\begin{align*}
+    k &= 0.835 \\
+    T(0 < x < 10, 0.2) &= ?
+\end{align*}
+$$
+
+<p>
+sujeto a
+
+$$
+\begin{align*}
+    T(0, t) &= 100 \\
+    T(10, t) &= 50 \\
+    T(0 < x < 10, 0) &= 0
+\end{align*}
+$$
+
+<p>
+para la solución numérica usamos
+
+$$
+\begin{align*}
+    \Delta x &= 2 \\
+    \Delta t &= 0.1
+\end{align*}
+$$
+
+<p>
+Condición inicial
+
+<p>
+imagen
+
+$$
+\begin{align*}
+    T^{0}_{0} &= 100 \\
+    T^{0}_{1} &= 0 \\
+    T^{0}_{2} &= 0 \\
+    T^{0}_{3} &= 0 \\
+    T^{0}_{4} &= 0 \\
+    T^{0}_{5} &= 50
+\end{align*}
+$$
+
+<p>
+Para \( l = 0 \)
+
+$$
+\begin{align*}
+    T^{l+1}_{i} &= T^{l}_{i} + k \frac{\Delta t}{\Delta x^{2}} (T^{l}_{i-1} - 2 T^{l}_{i} + T^{l}_{i+1}) \\
+    T^{0+1}_{i} &= T^{0}_{i} + k \frac{\Delta t}{\Delta x^{2}} (T^{0}_{i-1} - 2 T^{0}_{i} + T^{0}_{i+1}) \\
+    T^{1}_{i} &= T^{0}_{i} + k \frac{\Delta t}{\Delta x^{2}} (T^{0}_{i-1} - 2 T^{0}_{i} + T^{0}_{i+1})
+\end{align*}
+$$
+
+<p>
+<em>Nodo 1</em>
+
+$$
+\begin{align*}
+    T^{1}_{i} &= T^{0}_{i} + k \frac{\Delta t}{\Delta x^{2}} (T^{0}_{i-1} - 2 T^{0}_{i} + T^{0}_{i+1}) \\
+    T^{1}_{1} &= T^{0}_{1} + k \frac{\Delta t}{\Delta x^{2}} (T^{0}_{1-1} - 2 T^{0}_{1} + T^{0}_{1+1}) \\
+    T^{1}_{1} &= T^{0}_{1} + k \frac{\Delta t}{\Delta x^{2}} (T^{0}_{0} - 2 T^{0}_{1} + T^{0}_{2})
+\end{align*}
+$$
+
+<p>
+<center><p><img src="imagenes/006_DF02_1.svg" align="bottom" width=500></p></center>
+
+$$
+\begin{equation*}
+    T^{1}_{1} = 0 + 0.835 \left( \frac{0.1}{2^{2}} \right) [100 - 2 (0) + 0] = 2.0875
+\end{equation*}
+$$
+
+<p>
+<em>Nodo 2</em>
+
+$$
+\begin{align*}
+    T^{1}_{i} &= T^{0}_{i} + k \frac{\Delta t}{\Delta x^{2}} (T^{0}_{i-1} - 2 T^{0}_{i} + T^{0}_{i+1}) \\
+    T^{1}_{2} &= T^{0}_{2} + k \frac{\Delta t}{\Delta x^{2}} (T^{0}_{2-1} - 2 T^{0}_{2} + T^{0}_{2+1}) \\
+    T^{1}_{2} &= T^{0}_{2} + k \frac{\Delta t}{\Delta x^{2}} (T^{0}_{1} - 2 T^{0}_{2} + T^{0}_{3})
+\end{align*}
+$$
+
+<p>
+<center><p><img src="imagenes/006_DF02_2.svg" align="bottom" width=500></p></center>
+
+$$
+\begin{equation*}
+    T^{1}_{2} = 0 + 0.835 \left( \frac{0.1}{2^{2}} \right) [0 - 2 (0) + 0] = 0
+\end{equation*}
+$$
+
+<p>
+<em>Nodo 3</em>
+
+$$
+\begin{align*}
+    T^{1}_{i} &= T^{0}_{i} + k \frac{\Delta t}{\Delta x^{2}} (T^{0}_{i-1} - 2 T^{0}_{i} + T^{0}_{i+1}) \\
+    T^{1}_{3} &= T^{0}_{3} + k \frac{\Delta t}{\Delta x^{2}} (T^{0}_{3-1} - 2 T^{0}_{3} + T^{0}_{3+1}) \\
+    T^{1}_{3} &= T^{0}_{3} + k \frac{\Delta t}{\Delta x^{2}} (T^{0}_{2} - 2 T^{0}_{3} + T^{0}_{4})
+\end{align*}
+$$
+
+<p>
+<center><p><img src="imagenes/006_DF02_3.svg" align="bottom" width=500></p></center>
+
+$$
+\begin{equation*}
+    T^{1}_{3} = 0 + 0.835 \left( \frac{0.1}{2^{2}} \right) [0 - 2 (0) + 0] = 0
+\end{equation*}
+$$
+
+<p>
+<em>Nodo 4</em>
+
+$$
+\begin{align*}
+    T^{1}_{i} &= T^{0}_{i} + k \frac{\Delta t}{\Delta x^{2}} (T^{0}_{i-1} - 2 T^{0}_{i} + T^{0}_{i+1}) \\
+    T^{1}_{4} &= T^{0}_{4} + k \frac{\Delta t}{\Delta x^{2}} (T^{0}_{4-1} - 2 T^{0}_{4} + T^{0}_{4+1}) \\
+    T^{1}_{4} &= T^{0}_{4} + k \frac{\Delta t}{\Delta x^{2}} (T^{0}_{3} - 2 T^{0}_{4} + T^{0}_{5})
+\end{align*}
+$$
+
+<p>
+<center><p><img src="imagenes/006_DF02_4.svg" align="bottom" width=500></p></center>
+
+$$
+\begin{equation*}
+    T^{1}_{4} = 0 + 0.835 \left( \frac{0.1}{2^{2}} \right) [0 - 2 (0) + 50] = 1.0438
+\end{equation*}
+$$
+
+<p>
+Para \( l = 1 \)
+
+$$
+\begin{align*}
+    T^{l+1}_{i} &= T^{l}_{i} + k \frac{\Delta t}{\Delta x^{2}} (T^{l}_{i-1} - 2 T^{l}_{i} + T^{l}_{i+1}) \\
+    T^{1+1}_{i} &= T^{1}_{i} + k \frac{\Delta t}{\Delta x^{2}} (T^{1}_{i-1} - 2 T^{1}_{i} + T^{1}_{i+1}) \\
+    T^{2}_{i} &= T^{1}_{i} + k \frac{\Delta t}{\Delta x^{2}} (T^{1}_{i-1} - 2 T^{1}_{i} + T^{1}_{i+1})
+\end{align*}
+$$
+
+<p>
+<em>Nodo 1</em>
+
+$$
+\begin{align*}
+    T^{2}_{i} &= T^{1}_{i} + k \frac{\Delta t}{\Delta x^{2}} (T^{1}_{i-1} - 2 T^{1}_{i} + T^{1}_{i+1}) \\
+    T^{2}_{1} &= T^{1}_{1} + k \frac{\Delta t}{\Delta x^{2}} (T^{1}_{1-1} - 2 T^{1}_{1} + T^{1}_{1+1}) \\
+    T^{2}_{i} &= T^{1}_{1} + k \frac{\Delta t}{\Delta x^{2}} (T^{1}_{0} - 2 T^{1}_{1} + T^{1}_{2})
+\end{align*}
+$$
+
+<p>
+<center><p><img src="imagenes/006_DF02_5.svg" align="bottom" width=500></p></center>
+
+$$
+\begin{equation*}
+    T^{2}_{1} = 2.0875 + 0.835 \left( \frac{0.1}{2^{2}} \right) [100 - 2 (2.0875) + 0] = 4.0878
+\end{equation*}
+$$
+
+<p>
+<em>Nodo 2</em>
+
+$$
+\begin{align*}
+    T^{2}_{i} &= T^{1}_{i} + k \frac{\Delta t}{\Delta x^{2}} (T^{1}_{i-1} - 2 T^{1}_{i} + T^{1}_{i+1}) \\
+    T^{2}_{2} &= T^{1}_{2} + k \frac{\Delta t}{\Delta x^{2}} (T^{1}_{2-1} - 2 T^{1}_{2} + T^{1}_{2+1}) \\
+    T^{2}_{2} &= T^{1}_{2} + k \frac{\Delta t}{\Delta x^{2}} (T^{1}_{1} - 2 T^{1}_{2} + T^{1}_{3})
+\end{align*}
+$$
+
+<p>
+<center><p><img src="imagenes/006_DF02_6.svg" align="bottom" width=500></p></center>
+
+$$
+\begin{equation*}
+    T^{2}_{2} = 0 + 0.835 \left( \frac{0.1}{2^{2}} \right) [2.0875 - 2 (0) + 0] = 0.0436
+\end{equation*}
+$$
+
+<p>
+<em>Nodo 3</em>
+
+$$
+\begin{align*}
+    T^{2}_{i} &= T^{1}_{i} + k \frac{\Delta t}{\Delta x^{2}} (T^{1}_{i-1} - 2 T^{1}_{i} + T^{1}_{i+1}) \\
+    T^{2}_{3} &= T^{1}_{3} + k \frac{\Delta t}{\Delta x^{2}} (T^{1}_{3-1} - 2 T^{1}_{3} + T^{1}_{3+1}) \\
+    T^{2}_{3} &= T^{1}_{3} + k \frac{\Delta t}{\Delta x^{2}} (T^{1}_{2} - 2 T^{1}_{3} + T^{1}_{4})
+\end{align*}
+$$
+
+<p>
+<center><p><img src="imagenes/006_DF02_7.svg" align="bottom" width=500></p></center>
+
+$$
+\begin{equation*}
+    T^{2}_{3} = 0 + 0.835 \left( \frac{0.1}{2^{2}} \right) [0 - 2 (0) + 1.0438] = 0.0218
+\end{equation*}
+$$
+
+<p>
+<em>Nodo 4</em>
+
+$$
+\begin{align*}
+    T^{2}_{i} &= T^{1}_{i} + k \frac{\Delta t}{\Delta x^{2}} (T^{1}_{i-1} - 2 T^{1}_{i} + T^{1}_{i+1}) \\
+    T^{2}_{4} &= T^{1}_{4} + k \frac{\Delta t}{\Delta x^{2}} (T^{1}_{4-1} - 2 T^{1}_{4} + T^{1}_{4+1}) \\
+    T^{2}_{4} &= T^{1}_{4} + k \frac{\Delta t}{\Delta x^{2}} (T^{1}_{3} - 2 T^{1}_{4} + T^{1}_{5})
+\end{align*}
+$$
+
+<p>
+<center><p><img src="imagenes/006_DF02_8.svg" align="bottom" width=500></p></center>
+
+$$
+\begin{equation*}
+    T^{2}_{4} = 1.0438 + 0.835 \left( \frac{0.1}{2^{2}} \right) [0 - 2 (1.0438) + 50] = 2.0440
+\end{equation*}
+$$
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">filas <span style="color: #666666">=</span> <span style="color: #666666">3</span>
+columnas <span style="color: #666666">=</span> <span style="color: #666666">6</span>
+
+A <span style="color: #666666">=</span> zeros(filas, columnas)
+
+<span style="color: #008000; font-weight: bold">for</span> i<span style="color: #666666">=1</span>:filas
+    A[i,<span style="color: #666666">1</span>] <span style="color: #666666">=</span> <span style="color: #666666">100</span>
+    A[i,columnas] <span style="color: #666666">=</span> <span style="color: #666666">50</span>
+end
+
+k <span style="color: #666666">=</span> <span style="color: #666666">0.835</span>
+Δx <span style="color: #666666">=</span> <span style="color: #666666">2.0</span>
+Δt <span style="color: #666666">=</span> <span style="color: #666666">0.1</span>
+
+<span style="color: #008000; font-weight: bold">for</span> i<span style="color: #666666">=2</span>:filas
+    <span style="color: #008000; font-weight: bold">for</span> j<span style="color: #666666">=2</span>:columnas <span style="color: #666666">-</span> <span style="color: #666666">1</span>
+        A[i,j] <span style="color: #666666">=</span> A[i<span style="color: #666666">-1</span>,j] <span style="color: #666666">+</span> (k <span style="color: #666666">*</span> (Δt<span style="color: #666666">/</span>Δx<span style="color: #666666">^2</span>) <span style="color: #666666">*</span> (A[i<span style="color: #666666">-1</span>,j<span style="color: #666666">-1</span>] <span style="color: #666666">-</span> (<span style="color: #666666">2*</span>A[i<span style="color: #666666">-1</span>,j]) <span style="color: #666666">+</span> A[i<span style="color: #666666">-1</span>,j<span style="color: #666666">+1</span>]))
+    end
+end
+</pre></div>
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">A
+    <span style="color: #666666">3</span>x6 Array{Float64,<span style="color: #666666">2</span>}:
+     <span style="color: #666666">100.0</span>  <span style="color: #666666">0.0</span>      <span style="color: #666666">0.0</span>        <span style="color: #666666">0.0</span>        <span style="color: #666666">0.0</span>      <span style="color: #666666">50.0</span>
+     <span style="color: #666666">100.0</span>  <span style="color: #666666">2.0875</span>   <span style="color: #666666">0.0</span>        <span style="color: #666666">0.0</span>        <span style="color: #666666">1.04375</span>  <span style="color: #666666">50.0</span>
+     <span style="color: #666666">100.0</span>  <span style="color: #666666">4.08785</span>  <span style="color: #666666">0.0435766</span>  <span style="color: #666666">0.0217883</span>  <span style="color: #666666">2.04392</span>  <span style="color: #666666">50.0</span>
+</pre></div>
+<p>
+
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="previous">
+    <a href="._dfm004.html">&larr; Prev</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+
