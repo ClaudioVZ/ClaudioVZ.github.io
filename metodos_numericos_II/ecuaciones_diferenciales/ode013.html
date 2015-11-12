@@ -120,12 +120,12 @@ MathJax.Hub.Config({
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
         <ul class="dropdown-menu">
-     <!-- navigation toc: --> <li><a href="#___sec0" style="font-size: 80%;"><b>Introducción</b></a></li>
-     <!-- navigation toc: --> <li><a href="#___sec1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Modelos matemáticos</a></li>
-     <!-- navigation toc: --> <li><a href="._ode004.html#___sec4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Aproximaciones y errores de redondeo</a></li>
-     <!-- navigation toc: --> <li><a href="._ode008.html#___sec18" style="font-size: 80%;"><b>Métodos</b></a></li>
-     <!-- navigation toc: --> <li><a href="._ode008.html#___sec19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Método de Euler</a></li>
-     <!-- navigation toc: --> <li><a href="._ode012.html#___sec32" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Métodos implícitos de Runge-Kutta (RK)</a></li>
+     <!-- navigation toc: --> <li><a href="ode001.html#___sec0" style="font-size: 80%;"><b>Introducción</b></a></li>
+     <!-- navigation toc: --> <li><a href="ode001.html#___sec1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Modelos matemáticos</a></li>
+     <!-- navigation toc: --> <li><a href="ode004.html#___sec4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Aproximaciones y errores de redondeo</a></li>
+     <!-- navigation toc: --> <li><a href="ode008.html#___sec18" style="font-size: 80%;"><b>Métodos</b></a></li>
+     <!-- navigation toc: --> <li><a href="ode008.html#___sec19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Método de Euler</a></li>
+     <!-- navigation toc: --> <li><a href="ode012.html#___sec32" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Métodos implícitos de Runge-Kutta (RK)</a></li>
 
         </ul>
       </li>
@@ -138,37 +138,50 @@ MathJax.Hub.Config({
 
 <p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
 
-<a name="part0001"></a>
+<a name="part0013"></a>
 <!-- !split -->
 
-<p>
-
-<center><h1 id="___sec0">Introducción </h1></center> <!-- chapter heading -->
-
-<h1 id="___sec1">Modelos matemáticos </h1>
+<h2 id="___sec34">Métodos de primer orden </h2>
 
 <p>
-Un modelo matemático general se define como
+Para \( s = 1 \)
 
 $$
-\begin{equation}
-    \text{variable dependiente} = f(\text{variables independientes}, \text{parámetros}, \text{funciones de fuerza})
-\tag{1}
-\end{equation}
+\begin{align*}
+    k_{1} &= f(t_{n}, y_{n}) \\
+    y_{n+1} &= y_{n} + h b_{1} k_{1}
+\end{align*}
 $$
 
 <p>
-donde la <em>variable dependiente</em> es una característica que refleja el comportamiento o estado de un sistema, las <em>variables independientes</em> son comunmente dimensiones (tiempo, espacio), los <em>parámetros</em> se refieren a las propiedades o componentes del sistema y las <em>funciones de fuerza</em> son influencias externas u otros modelos.
+tabla de <em>Butcher</em>
+
+<p>
+\begin{array}{c|c}
+0 & \\
+\hline
+& 1
+\end{array}
+
+<p>
+reemplazando se obtiene el método de Euler
+
+$$
+\begin{align*}
+    k_{1} &= f(t_{n}, y_{n}) \\
+    y_{n+1} &= y_{n} + h k_{1}
+\end{align*}
+$$
 
 <p>
 <p>
 <!-- navigation buttons at the bottom of the page -->
 <ul class="pager">
   <li class="previous">
-    <a href="._ode000.html">&larr; Prev</a>
+    <a href="ode012.html">&larr; Prev</a>
   </li>
   <li class="next">
-    <a href="._ode002.html">Next &rarr;</a>
+    <a href="ode014.html">Next &rarr;</a>
   </li>
 </ul>
 <!-- ------------------- end of main content --------------- -->

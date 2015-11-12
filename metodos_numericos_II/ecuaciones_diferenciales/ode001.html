@@ -120,12 +120,12 @@ MathJax.Hub.Config({
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
         <ul class="dropdown-menu">
-     <!-- navigation toc: --> <li><a href="._ode001.html#___sec0" style="font-size: 80%;"><b>Introducción</b></a></li>
-     <!-- navigation toc: --> <li><a href="._ode001.html#___sec1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Modelos matemáticos</a></li>
-     <!-- navigation toc: --> <li><a href="._ode004.html#___sec4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Aproximaciones y errores de redondeo</a></li>
-     <!-- navigation toc: --> <li><a href="._ode008.html#___sec18" style="font-size: 80%;"><b>Métodos</b></a></li>
-     <!-- navigation toc: --> <li><a href="._ode008.html#___sec19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Método de Euler</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec32" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Métodos implícitos de Runge-Kutta (RK)</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec0" style="font-size: 80%;"><b>Introducción</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Modelos matemáticos</a></li>
+     <!-- navigation toc: --> <li><a href="ode004.html#___sec4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Aproximaciones y errores de redondeo</a></li>
+     <!-- navigation toc: --> <li><a href="ode008.html#___sec18" style="font-size: 80%;"><b>Métodos</b></a></li>
+     <!-- navigation toc: --> <li><a href="ode008.html#___sec19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Método de Euler</a></li>
+     <!-- navigation toc: --> <li><a href="ode012.html#___sec32" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Métodos implícitos de Runge-Kutta (RK)</a></li>
 
         </ul>
       </li>
@@ -138,95 +138,37 @@ MathJax.Hub.Config({
 
 <p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
 
-<a name="part0012"></a>
+<a name="part0001"></a>
 <!-- !split -->
 
 <p>
 
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">function f(x,y)
-    <span style="color: #666666">4*</span>exp(<span style="color: #666666">0.8*</span>x) <span style="color: #666666">-</span> (<span style="color: #666666">0.5*</span>y)
-end
+<center><h1 id="___sec0">Introducción </h1></center> <!-- chapter heading -->
 
-    f (generic function <span style="color: #008000; font-weight: bold">with</span> <span style="color: #666666">1</span> method)
-</pre></div>
-
-<h1 id="___sec32">Métodos implícitos de Runge-Kutta (RK) </h1>
+<h1 id="___sec1">Modelos matemáticos </h1>
 
 <p>
-Los métodos implícitos tienen la siguiente forma generalizada
+Un modelo matemático general se define como
 
 $$
-\begin{align*}
-    k_{1} &= f(t_{n}, y_{n}) \\
-    k_{2} &= f(t_{n} + c_{2} h, y_{n} + h(a_{21} k_{1})) \\
-    k_{3} &= f(t_{n} + c_{3} h, y_{n} + h(a_{31} k_{1} + a_{32} k_{2})) \\
-    \vdots \\
-    k_{s} &= f(t_{n} + c_{s} h, y_{n} + h(a_{s1} k_{1} + a_{s2} k_{2} + \cdots + a_{s,s-1} k_{s-1})) \\
-    y_{n+1} &= y_{n} + h \sum^{s}_{i=1} b_{i} k_{i}
-\end{align*}
+\begin{equation}
+    \text{variable dependiente} = f(\text{variables independientes}, \text{parámetros}, \text{funciones de fuerza})
+\tag{1}
+\end{equation}
 $$
 
 <p>
-Las ecuaciones anteriores pueden representarse usando la tabla de <em>Butcher</em>
-
-<p>
-\begin{array}{c|c c}
-0 & & & & & \\
-c_{2} & a_{21} & & & & \\
-c_{3} & a_{31} & a_{32} & & & \\
-\vdots & \vdots & & \ddots & & \\
-c_{s} & a_{s1} & a_{s2} & \cdots &amp; a_{s,s-1} & \\
-\hline
-& b_{1} & b_{2} & \cdots &amp; b_{s-1} & b_{s}
-\end{array}
-
-<h2 id="___sec33">Clasificación </h2>
-
-<p>
-Se clasifican según su orden de aproximación
-
-$$
-\begin{equation*}
-    \text{RKp}
-\end{equation*}
-$$
-
-<p>
-RK1 Método de primer orden
-
-<p>
-RK2 Método de segundo orden
-
-<p>
-RK3 Método de tercer orden
-
-<p>
-RK4 Método de cinco cuarto orden
-
-<p>
-RK5 Método de quinto orden
-
-<p>
-También se clasifican por el número de etapas (stages)
-
-<p>
-\begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|}
-\text{Orden p} & 1 &amp; 2 & 3 &amp; 4 & & 5 &amp; 6 & & 7 & & 8 \\
-\text{Etapas s} & 1 &amp; 2 & 3 &amp; 4 & 5 &amp; 6 & 7 &amp; 8 & 9 &amp; 10 &amp; 11 \\
-\text{Parámetros} & 1 &amp; 3 & 6 &amp; 10 &amp; 15 &amp; 21 &amp; 28 &amp; 36 &amp; 45 &amp; 55 &amp; 66 \\
-\text{Condiciones} & 1 &amp; 2 & 4 &amp; 8 & & 17 &amp; 37 & & 85 & & 200
-\end{array}
+donde la <em>variable dependiente</em> es una característica que refleja el comportamiento o estado de un sistema, las <em>variables independientes</em> son comunmente dimensiones (tiempo, espacio), los <em>parámetros</em> se refieren a las propiedades o componentes del sistema y las <em>funciones de fuerza</em> son influencias externas u otros modelos.
 
 <p>
 <p>
 <!-- navigation buttons at the bottom of the page -->
 <ul class="pager">
   <li class="previous">
-    <a href="._ode011.html">&larr; Prev</a>
+    <a href="ode000.html">&larr; Prev</a>
   </li>
   <li class="next">
-    <a href="._ode013.html">Next &rarr;</a>
+    <a href="ode002.html">Next &rarr;</a>
   </li>
 </ul>
 <!-- ------------------- end of main content --------------- -->
