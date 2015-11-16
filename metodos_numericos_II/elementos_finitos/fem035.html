@@ -171,7 +171,7 @@ MathJax.Hub.Config({
      <!-- navigation toc: --> <li><a href="fem003.html#___sec3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ejemplo 2</a></li>
      <!-- navigation toc: --> <li><a href="fem004.html#___sec4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Forma alternativa</a></li>
      <!-- navigation toc: --> <li><a href="fem005.html#___sec5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ejemplo 3</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec6" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solución general</a></li>
+     <!-- navigation toc: --> <li><a href="fem006.html#___sec6" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solución general</a></li>
      <!-- navigation toc: --> <li><a href="fem007.html#___sec7" style="font-size: 80%;"><b>Elementos unidimensionales</b></a></li>
      <!-- navigation toc: --> <li><a href="fem007.html#___sec8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Polinomios de Lagrange</a></li>
      <!-- navigation toc: --> <li><a href="fem007.html#___sec9" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Coordenadas globales</a></li>
@@ -238,10 +238,10 @@ MathJax.Hub.Config({
      <!-- navigation toc: --> <li><a href="fem033.html#___sec70" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Elemento de dos nodos</a></li>
      <!-- navigation toc: --> <li><a href="fem033.html#___sec71" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Elemento de tres nodos</a></li>
      <!-- navigation toc: --> <li><a href="fem034.html#___sec72" style="font-size: 80%;"><b>Elemento barra en tracción-compresión</b></a></li>
-     <!-- navigation toc: --> <li><a href="fem035.html#___sec73" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Coordenadas naturales</a></li>
-     <!-- navigation toc: --> <li><a href="fem035.html#___sec74" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ejemplo 1</a></li>
-     <!-- navigation toc: --> <li><a href="fem035.html#___sec75" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Un elemento de dos nodos</a></li>
-     <!-- navigation toc: --> <li><a href="fem035.html#___sec76" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dos elementos de dos nodos</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec73" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Coordenadas naturales</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec74" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ejemplo 1</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec75" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Un elemento de dos nodos</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec76" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dos elementos de dos nodos</a></li>
      <!-- navigation toc: --> <li><a href="fem036.html#___sec77" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ejemplo 2</a></li>
      <!-- navigation toc: --> <li><a href="fem036.html#___sec78" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Un elemento de tres nodos</a></li>
      <!-- navigation toc: --> <li><a href="fem036.html#___sec79" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dos elementos de tres nodos</a></li>
@@ -268,34 +268,122 @@ MathJax.Hub.Config({
 
 <p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
 
-<a name="part0006"></a>
+<a name="part0035"></a>
 <!-- !split -->
 
-<h2 id="___sec6">Solución general </h2>
+<h1 id="___sec73">Coordenadas naturales </h1>
+
+<h2 id="___sec74">Ejemplo 1 </h2>
+
+<p>
+\( L = 0.5 \ \text{m} \), \( A = 6.25 \times 10^{-4} \ \text{m}^{2} \) y \( E = 200 \ \text{MPa} \)
+
+<p>
+<center><p><img src="imagenes/010_ejemplo_barra_1.svg" align="bottom" width=500></p></center>
+
+<p>
+la función que interpola la geometría es
 
 $$
 \begin{equation*}
-    \int_{0}^{1} R(x) W(x) \ dx = \int_{0}^{1} \bigg( \frac{d^{2} u(x)}{d x^{2}} + x^{2} \bigg) W(x) \ dx = 0
+    x = \bigg( \frac{1}{2} - \frac{1}{2} \xi \bigg) x_{1} + \bigg( \frac{1}{2} + \frac{1}{2} \xi \bigg) x_{2}
 \end{equation*}
 $$
 
 <p>
-puede escribirse como la suma de integrales
+las funciones de forma son
 
 $$
 \begin{equation*}
-    \int_{0}^{1} \frac{d^{2} u(x)}{d x^{2}} W(x) \ dx + \int_{0}^{1} x^{2} W(x) \ dx = 0
+    \mathbf{N} =
+    \begin{bmatrix}
+        \frac{1}{2} - \frac{1}{2} \xi & \frac{1}{2} + \frac{1}{2} \xi
+    \end{bmatrix}
 \end{equation*}
 $$
 
 <p>
-integrando por partes para reducir el orden de la derivada
+el jacobiano es
 
 $$
-\begin{align*}
-    \int u \ dv &= uv - \int v \ du \\
-    \int_{0}^{1} W(x) \frac{d^{2} u(x)}{d x^{2}} \ dx &= \bigg( W(x) \frac{d u(x)}{d x} \bigg) \bigg|_{0}^{1} - \int_{0}^{1} \frac{d u(x)}{d x} \frac{d W(x)}{d x}\ dx
-\end{align*}
+\begin{equation*}
+    J = \frac{d x}{d \xi} = \frac{1}{2} x_{2} - \frac{1}{2} x_{1} = \frac{l}{2}
+\end{equation*}
+$$
+
+<p>
+deformaciones
+
+$$
+\begin{equation*}
+    \mathbf{B} = \frac{d \mathbf{N}}{d x} = \frac{d \mathbf{N}}{d \xi} \frac{d \xi}{d x} =
+    \begin{bmatrix}
+        -\frac{1}{2} & \frac{1}{2}
+    \end{bmatrix}
+    \frac{2}{l} =
+    \begin{bmatrix}
+        -\frac{1}{l} & \frac{1}{l}
+    \end{bmatrix}
+\end{equation*}
+$$
+
+<h3 id="___sec75">Un elemento de dos nodos </h3>
+
+<p>
+<center><p><img src="imagenes/010_ejemplo_barra_2.svg" align="bottom" width=500></p></center>
+
+$$
+\begin{equation*}
+    \int_{-1}^{+1} \mathbf{B}^{\mathrm{T}} \mathbf{D} \ \mathbf{B} \ J \ d\xi \ \mathbf{u} = \int_{-1}^{+1} q \ \mathbf{N}^{\mathrm{T}} J \ d\xi + \mathbf{F}
+\end{equation*}
+$$
+
+<p>
+interpolación de desplazamientos
+
+$$
+\begin{equation*}
+    \mathbf{N} =
+    \begin{bmatrix}
+        \frac{1}{2} - \frac{1}{2} \xi & \frac{1}{2} + \frac{1}{2} \xi
+    \end{bmatrix}
+\end{equation*}
+$$
+
+<p>
+interpolación de deformaciones
+
+$$
+\begin{equation*}
+    \mathbf{B} = \frac{d \mathbf{N}}{d x} =
+    \begin{bmatrix}
+        -\frac{1}{l} & \frac{1}{l}
+    \end{bmatrix} =
+    \begin{bmatrix}
+        -\frac{1}{0.5} & \frac{1}{0.5}
+    \end{bmatrix} =
+    \begin{bmatrix}
+        -2 & 2
+    \end{bmatrix}
+\end{equation*}
+$$
+
+<p>
+matriz constitutiva
+
+$$
+\begin{equation*}
+    \mathbf{D} = E \ A = 1.25 \times 10^{5} \ [\text{N}]
+\end{equation*}
+$$
+
+<p>
+jacobiano
+
+$$
+\begin{equation*}
+    J = \frac{dx}{d\xi} = \frac{l}{2} = \frac{0.5}{2} = \frac{1}{4}
+\end{equation*}
 $$
 
 <p>
@@ -303,148 +391,651 @@ reemplazando
 
 $$
 \begin{equation*}
-    \bigg( \frac{d u(x)}{d x} W(x) \bigg) \bigg|_{0}^{1} - \int_{0}^{1} \frac{d u(x)}{d x} \frac{d W(x)}{d x}\ dx + \int_{0}^{1} x^{2} W(x) \ dx = 0
-\end{equation*}
-$$
-
-<p>
-reordenando
-
-$$
-\begin{equation*}
-    \int_{0}^{1} \frac{d u(x)}{d x} \frac{d W(x)}{d x} \ dx = \int_{0}^{1} x^{2} W(x) \ dx + \bigg( \frac{d u(x)}{d x} W(x) \bigg) \bigg|_{0}^{1}
-\end{equation*}
-$$
-
-<p>
-para la solución se usara un elemento de dos nodos
-
-$$
-\begin{align*}
-    u(x) &= \sum_{i=1}^{2} N_{i} a_{i} = N_{1} a_{1} + N_{2} a_{2} \\
-    \frac{d u(x)}{d x} &= \frac{d N_{1}}{d x} a_{1} + \frac{d N_{2}}{d x} a_{2} \\
-    W(x) &= \sum_{i=1}^{2} N_{i} \delta a_{i} = N_{1} \delta a_{1} + N_{2} \delta a_{2} \\
-    \frac{d W(x)}{d x} &= \frac{d N_{1}}{d x} \delta a_{1} + \frac{d N_{2}}{d x} \delta a_{2}
-\end{align*}
-$$
-
-<p>
-reemplazando
-
-$$
-\begin{equation*}
-    \int_{0}^{1} \bigg( \frac{d N_{1}}{d x} a_{1} + \frac{d N_{2}}{d x} a_{2} \bigg) \bigg( \frac{d N_{1}}{d x} \delta a_{1} + \frac{d N_{2}}{d x} \delta a_{2} \bigg) \ dx = \int_{0}^{1} x^{2} (N_{1} \delta a_{1} + N_{2} \delta a_{2}) \ dx + \bigg[ \frac{d u(x)}{d x} (N_{1} \delta a_{1} + N_{2} \delta a_{2}) \bigg] \bigg|_{0}^{1}
-\end{equation*}
-$$
-
-<p>
-multiplicando
-
-$$
-\begin{equation*}
-    \int_{0}^{1} \frac{d N_{1}}{d x} \frac{d N_{1}}{d x} a_{1} \delta a_{1} + \frac{d N_{1}}{d x} \frac{d N_{2}}{d x} a_{2} \delta a_{1} + \frac{d N_{2}}{d x} \frac{d N_{1}}{d x} a_{1} \delta a_{2} + \frac{d N_{2}}{d x} \frac{d N_{2}}{d x} a_{2} \delta a_{2} \ dx = \int_{0}^{1} x^{2} N_{1} \delta a_{1} + x^{2} N_{2} \delta a_{2} \ dx + \bigg( \frac{d u(x)}{d x} N_{1} \delta a_{1} + \frac{d u(x)}{d x} N_{2} \delta a_{2} \bigg) \bigg|_{0}^{1}
-\end{equation*}
-$$
-
-<p>
-reemplazando los límites de integración en el lado derecho
-
-$$
-\begin{equation*}
-    \int_{0}^{1} \frac{d N_{1}}{d x} \frac{d N_{1}}{d x} a_{1} \delta a_{1} + \frac{d N_{1}}{d x} \frac{d N_{2}}{d x} a_{2} \delta a_{1} + \frac{d N_{2}}{d x} \frac{d N_{1}}{d x} a_{1} \delta a_{2} + \frac{d N_{2}}{d x} \frac{d N_{2}}{d x} a_{2} \delta a_{2} \ dx = \int_{0}^{1} x^{2} N_{1} \delta a_{1} + x^{2} N_{2} \delta a_{2} \ dx + \bigg( \frac{d u(1)}{d x} N_{1}(1) \delta a_{1} + \frac{d u(1)}{d x} N_{2}(1) \delta a_{2} \bigg) - \bigg( \frac{d u(0)}{d x} N_{1}(0) \delta a_{1} + \frac{d u(0)}{d x} N_{2}(0) \delta a_{2} \bigg)
-\end{equation*}
-$$
-
-<p>
-reordenando y agrupando
-
-$$
-\begin{equation*}
-    \int_{0}^{1} \bigg( \frac{d N_{1}}{d x} \frac{d N_{1}}{d x} a_{1} + \frac{d N_{1}}{d x} \frac{d N_{2}}{d x} a_{2} \bigg) \delta a_{1} + \bigg( \frac{d N_{2}}{d x} \frac{d N_{1}}{d x} a_{1} + \frac{d N_{2}}{d x} \frac{d N_{2}}{d x} a_{2} \bigg) \delta a_{2} \ dx = \int_{0}^{1} x^{2} N_{1} \delta a_{1} + x^{2} N_{2} \delta a_{2} \ dx + \bigg( \frac{d u(1)}{d x} N_{1}(1) - \frac{d u(0)}{d x} N_{1}(0) \bigg) \delta a_{1} + \bigg( \frac{d u(1)}{d x} N_{2}(1) - \frac{d u(0)}{d x} N_{2}(0) \bigg) \delta a_{2}
-\end{equation*}
-$$
-
-<p>
-formando un sistema de ecuaciones
-
-$$
-\begin{align*}
-    \int_{0}^{1} \bigg( \frac{d N_{1}}{d x} \frac{d N_{1}}{d x} a_{1} + \frac{d N_{1}}{d x} \frac{d N_{2}}{d x} a_{2} \bigg) \delta a_{1} \ dx &= \int_{0}^{1} x^{2} N_{1} \delta a_{1} \ dx + \bigg( \frac{d u(1)}{d x} N_{1}(1) - \frac{d u(0)}{d x} N_{1}(0) \bigg) \delta a_{1} \\
-    \int_{0}^{1} \bigg( \frac{d N_{2}}{d x} \frac{d N_{1}}{d x} a_{1} + \frac{d N_{2}}{d x} \frac{d N_{2}}{d x} a_{2} \bigg) \delta a_{2} \ dx &= \int_{0}^{1} x^{2} N_{2} \delta a_{2} \ dx + \bigg( \frac{d u(1)}{d x} N_{2}(1) - \frac{d u(0)}{d x} N_{2}(0) \bigg) \delta a_{2}
-\end{align*}
-$$
-
-<p>
-las constantes se simplifican en ambos lados
-
-$$
-\begin{align*}
-    \int_{0}^{1} \frac{d N_{1}}{d x} \frac{d N_{1}}{d x} a_{1} + \frac{d N_{1}}{d x} \frac{d N_{2}}{d x} a_{2} \ dx &= \int_{0}^{1} x^{2} N_{1} \ dx + \frac{d u(1)}{d x} N_{1}(1) - \frac{d u(0)}{d x} N_{1}(0) \\
-    \int_{0}^{1} \frac{d N_{2}}{d x} \frac{d N_{1}}{d x} a_{1} + \frac{d N_{2}}{d x} \frac{d N_{2}}{d x} a_{2} \ dx &= \int_{0}^{1} x^{2} N_{2} \ dx + \frac{d u(1)}{d x} N_{2}(1) - \frac{d u(0)}{d x} N_{2}(0)
-\end{align*}
-$$
-
-<p>
-las funciones de forma obtenidas anteriomente, tienen los siguientes valores
-
-<p>
-\begin{matrix}
-    N_{1}(1) = 0 &amp; N_{1}(0) = 0 \\
-    N_{2}(1) = 0 &amp; N_{2}(0) = 0
-\end{matrix}
-
-<p>
-reemplazando
-
-$$
-\begin{align*}
-    \int_{0}^{1} \frac{d N_{1}}{d x} \frac{d N_{1}}{d x} a_{1} + \frac{d N_{1}}{d x} \frac{d N_{2}}{d x} a_{2} \ dx &= \int_{0}^{1} x^{2} N_{1} \ dx \\
-    \int_{0}^{1} \frac{d N_{2}}{d x} \frac{d N_{1}}{d x} a_{1} + \frac{d N_{2}}{d x} \frac{d N_{2}}{d x} a_{2} \ dx &= \int_{0}^{1} x^{2} N_{2} \ dx
-\end{align*}
-$$
-
-<p>
-en forma matricial
-
-$$
-\begin{equation*}
-    \int_{0}^{1}
+    \int_{-1}^{+1}
     \begin{bmatrix}
-        \frac{d N_{1}}{d x} \frac{d N_{1}}{d x} & \frac{d N_{1}}{d x} \frac{d N_{2}}{d x} \\
-        \frac{d N_{2}}{d x} \frac{d N_{1}}{d x} & \frac{d N_{2}}{d x} \frac{d N_{2}}{d x}
-    \end{bmatrix} dx
-    \begin{bmatrix}
-    a_{1} \\
-    a_{2}
-    \end{bmatrix} = \int_{0}^{1} x^{2}
-    \begin{bmatrix}
-    N_{1} \\
-    N_{2}
-    \end{bmatrix} dx
-\end{equation*}
-$$
-
-<p>
-factorizando matrices
-
-$$
-\begin{equation*}
-    \int_{0}^{1}
-    \begin{bmatrix}
-        \frac{d N_{1}}{d x} \\
-        \frac{d N_{2}}{d x}
+        -2 \\
+        2
     \end{bmatrix}
     \begin{bmatrix}
-        \frac{d N_{1}}{d x} & \frac{d N_{2}}{d x}
-    \end{bmatrix} dx
+        1.25 \times 10^{5}
+    \end{bmatrix}
     \begin{bmatrix}
-    a_{1} \\
-    a_{2}
-    \end{bmatrix} = \int_{0}^{1} x^{2}
+        -2 & 2
+    \end{bmatrix} \frac{1}{4} \ d \xi
     \begin{bmatrix}
-    N_{1} \\
-    N_{2}
-    \end{bmatrix} dx
+    u_{1} \\
+    u_{2}
+    \end{bmatrix} = \int_{-1}^{+1} 1000
+    \begin{bmatrix}
+        \frac{1}{2} - \frac{1}{2} \xi \\
+        \frac{1}{2} + \frac{1}{2} \xi
+    \end{bmatrix} \frac{1}{4} \ d \xi +
+    \begin{bmatrix}
+    F_{1} \\
+    F_{2}
+    \end{bmatrix}
+\end{equation*}
+$$
+
+<p>
+integrando
+
+$$
+\begin{equation*}
+    \begin{bmatrix}
+        2.5 \times 10^{5} & -2.5 \times 10^{5} \\
+        -2.5 \times 10^{5} & 2.5 \times 10^{5}
+    \end{bmatrix}
+    \begin{bmatrix}
+    u_{1} \\
+    u_{2}
+    \end{bmatrix} =
+    \begin{bmatrix}
+    250 \\
+    250
+    \end{bmatrix} +
+    \begin{bmatrix}
+    F_{1} \\
+    F_{2}
+    \end{bmatrix}
+\end{equation*}
+$$
+
+<p>
+reemplazando las condiciones de contorno
+
+$$
+\begin{equation*}
+    \begin{bmatrix}
+        2.5 \times 10^{5} & -2.5 \times 10^{5} \\
+        -2.5 \times 10^{5} & 2.5 \times 10^{5}
+    \end{bmatrix}
+    \begin{bmatrix}
+    0 \\
+    u_{2}
+    \end{bmatrix} =
+    \begin{bmatrix}
+    250 \\
+    250
+    \end{bmatrix} +
+    \begin{bmatrix}
+    F_{1} \\
+    250
+    \end{bmatrix}
+\end{equation*}
+$$
+
+<p>
+sumando
+
+$$
+\begin{equation*}
+    \begin{bmatrix}
+        2.5 \times 10^{5} & -2.5 \times 10^{5} \\
+        -2.5 \times 10^{5} & 2.5 \times 10^{5}
+    \end{bmatrix}
+    \begin{bmatrix}
+    0 \\
+    u_{2}
+    \end{bmatrix} =
+    \begin{bmatrix}
+    F_{1} + 250 \\
+    500
+    \end{bmatrix}
+\end{equation*}
+$$
+
+<p>
+resolviendo
+
+$$
+\begin{align*}
+    F_{1} &= -750 \ [\text{N}] \\
+    u_{2} &= 0.002 \ [\text{m}]
+\end{align*}
+$$
+
+<p>
+<b>Desplazamientos, deformaciones y esfuerzos</b>
+
+<p>
+Las funciones de forma en coordenadas naturales se transforman a coordenadas globales usando
+
+$$
+\begin{equation*}
+    x = \bigg( \frac{1}{2} - \frac{1}{2} \xi \bigg) x_{1} + \bigg( \frac{1}{2} + \frac{1}{2} \xi \bigg) x_{2}
+\end{equation*}
+$$
+
+<p>
+despejando \( \xi \)
+
+$$
+\begin{equation*}
+    \xi = \frac{2}{x_{2} - x_{1}} x - \frac{x_{2} + x_{1}}{x_{2} - x_{1}}
+\end{equation*}
+$$
+
+<p>
+reemplazando \( x_{1}=0 \) y \( x_{2}=0.5 \)
+
+$$
+\begin{equation*}
+    \xi = \frac{2}{0.5 - 0} x - \frac{0.5 + 0}{0.5 - 0} = 4 x - 1
+\end{equation*}
+$$
+
+<p>
+desplazamientos
+
+$$
+\begin{equation*}
+    u = \mathbf{N} \ \mathbf{u} =
+    \begin{bmatrix}
+        \frac{1}{2} - \frac{1}{2} \xi & \frac{1}{2} + \frac{1}{2} \xi
+    \end{bmatrix}
+    \begin{bmatrix}
+    0 \\
+    0.002
+    \end{bmatrix} = 0.001 + 0.001 \xi= 0.004 x \ [\text{m}]
+\end{equation*}
+$$
+
+<p>
+deformación normal
+
+$$
+\begin{equation*}
+    \varepsilon = \mathbf{B} \ \mathbf{u} =
+    \begin{bmatrix}
+        -2 & 2
+    \end{bmatrix}
+    \begin{bmatrix}
+    0 \\
+    0.002
+    \end{bmatrix} = 0.004
+\end{equation*}
+$$
+
+<p>
+esfuerzo normal
+
+$$
+\begin{equation*}
+    \sigma = E \ \varepsilon = 0.8 \ [\text{MPa}]
+\end{equation*}
+$$
+
+<h3 id="___sec76">Dos elementos de dos nodos </h3>
+
+<p>
+<center><p><img src="imagenes/010_ejemplo_barra_3.svg" align="bottom" width=500></p></center>
+
+$$
+\begin{equation*}
+    \int_{-1}^{+1} \mathbf{B}^{\mathrm{T}} \mathbf{D} \ \mathbf{B} \ J \ d\xi \ \mathbf{u} = \int_{-1}^{+1} q \ \mathbf{N}^{\mathrm{T}} J \ d\xi + \mathbf{F}
+\end{equation*}
+$$
+
+<p>
+<em>Elemento 1</em>
+
+<p>
+interpolación de desplazamientos
+
+$$
+\begin{equation*}
+    \mathbf{N} =
+    \begin{bmatrix}
+        \frac{1}{2} - \frac{1}{2} \xi & \frac{1}{2} + \frac{1}{2} \xi
+    \end{bmatrix}
+\end{equation*}
+$$
+
+<p>
+interpolación de deformaciones
+
+$$
+\begin{equation*}
+    \mathbf{B} = \frac{d \mathbf{N}}{d x} =
+    \begin{bmatrix}
+        -\frac{1}{l} & \frac{1}{l}
+    \end{bmatrix} =
+    \begin{bmatrix}
+        -\frac{1}{0.25} & \frac{1}{0.25}
+    \end{bmatrix} =
+    \begin{bmatrix}
+        -4 & 4
+    \end{bmatrix}
+\end{equation*}
+$$
+
+<p>
+matriz constitutiva
+
+$$
+\begin{equation*}
+    \mathbf{D} = E \ A = 1.25 \times 10^{5} \ [\text{N}]
+\end{equation*}
+$$
+
+<p>
+jacobiano
+
+$$
+\begin{equation*}
+    J = \frac{dx}{d\xi} = \frac{l}{2} = \frac{0.25}{2} = \frac{1}{8}
+\end{equation*}
+$$
+
+<p>
+reemplazando
+
+$$
+\begin{equation*}
+    \int_{-1}^{+1}
+    \begin{bmatrix}
+        -4 \\
+        4
+    \end{bmatrix}
+    \begin{bmatrix}
+        1.25 \times 10^{5}
+    \end{bmatrix}
+    \begin{bmatrix}
+        -4 & 4
+    \end{bmatrix} \frac{1}{8} \ d \xi
+    \begin{bmatrix}
+    u_{1} \\
+    u_{2}
+    \end{bmatrix} = \int_{-1}^{+1} 1000
+    \begin{bmatrix}
+        \frac{1}{2} - \frac{1}{2} \xi \\
+        \frac{1}{2} + \frac{1}{2} \xi
+    \end{bmatrix} \frac{1}{8} \ d \xi +
+    \begin{bmatrix}
+    F_{1} \\
+    F_{2}
+    \end{bmatrix}
+\end{equation*}
+$$
+
+<p>
+integrando
+
+$$
+\begin{equation*}
+    \begin{bmatrix}
+        5 \times 10^{5} & -5 \times 10^{5} \\
+        -5 \times 10^{5} & 5 \times 10^{5}
+    \end{bmatrix}
+    \begin{bmatrix}
+    u_{1} \\
+    u_{2}
+    \end{bmatrix} =
+    \begin{bmatrix}
+    125 \\
+    125
+    \end{bmatrix} +
+    \begin{bmatrix}
+    F_{1} \\
+    F_{2}
+    \end{bmatrix}
+\end{equation*}
+$$
+
+<p>
+<em>Elemento 2</em>
+
+<p>
+interpolación de desplazamientos
+
+$$
+\begin{equation*}
+    \mathbf{N} =
+    \begin{bmatrix}
+        \frac{1}{2} - \frac{1}{2} \xi & \frac{1}{2} + \frac{1}{2} \xi
+    \end{bmatrix}
+\end{equation*}
+$$
+
+<p>
+interpolación de deformaciones
+
+$$
+\begin{equation*}
+    \mathbf{B} = \frac{d \mathbf{N}}{d x} =
+    \begin{bmatrix}
+        -\frac{1}{l} & \frac{1}{l}
+    \end{bmatrix} =
+    \begin{bmatrix}
+        -\frac{1}{0.25} & \frac{1}{0.25}
+    \end{bmatrix} =
+    \begin{bmatrix}
+        -4 & 4
+    \end{bmatrix}
+\end{equation*}
+$$
+
+<p>
+matriz constitutiva
+
+$$
+\begin{equation*}
+    \mathbf{D} = E \ A = 1.25 \times 10^{5} \ [\text{N}]
+\end{equation*}
+$$
+
+<p>
+jacobiano
+
+$$
+\begin{equation*}
+    J = \frac{dx}{d\xi} = \frac{l}{2} = \frac{0.25}{2} = \frac{1}{8}
+\end{equation*}
+$$
+
+<p>
+reemplazando
+
+$$
+\begin{equation*}
+    \int_{-1}^{+1}
+    \begin{bmatrix}
+        -4 \\
+        4
+    \end{bmatrix}
+    \begin{bmatrix}
+        1.25 \times 10^{5}
+    \end{bmatrix}
+    \begin{bmatrix}
+        -4 & 4
+    \end{bmatrix} \frac{1}{8} \ d \xi
+    \begin{bmatrix}
+    u_{1} \\
+    u_{2}
+    \end{bmatrix} = \int_{-1}^{+1} 1000
+    \begin{bmatrix}
+        \frac{1}{2} - \frac{1}{2} \xi \\
+        \frac{1}{2} + \frac{1}{2} \xi
+    \end{bmatrix} \frac{1}{8} \ d \xi +
+    \begin{bmatrix}
+    F_{1} \\
+    F_{2}
+    \end{bmatrix}
+\end{equation*}
+$$
+
+<p>
+integrando
+
+$$
+\begin{equation*}
+    \begin{bmatrix}
+        5 \times 10^{5} & -5 \times 10^{5} \\
+        -5 \times 10^{5} & 5 \times 10^{5}
+    \end{bmatrix}
+    \begin{bmatrix}
+    u_{1} \\
+    u_{2}
+    \end{bmatrix} =
+    \begin{bmatrix}
+    125 \\
+    125
+    \end{bmatrix} +
+    \begin{bmatrix}
+    F_{1} \\
+    F_{2}
+    \end{bmatrix}
+\end{equation*}
+$$
+
+<p>
+<b>Ensamblaje y solución</b>
+
+<p>
+ensamblando matriz global
+
+$$
+\begin{equation*}
+    \begin{bmatrix}
+        5 \times 10^{5} & -5 \times 10^{5} & 0 \\
+        -5 \times 10^{5} & 5 \times 10^{5} + 5 \times 10^{5} & -5 \times 10^{5} \\
+        0 & -5 \times 10^{5} & 5 \times 10^{5}
+    \end{bmatrix}
+    \begin{bmatrix}
+    u_{1} \\
+    u_{2} + u_{1} \\
+    u_{2}
+    \end{bmatrix} =
+    \begin{bmatrix}
+    125 \\
+    125 + 125 \\
+    125
+    \end{bmatrix} +
+    \begin{bmatrix}
+    F_{1} \\
+    F_{2} + F_{1} \\
+    F_{2}
+    \end{bmatrix}
+\end{equation*}
+$$
+
+<p>
+sumando
+
+$$
+\begin{equation*}
+    \begin{bmatrix}
+        5 \times 10^{5} & -5 \times 10^{5} & 0 \\
+        -5 \times 10^{5} & 10 \times 10^{5} & -5 \times 10^{5} \\
+        0 & -5 \times 10^{5} & 5 \times 10^{5}
+    \end{bmatrix}
+    \begin{bmatrix}
+    u_{1} \\
+    u_{2} \\
+    u_{3}
+    \end{bmatrix} =
+    \begin{bmatrix}
+    125 \\
+    250 \\
+    125
+    \end{bmatrix} +
+    \begin{bmatrix}
+    F_{1} \\
+    F_{2} \\
+    F_{3}
+    \end{bmatrix}
+\end{equation*}
+$$
+
+<p>
+reemplazando condiciones de contorno
+
+$$
+\begin{equation*}
+    \begin{bmatrix}
+        5 \times 10^{5} & -5 \times 10^{5} & 0 \\
+        -5 \times 10^{5} & 10 \times 10^{5} & -5 \times 10^{5} \\
+        0 & -5 \times 10^{5} & 5 \times 10^{5}
+    \end{bmatrix}
+    \begin{bmatrix}
+    0 \\
+    u_{2} \\
+    u_{3}
+    \end{bmatrix} =
+    \begin{bmatrix}
+    125 \\
+    250 \\
+    125
+    \end{bmatrix} +
+    \begin{bmatrix}
+    F_{1} \\
+    0 \\
+    250
+    \end{bmatrix}
+\end{equation*}
+$$
+
+<p>
+sumando
+
+$$
+\begin{equation*}
+    \begin{bmatrix}
+        5 \times 10^{5} & -5 \times 10^{5} & 0 \\
+        -5 \times 10^{5} & 10 \times 10^{5} & -5 \times 10^{5} \\
+        0 & -5 \times 10^{5} & 5 \times 10^{5}
+    \end{bmatrix}
+    \begin{bmatrix}
+    0 \\
+    u_{2} \\
+    u_{3}
+    \end{bmatrix} =
+    \begin{bmatrix}
+    F_{1} + 125 \\
+    250 \\
+    375
+    \end{bmatrix}
+\end{equation*}
+$$
+
+<p>
+resolviendo
+
+$$
+\begin{align*}
+    F_{1} &= -750 \ [\text{N}] \\
+    u_{2} &= 0.00125 \ [\text{m}] \\
+    u_{3} &= 0.002 \ [\text{m}]
+\end{align*}
+$$
+
+<p>
+<b>Desplazamientos, deformaciones y esfuerzos</b>
+
+<p>
+Las funciones de forma en coordenadas naturales se transforman a coordenadas globales usando
+
+$$
+\begin{equation*}
+    x = \bigg( \frac{1}{2} - \frac{1}{2} \xi \bigg) x_{1} + \bigg( \frac{1}{2} + \frac{1}{2} \xi \bigg) x_{2}
+\end{equation*}
+$$
+
+<p>
+despejando \( \xi \)
+
+$$
+\begin{equation*}
+    \xi = \frac{2}{x_{2} - x_{1}} x - \frac{x_{2} + x_{1}}{x_{2} - x_{1}}
+\end{equation*}
+$$
+
+<p>
+<em>Elemento 1</em>
+
+<p>
+reemplazando \( x_{1}=0 \) y \( x_{2}=0.25 \)
+
+$$
+\begin{equation*}
+    \xi = \frac{2}{0.25 - 0} x - \frac{0.25 + 0}{0.25 - 0} = 8 x - 1
+\end{equation*}
+$$
+
+<p>
+desplazamientos
+
+$$
+\begin{equation*}
+    u = \mathbf{N} \ \mathbf{u} =
+    \begin{bmatrix}
+        \frac{1}{2} - \frac{1}{2} \xi &
+        \frac{1}{2} + \frac{1}{2} \xi
+    \end{bmatrix}
+    \begin{bmatrix}
+    0 \\
+    0.00125
+    \end{bmatrix} = 0.000625 + 0.000625 \xi = 0.005 x \ [\text{m}]
+\end{equation*}
+$$
+
+<p>
+deformaciones
+
+$$
+\begin{equation*}
+    \varepsilon = \mathbf{B} \ \mathbf{u} =
+    \begin{bmatrix}
+        -4 & 4
+    \end{bmatrix}
+    \begin{bmatrix}
+    0 \\
+    0.00125
+    \end{bmatrix} = 0.005
+\end{equation*}
+$$
+
+<p>
+esfuerzo
+
+$$
+\begin{equation*}
+    \sigma = E \ \varepsilon = 1 \ [\text{MPa}]
+\end{equation*}
+$$
+
+<p>
+<em>Elemento 2</em>
+
+<p>
+reemplazando \( x_{1}=0.25 \) y \( x_{2}=0.5 \)
+
+$$
+\begin{equation*}
+    \xi = \frac{2}{0.5 - 0.25} x - \frac{0.5 + 0.25}{0.5 - 0.25} = 8 x - 3
+\end{equation*}
+$$
+
+<p>
+desplazamientos
+
+$$
+\begin{equation*}
+    u = \mathbf{N} \ \mathbf{u} =
+    \begin{bmatrix}
+        \frac{1}{2} - \frac{1}{2} \xi &
+        \frac{1}{2} + \frac{1}{2} \xi
+    \end{bmatrix}
+    \begin{bmatrix}
+    0.00125 \\
+    0.002
+    \end{bmatrix} = 0.001625 + 0.000375 \xi = 0.0005 + 0.003 x \ [\text{m}]
+\end{equation*}
+$$
+
+<p>
+deformaciones
+
+$$
+\begin{equation*}
+    \varepsilon = \mathbf{B} \ \mathbf{u} =
+    \begin{bmatrix}
+        -4 & 4
+    \end{bmatrix}
+    \begin{bmatrix}
+    0.00125 \\
+    0.002
+    \end{bmatrix} = 0.003
+\end{equation*}
+$$
+
+<p>
+esfuerzo
+
+$$
+\begin{equation*}
+    \sigma = E \ \varepsilon = 0.6 \ [\text{MPa}]
 \end{equation*}
 $$
 
@@ -453,10 +1044,10 @@ $$
 <!-- navigation buttons at the bottom of the page -->
 <ul class="pager">
   <li class="previous">
-    <a href="fem005.html">&larr; Prev</a>
+    <a href="fem034.html">&larr; Prev</a>
   </li>
   <li class="next">
-    <a href="fem007.html">Next &rarr;</a>
+    <a href="fem036.html">Next &rarr;</a>
   </li>
 </ul>
 <!-- ------------------- end of main content --------------- -->

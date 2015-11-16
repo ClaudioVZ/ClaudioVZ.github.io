@@ -171,7 +171,7 @@ MathJax.Hub.Config({
      <!-- navigation toc: --> <li><a href="fem003.html#___sec3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ejemplo 2</a></li>
      <!-- navigation toc: --> <li><a href="fem004.html#___sec4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Forma alternativa</a></li>
      <!-- navigation toc: --> <li><a href="fem005.html#___sec5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ejemplo 3</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec6" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solución general</a></li>
+     <!-- navigation toc: --> <li><a href="fem006.html#___sec6" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solución general</a></li>
      <!-- navigation toc: --> <li><a href="fem007.html#___sec7" style="font-size: 80%;"><b>Elementos unidimensionales</b></a></li>
      <!-- navigation toc: --> <li><a href="fem007.html#___sec8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Polinomios de Lagrange</a></li>
      <!-- navigation toc: --> <li><a href="fem007.html#___sec9" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Coordenadas globales</a></li>
@@ -254,8 +254,8 @@ MathJax.Hub.Config({
      <!-- navigation toc: --> <li><a href="fem040.html#___sec86" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Elementos triangulares</a></li>
      <!-- navigation toc: --> <li><a href="fem040.html#___sec87" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Coordenadas globales</a></li>
      <!-- navigation toc: --> <li><a href="fem040.html#___sec88" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Elemento de tres nodos</a></li>
-     <!-- navigation toc: --> <li><a href="fem041.html#___sec89" style="font-size: 80%;"><b>Elasticidad plana</b></a></li>
-     <!-- navigation toc: --> <li><a href="fem041.html#___sec90" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Esfuerzo plano</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec89" style="font-size: 80%;"><b>Elasticidad plana</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec90" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Esfuerzo plano</a></li>
 
         </ul>
       </li>
@@ -268,195 +268,705 @@ MathJax.Hub.Config({
 
 <p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
 
-<a name="part0006"></a>
+<a name="part0041"></a>
 <!-- !split -->
 
-<h2 id="___sec6">Solución general </h2>
+<p>
 
-$$
-\begin{equation*}
-    \int_{0}^{1} R(x) W(x) \ dx = \int_{0}^{1} \bigg( \frac{d^{2} u(x)}{d x^{2}} + x^{2} \bigg) W(x) \ dx = 0
-\end{equation*}
-$$
+<center><h1 id="___sec89">Elasticidad plana </h1></center> <!-- chapter heading -->
+
+<h2 id="___sec90">Esfuerzo plano </h2>
 
 <p>
-puede escribirse como la suma de integrales
-
-$$
-\begin{equation*}
-    \int_{0}^{1} \frac{d^{2} u(x)}{d x^{2}} W(x) \ dx + \int_{0}^{1} x^{2} W(x) \ dx = 0
-\end{equation*}
-$$
-
-<p>
-integrando por partes para reducir el orden de la derivada
+Ecuaciones de equilibrio interno del esfuerzo plano en función de los desplazamientos
 
 $$
 \begin{align*}
-    \int u \ dv &= uv - \int v \ du \\
-    \int_{0}^{1} W(x) \frac{d^{2} u(x)}{d x^{2}} \ dx &= \bigg( W(x) \frac{d u(x)}{d x} \bigg) \bigg|_{0}^{1} - \int_{0}^{1} \frac{d u(x)}{d x} \frac{d W(x)}{d x}\ dx
+    \frac{E}{1 - \nu^{2}} \bigg[
+    \frac{\partial^{2} u}{\partial x^{2}}
+    + \nu \frac{\partial^{2} v}{\partial x \ \partial y}
+    + \frac{1 - \nu}{2} \bigg(
+    \frac{\partial^{2} u}{\partial y^{2}}
+    + \frac{\partial^{2} v}{\partial y \ \partial x} \bigg)
+    \bigg] + F_{x} &= 0 \\
+    \frac{E}{1 - \nu^{2}} \bigg[
+    \nu \frac{\partial^{2} u}{\partial y \ \partial x}
+    + \frac{\partial^{2} v}{\partial y^{2}}
+    + \frac{1 - \nu}{2} \bigg(
+    \frac{\partial^{2} u}{\partial x \ \partial y}
+    + \frac{\partial^{2} v}{\partial x^{2}} \bigg)
+    \bigg] + F_{y} &= 0
 \end{align*}
 $$
 
 <p>
-reemplazando
-
-$$
-\begin{equation*}
-    \bigg( \frac{d u(x)}{d x} W(x) \bigg) \bigg|_{0}^{1} - \int_{0}^{1} \frac{d u(x)}{d x} \frac{d W(x)}{d x}\ dx + \int_{0}^{1} x^{2} W(x) \ dx = 0
-\end{equation*}
-$$
-
-<p>
-reordenando
-
-$$
-\begin{equation*}
-    \int_{0}^{1} \frac{d u(x)}{d x} \frac{d W(x)}{d x} \ dx = \int_{0}^{1} x^{2} W(x) \ dx + \bigg( \frac{d u(x)}{d x} W(x) \bigg) \bigg|_{0}^{1}
-\end{equation*}
-$$
-
-<p>
-para la solución se usara un elemento de dos nodos
+Usando el método de Galerkin
 
 $$
 \begin{align*}
-    u(x) &= \sum_{i=1}^{2} N_{i} a_{i} = N_{1} a_{1} + N_{2} a_{2} \\
-    \frac{d u(x)}{d x} &= \frac{d N_{1}}{d x} a_{1} + \frac{d N_{2}}{d x} a_{2} \\
-    W(x) &= \sum_{i=1}^{2} N_{i} \delta a_{i} = N_{1} \delta a_{1} + N_{2} \delta a_{2} \\
-    \frac{d W(x)}{d x} &= \frac{d N_{1}}{d x} \delta a_{1} + \frac{d N_{2}}{d x} \delta a_{2}
+    \int_{0}^{t} \int_{0}^{h} \int_{0}^{b} \bigg\{
+    \frac{E}{1 - \nu^{2}} \bigg[
+    \frac{\partial^{2} u}{\partial x^{2}}
+    + \nu \frac{\partial^{2} v}{\partial x \ \partial y}
+    + \frac{1 - \nu}{2} \bigg(
+    \frac{\partial^{2} u}{\partial y^{2}}
+    + \frac{\partial^{2} v}{\partial y \ \partial x} \bigg)
+    \bigg] + F_{x} \bigg\} (N_{1} + N_{2} + N_{3} + N_{4}) \ dx \ dy \ dz &= 0 \\
+    \int_{0}^{t} \int_{0}^{h} \int_{0}^{b} \bigg\{
+    \frac{E}{1 - \nu^{2}} \bigg[
+    \nu \frac{\partial^{2} u}{\partial y \ \partial x}
+    + \frac{\partial^{2} v}{\partial y^{2}}
+    + \frac{1 - \nu}{2} \bigg(
+    \frac{\partial^{2} u}{\partial x \ \partial y}
+    + \frac{\partial^{2} v}{\partial x^{2}} \bigg)
+    \bigg] + F_{y} \bigg\} (N_{1} + N_{2} + N_{3} + N_{4}) \ dx \ dy \ dz &= 0
 \end{align*}
 $$
 
 <p>
-reemplazando
-
-$$
-\begin{equation*}
-    \int_{0}^{1} \bigg( \frac{d N_{1}}{d x} a_{1} + \frac{d N_{2}}{d x} a_{2} \bigg) \bigg( \frac{d N_{1}}{d x} \delta a_{1} + \frac{d N_{2}}{d x} \delta a_{2} \bigg) \ dx = \int_{0}^{1} x^{2} (N_{1} \delta a_{1} + N_{2} \delta a_{2}) \ dx + \bigg[ \frac{d u(x)}{d x} (N_{1} \delta a_{1} + N_{2} \delta a_{2}) \bigg] \bigg|_{0}^{1}
-\end{equation*}
-$$
-
-<p>
-multiplicando
-
-$$
-\begin{equation*}
-    \int_{0}^{1} \frac{d N_{1}}{d x} \frac{d N_{1}}{d x} a_{1} \delta a_{1} + \frac{d N_{1}}{d x} \frac{d N_{2}}{d x} a_{2} \delta a_{1} + \frac{d N_{2}}{d x} \frac{d N_{1}}{d x} a_{1} \delta a_{2} + \frac{d N_{2}}{d x} \frac{d N_{2}}{d x} a_{2} \delta a_{2} \ dx = \int_{0}^{1} x^{2} N_{1} \delta a_{1} + x^{2} N_{2} \delta a_{2} \ dx + \bigg( \frac{d u(x)}{d x} N_{1} \delta a_{1} + \frac{d u(x)}{d x} N_{2} \delta a_{2} \bigg) \bigg|_{0}^{1}
-\end{equation*}
-$$
-
-<p>
-reemplazando los límites de integración en el lado derecho
-
-$$
-\begin{equation*}
-    \int_{0}^{1} \frac{d N_{1}}{d x} \frac{d N_{1}}{d x} a_{1} \delta a_{1} + \frac{d N_{1}}{d x} \frac{d N_{2}}{d x} a_{2} \delta a_{1} + \frac{d N_{2}}{d x} \frac{d N_{1}}{d x} a_{1} \delta a_{2} + \frac{d N_{2}}{d x} \frac{d N_{2}}{d x} a_{2} \delta a_{2} \ dx = \int_{0}^{1} x^{2} N_{1} \delta a_{1} + x^{2} N_{2} \delta a_{2} \ dx + \bigg( \frac{d u(1)}{d x} N_{1}(1) \delta a_{1} + \frac{d u(1)}{d x} N_{2}(1) \delta a_{2} \bigg) - \bigg( \frac{d u(0)}{d x} N_{1}(0) \delta a_{1} + \frac{d u(0)}{d x} N_{2}(0) \delta a_{2} \bigg)
-\end{equation*}
-$$
-
-<p>
-reordenando y agrupando
-
-$$
-\begin{equation*}
-    \int_{0}^{1} \bigg( \frac{d N_{1}}{d x} \frac{d N_{1}}{d x} a_{1} + \frac{d N_{1}}{d x} \frac{d N_{2}}{d x} a_{2} \bigg) \delta a_{1} + \bigg( \frac{d N_{2}}{d x} \frac{d N_{1}}{d x} a_{1} + \frac{d N_{2}}{d x} \frac{d N_{2}}{d x} a_{2} \bigg) \delta a_{2} \ dx = \int_{0}^{1} x^{2} N_{1} \delta a_{1} + x^{2} N_{2} \delta a_{2} \ dx + \bigg( \frac{d u(1)}{d x} N_{1}(1) - \frac{d u(0)}{d x} N_{1}(0) \bigg) \delta a_{1} + \bigg( \frac{d u(1)}{d x} N_{2}(1) - \frac{d u(0)}{d x} N_{2}(0) \bigg) \delta a_{2}
-\end{equation*}
-$$
-
-<p>
-formando un sistema de ecuaciones
+El espesor es constante
 
 $$
 \begin{align*}
-    \int_{0}^{1} \bigg( \frac{d N_{1}}{d x} \frac{d N_{1}}{d x} a_{1} + \frac{d N_{1}}{d x} \frac{d N_{2}}{d x} a_{2} \bigg) \delta a_{1} \ dx &= \int_{0}^{1} x^{2} N_{1} \delta a_{1} \ dx + \bigg( \frac{d u(1)}{d x} N_{1}(1) - \frac{d u(0)}{d x} N_{1}(0) \bigg) \delta a_{1} \\
-    \int_{0}^{1} \bigg( \frac{d N_{2}}{d x} \frac{d N_{1}}{d x} a_{1} + \frac{d N_{2}}{d x} \frac{d N_{2}}{d x} a_{2} \bigg) \delta a_{2} \ dx &= \int_{0}^{1} x^{2} N_{2} \delta a_{2} \ dx + \bigg( \frac{d u(1)}{d x} N_{2}(1) - \frac{d u(0)}{d x} N_{2}(0) \bigg) \delta a_{2}
+    t \int_{0}^{h} \int_{0}^{b} \bigg\{
+    \frac{E}{1 - \nu^{2}} \bigg[
+    \frac{\partial^{2} u}{\partial x^{2}}
+    + \nu \frac{\partial^{2} v}{\partial x \ \partial y}
+    + \frac{1 - \nu}{2} \bigg(
+    \frac{\partial^{2} u}{\partial y^{2}}
+    + \frac{\partial^{2} v}{\partial y \ \partial x} \bigg)
+    \bigg] + F_{x} \bigg\} (N_{1} + N_{2} + N_{3} + N_{4}) \ dx \ dy &= 0 \\
+    t \int_{0}^{h} \int_{0}^{b} \bigg\{
+    \frac{E}{1 - \nu^{2}} \bigg[
+    \nu \frac{\partial^{2} u}{\partial y \ \partial x}
+    + \frac{\partial^{2} v}{\partial y^{2}}
+    + \frac{1 - \nu}{2} \bigg(
+    \frac{\partial^{2} u}{\partial x \ \partial y}
+    + \frac{\partial^{2} v}{\partial x^{2}} \bigg)
+    \bigg] + F_{y} \bigg\} (N_{1} + N_{2} + N_{3} + N_{4}) \ dx \ dy &= 0
 \end{align*}
 $$
 
 <p>
-las constantes se simplifican en ambos lados
+Para reducir el tamaño de la ecuación se usara \( N_{i} \)
 
 $$
 \begin{align*}
-    \int_{0}^{1} \frac{d N_{1}}{d x} \frac{d N_{1}}{d x} a_{1} + \frac{d N_{1}}{d x} \frac{d N_{2}}{d x} a_{2} \ dx &= \int_{0}^{1} x^{2} N_{1} \ dx + \frac{d u(1)}{d x} N_{1}(1) - \frac{d u(0)}{d x} N_{1}(0) \\
-    \int_{0}^{1} \frac{d N_{2}}{d x} \frac{d N_{1}}{d x} a_{1} + \frac{d N_{2}}{d x} \frac{d N_{2}}{d x} a_{2} \ dx &= \int_{0}^{1} x^{2} N_{2} \ dx + \frac{d u(1)}{d x} N_{2}(1) - \frac{d u(0)}{d x} N_{2}(0)
+    t \int_{0}^{h} \int_{0}^{b}
+    \bigg\{ \frac{E}{1 - \nu^{2}} \bigg[
+    \frac{\partial^{2} u}{\partial x^{2}}
+    + \nu \frac{\partial^{2} v}{\partial x \ \partial y}
+    + \frac{1 - \nu}{2} \bigg(
+    \frac{\partial^{2} u}{\partial y^{2}}
+    + \frac{\partial^{2} v}{\partial y \ \partial x} \bigg)
+    \bigg] + F_{x} \bigg\} N_{i} \ dx \ dy &= 0 \\
+    t \int_{0}^{h} \int_{0}^{b}
+    \bigg\{ \frac{E}{1 - \nu^{2}} \bigg[
+    \nu \frac{\partial^{2} u}{\partial y \ \partial x}
+    + \frac{\partial^{2} v}{\partial y^{2}}
+    + \frac{1 - \nu}{2} \bigg(
+    \frac{\partial^{2} u}{\partial x \ \partial y}
+    + \frac{\partial^{2} v}{\partial x^{2}} \bigg)
+    \bigg] + F_{y} \bigg\} N_{i} \ dx \ dy &= 0
 \end{align*}
 $$
 
 <p>
-las funciones de forma obtenidas anteriomente, tienen los siguientes valores
+Expandiendo términos
+
+$$
+\begin{align*}
+    t \frac{E}{1 - \nu^{2}} \int_{0}^{h} \int_{0}^{b}
+    N_{i} \frac{\partial^{2} u}{\partial x^{2}}
+    + \nu N_{i} \frac{\partial^{2} v}{\partial x \ \partial y}
+    + \frac{1 - \nu}{2} \bigg(
+    N_{i} \frac{\partial^{2} u}{\partial y^{2}}
+    + N_{i} \frac{\partial^{2} v}{\partial y \ \partial x} \bigg) \ dx \ dy
+    + t \int_{0}^{h} \int_{0}^{b} N_{i} F_{x} \ dx \ dy &= 0 \\
+    t \frac{E}{1 - \nu^{2}} \int_{0}^{h} \int_{0}^{b}
+    \nu N_{i} \frac{\partial^{2} u}{\partial y \ \partial x}
+    + N_{i} \frac{\partial^{2} v}{\partial y^{2}}
+    + \frac{1 - \nu}{2} \bigg(
+    N_{i} \frac{\partial^{2} u}{\partial x \ \partial y}
+    + N_{i} \frac{\partial^{2} v}{\partial x^{2}} \bigg) \ dx \ dy
+    + t \int_{0}^{h} \int_{0}^{b} N_{i} F_{y} \ dx \ dy &= 0
+\end{align*}
+$$
+
+<p>
+Se reducira el orden de las derivadas parciales mediante integración por partes
+
+$$
+\begin{equation*}
+    \int \alpha \ d\beta = \alpha \beta - \int \beta \ d\alpha
+\end{equation*}
+$$
+
+<p>
+Para \( u_{xx} \)
+
+$$
+\begin{equation*}
+    \int_{0}^{h} \int_{0}^{b} N_{i} \frac{\partial^{2} u}{\partial x^{2}} \ dx \ dy =
+    \int_{0}^{h} \bigg( \int_{0}^{b} N_{i} \frac{\partial^{2} u}{\partial x^{2}} \ dx \bigg) \ dy
+\end{equation*}
+$$
+
+<p>
+identificando variables
 
 <p>
 \begin{matrix}
-    N_{1}(1) = 0 &amp; N_{1}(0) = 0 \\
-    N_{2}(1) = 0 &amp; N_{2}(0) = 0
+    \alpha = N_{i} & d\beta = \frac{\partial^{2} u}{\partial x^{2}} \ dx \\
+    d\alpha = \frac{\partial N_{i}}{\partial x} \ dx & \beta = \frac{\partial u}{\partial x}
 \end{matrix}
 
 <p>
 reemplazando
 
 $$
+\begin{equation*}
+    \int ( \alpha \beta - \int \beta \ d\alpha ) \ dy =
+    \int_{0}^{h} \bigg(
+    N_{i} \frac{\partial u}{\partial x}
+    - \int_{0}^{b} \frac{\partial u}{\partial x} \frac{\partial N_{i}}{\partial x} \ dx \bigg) \ dy =
+    \int_{0}^{h} N_{i} \frac{\partial u}{\partial x} \ dy
+    - \int_{0}^{h} \int_{0}^{b} \frac{\partial N_{i}}{\partial x} \frac{\partial u}{\partial x} \ dx \ dy
+\end{equation*}
+$$
+
+<p>
+Para \( v_{xy} \)
+
+$$
+\begin{equation*}
+    \int_{0}^{h} \int_{0}^{b} N_{i} \frac{\partial^{2} v}{\partial x \ \partial y} \ dx \ dy =
+    \int_{0}^{h} \bigg( \int_{0}^{b} N_{i} \frac{\partial^{2} v}{\partial x \ \partial y} \ dx \bigg) \ dy
+\end{equation*}
+$$
+
+<p>
+identificando variables
+
+<p>
+\begin{matrix}
+    \alpha = N_{i} & d\beta = \frac{\partial^{2} v}{\partial x \ \partial y} \ dx \\
+    d\alpha = \frac{\partial N_{i}}{\partial x} \ dx & \beta = \frac{\partial v}{\partial y}
+\end{matrix}
+
+<p>
+reemplazando
+
+$$
+\begin{equation*}
+    \int ( \alpha \beta - \int \beta \ d\alpha ) \ dy =
+    \int_{0}^{h} \bigg(
+    N_{i} \frac{\partial v}{\partial y}
+    - \int_{0}^{b} \frac{\partial v}{\partial y} \frac{\partial N_{i}}{\partial x} \ dx \bigg) \ dy =
+    \int_{0}^{b} N_{i} \frac{\partial v}{\partial y} \ dy
+    - \int_{0}^{h} \int_{0}^{b} \frac{\partial N_{i}}{\partial x} \frac{\partial v}{\partial y} \ dx \ dy
+\end{equation*}
+$$
+
+<p>
+Para \( u_{yy} \)
+
+$$
+\begin{equation*}
+    \int_{0}^{h} \int_{0}^{b} N_{i} \frac{\partial^{2} u}{\partial y^{2}} \ dx \ dy =
+    \int_{0}^{b} \bigg( \int_{0}^{h} N_{i} \frac{\partial^{2} u}{\partial y^{2}} \ dy \bigg) \ dx
+\end{equation*}
+$$
+
+<p>
+identificando variables
+
+<p>
+\begin{matrix}
+    \alpha = N_{i} & d\beta = \frac{\partial^{2} u}{\partial y^{2}} \ dy \\
+    d\alpha = \frac{\partial N_{i}}{\partial y} \ dy & \beta = \frac{\partial u}{\partial y}
+\end{matrix}
+
+<p>
+reemplazando
+
+$$
+\begin{equation*}
+    \int ( \alpha \beta - \int \beta \ d\alpha ) \ dx =
+    \int_{0}^{b} \bigg(
+    N_{i} \frac{\partial u}{\partial y}
+    - \int_{0}^{h} \frac{\partial u}{\partial y} \frac{\partial N_{i}}{\partial y} \ dy \bigg) \ dx =
+    \int_{0}^{b} N_{i} \frac{\partial u}{\partial y} \ dx
+    - \int_{0}^{h} \int_{0}^{b} \frac{\partial N_{i}}{\partial y} \frac{\partial u}{\partial y} \ dx \ dy
+\end{equation*}
+$$
+
+<p>
+Para \( v_{yx} \)
+
+$$
+\begin{equation*}
+    \int_{0}^{h} \int_{0}^{b} N_{i} \frac{\partial^{2} v}{\partial y \ \partial x} \ dx \ dy =
+    \int_{0}^{b} \bigg( \int_{0}^{h} N_{i} \frac{\partial^{2} v}{\partial y \ \partial x} \ dy \bigg) \ dx
+\end{equation*}
+$$
+
+<p>
+identificando variables
+
+<p>
+\begin{matrix}
+    \alpha = N_{i} & d\beta = \frac{\partial^{2} v}{\partial y \ \partial x} \ dy \\
+    d\alpha = \frac{\partial N_{i}}{\partial y} \ dy & \beta = \frac{\partial v}{\partial x}
+\end{matrix}
+
+<p>
+reemplazando
+
+$$
+\begin{equation*}
+    \int ( \alpha \beta - \int \beta \ d\alpha ) \ dx =
+    \int_{0}^{b} \bigg(
+    N_{i} \frac{\partial v}{\partial x}
+    - \int_{0}^{h} \frac{\partial v}{\partial x} \frac{\partial N_{i}}{\partial y} \ dy \bigg) \ dx =
+    \int_{0}^{b} N_{i} \frac{\partial v}{\partial x} \ dx
+    - \int_{0}^{h} \int_{0}^{b} \frac{\partial N_{i}}{\partial y} \frac{\partial v}{\partial x} \ dx \ dy
+\end{equation*}
+$$
+
+<p>
+Para \( u_{yx} \)
+
+$$
+\begin{equation*}
+    \int_{0}^{h} \int_{0}^{b} N_{i} \frac{\partial^{2} u}{\partial y \ \partial x} \ dx \ dy =
+    \int_{0}^{b} \bigg( \int_{0}^{h} N_{i} \frac{\partial^{2} u}{\partial y \ \partial x} \ dy \bigg) \ dx
+\end{equation*}
+$$
+
+<p>
+identificando variables
+
+<p>
+\begin{matrix}
+    \alpha = N_{i} & d\beta = \frac{\partial^{2} u}{\partial y \ \partial x} \ dy \\
+    d\alpha = \frac{\partial N_{i}}{\partial y} \ dy & \beta = \frac{\partial u}{\partial x}
+\end{matrix}
+
+<p>
+reemplazando
+
+$$
+\begin{equation*}
+    \int ( \alpha \beta - \int \beta \ d\alpha ) \ dx =
+    \int_{0}^{b} \bigg(
+    N_{i} \frac{\partial u}{\partial x}
+    - \int_{0}^{h} \frac{\partial u}{\partial x} \frac{\partial N_{i}}{\partial y} \ dy \bigg) \ dx =
+    \int_{0}^{b} N_{i} \frac{\partial u}{\partial x} \ dx
+    - \int_{0}^{h} \int_{0}^{b} \frac{\partial N_{i}}{\partial y} \frac{\partial u}{\partial x} \ dx \ dy
+\end{equation*}
+$$
+
+<p>
+Para \( v_{yy} \)
+
+$$
+\begin{equation*}
+    \int_{0}^{h} \int_{0}^{b} N_{i} \frac{\partial^{2} v}{\partial y^{2}} \ dx \ dy =
+    \int_{0}^{b} \bigg( \int_{0}^{h} N_{i} \frac{\partial^{2} v}{\partial y^{2}} \ dy \bigg) \ dx
+\end{equation*}
+$$
+
+<p>
+identificando variables
+
+<p>
+\begin{matrix}
+    \alpha = N_{i} & d\beta = \frac{\partial^{2} v}{\partial y^{2}} \ dy \\
+    d\alpha = \frac{\partial N_{i}}{\partial y} \ dy & \beta = \frac{\partial v}{\partial y}
+\end{matrix}
+
+<p>
+reemplazando
+
+$$
+\begin{equation*}
+    \int ( \alpha \beta - \int \beta \ d\alpha ) \ dx =
+    \int_{0}^{b} \bigg(
+    N_{i} \frac{\partial v}{\partial y}
+    - \int_{0}^{h} \frac{\partial v}{\partial y} \frac{\partial N_{i}}{\partial y} \ dy \bigg) \ dx =
+    \int_{0}^{b} N_{i} \frac{\partial v}{\partial y} \ dx
+    - \int_{0}^{h} \int_{0}^{b} \frac{\partial N_{i}}{\partial y} \frac{\partial v}{\partial y} \ dx \ dy
+\end{equation*}
+$$
+
+<p>
+Para \( u_{xy} \)
+
+$$
+\begin{equation*}
+    \int_{0}^{h} \int_{0}^{b} N_{i} \frac{\partial^{2} u}{\partial x \ \partial y} \ dx \ dy =
+    \int_{0}^{h} \bigg( \int_{0}^{b} N_{i} \frac{\partial^{2} u}{\partial x \ \partial y} \ dx \bigg) \ dy
+\end{equation*}
+$$
+
+<p>
+identificando variables
+
+<p>
+\begin{matrix}
+    \alpha = N_{i} & d\beta = \frac{\partial^{2} u}{\partial x \ \partial y} \ dx \\
+    d\alpha = \frac{\partial N_{i}}{\partial x} \ dx & \beta = \frac{\partial u}{\partial y}
+\end{matrix}
+
+<p>
+reemplazando
+
+$$
+\begin{equation*}
+    \int ( \alpha \beta - \int \beta \ d\alpha ) \ dy =
+    \int_{0}^{h} \bigg(
+    N_{i} \frac{\partial u}{\partial y}
+    - \int_{0}^{b} \frac{\partial u}{\partial y} \frac{\partial N_{i}}{\partial x} \ dx \bigg) \ dy =
+    \int_{0}^{b} N_{i} \frac{\partial u}{\partial y} \ dy
+    - \int_{0}^{h} \int_{0}^{b} \frac{\partial N_{i}}{\partial x} \frac{\partial u}{\partial y} \ dx \ dy
+\end{equation*}
+$$
+
+<p>
+Para \( v_{xx} \)
+
+$$
+\begin{equation*}
+    \int_{0}^{h} \int_{0}^{b} N_{i} \frac{\partial^{2} v}{\partial x^{2}} \ dx \ dy =
+    \int_{0}^{h} \bigg( \int_{0}^{b} N_{i} \frac{\partial^{2} v}{\partial x^{2}} \ dx \bigg) \ dy
+\end{equation*}
+$$
+
+<p>
+identificando variables
+
+<p>
+\begin{matrix}
+    \alpha = N_{i} & d\beta = \frac{\partial^{2} v}{\partial x^{2}} \ dx \\
+    d\alpha = \frac{\partial N_{i}}{\partial x} \ dx & \beta = \frac{\partial v}{\partial x}
+\end{matrix}
+
+<p>
+reemplazando
+
+$$
+\begin{equation*}
+    \int ( \alpha \beta - \int \beta \ d\alpha ) \ dy =
+    \int_{0}^{h} \bigg(
+    N_{i} \frac{\partial v}{\partial x}
+    - \int_{0}^{b} \frac{\partial v}{\partial x} \frac{\partial N_{i}}{\partial x} \ dx \bigg) \ dy =
+    \int_{0}^{h} N_{i} \frac{\partial v}{\partial x} \ dy
+    - \int_{0}^{h} \int_{0}^{b} \frac{\partial N_{i}}{\partial x} \frac{\partial v}{\partial x} \ dx \ dy
+\end{equation*}
+$$
+
+<p>
+Reemplazando y reordenando
+
+$$
 \begin{align*}
-    \int_{0}^{1} \frac{d N_{1}}{d x} \frac{d N_{1}}{d x} a_{1} + \frac{d N_{1}}{d x} \frac{d N_{2}}{d x} a_{2} \ dx &= \int_{0}^{1} x^{2} N_{1} \ dx \\
-    \int_{0}^{1} \frac{d N_{2}}{d x} \frac{d N_{1}}{d x} a_{1} + \frac{d N_{2}}{d x} \frac{d N_{2}}{d x} a_{2} \ dx &= \int_{0}^{1} x^{2} N_{2} \ dx
+    t \frac{E}{1 - \nu^{2}} \int_{0}^{h} \int_{0}^{b}
+    \frac{\partial N_{i}}{\partial x} \frac{\partial u}{\partial x}
+    + \nu \frac{\partial N_{i}}{\partial x} \frac{\partial v}{\partial y}
+    + \frac{1 - \nu}{2} \bigg(
+    \frac{\partial N_{i}}{\partial y} \frac{\partial u}{\partial y}
+    + \frac{\partial N_{i}}{\partial y} \frac{\partial v}{\partial x} \bigg) \ dx \ dy &=
+    t \frac{E}{1 - \nu^{2}} \bigg[ \int_{0}^{h}
+    N_{i} \frac{\partial u}{\partial x}
+    + \nu N_{i} \frac{\partial v}{\partial y} \ dy
+    + \frac{1 - \nu}{2} \int_{0}^{b}
+    N_{i} \frac{\partial u}{\partial y}
+    + N_{i} \frac{\partial v}{\partial x} \ dx \bigg]
+    + t \int_{0}^{h} \int_{0}^{b} N_{i} F_{x} \ dx \ dy \\
+    t \frac{E}{1 - \nu^{2}} \int_{0}^{h} \int_{0}^{b}
+    \nu \frac{\partial N_{i}}{\partial y} \frac{\partial u}{\partial x}
+    + \frac{\partial N_{i}}{\partial y} \frac{\partial v}{\partial y}
+    + \frac{1 - \nu}{2} \bigg(
+    \frac{\partial N_{i}}{\partial x} \frac{\partial u}{\partial y}
+    + \frac{\partial N_{i}}{\partial x} \frac{\partial v}{\partial x} \bigg) \ dx \ dy &=
+    t \frac{E}{1 - \nu^{2}} \bigg[ \int_{0}^{b}
+    \nu N_{i} \frac{\partial u}{\partial x}
+    + N_{i} \frac{\partial v}{\partial y} \ dx
+    + \frac{1 - \nu}{2} \int_{0}^{h}
+    N_{i} \frac{\partial u}{\partial y}
+    + N_{i} \frac{\partial v}{\partial x} \ dy \bigg]
+    + t \int_{0}^{h} \int_{0}^{b} N_{i} F_{y} \ dx \ dy
 \end{align*}
 $$
 
 <p>
-en forma matricial
+El lado derecho es reemplazado por su equivalente nodal \( F_{j} \)
 
 $$
-\begin{equation*}
-    \int_{0}^{1}
-    \begin{bmatrix}
-        \frac{d N_{1}}{d x} \frac{d N_{1}}{d x} & \frac{d N_{1}}{d x} \frac{d N_{2}}{d x} \\
-        \frac{d N_{2}}{d x} \frac{d N_{1}}{d x} & \frac{d N_{2}}{d x} \frac{d N_{2}}{d x}
-    \end{bmatrix} dx
-    \begin{bmatrix}
-    a_{1} \\
-    a_{2}
-    \end{bmatrix} = \int_{0}^{1} x^{2}
-    \begin{bmatrix}
-    N_{1} \\
-    N_{2}
-    \end{bmatrix} dx
-\end{equation*}
+\begin{align*}
+    t \frac{E}{1 - \nu^{2}} \int_{0}^{h} \int_{0}^{b}
+    \frac{\partial N_{i}}{\partial x} \frac{\partial u}{\partial x}
+    + \nu \frac{\partial N_{i}}{\partial x} \frac{\partial v}{\partial y}
+    + \frac{1 - \nu}{2} \bigg(
+    \frac{\partial N_{i}}{\partial y} \frac{\partial u}{\partial y}
+    + \frac{\partial N_{i}}{\partial y} \frac{\partial v}{\partial x} \bigg) \ dx \ dy &=
+    F_{jx} \\
+    t \frac{E}{1 - \nu^{2}} \int_{0}^{h} \int_{0}^{b}
+    \nu \frac{\partial N_{i}}{\partial y} \frac{\partial u}{\partial x}
+    + \frac{\partial N_{i}}{\partial y} \frac{\partial v}{\partial y}
+    + \frac{1 - \nu}{2} \bigg(
+    \frac{\partial N_{i}}{\partial x} \frac{\partial u}{\partial y}
+    + \frac{\partial N_{i}}{\partial x} \frac{\partial v}{\partial x} \bigg) \ dx \ dy &=
+    F_{jy}
+\end{align*}
 $$
 
 <p>
-factorizando matrices
+El desplazamiento horizontal es
 
 $$
 \begin{equation*}
-    \int_{0}^{1}
+    u =
     \begin{bmatrix}
-        \frac{d N_{1}}{d x} \\
-        \frac{d N_{2}}{d x}
+    N_{1} & N_{2} & N_{3} & N_{4}
     \end{bmatrix}
     \begin{bmatrix}
-        \frac{d N_{1}}{d x} & \frac{d N_{2}}{d x}
-    \end{bmatrix} dx
-    \begin{bmatrix}
-    a_{1} \\
-    a_{2}
-    \end{bmatrix} = \int_{0}^{1} x^{2}
-    \begin{bmatrix}
-    N_{1} \\
-    N_{2}
-    \end{bmatrix} dx
+    u_{1} \\
+    u_{2} \\
+    u_{3} \\
+    u_{4}
+    \end{bmatrix}
 \end{equation*}
 $$
 
 <p>
+El desplazamiento vertical es
+
+$$
+\begin{equation*}
+    v =
+    \begin{bmatrix}
+    N_{1} & N_{2} & N_{3} & N_{4}
+    \end{bmatrix}
+    \begin{bmatrix}
+    v_{1} \\
+    v_{2} \\
+    v_{3} \\
+    v_{4}
+    \end{bmatrix}
+\end{equation*}
+$$
+
+<p>
+Para reducir el tamaño de la ecuación \( u = N_{j} u_{j} \) y \( v = N_{j} v_{j} \); sus derivadas serán
+
+$$
+\begin{equation*}
+    \begin{matrix}
+        \frac{\partial u}{\partial x} = \frac{\partial N_{j}}{\partial x} u_{j} &
+        \frac{\partial u}{\partial y} = \frac{\partial N_{j}}{\partial y} u_{j} \\
+        \frac{\partial v}{\partial x} = \frac{\partial N_{j}}{\partial x} v_{j} &
+        \frac{\partial v}{\partial y} = \frac{\partial N_{j}}{\partial y} v_{j}
+    \end{matrix}
+\end{equation*}
+$$
+
+<p>
+Reemplazando
+
+$$
+\begin{align*}
+    t \frac{E}{1 - \nu^{2}} \int_{0}^{h} \int_{0}^{b}
+    \frac{\partial N_{i}}{\partial x} \frac{\partial N_{j}}{\partial x} u_{j}
+    + \nu \frac{\partial N_{i}}{\partial x} \frac{\partial N_{j}}{\partial y} v_{j}
+    + \frac{1 - \nu}{2} \bigg(
+    \frac{\partial N_{i}}{\partial y} \frac{\partial N_{j}}{\partial y} u_{j}
+    + \frac{\partial N_{i}}{\partial y} \frac{\partial N_{j}}{\partial x} v_{j} \bigg) \ dx \ dy &=
+    F_{jx} \\
+    t \frac{E}{1 - \nu^{2}} \int_{0}^{h} \int_{0}^{b}
+    \nu \frac{\partial N_{i}}{\partial y} \frac{\partial N_{j}}{\partial x} u_{j}
+    + \frac{\partial N_{i}}{\partial y} \frac{\partial N_{j}}{\partial y} v_{j}
+    + \frac{1 - \nu}{2} \bigg(
+    \frac{\partial N_{i}}{\partial x} \frac{\partial N_{j}}{\partial y} u_{j}
+    + \frac{\partial N_{i}}{\partial x} \frac{\partial N_{j}}{\partial x} v_{j} \bigg) \ dx \ dy &=
+    F_{jy}
+\end{align*}
+$$
+
+<p>
+En forma matricial
+
+$$
+\begin{equation*}
+    t \frac{E}{1 - \nu^{2}} \int_{0}^{h} \int_{0}^{b}
+    \begin{bmatrix}
+    \frac{\partial N_{i}}{\partial x} \frac{\partial N_{j}}{\partial x} u_{j}
+    + \nu \frac{\partial N_{i}}{\partial x} \frac{\partial N_{j}}{\partial y} v_{j}
+    + \frac{1 - \nu}{2} \bigg(
+    \frac{\partial N_{i}}{\partial y} \frac{\partial N_{j}}{\partial y} u_{j}
+    + \frac{\partial N_{i}}{\partial y} \frac{\partial N_{j}}{\partial x} v_{j} \bigg)\\
+    \nu \frac{\partial N_{i}}{\partial y} \frac{\partial N_{j}}{\partial x} u_{j}
+    + \frac{\partial N_{i}}{\partial y} \frac{\partial N_{j}}{\partial y} v_{j}
+    + \frac{1 - \nu}{2} \bigg(
+    \frac{\partial N_{i}}{\partial x} \frac{\partial N_{j}}{\partial y} u_{j}
+    + \frac{\partial N_{i}}{\partial x} \frac{\partial N_{j}}{\partial x} v_{j} \bigg)
+    \end{bmatrix} \ dx \ dy =
+    \begin{bmatrix}
+    F_{jx} \\
+    F_{jy}
+    \end{bmatrix}
+\end{equation*}
+$$
+
+<p>
+Factorizando y reordenando
+
+$$
+\begin{equation*}
+    \int_{0}^{h} \int_{0}^{b}
+    \begin{bmatrix}
+        \frac{\partial N_{i}}{\partial x} & 0 & \frac{\partial N_{i}}{\partial y} \\
+        0 & \frac{\partial N_{i}}{\partial y} & \frac{\partial N_{i}}{\partial x} \\
+    \end{bmatrix} \frac{E}{1 - \nu^{2}}
+    \begin{bmatrix}
+        1 & \nu & 0 \\
+        \nu & 1 & 0 \\
+        0 & 0 & \frac{1 - \nu}{2}
+    \end{bmatrix}
+    \begin{bmatrix}
+        \frac{\partial N_{j}}{\partial x} & 0 \\
+        0 & \frac{\partial N_{j}}{\partial y} \\
+        \frac{\partial N_{j}}{\partial y} & \frac{\partial N_{j}}{\partial x}
+    \end{bmatrix} \ t \ dx \ dy
+    \begin{bmatrix}
+    u_{j} \\
+    v_{j}
+    \end{bmatrix} =
+    \begin{bmatrix}
+    F_{jx} \\
+    F_{jy}
+    \end{bmatrix}
+\end{equation*}
+$$
+
+<p>
+Reemplazando las cuatro funciones de forma
+
+$$
+\begin{equation*}
+    \int_{0}^{h} \int_{0}^{b}
+    \begin{bmatrix}
+        \frac{\partial N_{1}}{\partial x} & 0 & \frac{\partial N_{1}}{\partial y} \\
+        0 & \frac{\partial N_{1}}{\partial y} & \frac{\partial N_{1}}{\partial x} \\
+        \frac{\partial N_{2}}{\partial x} & 0 & \frac{\partial N_{2}}{\partial y} \\
+        0 & \frac{\partial N_{2}}{\partial y} & \frac{\partial N_{2}}{\partial x} \\
+        \frac{\partial N_{3}}{\partial x} & 0 & \frac{\partial N_{3}}{\partial y} \\
+        0 & \frac{\partial N_{3}}{\partial y} & \frac{\partial N_{3}}{\partial x} \\
+        \frac{\partial N_{4}}{\partial x} & 0 & \frac{\partial N_{4}}{\partial y} \\
+        0 & \frac{\partial N_{4}}{\partial y} & \frac{\partial N_{4}}{\partial x}
+    \end{bmatrix} \frac{E}{1 - \nu^{2}}
+    \begin{bmatrix}
+        1 & \nu & 0 \\
+        \nu & 1 & 0 \\
+        0 & 0 & \frac{1 - \nu}{2}
+    \end{bmatrix}
+    \begin{bmatrix}
+        \frac{\partial N_{1}}{\partial x} & 0 &
+        \frac{\partial N_{2}}{\partial x} & 0 &
+        \frac{\partial N_{3}}{\partial x} & 0 &
+        \frac{\partial N_{4}}{\partial x} & 0 \\
+        0 & \frac{\partial N_{1}}{\partial y} &
+        0 & \frac{\partial N_{2}}{\partial y} &
+        0 & \frac{\partial N_{3}}{\partial y} &
+        0 & \frac{\partial N_{4}}{\partial y} \\
+        \frac{\partial N_{1}}{\partial y} & \frac{\partial N_{1}}{\partial x} &
+        \frac{\partial N_{2}}{\partial y} & \frac{\partial N_{2}}{\partial x} &
+        \frac{\partial N_{3}}{\partial y} & \frac{\partial N_{3}}{\partial x} &
+        \frac{\partial N_{4}}{\partial y} & \frac{\partial N_{4}}{\partial x}
+    \end{bmatrix} \ t \ dx \ dy
+    \begin{bmatrix}
+    u_{1} \\
+    v_{1} \\
+    u_{2} \\
+    v_{2} \\
+    u_{3} \\
+    v_{3} \\
+    u_{4} \\
+    v_{4}
+    \end{bmatrix} =
+    \begin{bmatrix}
+    F_{1x} \\
+    F_{1y} \\
+    F_{2x} \\
+    F_{2y} \\
+    F_{3x} \\
+    F_{3y} \\
+    F_{4x} \\
+    F_{4y}
+    \end{bmatrix}
+\end{equation*}
+$$
+
+<p>
+Puede reescribirse como
+
+$$
+\begin{equation*}
+    \int_{0}^{h} \int_{0}^{b}
+    \begin{bmatrix}
+        B_{1} \\
+        B_{2} \\
+        B_{3} \\
+        B_{4}
+    \end{bmatrix} \frac{E}{1 - \nu^{2}}
+    \begin{bmatrix}
+        1 & \nu & 0 \\
+        \nu & 1 & 0 \\
+        0 & 0 & \frac{1 - \nu}{2}
+    \end{bmatrix}
+    \begin{bmatrix}
+        B_{1} & B_{2} & B_{3} & B_{4}
+    \end{bmatrix} \ t \ dx \ dy
+    \begin{bmatrix}
+        d_{1} \\
+        d_{2} \\
+        d_{3} \\
+        d_{4}
+    \end{bmatrix} =
+    \begin{bmatrix}
+        F_{1} \\
+        F_{2} \\
+        F_{3} \\
+        F_{4}
+    \end{bmatrix}
+\end{equation*}
+$$
+
+<p>
+y en forma compacta
+
+$$
+\begin{equation*}
+    \iint \limits_{A} \mathbf{B}^{\mathrm{T}} \ \mathbf{D} \ \mathbf{B} \ t \ dA \ \mathbf{d} = \mathbf{F}
+\end{equation*}
+$$
+
+<p>
+en forma general
+
+$$
+\begin{equation*}
+    \mathbf{K} \ \mathbf{d} = \mathbf{F}
+\end{equation*}
+$$
+
+
 <p>
 <!-- navigation buttons at the bottom of the page -->
 <ul class="pager">
   <li class="previous">
-    <a href="fem005.html">&larr; Prev</a>
-  </li>
-  <li class="next">
-    <a href="fem007.html">Next &rarr;</a>
+    <a href="fem040.html">&larr; Prev</a>
   </li>
 </ul>
 <!-- ------------------- end of main content --------------- -->

@@ -171,7 +171,7 @@ MathJax.Hub.Config({
      <!-- navigation toc: --> <li><a href="fem003.html#___sec3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ejemplo 2</a></li>
      <!-- navigation toc: --> <li><a href="fem004.html#___sec4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Forma alternativa</a></li>
      <!-- navigation toc: --> <li><a href="fem005.html#___sec5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ejemplo 3</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec6" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solución general</a></li>
+     <!-- navigation toc: --> <li><a href="fem006.html#___sec6" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solución general</a></li>
      <!-- navigation toc: --> <li><a href="fem007.html#___sec7" style="font-size: 80%;"><b>Elementos unidimensionales</b></a></li>
      <!-- navigation toc: --> <li><a href="fem007.html#___sec8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Polinomios de Lagrange</a></li>
      <!-- navigation toc: --> <li><a href="fem007.html#___sec9" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Coordenadas globales</a></li>
@@ -231,8 +231,8 @@ MathJax.Hub.Config({
      <!-- navigation toc: --> <li><a href="fem030.html#___sec63" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Elementos de mayor grado polinomial</a></li>
      <!-- navigation toc: --> <li><a href="fem030.html#___sec64" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Elemento de dos nodos</a></li>
      <!-- navigation toc: --> <li><a href="fem030.html#___sec65" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Elemento de tres nodos</a></li>
-     <!-- navigation toc: --> <li><a href="fem031.html#___sec66" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Polinomios de Hermite</a></li>
-     <!-- navigation toc: --> <li><a href="fem031.html#___sec67" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Elemento de dos nodos</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec66" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Polinomios de Hermite</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec67" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Elemento de dos nodos</a></li>
      <!-- navigation toc: --> <li><a href="fem032.html#___sec68" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Elemento de tres nodos</a></li>
      <!-- navigation toc: --> <li><a href="fem033.html#___sec69" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Elementos de mayor grado polinomial</a></li>
      <!-- navigation toc: --> <li><a href="fem033.html#___sec70" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Elemento de dos nodos</a></li>
@@ -268,138 +268,52 @@ MathJax.Hub.Config({
 
 <p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
 
-<a name="part0006"></a>
+<a name="part0031"></a>
 <!-- !split -->
 
-<h2 id="___sec6">Solución general </h2>
+<h1 id="___sec66">Polinomios de Hermite </h1>
+
+<p>
+<!-- Elementos viga Euler-Bernoulli -->
+
+<h2 id="___sec67">Elemento de dos nodos </h2>
 
 $$
 \begin{equation*}
-    \int_{0}^{1} R(x) W(x) \ dx = \int_{0}^{1} \bigg( \frac{d^{2} u(x)}{d x^{2}} + x^{2} \bigg) W(x) \ dx = 0
+    v = \alpha_{0} + \alpha_{1} \xi + \alpha_{2} \xi^{2} + \alpha_{3} \xi^{3} =
+    \begin{bmatrix}
+        1 & \xi & \xi^{2} & \xi^{3}
+    \end{bmatrix}
+    \begin{bmatrix}
+        \alpha_{0} \\
+        \alpha_{1} \\
+        \alpha_{2} \\
+        \alpha_{3}
+    \end{bmatrix}
 \end{equation*}
 $$
 
 <p>
-puede escribirse como la suma de integrales
-
-$$
-\begin{equation*}
-    \int_{0}^{1} \frac{d^{2} u(x)}{d x^{2}} W(x) \ dx + \int_{0}^{1} x^{2} W(x) \ dx = 0
-\end{equation*}
-$$
-
-<p>
-integrando por partes para reducir el orden de la derivada
+reemplazando los valores \( \xi_{1} = -1 \) y \( \xi_{2} = 1 \)
 
 $$
 \begin{align*}
-    \int u \ dv &= uv - \int v \ du \\
-    \int_{0}^{1} W(x) \frac{d^{2} u(x)}{d x^{2}} \ dx &= \bigg( W(x) \frac{d u(x)}{d x} \bigg) \bigg|_{0}^{1} - \int_{0}^{1} \frac{d u(x)}{d x} \frac{d W(x)}{d x}\ dx
+    \alpha_{0} + \alpha_{1} (-1) + \alpha_{2} (-1)^{2} + \alpha_{3} (-1)^{3} &= v_{1} \\
+    \alpha_{1} + 2 \alpha_{2} (-1) + 3 \alpha_{3} (-1)^{2} &= \theta_{1} \\
+    \alpha_{0} + \alpha_{1} (1) + \alpha_{2} (1)^{2} + \alpha_{3} (1)^{3} &= v_{2} \\
+    \alpha_{1} + 2 \alpha_{2} (1) + 3 \alpha_{3} (1)^{2} &= \theta_{2}
 \end{align*}
 $$
 
 <p>
-reemplazando
-
-$$
-\begin{equation*}
-    \bigg( \frac{d u(x)}{d x} W(x) \bigg) \bigg|_{0}^{1} - \int_{0}^{1} \frac{d u(x)}{d x} \frac{d W(x)}{d x}\ dx + \int_{0}^{1} x^{2} W(x) \ dx = 0
-\end{equation*}
-$$
-
-<p>
-reordenando
-
-$$
-\begin{equation*}
-    \int_{0}^{1} \frac{d u(x)}{d x} \frac{d W(x)}{d x} \ dx = \int_{0}^{1} x^{2} W(x) \ dx + \bigg( \frac{d u(x)}{d x} W(x) \bigg) \bigg|_{0}^{1}
-\end{equation*}
-$$
-
-<p>
-para la solución se usara un elemento de dos nodos
+simplificando
 
 $$
 \begin{align*}
-    u(x) &= \sum_{i=1}^{2} N_{i} a_{i} = N_{1} a_{1} + N_{2} a_{2} \\
-    \frac{d u(x)}{d x} &= \frac{d N_{1}}{d x} a_{1} + \frac{d N_{2}}{d x} a_{2} \\
-    W(x) &= \sum_{i=1}^{2} N_{i} \delta a_{i} = N_{1} \delta a_{1} + N_{2} \delta a_{2} \\
-    \frac{d W(x)}{d x} &= \frac{d N_{1}}{d x} \delta a_{1} + \frac{d N_{2}}{d x} \delta a_{2}
-\end{align*}
-$$
-
-<p>
-reemplazando
-
-$$
-\begin{equation*}
-    \int_{0}^{1} \bigg( \frac{d N_{1}}{d x} a_{1} + \frac{d N_{2}}{d x} a_{2} \bigg) \bigg( \frac{d N_{1}}{d x} \delta a_{1} + \frac{d N_{2}}{d x} \delta a_{2} \bigg) \ dx = \int_{0}^{1} x^{2} (N_{1} \delta a_{1} + N_{2} \delta a_{2}) \ dx + \bigg[ \frac{d u(x)}{d x} (N_{1} \delta a_{1} + N_{2} \delta a_{2}) \bigg] \bigg|_{0}^{1}
-\end{equation*}
-$$
-
-<p>
-multiplicando
-
-$$
-\begin{equation*}
-    \int_{0}^{1} \frac{d N_{1}}{d x} \frac{d N_{1}}{d x} a_{1} \delta a_{1} + \frac{d N_{1}}{d x} \frac{d N_{2}}{d x} a_{2} \delta a_{1} + \frac{d N_{2}}{d x} \frac{d N_{1}}{d x} a_{1} \delta a_{2} + \frac{d N_{2}}{d x} \frac{d N_{2}}{d x} a_{2} \delta a_{2} \ dx = \int_{0}^{1} x^{2} N_{1} \delta a_{1} + x^{2} N_{2} \delta a_{2} \ dx + \bigg( \frac{d u(x)}{d x} N_{1} \delta a_{1} + \frac{d u(x)}{d x} N_{2} \delta a_{2} \bigg) \bigg|_{0}^{1}
-\end{equation*}
-$$
-
-<p>
-reemplazando los límites de integración en el lado derecho
-
-$$
-\begin{equation*}
-    \int_{0}^{1} \frac{d N_{1}}{d x} \frac{d N_{1}}{d x} a_{1} \delta a_{1} + \frac{d N_{1}}{d x} \frac{d N_{2}}{d x} a_{2} \delta a_{1} + \frac{d N_{2}}{d x} \frac{d N_{1}}{d x} a_{1} \delta a_{2} + \frac{d N_{2}}{d x} \frac{d N_{2}}{d x} a_{2} \delta a_{2} \ dx = \int_{0}^{1} x^{2} N_{1} \delta a_{1} + x^{2} N_{2} \delta a_{2} \ dx + \bigg( \frac{d u(1)}{d x} N_{1}(1) \delta a_{1} + \frac{d u(1)}{d x} N_{2}(1) \delta a_{2} \bigg) - \bigg( \frac{d u(0)}{d x} N_{1}(0) \delta a_{1} + \frac{d u(0)}{d x} N_{2}(0) \delta a_{2} \bigg)
-\end{equation*}
-$$
-
-<p>
-reordenando y agrupando
-
-$$
-\begin{equation*}
-    \int_{0}^{1} \bigg( \frac{d N_{1}}{d x} \frac{d N_{1}}{d x} a_{1} + \frac{d N_{1}}{d x} \frac{d N_{2}}{d x} a_{2} \bigg) \delta a_{1} + \bigg( \frac{d N_{2}}{d x} \frac{d N_{1}}{d x} a_{1} + \frac{d N_{2}}{d x} \frac{d N_{2}}{d x} a_{2} \bigg) \delta a_{2} \ dx = \int_{0}^{1} x^{2} N_{1} \delta a_{1} + x^{2} N_{2} \delta a_{2} \ dx + \bigg( \frac{d u(1)}{d x} N_{1}(1) - \frac{d u(0)}{d x} N_{1}(0) \bigg) \delta a_{1} + \bigg( \frac{d u(1)}{d x} N_{2}(1) - \frac{d u(0)}{d x} N_{2}(0) \bigg) \delta a_{2}
-\end{equation*}
-$$
-
-<p>
-formando un sistema de ecuaciones
-
-$$
-\begin{align*}
-    \int_{0}^{1} \bigg( \frac{d N_{1}}{d x} \frac{d N_{1}}{d x} a_{1} + \frac{d N_{1}}{d x} \frac{d N_{2}}{d x} a_{2} \bigg) \delta a_{1} \ dx &= \int_{0}^{1} x^{2} N_{1} \delta a_{1} \ dx + \bigg( \frac{d u(1)}{d x} N_{1}(1) - \frac{d u(0)}{d x} N_{1}(0) \bigg) \delta a_{1} \\
-    \int_{0}^{1} \bigg( \frac{d N_{2}}{d x} \frac{d N_{1}}{d x} a_{1} + \frac{d N_{2}}{d x} \frac{d N_{2}}{d x} a_{2} \bigg) \delta a_{2} \ dx &= \int_{0}^{1} x^{2} N_{2} \delta a_{2} \ dx + \bigg( \frac{d u(1)}{d x} N_{2}(1) - \frac{d u(0)}{d x} N_{2}(0) \bigg) \delta a_{2}
-\end{align*}
-$$
-
-<p>
-las constantes se simplifican en ambos lados
-
-$$
-\begin{align*}
-    \int_{0}^{1} \frac{d N_{1}}{d x} \frac{d N_{1}}{d x} a_{1} + \frac{d N_{1}}{d x} \frac{d N_{2}}{d x} a_{2} \ dx &= \int_{0}^{1} x^{2} N_{1} \ dx + \frac{d u(1)}{d x} N_{1}(1) - \frac{d u(0)}{d x} N_{1}(0) \\
-    \int_{0}^{1} \frac{d N_{2}}{d x} \frac{d N_{1}}{d x} a_{1} + \frac{d N_{2}}{d x} \frac{d N_{2}}{d x} a_{2} \ dx &= \int_{0}^{1} x^{2} N_{2} \ dx + \frac{d u(1)}{d x} N_{2}(1) - \frac{d u(0)}{d x} N_{2}(0)
-\end{align*}
-$$
-
-<p>
-las funciones de forma obtenidas anteriomente, tienen los siguientes valores
-
-<p>
-\begin{matrix}
-    N_{1}(1) = 0 &amp; N_{1}(0) = 0 \\
-    N_{2}(1) = 0 &amp; N_{2}(0) = 0
-\end{matrix}
-
-<p>
-reemplazando
-
-$$
-\begin{align*}
-    \int_{0}^{1} \frac{d N_{1}}{d x} \frac{d N_{1}}{d x} a_{1} + \frac{d N_{1}}{d x} \frac{d N_{2}}{d x} a_{2} \ dx &= \int_{0}^{1} x^{2} N_{1} \ dx \\
-    \int_{0}^{1} \frac{d N_{2}}{d x} \frac{d N_{1}}{d x} a_{1} + \frac{d N_{2}}{d x} \frac{d N_{2}}{d x} a_{2} \ dx &= \int_{0}^{1} x^{2} N_{2} \ dx
+    \alpha_{0} - \alpha_{1} + \alpha_{2} - \alpha_{3} &= v_{1} \\
+    \alpha_{1} - 2 \alpha_{2} + 3 \alpha_{3} &= \theta_{1} \\
+    \alpha_{0} + \alpha_{1} + \alpha_{2} + \alpha_{3} &= v_{2} \\
+    \alpha_{1} + 2 \alpha_{2} + 3 \alpha_{3} &= \theta_{2}
 \end{align*}
 $$
 
@@ -408,44 +322,109 @@ en forma matricial
 
 $$
 \begin{equation*}
-    \int_{0}^{1}
     \begin{bmatrix}
-        \frac{d N_{1}}{d x} \frac{d N_{1}}{d x} & \frac{d N_{1}}{d x} \frac{d N_{2}}{d x} \\
-        \frac{d N_{2}}{d x} \frac{d N_{1}}{d x} & \frac{d N_{2}}{d x} \frac{d N_{2}}{d x}
-    \end{bmatrix} dx
+        1 & -1 & 1 & -1 \\
+        0 & 1 & -2 & 3 \\
+        1 & 1 & 1 & 1 \\
+        0 & 1 & 2 & 3
+    \end{bmatrix}
     \begin{bmatrix}
-    a_{1} \\
-    a_{2}
-    \end{bmatrix} = \int_{0}^{1} x^{2}
+        \alpha_{0} \\
+        \alpha_{1} \\
+        \alpha_{2} \\
+        \alpha_{3}
+    \end{bmatrix} =
     \begin{bmatrix}
-    N_{1} \\
-    N_{2}
-    \end{bmatrix} dx
+        v_{1} \\
+        \theta_{1} \\
+        v_{2} \\
+        \theta_{2}
+    \end{bmatrix}
 \end{equation*}
 $$
 
 <p>
-factorizando matrices
+resolviendo
 
 $$
 \begin{equation*}
-    \int_{0}^{1}
     \begin{bmatrix}
-        \frac{d N_{1}}{d x} \\
-        \frac{d N_{2}}{d x}
+        \alpha_{0} \\
+        \alpha_{1} \\
+        \alpha_{2} \\
+        \alpha_{3}
+    \end{bmatrix} =
+    \begin{bmatrix}
+        \frac{1}{2} & \frac{1}{4} & \frac{1}{2} & -\frac{1}{4} \\
+        -\frac{3}{4} & -\frac{1}{4} & \frac{3}{4} & -\frac{1}{4} \\
+        0 & -\frac{1}{4} & 0 & \frac{1}{4} \\
+        \frac{1}{4} & \frac{1}{4} & -\frac{1}{4} & \frac{1}{4}
     \end{bmatrix}
     \begin{bmatrix}
-        \frac{d N_{1}}{d x} & \frac{d N_{2}}{d x}
-    \end{bmatrix} dx
-    \begin{bmatrix}
-    a_{1} \\
-    a_{2}
-    \end{bmatrix} = \int_{0}^{1} x^{2}
-    \begin{bmatrix}
-    N_{1} \\
-    N_{2}
-    \end{bmatrix} dx
+        v_{1} \\
+        \theta_{1} \\
+        v_{2} \\
+        \theta_{2}
+    \end{bmatrix}
 \end{equation*}
+$$
+
+<p>
+reemplazando
+
+$$
+\begin{align*}
+    v
+    &= \begin{bmatrix}
+        1 & \xi & \xi^{2} & \xi^{3}
+    \end{bmatrix}
+    \begin{bmatrix}
+        \alpha_{0} \\
+        \alpha_{1} \\
+        \alpha_{2} \\
+        \alpha_{3}
+    \end{bmatrix} \\
+    &= \begin{bmatrix}
+        1 & \xi & \xi^{2} & \xi^{3}
+    \end{bmatrix}
+    \begin{bmatrix}
+        \frac{1}{2} & \frac{1}{4} & \frac{1}{2} & -\frac{1}{4} \\
+        -\frac{3}{4} & -\frac{1}{4} & \frac{3}{4} & -\frac{1}{4} \\
+        0 & -\frac{1}{4} & 0 & \frac{1}{4} \\
+        \frac{1}{4} & \frac{1}{4} & -\frac{1}{4} & \frac{1}{4}
+    \end{bmatrix}
+    \begin{bmatrix}
+        v_{1} \\
+        \theta_{1} \\
+        v_{2} \\
+        \theta_{2}
+    \end{bmatrix} \\
+    &= \begin{bmatrix}
+        \frac{1}{4} (\xi + 2) (\xi - 1)^{2} &
+        \frac{1}{4} (\xi + 1) (\xi - 1)^{2} &
+        -\frac{1}{4} (\xi - 2) (\xi + 1)^{2} &
+        \frac{1}{4} (\xi - 1) (\xi + 1)^{2}
+    \end{bmatrix}
+    \begin{bmatrix}
+        v_{1} \\
+        \theta_{1} \\
+        v_{2} \\
+        \theta_{2}
+    \end{bmatrix}
+\end{align*}
+$$
+
+<p>
+Reescribiendo \( v \):
+
+$$
+\begin{align*}
+    v &= \bigg[ \frac{1}{4} (\xi + 2) (\xi - 1)^{2} \bigg] v_{1} +
+    \bigg[ \frac{1}{4} (\xi + 1) (\xi - 1)^{2} \bigg] \theta_{1} +
+    \bigg[ -\frac{1}{4} (\xi - 2) (\xi + 1)^{2} \bigg] v_{2} +
+    \bigg[ \frac{1}{4} (\xi - 1) (\xi + 1)^{2} \bigg] \theta_{2} \\
+    &= N_{1} v_{1} + N_{2} \theta_{1} + N_{3} v_{2} + N_{4} \theta_{2}
+\end{align*}
 $$
 
 <p>
@@ -453,10 +432,10 @@ $$
 <!-- navigation buttons at the bottom of the page -->
 <ul class="pager">
   <li class="previous">
-    <a href="fem005.html">&larr; Prev</a>
+    <a href="fem030.html">&larr; Prev</a>
   </li>
   <li class="next">
-    <a href="fem007.html">Next &rarr;</a>
+    <a href="fem032.html">Next &rarr;</a>
   </li>
 </ul>
 <!-- ------------------- end of main content --------------- -->
