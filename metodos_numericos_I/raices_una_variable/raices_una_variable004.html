@@ -1,0 +1,628 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Raices de una variable">
+
+<title>Raices de una variable</title>
+
+<!-- Bootstrap style: bootswatch_cosmo -->
+<link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/cosmo/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+
+/* Add scrollbar to dropdown menus in bootstrap navigation bar */
+.dropdown-menu {
+   height: auto;
+   max-height: 400px;
+   overflow-x: hidden;
+}
+
+/* Adds an invisible element before each target to offset for the navigation
+   bar */
+.anchor::before {
+  content:"";
+  display:block;
+  height:50px;      /* fixed header height for style bootswatch_cosmo */
+  margin:-50px 0 0; /* negative fixed header height */
+}
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 2,
+ 'sections': [('Table of contents',
+               2,
+               'table_of_contents',
+               'table_of_contents'),
+              (u'M\xe9todo de la bisecci\xf3n', 2, None, '___sec0'),
+              (u'Ejemplo 1', 3, None, '___sec1'),
+              (u'Implementaci\xf3n de funciones auxiliares',
+               3,
+               None,
+               '___sec2'),
+              (u'Implementaci\xf3n no vectorizada', 3, None, '___sec3'),
+              (u'Ejemplo 2', 3, None, '___sec4'),
+              (u'Ejemplo 3', 3, None, '___sec5'),
+              (u'Ejemplo 4', 3, None, '___sec6'),
+              (u'M\xe9todo de la falsa posici\xf3n', 2, None, '___sec7'),
+              (u'Ejemplo 1', 3, None, '___sec8'),
+              (u'Implementaci\xf3n de funciones auxiliares',
+               3,
+               None,
+               '___sec9'),
+              (u'Implementaci\xf3n no vectorizada', 3, None, '___sec10'),
+              (u'Ejemplo 2', 3, None, '___sec11'),
+              (u'Ejemplo 3', 3, None, '___sec12'),
+              (u'Ejemplo 4', 3, None, '___sec13'),
+              (u'M\xe9todo de la falsa posici\xf3n modificado',
+               2,
+               None,
+               '___sec14'),
+              (u'Ejemplo 1', 3, None, '___sec15'),
+              (u'Implementaci\xf3n de funciones auxiliares',
+               3,
+               None,
+               '___sec16'),
+              (u'Implementaci\xf3n no vectorizada', 3, None, '___sec17'),
+              (u'Ejemplo 2', 3, None, '___sec18'),
+              (u'Ejemplo 3', 3, None, '___sec19'),
+              (u'Ejemplo 4', 3, None, '___sec20'),
+              (u'M\xe9todo del punto fijo', 2, None, '___sec21'),
+              (u'Ejemplo 1', 3, None, '___sec22'),
+              (u'Implementaci\xf3n no vectorizada', 3, None, '___sec23'),
+              (u'Ejemplo 2', 3, None, '___sec24'),
+              (u'M\xe9todo de Newton-Raphson', 2, None, '___sec25'),
+              (u'Ejemplo 1', 3, None, '___sec26'),
+              (u'Implementaci\xf3n no vectorizada', 3, None, '___sec27'),
+              (u'M\xe9todo de la secante', 2, None, '___sec28'),
+              (u'Ejemplo 1', 3, None, '___sec29'),
+              (u'Implementaci\xf3n de funciones auxiliares',
+               3,
+               None,
+               '___sec30'),
+              (u'Implementaci\xf3n no vectorizada', 3, None, '___sec31'),
+              (u'Ejemplo 2', 3, None, '___sec32'),
+              (u'Ejemplo 3', 3, None, '___sec33'),
+              (u'M\xe9todo de la secante modificada', 2, None, '___sec34'),
+              (u'Ejemplo 1', 3, None, '___sec35'),
+              (u'Implementaci\xf3n de funciones auxiliares',
+               3,
+               None,
+               '___sec36'),
+              (u'Implementaci\xf3n no vectorizada', 3, None, '___sec37'),
+              (u'Ejemplo 2', 3, None, '___sec38'),
+              (u'Ejemplo 3', 3, None, '___sec39')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="raices_una_variable.html">Raices de una variable</a>
+  </div>
+
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="raices_una_variable000.html#table_of_contents" style="font-size: 80%;"><b>Table of contents</b></a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable001.html#___sec0" style="font-size: 80%;"><b>Método de la bisección</b></a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable001.html#___sec1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Ejemplo 1</a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable001.html#___sec2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Implementación de funciones auxiliares</a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable001.html#___sec3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Implementación no vectorizada</a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable001.html#___sec4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Ejemplo 2</a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable001.html#___sec5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Ejemplo 3</a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable001.html#___sec6" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Ejemplo 4</a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable002.html#___sec7" style="font-size: 80%;"><b>Método de la falsa posición</b></a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable002.html#___sec8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Ejemplo 1</a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable002.html#___sec9" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Implementación de funciones auxiliares</a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable002.html#___sec10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Implementación no vectorizada</a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable002.html#___sec11" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Ejemplo 2</a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable002.html#___sec12" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Ejemplo 3</a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable002.html#___sec13" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Ejemplo 4</a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable003.html#___sec14" style="font-size: 80%;"><b>Método de la falsa posición modificado</b></a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable003.html#___sec15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Ejemplo 1</a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable003.html#___sec16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Implementación de funciones auxiliares</a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable003.html#___sec17" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Implementación no vectorizada</a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable003.html#___sec18" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Ejemplo 2</a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable003.html#___sec19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Ejemplo 3</a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable003.html#___sec20" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Ejemplo 4</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec21" style="font-size: 80%;"><b>Método del punto fijo</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec22" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Ejemplo 1</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec23" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Implementación no vectorizada</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec24" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Ejemplo 2</a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable005.html#___sec25" style="font-size: 80%;"><b>Método de Newton-Raphson</b></a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable005.html#___sec26" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Ejemplo 1</a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable005.html#___sec27" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Implementación no vectorizada</a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable006.html#___sec28" style="font-size: 80%;"><b>Método de la secante</b></a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable006.html#___sec29" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Ejemplo 1</a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable006.html#___sec30" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Implementación de funciones auxiliares</a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable006.html#___sec31" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Implementación no vectorizada</a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable006.html#___sec32" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Ejemplo 2</a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable006.html#___sec33" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Ejemplo 3</a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable007.html#___sec34" style="font-size: 80%;"><b>Método de la secante modificada</b></a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable007.html#___sec35" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Ejemplo 1</a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable007.html#___sec36" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Implementación de funciones auxiliares</a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable007.html#___sec37" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Implementación no vectorizada</a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable007.html#___sec38" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Ejemplo 2</a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable007.html#___sec39" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Ejemplo 3</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0004"></a>
+<!-- !split -->
+
+<h2 id="___sec21" class="anchor">Método del punto fijo </h2>
+
+<p>
+El método del punto fijo consiste en transformar una función \( f(x) = 0 \) en \( x = g(x) \) y obtener la raíz en forma iterativa
+
+$$
+\begin{equation}
+    x_{i+1} = g(x_{i})
+\tag{5}
+\end{equation}
+$$
+
+<p>
+Algoritmo
+
+<p>
+
+<!-- code=text typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>x_0 es la raiz aproximada
+x_1 = f(x_0)
+x_2 = f(x_1)
+x_3 = f(x_2)
+...
+</pre></div>
+
+<h3 id="___sec22" class="anchor">Ejemplo 1 </h3>
+
+<p>
+Encontrar la raiz de
+
+$$
+\begin{equation*}
+    y = e^{-x} - x
+\end{equation*}
+$$
+
+<p>
+Reemplazamos \( y = 0 \)
+
+$$
+\begin{equation*}
+    0 = e^{-x} - x
+\end{equation*}
+$$
+
+<p>
+Despejando \( x \)
+
+$$
+\begin{equation*}
+    x = e^{-x}
+\end{equation*}
+$$
+
+<p>
+Transformando en una función iterativa
+
+$$
+\begin{equation*}
+    x_{i+1} = e^{-x_{i}}
+\end{equation*}
+$$
+
+<p>
+<b>Iteración 0</b>
+
+<p>
+Raíz aproximada
+
+$$
+\begin{equation*}
+    x_{0} = 0
+\end{equation*}
+$$
+
+<p>
+Error relativo
+
+$$
+\begin{equation*}
+    e_{r} = ?
+\end{equation*}
+$$
+
+<p>
+<b>Iteración 1</b>
+
+<p>
+Raíz aproximada
+
+$$
+\begin{equation*}
+    x_{1} = e^{-0} = 1
+\end{equation*}
+$$
+
+<p>
+Error relativo
+
+$$
+\begin{equation*}
+    e_{r} = \bigg|\frac{1 - 0}{1}\bigg| \times 100\% = 100\%
+\end{equation*}
+$$
+
+<p>
+<b>Iteración 2</b>
+
+<p>
+Raíz aproximada
+
+$$
+\begin{equation*}
+    x_{2} = e^{-1} = 0.367879
+\end{equation*}
+$$
+
+<p>
+Error relativo
+
+$$
+\begin{equation*}
+    e_{r} = \bigg|\frac{0.367879 - 1}{0.367879}\bigg| \times 100\% = 171.83\%
+\end{equation*}
+$$
+
+<p>
+<b>Iteración 3</b>
+
+<p>
+Raíz aproximada
+
+$$
+\begin{equation*}
+    x_{3} = e^{-0.367879} = 0.692201
+\end{equation*}
+$$
+
+<p>
+Error relativo
+
+$$
+\begin{equation*}
+    e_{r} = \bigg|\frac{0.692201 - 0.367879}{0.692201}\bigg| \times 100\% = 46.85\%
+\end{equation*}
+$$
+
+<h3 id="___sec23" class="anchor">Implementación no vectorizada </h3>
+
+<p>
+Seudocódigo
+
+<p>
+
+<!-- code=text typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>function punto_fijo(f(x), x_0)
+    x_actual = x_0
+    error_permitido = 0.000001
+    while(True)
+        x_anterior = x_actual
+        x_actual = f(x_anterior)
+        if x_raiz_actual != 0
+            error_relativo = abs((x_raiz_actual - x_raiz_anterior)/x_raiz_actual)*100
+        end if
+        if error_relativo &lt; error_permitido
+            exit
+        end if
+    end while
+    mostrar x_actual
+end function
+</pre></div>
+<p>
+O también
+
+<p>
+
+<!-- code=text typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>function punto_fijo(f(x), x_0)
+    x_actual = x_0
+    for 1 to maxima_iteracion do
+        x_anterior = x_actual
+        x_actual = f(x_anterior)
+    end for
+    mostrar x_actual
+end function
+</pre></div>
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">math</span> <span style="color: #008000; font-weight: bold">import</span> exp
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(x):
+    <span style="color: #408080; font-style: italic"># f(x) = exp(-x) - x</span>
+    y <span style="color: #666666">=</span> exp(<span style="color: #666666">-</span>x)
+    <span style="color: #008000; font-weight: bold">return</span> y
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">punto_fijo</span>(f, x_0):
+    <span style="color: #008000; font-weight: bold">print</span>(<span style="color: #BA2121">&quot;{0:s} </span><span style="color: #BB6622; font-weight: bold">\t</span><span style="color: #BA2121"> {1:15s} </span><span style="color: #BB6622; font-weight: bold">\t</span><span style="color: #BA2121"> {2:15s} </span><span style="color: #BB6622; font-weight: bold">\t</span><span style="color: #BA2121"> {3:15s}&quot;</span><span style="color: #666666">.</span>format(<span style="color: #BA2121">&#39;i&#39;</span>, <span style="color: #BA2121">&#39;x anterior&#39;</span>, <span style="color: #BA2121">&#39;x actual&#39;</span>, <span style="color: #BA2121">&#39;error relativo %&#39;</span>))
+    x_actual <span style="color: #666666">=</span> x_0
+    i <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+    <span style="color: #008000; font-weight: bold">print</span>(<span style="color: #BA2121">&quot;{0:d} </span><span style="color: #BB6622; font-weight: bold">\t</span><span style="color: #BA2121"> {1:15s} </span><span style="color: #BB6622; font-weight: bold">\t</span><span style="color: #BA2121"> {2:.15f} </span><span style="color: #BB6622; font-weight: bold">\t</span><span style="color: #BA2121"> {3:15s}&quot;</span><span style="color: #666666">.</span>format(i, <span style="color: #BA2121">&#39;???????????????&#39;</span>, x_actual, <span style="color: #BA2121">&#39;???????????????&#39;</span>))
+    error_permitido <span style="color: #666666">=</span> <span style="color: #666666">0.000001</span>
+    <span style="color: #008000; font-weight: bold">while</span> <span style="color: #008000">True</span>:
+        x_anterior <span style="color: #666666">=</span> x_actual
+        x_actual <span style="color: #666666">=</span> f(x_anterior)
+        <span style="color: #008000; font-weight: bold">if</span> x_actual <span style="color: #666666">!=</span> <span style="color: #666666">0</span>:
+            error_relativo <span style="color: #666666">=</span> <span style="color: #008000">abs</span>((x_actual <span style="color: #666666">-</span> x_anterior)<span style="color: #666666">/</span>x_actual)<span style="color: #666666">*100</span>
+        i <span style="color: #666666">=</span> i <span style="color: #666666">+</span> <span style="color: #666666">1</span>
+        <span style="color: #008000; font-weight: bold">print</span>(<span style="color: #BA2121">&quot;{0:d} </span><span style="color: #BB6622; font-weight: bold">\t</span><span style="color: #BA2121"> {1:.15f} </span><span style="color: #BB6622; font-weight: bold">\t</span><span style="color: #BA2121"> {2:.15f} </span><span style="color: #BB6622; font-weight: bold">\t</span><span style="color: #BA2121"> {3:15.11f}&quot;</span><span style="color: #666666">.</span>format(i, x_anterior, x_actual, error_relativo))
+        <span style="color: #008000; font-weight: bold">if</span> (error_relativo <span style="color: #666666">&lt;</span> error_permitido) <span style="color: #AA22FF; font-weight: bold">or</span> (i<span style="color: #666666">&gt;=20</span>):
+            <span style="color: #008000; font-weight: bold">break</span>
+    <span style="color: #008000; font-weight: bold">print</span>(<span style="color: #BA2121">&#39;</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">x =&#39;</span>, x_actual)
+</pre></div>
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>punto_fijo(f, <span style="color: #666666">0</span>)
+</pre></div>
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>    i 	 x anterior      	 x actual        	 error relativo <span style="color: #666666">%</span>
+    <span style="color: #666666">0</span> 	 ??????????????? 	 <span style="color: #666666">0.000000000000000</span> 	 ???????????????
+    <span style="color: #666666">1</span> 	 <span style="color: #666666">0.000000000000000</span> 	 <span style="color: #666666">1.000000000000000</span> 	 <span style="color: #666666">100.00000000000</span>
+    <span style="color: #666666">2</span> 	 <span style="color: #666666">1.000000000000000</span> 	 <span style="color: #666666">0.367879441171442</span> 	 <span style="color: #666666">171.82818284590</span>
+    <span style="color: #666666">3</span> 	 <span style="color: #666666">0.367879441171442</span> 	 <span style="color: #666666">0.692200627555346</span> 	  <span style="color: #666666">46.85363946134</span>
+    <span style="color: #666666">4</span> 	 <span style="color: #666666">0.692200627555346</span> 	 <span style="color: #666666">0.500473500563637</span> 	  <span style="color: #666666">38.30914659333</span>
+    <span style="color: #666666">5</span> 	 <span style="color: #666666">0.500473500563637</span> 	 <span style="color: #666666">0.606243535085597</span> 	  <span style="color: #666666">17.44678968115</span>
+    <span style="color: #666666">6</span> 	 <span style="color: #666666">0.606243535085597</span> 	 <span style="color: #666666">0.545395785975027</span> 	  <span style="color: #666666">11.15662252538</span>
+    <span style="color: #666666">7</span> 	 <span style="color: #666666">0.545395785975027</span> 	 <span style="color: #666666">0.579612335503379</span> 	   <span style="color: #666666">5.90335081441</span>
+    <span style="color: #666666">8</span> 	 <span style="color: #666666">0.579612335503379</span> 	 <span style="color: #666666">0.560115461361089</span> 	   <span style="color: #666666">3.48086697962</span>
+    <span style="color: #666666">9</span> 	 <span style="color: #666666">0.560115461361089</span> 	 <span style="color: #666666">0.571143115080177</span> 	   <span style="color: #666666">1.93080393126</span>
+    <span style="color: #666666">10</span> 	 <span style="color: #666666">0.571143115080177</span> 	 <span style="color: #666666">0.564879347391050</span> 	   <span style="color: #666666">1.10886824205</span>
+    <span style="color: #666666">11</span> 	 <span style="color: #666666">0.564879347391050</span> 	 <span style="color: #666666">0.568428725029061</span> 	   <span style="color: #666666">0.62441911918</span>
+    <span style="color: #666666">12</span> 	 <span style="color: #666666">0.568428725029061</span> 	 <span style="color: #666666">0.566414733146883</span> 	   <span style="color: #666666">0.35556841380</span>
+    <span style="color: #666666">13</span> 	 <span style="color: #666666">0.566414733146883</span> 	 <span style="color: #666666">0.567556637328283</span> 	   <span style="color: #666666">0.20119651614</span>
+    <span style="color: #666666">14</span> 	 <span style="color: #666666">0.567556637328283</span> 	 <span style="color: #666666">0.566908911921495</span> 	   <span style="color: #666666">0.11425564022</span>
+    <span style="color: #666666">15</span> 	 <span style="color: #666666">0.566908911921495</span> 	 <span style="color: #666666">0.567276232175570</span> 	   <span style="color: #666666">0.06475156780</span>
+    <span style="color: #666666">16</span> 	 <span style="color: #666666">0.567276232175570</span> 	 <span style="color: #666666">0.567067898390788</span> 	   <span style="color: #666666">0.03673877244</span>
+    <span style="color: #666666">17</span> 	 <span style="color: #666666">0.567067898390788</span> 	 <span style="color: #666666">0.567186050099357</span> 	   <span style="color: #666666">0.02083120848</span>
+    <span style="color: #666666">18</span> 	 <span style="color: #666666">0.567186050099357</span> 	 <span style="color: #666666">0.567119040057215</span> 	   <span style="color: #666666">0.01181586888</span>
+    <span style="color: #666666">19</span> 	 <span style="color: #666666">0.567119040057215</span> 	 <span style="color: #666666">0.567157044001298</span> 	   <span style="color: #666666">0.00670077970</span>
+    <span style="color: #666666">20</span> 	 <span style="color: #666666">0.567157044001298</span> 	 <span style="color: #666666">0.567135490206278</span> 	   <span style="color: #666666">0.00380046662</span>
+
+    x <span style="color: #666666">=</span> <span style="color: #666666">0.5671354902062784</span>
+</pre></div>
+
+<h3 id="___sec24" class="anchor">Ejemplo 2 </h3>
+
+<p>
+Encontrar la raiz de
+
+$$
+\begin{equation*}
+    y = x^{2} - 5 x + 3
+\end{equation*}
+$$
+
+<p>
+Reemplazamos \( y = 0 \)
+
+$$
+\begin{equation*}
+    0 = x^{2} - 5 x + 3
+\end{equation*}
+$$
+
+<p>
+Despejando \( x \)
+
+$$
+\begin{equation*}
+    x = -\frac{3}{x - 5}
+\end{equation*}
+$$
+
+<p>
+Transformando en una función iterativa
+
+$$
+\begin{equation*}
+    x_{i+1} = -\frac{3}{x_{i} - 5}
+\end{equation*}
+$$
+
+<p>
+<b>Iteración 0</b>
+
+<p>
+Raíz aproximada
+
+$$
+\begin{equation*}
+    x_{0} = 1.85
+\end{equation*}
+$$
+
+<p>
+Error relativo
+
+$$
+\begin{equation*}
+    e_{r} = ?
+\end{equation*}
+$$
+
+<p>
+<b>Iteración 1</b>
+
+<p>
+Raíz aproximada
+
+$$
+\begin{equation*}
+    x_{1} = -\frac{3}{1.85 - 5} = 0.952381
+\end{equation*}
+$$
+
+<p>
+Error relativo
+
+$$
+\begin{equation*}
+    e_{r} = \bigg|\frac{0.952381 - 1.85}{0.952381}\bigg| \times 100\% = 94.25\%
+\end{equation*}
+$$
+
+<p>
+<b>Iteración 2</b>
+
+<p>
+Raíz aproximada
+
+$$
+\begin{equation*}
+    x_{2} = -\frac{3}{0.952381 - 5} = 0.741176
+\end{equation*}
+$$
+
+<p>
+Error relativo
+
+$$
+\begin{equation*}
+    e_{r} = \bigg|\frac{0.741176 - 0.952381}{0.741176}\bigg| \times 100\% = 28.50\%
+\end{equation*}
+$$
+
+<p>
+<b>Iteración 3</b>
+
+<p>
+Raíz aproximada
+
+$$
+\begin{equation*}
+    x_{3} = -\frac{3}{0.741176 - 5} = 0.704420
+\end{equation*}
+$$
+
+<p>
+Error relativo
+
+$$
+\begin{equation*}
+    e_{r} = \bigg|\frac{0.704420 - 0.741176}{0.704420}\bigg| \times 100\% = 5.22\%
+\end{equation*}
+$$
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">g</span>(x):
+    <span style="color: #408080; font-style: italic"># f(x) = x**2 - 5*x + 3</span>
+    y <span style="color: #666666">=</span> <span style="color: #666666">-3</span> <span style="color: #666666">/</span> (x <span style="color: #666666">-</span> <span style="color: #666666">5</span>)
+    <span style="color: #008000; font-weight: bold">return</span> y
+</pre></div>
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>punto_fijo(g, <span style="color: #666666">1.85</span>)
+</pre></div>
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>    i 	 x anterior      	 x actual        	 error relativo <span style="color: #666666">%</span>
+    <span style="color: #666666">0</span> 	 ??????????????? 	 <span style="color: #666666">1.850000000000000</span> 	 ???????????????
+    <span style="color: #666666">1</span> 	 <span style="color: #666666">1.850000000000000</span> 	 <span style="color: #666666">0.952380952380952</span> 	  <span style="color: #666666">94.25000000000</span>
+    <span style="color: #666666">2</span> 	 <span style="color: #666666">0.952380952380952</span> 	 <span style="color: #666666">0.741176470588235</span> 	  <span style="color: #666666">28.49584278156</span>
+    <span style="color: #666666">3</span> 	 <span style="color: #666666">0.741176470588235</span> 	 <span style="color: #666666">0.704419889502762</span> 	   <span style="color: #666666">5.21799307958</span>
+    <span style="color: #666666">4</span> 	 <span style="color: #666666">0.704419889502762</span> 	 <span style="color: #666666">0.698392282958199</span> 	   <span style="color: #666666">0.86306889289</span>
+    <span style="color: #666666">5</span> 	 <span style="color: #666666">0.698392282958199</span> 	 <span style="color: #666666">0.697413664224847</span> 	   <span style="color: #666666">0.14032112985</span>
+    <span style="color: #666666">6</span> 	 <span style="color: #666666">0.697413664224847</span> 	 <span style="color: #666666">0.697255038220987</span> 	   <span style="color: #666666">0.02275006922</span>
+    <span style="color: #666666">7</span> 	 <span style="color: #666666">0.697255038220987</span> 	 <span style="color: #666666">0.697229333053386</span> 	   <span style="color: #666666">0.00368675935</span>
+    <span style="color: #666666">8</span> 	 <span style="color: #666666">0.697229333053386</span> 	 <span style="color: #666666">0.697225167738000</span> 	   <span style="color: #666666">0.00059741323</span>
+    <span style="color: #666666">9</span> 	 <span style="color: #666666">0.697225167738000</span> 	 <span style="color: #666666">0.697224492786874</span> 	   <span style="color: #666666">0.00009680542</span>
+    <span style="color: #666666">10</span> 	 <span style="color: #666666">0.697224492786874</span> 	 <span style="color: #666666">0.697224383417362</span> 	   <span style="color: #666666">0.00001568642</span>
+    <span style="color: #666666">11</span> 	 <span style="color: #666666">0.697224383417362</span> 	 <span style="color: #666666">0.697224365695060</span> 	   <span style="color: #666666">0.00000254184</span>
+    <span style="color: #666666">12</span> 	 <span style="color: #666666">0.697224365695060</span> 	 <span style="color: #666666">0.697224362823327</span> 	   <span style="color: #666666">0.00000041188</span>
+
+    x <span style="color: #666666">=</span> <span style="color: #666666">0.6972243628233274</span>
+</pre></div>
+<p>
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="previous">
+    <a href="raices_una_variable003.html">&larr; Prev</a>
+  </li>
+  <li class="next">
+    <a href="raices_una_variable005.html">Next &rarr;</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

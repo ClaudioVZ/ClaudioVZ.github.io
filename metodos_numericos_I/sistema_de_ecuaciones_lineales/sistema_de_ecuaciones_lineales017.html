@@ -1,0 +1,759 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Sistema de ecuaciones lineales">
+
+<title>Sistema de ecuaciones lineales</title>
+
+<!-- Bootstrap style: bootswatch_cosmo -->
+<link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/cosmo/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+
+/* Add scrollbar to dropdown menus in bootstrap navigation bar */
+.dropdown-menu {
+   height: auto;
+   max-height: 400px;
+   overflow-x: hidden;
+}
+
+/* Adds an invisible element before each target to offset for the navigation
+   bar */
+.anchor::before {
+  content:"";
+  display:block;
+  height:50px;      /* fixed header height for style bootswatch_cosmo */
+  margin:-50px 0 0; /* negative fixed header height */
+}
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 0,
+ 'sections': [('Table of contents',
+               0,
+               'table_of_contents',
+               'table_of_contents'),
+              (u'Operaciones con matrices', 0, None, '___sec0'),
+              (u'Suma algebraica', 1, None, '___sec1'),
+              (u'Primer patr\xf3n', 2, None, '___sec2'),
+              (u'Segundo patr\xf3n', 2, None, '___sec3'),
+              (u'F\xf3rmula matem\xe1tica', 2, None, '___sec4'),
+              (u'Seudoc\xf3digo de funciones auxiliares', 2, None, '___sec5'),
+              (u'Seudoc\xf3digo del algoritmo', 2, None, '___sec6'),
+              (u'Implementaci\xf3n vectorizada usando listas',
+               2,
+               None,
+               '___sec7'),
+              (u'Implementaci\xf3n vectorizada usando arreglos',
+               2,
+               None,
+               '___sec8'),
+              (u'Multiplicaci\xf3n', 1, None, '___sec9'),
+              (u'Primer patr\xf3n', 2, None, '___sec10'),
+              (u'Segundo patr\xf3n', 2, None, '___sec11'),
+              (u'Tercer patr\xf3n', 2, None, '___sec12'),
+              (u'F\xf3rmula matem\xe1tica', 2, None, '___sec13'),
+              (u'Seudoc\xf3digo de funciones auxiliares',
+               2,
+               None,
+               '___sec14'),
+              (u'Seudoc\xf3digo del algoritmo', 2, None, '___sec15'),
+              (u'Implementaci\xf3n vectorizada usando arreglos',
+               2,
+               None,
+               '___sec16'),
+              (u'Transpuesta', 1, None, '___sec17'),
+              (u'Primer patr\xf3n', 2, None, '___sec18'),
+              (u'Segundo patr\xf3n', 2, None, '___sec19'),
+              (u'F\xf3rmula matem\xe1tica', 2, None, '___sec20'),
+              (u'Seudoc\xf3digo de funciones auxiliares',
+               2,
+               None,
+               '___sec21'),
+              (u'Seudoc\xf3digo del algoritmo', 2, None, '___sec22'),
+              (u'Implementaci\xf3n vectorizada usando arreglos',
+               2,
+               None,
+               '___sec23'),
+              (u'Traza', 1, None, '___sec24'),
+              (u'Patr\xf3n', 2, None, '___sec25'),
+              (u'Seudoc\xf3digo de funciones auxiliares',
+               2,
+               None,
+               '___sec26'),
+              (u'Seudoc\xf3digo del algoritmo', 2, None, '___sec27'),
+              (u'Implementaci\xf3n vectorizada usando arreglos',
+               2,
+               None,
+               '___sec28'),
+              (u'Eliminaci\xf3n de Gauss', 0, None, '___sec29'),
+              (u'Eliminaci\xf3n hacia adelante', 1, None, '___sec30'),
+              (u'Algoritmo de c\xe1lculo', 2, None, '___sec31'),
+              (u'Primera fila pivote', 3, None, '___sec32'),
+              (u'Segunda fila pivote', 3, None, '___sec33'),
+              (u'Tercera fila pivote', 3, None, '___sec34'),
+              (u'Patr\xf3n de c\xe1lculo', 2, None, '___sec35'),
+              (u'Primer patr\xf3n', 3, None, '___sec36'),
+              (u'Segundo patr\xf3n', 3, None, '___sec37'),
+              (u'Tercer patr\xf3n', 3, None, '___sec38'),
+              (u'F\xf3rmula matem\xe1tica', 2, None, '___sec39'),
+              (u'Seudoc\xf3digo', 2, None, '___sec40'),
+              (u'Implementaci\xf3n eliminaci\xf3n hacia adelante',
+               2,
+               None,
+               '___sec41'),
+              (u'Sustituci\xf3n hacia atr\xe1s', 1, None, '___sec42'),
+              (u'Algoritmo de c\xe1lculo', 2, None, '___sec43'),
+              (u'Patr\xf3n de c\xe1lculo', 2, None, '___sec44'),
+              (u'Primer patr\xf3n', 3, None, '___sec45'),
+              (u'Segundo patr\xf3n', 3, None, '___sec46'),
+              (u'Tercer patr\xf3n', 3, None, '___sec47'),
+              (u'F\xf3rmula matem\xe1tica', 2, None, '___sec48'),
+              (u'Seudoc\xf3digo', 2, None, '___sec49'),
+              (u'Implementaci\xf3n sustituci\xf3n hacia atr\xe1s',
+               2,
+               None,
+               '___sec50'),
+              (u'Implementaci\xf3n eliminaci\xf3n de Gauss',
+               2,
+               None,
+               '___sec51'),
+              (u'Eliminaci\xf3n hacia adelante revisitado',
+               0,
+               None,
+               '___sec52'),
+              (u'F\xf3rmula matem\xe1tica', 2, None, '___sec53'),
+              (u'Seudoc\xf3digo', 2, None, '___sec54'),
+              (u'Implementaci\xf3n eliminaci\xf3n hacia adelante',
+               2,
+               None,
+               '___sec55'),
+              (u'Eliminaci\xf3n de Gauss', 0, None, '___sec56'),
+              (u'Eliminaci\xf3n hacia atr\xe1s', 1, None, '___sec57'),
+              (u'Algoritmo de c\xe1lculo', 2, None, '___sec58'),
+              (u'Cuarta fila pivote', 2, None, '___sec59'),
+              (u'Tercera fila pivote', 2, None, '___sec60'),
+              (u'Segunda fila pivote', 2, None, '___sec61'),
+              (u'Patr\xf3n de c\xe1lculo', 2, None, '___sec62'),
+              (u'Primer patr\xf3n', 3, None, '___sec63'),
+              (u'Segundo patr\xf3n', 3, None, '___sec64'),
+              (u'Tercer patr\xf3n', 3, None, '___sec65'),
+              (u'F\xf3rmula matem\xe1tica', 2, None, '___sec66'),
+              (u'Seudoc\xf3digo', 2, None, '___sec67'),
+              (u'Implementaci\xf3n eliminaci\xf3n hacia atr\xe1s',
+               2,
+               None,
+               '___sec68'),
+              (u'Sustituci\xf3n hacia adelante', 1, None, '___sec69'),
+              (u'Algoritmo de c\xe1lculo', 2, None, '___sec70'),
+              (u'Patr\xf3n de c\xe1lculo', 2, None, '___sec71'),
+              (u'Primer patr\xf3n', 3, None, '___sec72'),
+              (u'Segundo patr\xf3n', 3, None, '___sec73'),
+              (u'Tercer patr\xf3n', 3, None, '___sec74'),
+              (u'F\xf3rmula matem\xe1tica', 2, None, '___sec75'),
+              (u'Seudoc\xf3digo', 2, None, '___sec76'),
+              (u'Implementaci\xf3n sustituci\xf3n hacia adelante',
+               2,
+               None,
+               '___sec77'),
+              (u'Implementaci\xf3n eliminaci\xf3n de Gauss',
+               2,
+               None,
+               '___sec78'),
+              (u'Eliminaci\xf3n hacia atr\xe1s revisitado',
+               0,
+               None,
+               '___sec79'),
+              (u'F\xf3rmula matem\xe1tica', 2, None, '___sec80'),
+              (u'Seudoc\xf3digo', 2, None, '___sec81'),
+              (u'Implementaci\xf3n eliminaci\xf3n hacia atr\xe1s',
+               2,
+               None,
+               '___sec82'),
+              (u'Factorizaci\xf3n LU', 0, None, '___sec83'),
+              (u'Ejemplo', 2, None, '___sec84'),
+              (u'Soluci\xf3n A', 3, None, '___sec85'),
+              (u'Soluci\xf3n B', 3, None, '___sec86'),
+              (u'Algoritmo de Doolittle', 0, None, '___sec87'),
+              (u'Ejemplo', 2, None, '___sec88'),
+              (u'Patr\xf3n de c\xe1lculo', 2, None, '___sec89'),
+              (u'Primer patr\xf3n', 3, None, '___sec90'),
+              (u'Segundo patr\xf3n', 3, None, '___sec91'),
+              (u'Tercer patr\xf3n', 3, None, '___sec92'),
+              (u'F\xf3rmula matem\xe1tica', 2, None, '___sec93'),
+              (u'Seudoc\xf3digo', 2, None, '___sec94'),
+              (u'Implementaci\xf3n descomposici\xf3n de Doolittle',
+               2,
+               None,
+               '___sec95'),
+              (u'Algoritmo de Crout', 0, None, '___sec96'),
+              (u'Ejemplo', 2, None, '___sec97'),
+              (u'Patr\xf3n de c\xe1lculo', 2, None, '___sec98'),
+              (u'Primer patr\xf3n', 3, None, '___sec99'),
+              (u'Segundo patr\xf3n', 3, None, '___sec100'),
+              (u'Tercer patr\xf3n', 3, None, '___sec101'),
+              (u'Cuarto patr\xf3n', 3, None, '___sec102'),
+              (u'Quinto patr\xf3n', 3, None, '___sec103'),
+              (u'Sexto patr\xf3n', 3, None, '___sec104'),
+              (u'F\xf3rmula matem\xe1tica', 2, None, '___sec105'),
+              (u'Seudoc\xf3digo', 2, None, '___sec106'),
+              (u'Implementaci\xf3n descomposici\xf3n de Crout',
+               2,
+               None,
+               '___sec107'),
+              (u'Algoritmo de Doolittle revisitado', 0, None, '___sec108'),
+              (u'F\xf3rmula matem\xe1tica', 2, None, '___sec109'),
+              (u'Seudoc\xf3digo', 2, None, '___sec110'),
+              (u'Implementaci\xf3n descomposici\xf3n de Doolittle',
+               2,
+               None,
+               '___sec111'),
+              (u'Algoritmo de Crout revisitado', 0, None, '___sec112'),
+              (u'F\xf3rmula matem\xe1tica', 2, None, '___sec113'),
+              (u'Seudoc\xf3digo', 2, None, '___sec114'),
+              (u'Implementaci\xf3n', 2, None, '___sec115'),
+              (u'Factorizaci\xf3n de Cholesky', 0, None, '___sec116'),
+              (u'Algoritmo de Cholesky-Banachiewicz', 0, None, '___sec117'),
+              (u'Patr\xf3n de c\xe1lculo', 2, None, '___sec118'),
+              (u'Primer patr\xf3n', 3, None, '___sec119'),
+              (u'Segundo patr\xf3n', 3, None, '___sec120'),
+              (u'Tercer patr\xf3n', 3, None, '___sec121'),
+              (u'F\xf3rmula matem\xe1tica', 2, None, '___sec122'),
+              (u'Seudoc\xf3digo', 2, None, '___sec123'),
+              (u'Implementaci\xf3n', 2, None, '___sec124'),
+              (u'Algoritmo de Cholesky\u2013Crout', 0, None, '___sec125'),
+              (u'Patr\xf3n de c\xe1lculo', 2, None, '___sec126'),
+              (u'Primer patr\xf3n', 3, None, '___sec127'),
+              (u'Segundo patr\xf3n', 3, None, '___sec128'),
+              (u'Tercer patr\xf3n', 3, None, '___sec129'),
+              (u'F\xf3rmula matem\xe1tica', 2, None, '___sec130'),
+              (u'Seudoc\xf3digo', 2, None, '___sec131'),
+              (u'Implementaci\xf3n', 2, None, '___sec132'),
+              (u'M\xe9todo de Gauss-Jacobi', 0, None, '___sec133'),
+              (u'Iteraci\xf3n 0', 3, None, '___sec134'),
+              (u'Iteraci\xf3n 1', 3, None, '___sec135'),
+              (u'Iteraci\xf3n 2', 3, None, '___sec136'),
+              (u'Iteraci\xf3n 3', 3, None, '___sec137'),
+              (u'Patr\xf3n de c\xe1lculo', 2, None, '___sec138'),
+              (u'Primer patr\xf3n', 3, None, '___sec139'),
+              (u'Segundo patr\xf3n', 3, None, '___sec140'),
+              (u'Tercer patr\xf3n', 3, None, '___sec141'),
+              (u'F\xf3rmula matem\xe1tica', 2, None, '___sec142'),
+              (u'Seudoc\xf3digo', 2, None, '___sec143'),
+              (u'Implementaci\xf3n', 2, None, '___sec144'),
+              (u'M\xe9todo de Gauss-Seidel', 0, None, '___sec145'),
+              (u'Iteraci\xf3n 0', 3, None, '___sec146'),
+              (u'Iteraci\xf3n 1', 3, None, '___sec147'),
+              (u'Iteraci\xf3n 2', 3, None, '___sec148'),
+              (u'Iteraci\xf3n 3', 3, None, '___sec149'),
+              (u'Patr\xf3n de c\xe1lculo', 2, None, '___sec150'),
+              (u'Primer patr\xf3n', 3, None, '___sec151'),
+              (u'Segundo patr\xf3n', 3, None, '___sec152'),
+              (u'Tercer patr\xf3n', 3, None, '___sec153'),
+              (u'F\xf3rmula matem\xe1tica', 2, None, '___sec154'),
+              (u'Seudoc\xf3digo', 2, None, '___sec155'),
+              (u'Implementaci\xf3n', 2, None, '___sec156'),
+              (u'M\xe9todos de relajaci\xf3n', 0, None, '___sec157'),
+              (u'Factor de relajaci\xf3n', 2, None, '___sec158'),
+              (u'Factor de relajaci\xf3n \xf3ptimo', 2, None, '___sec159'),
+              (u'Ejemplo 1', 2, None, '___sec160'),
+              (u'Soluci\xf3n ponderada', 2, None, '___sec161'),
+              (u'M\xe9todo de Gauss-Jacobi ponderado', 0, None, '___sec162'),
+              (u'Iteraci\xf3n 0', 3, None, '___sec163'),
+              (u'Iteraci\xf3n 1', 3, None, '___sec164'),
+              (u'Iteraci\xf3n 2', 3, None, '___sec165'),
+              (u'Iteraci\xf3n 3', 3, None, '___sec166'),
+              (u'F\xf3rmula matem\xe1tica', 2, None, '___sec167'),
+              (u'Seudoc\xf3digo', 2, None, '___sec168'),
+              (u'Implementaci\xf3n', 2, None, '___sec169'),
+              (u'M\xe9todo SOR (successive overrelaxation)',
+               0,
+               None,
+               '___sec170'),
+              (u'Iteraci\xf3n 0', 3, None, '___sec171'),
+              (u'Iteraci\xf3n 1', 3, None, '___sec172'),
+              (u'Iteraci\xf3n 2', 3, None, '___sec173'),
+              (u'Iteraci\xf3n 3', 3, None, '___sec174'),
+              (u'F\xf3rmula matem\xe1tica', 2, None, '___sec175'),
+              (u'Seudoc\xf3digo', 2, None, '___sec176'),
+              (u'Implementaci\xf3n', 2, None, '___sec177')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="sistema_de_ecuaciones_lineales.html">Sistema de ecuaciones lineales</a>
+  </div>
+
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales000.html#table_of_contents" style="font-size: 80%;"><b>Table of contents</b></a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales001.html#___sec0" style="font-size: 80%;"><b>Operaciones con matrices</b></a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales001.html#___sec1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Suma algebraica</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales001.html#___sec2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Primer patrón</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales001.html#___sec3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Segundo patrón</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales001.html#___sec4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fórmula matemática</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales001.html#___sec5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Seudocódigo de funciones auxiliares</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales001.html#___sec6" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Seudocódigo del algoritmo</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales001.html#___sec7" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Implementación vectorizada usando listas</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales001.html#___sec8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Implementación vectorizada usando arreglos</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales001.html#___sec9" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Multiplicación</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales001.html#___sec10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Primer patrón</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales001.html#___sec11" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Segundo patrón</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales001.html#___sec12" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tercer patrón</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales001.html#___sec13" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fórmula matemática</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales001.html#___sec14" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Seudocódigo de funciones auxiliares</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales001.html#___sec15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Seudocódigo del algoritmo</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales001.html#___sec16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Implementación vectorizada usando arreglos</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales001.html#___sec17" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Transpuesta</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales001.html#___sec18" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Primer patrón</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales001.html#___sec19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Segundo patrón</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales001.html#___sec20" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fórmula matemática</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales001.html#___sec21" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Seudocódigo de funciones auxiliares</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales001.html#___sec22" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Seudocódigo del algoritmo</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales001.html#___sec23" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Implementación vectorizada usando arreglos</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales001.html#___sec24" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Traza</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales001.html#___sec25" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Patrón</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales001.html#___sec26" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Seudocódigo de funciones auxiliares</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales001.html#___sec27" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Seudocódigo del algoritmo</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales001.html#___sec28" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Implementación vectorizada usando arreglos</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales002.html#___sec29" style="font-size: 80%;"><b>Eliminación de Gauss</b></a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales002.html#___sec30" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Eliminación hacia adelante</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales002.html#___sec31" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Algoritmo de cálculo</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales002.html#___sec32" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Primera fila pivote</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales002.html#___sec33" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Segunda fila pivote</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales002.html#___sec34" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tercera fila pivote</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales002.html#___sec35" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Patrón de cálculo</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales002.html#___sec36" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Primer patrón</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales002.html#___sec37" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Segundo patrón</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales002.html#___sec38" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tercer patrón</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales002.html#___sec39" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fórmula matemática</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales002.html#___sec40" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Seudocódigo</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales002.html#___sec41" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Implementación eliminación hacia adelante</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales002.html#___sec42" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Sustitución hacia atrás</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales002.html#___sec43" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Algoritmo de cálculo</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales002.html#___sec44" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Patrón de cálculo</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales002.html#___sec45" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Primer patrón</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales002.html#___sec46" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Segundo patrón</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales002.html#___sec47" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tercer patrón</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales002.html#___sec48" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fórmula matemática</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales002.html#___sec49" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Seudocódigo</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales002.html#___sec50" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Implementación sustitución hacia atrás</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales002.html#___sec51" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Implementación eliminación de Gauss</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales003.html#___sec52" style="font-size: 80%;"><b>Eliminación hacia adelante revisitado</b></a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales003.html#___sec53" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fórmula matemática</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales003.html#___sec54" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Seudocódigo</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales003.html#___sec55" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Implementación eliminación hacia adelante</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales004.html#___sec56" style="font-size: 80%;"><b>Eliminación de Gauss</b></a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales004.html#___sec57" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Eliminación hacia atrás</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales004.html#___sec58" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Algoritmo de cálculo</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales004.html#___sec59" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cuarta fila pivote</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales004.html#___sec60" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tercera fila pivote</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales004.html#___sec61" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Segunda fila pivote</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales004.html#___sec62" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Patrón de cálculo</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales004.html#___sec63" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Primer patrón</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales004.html#___sec64" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Segundo patrón</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales004.html#___sec65" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tercer patrón</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales004.html#___sec66" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fórmula matemática</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales004.html#___sec67" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Seudocódigo</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales004.html#___sec68" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Implementación eliminación hacia atrás</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales004.html#___sec69" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Sustitución hacia adelante</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales004.html#___sec70" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Algoritmo de cálculo</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales004.html#___sec71" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Patrón de cálculo</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales004.html#___sec72" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Primer patrón</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales004.html#___sec73" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Segundo patrón</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales004.html#___sec74" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tercer patrón</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales004.html#___sec75" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fórmula matemática</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales004.html#___sec76" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Seudocódigo</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales004.html#___sec77" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Implementación sustitución hacia adelante</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales004.html#___sec78" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Implementación eliminación de Gauss</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales005.html#___sec79" style="font-size: 80%;"><b>Eliminación hacia atrás revisitado</b></a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales005.html#___sec80" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fórmula matemática</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales005.html#___sec81" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Seudocódigo</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales005.html#___sec82" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Implementación eliminación hacia atrás</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales006.html#___sec83" style="font-size: 80%;"><b>Factorización LU</b></a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales006.html#___sec84" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ejemplo</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales006.html#___sec85" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solución A</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales006.html#___sec86" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solución B</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales007.html#___sec87" style="font-size: 80%;"><b>Algoritmo de Doolittle</b></a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales007.html#___sec88" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ejemplo</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales007.html#___sec89" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Patrón de cálculo</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales007.html#___sec90" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Primer patrón</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales007.html#___sec91" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Segundo patrón</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales007.html#___sec92" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tercer patrón</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales007.html#___sec93" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fórmula matemática</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales007.html#___sec94" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Seudocódigo</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales007.html#___sec95" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Implementación descomposición de Doolittle</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales008.html#___sec96" style="font-size: 80%;"><b>Algoritmo de Crout</b></a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales008.html#___sec97" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ejemplo</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales008.html#___sec98" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Patrón de cálculo</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales008.html#___sec99" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Primer patrón</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales008.html#___sec100" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Segundo patrón</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales008.html#___sec101" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tercer patrón</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales008.html#___sec102" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cuarto patrón</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales008.html#___sec103" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Quinto patrón</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales008.html#___sec104" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sexto patrón</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales008.html#___sec105" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fórmula matemática</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales008.html#___sec106" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Seudocódigo</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales008.html#___sec107" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Implementación descomposición de Crout</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales009.html#___sec108" style="font-size: 80%;"><b>Algoritmo de Doolittle revisitado</b></a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales009.html#___sec109" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fórmula matemática</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales009.html#___sec110" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Seudocódigo</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales009.html#___sec111" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Implementación descomposición de Doolittle</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales010.html#___sec112" style="font-size: 80%;"><b>Algoritmo de Crout revisitado</b></a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales010.html#___sec113" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fórmula matemática</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales010.html#___sec114" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Seudocódigo</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales010.html#___sec115" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Implementación</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales011.html#___sec116" style="font-size: 80%;"><b>Factorización de Cholesky</b></a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales012.html#___sec117" style="font-size: 80%;"><b>Algoritmo de Cholesky-Banachiewicz</b></a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales012.html#___sec118" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Patrón de cálculo</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales012.html#___sec119" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Primer patrón</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales012.html#___sec120" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Segundo patrón</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales012.html#___sec121" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tercer patrón</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales012.html#___sec122" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fórmula matemática</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales012.html#___sec123" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Seudocódigo</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales012.html#___sec124" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Implementación</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales013.html#___sec125" style="font-size: 80%;"><b>Algoritmo de Cholesky–Crout</b></a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales013.html#___sec126" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Patrón de cálculo</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales013.html#___sec127" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Primer patrón</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales013.html#___sec128" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Segundo patrón</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales013.html#___sec129" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tercer patrón</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales013.html#___sec130" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fórmula matemática</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales013.html#___sec131" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Seudocódigo</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales013.html#___sec132" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Implementación</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales014.html#___sec133" style="font-size: 80%;"><b>Método de Gauss-Jacobi</b></a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales014.html#___sec134" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Iteración 0</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales014.html#___sec135" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Iteración 1</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales014.html#___sec136" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Iteración 2</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales014.html#___sec137" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Iteración 3</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales014.html#___sec138" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Patrón de cálculo</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales014.html#___sec139" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Primer patrón</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales014.html#___sec140" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Segundo patrón</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales014.html#___sec141" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tercer patrón</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales014.html#___sec142" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fórmula matemática</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales014.html#___sec143" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Seudocódigo</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales014.html#___sec144" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Implementación</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales015.html#___sec145" style="font-size: 80%;"><b>Método de Gauss-Seidel</b></a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales015.html#___sec146" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Iteración 0</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales015.html#___sec147" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Iteración 1</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales015.html#___sec148" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Iteración 2</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales015.html#___sec149" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Iteración 3</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales015.html#___sec150" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Patrón de cálculo</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales015.html#___sec151" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Primer patrón</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales015.html#___sec152" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Segundo patrón</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales015.html#___sec153" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tercer patrón</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales015.html#___sec154" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fórmula matemática</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales015.html#___sec155" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Seudocódigo</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales015.html#___sec156" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Implementación</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales016.html#___sec157" style="font-size: 80%;"><b>Métodos de relajación</b></a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales016.html#___sec158" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Factor de relajación</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales016.html#___sec159" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Factor de relajación óptimo</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales016.html#___sec160" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ejemplo 1</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales016.html#___sec161" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solución ponderada</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec162" style="font-size: 80%;"><b>Método de Gauss-Jacobi ponderado</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec163" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Iteración 0</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec164" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Iteración 1</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec165" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Iteración 2</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec166" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Iteración 3</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec167" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fórmula matemática</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec168" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Seudocódigo</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec169" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Implementación</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales018.html#___sec170" style="font-size: 80%;"><b>Método SOR (successive overrelaxation)</b></a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales018.html#___sec171" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Iteración 0</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales018.html#___sec172" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Iteración 1</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales018.html#___sec173" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Iteración 2</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales018.html#___sec174" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Iteración 3</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales018.html#___sec175" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fórmula matemática</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales018.html#___sec176" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Seudocódigo</a></li>
+     <!-- navigation toc: --> <li><a href="sistema_de_ecuaciones_lineales018.html#___sec177" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Implementación</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0017"></a>
+<!-- !split -->
+
+<p>
+
+<center><h1 id="___sec162" class="anchor">Método de Gauss-Jacobi ponderado </h1></center> <!-- chapter heading -->
+
+<p>
+Resolver el sistema de ecuaciones
+
+$$
+\begin{align*}
+    10 x_{1} - x_{2} + 2 x_{3} &= 6 \\
+    -x_{1} + 11 x_{2} - x_{3} + 3 x_{4} &= 25 \\
+    2 x_{1} - x_{2} + 10 x_{3} - x_{4} &= -11 \\
+    3 x_{2} - x_{3} + 8 x_{4} &= 15
+\end{align*}
+$$
+
+<p>
+Despejando \( x_{i} \)
+
+$$
+\begin{alignat*}{5}
+    x_{1}^{(k)} &= \cfrac{6}{10} & &+ \cfrac{1}{10} x_{2}^{(k-1)} &- \cfrac{2}{10} x_{3}^{(k-1)} & \\
+    x_{2}^{(k)} &= \cfrac{25}{11} &+ \cfrac{1}{11} x_{1}^{(k-1)} & &+ \cfrac{1}{11} x_{3}^{(k-1)} &- \cfrac{3}{11} x_{4}^{(k-1)} \\
+    x_{3}^{(k)} &= \cfrac{-11}{10} &- \cfrac{2}{10} x_{1}^{(k-1)} &+ \cfrac{1}{10} x_{2}^{(k-1)} & &+ \cfrac{1}{10} x_{4}^{(k-1)} \\
+    x_{4}^{(k)} &= \cfrac{15}{8} & &- \cfrac{3}{8} x_{2}^{(k-1)} &+ \cfrac{1}{8} x_{3}^{(k-1)} &
+\end{alignat*}
+$$
+
+<p>
+Usando \( \omega \) para acelerar la convergencia
+
+$$
+\begin{alignat*}{6}
+    x_{1}^{(k)} &= \omega \biggl[ \cfrac{6}{10} & &+ \cfrac{1}{10} x_{2}^{(k-1)} &- \cfrac{2}{10} x_{3}^{(k-1)} &  &\biggr] + (1 - \omega) x_{1}^{(k-1)} \\
+    x_{2}^{(k)} &= \omega \biggl[ \cfrac{25}{11} &+ \cfrac{1}{11} x_{1}^{(k-1)} & &+ \cfrac{1}{11} x_{3}^{(k-1)} &- \cfrac{3}{11} x_{4}^{(k-1)} &\biggr] + (1 - \omega) x_{2}^{(k-1)} \\
+    x_{3}^{(k)} &= \omega \biggl[ \cfrac{-11}{10} &- \cfrac{2}{10} x_{1}^{(k-1)} &+ \cfrac{1}{10} x_{2}^{(k-1)} & &+ \cfrac{1}{10} x_{4}^{(k-1)} &\biggr] + (1 - \omega) x_{3}^{(k-1)} \\
+    x_{4}^{(k)} &= \omega \biggl[ \cfrac{15}{8} & &- \cfrac{3}{8} x_{2}^{(k-1)} &+ \cfrac{1}{8} x_{3}^{(k-1)} &  &\biggr] + (1 - \omega) x_{4}^{(k-1)}
+\end{alignat*}
+$$
+
+<p>
+Para este ejemplo se usará \( \omega = 1.05 \)
+
+<h3 id="___sec163" class="anchor">Iteración 0 </h3>
+
+$$
+\begin{align*}
+    x_{1}^{(0)} &= \color{blue}{0} \\
+    x_{2}^{(0)} &= \color{blue}{0} \\
+    x_{3}^{(0)} &= \color{blue}{0} \\
+    x_{4}^{(0)} &= \color{blue}{0}
+\end{align*}
+$$
+
+<h3 id="___sec164" class="anchor">Iteración 1 </h3>
+
+$$
+\begin{align*}
+    x_{1}^{(1)} &= 1.05 \biggl[ \frac{6 + x_{2}^{(0)} - 2 x_{3}^{(0)}}{10} \biggr] + (1 - 1.05) x_{1}^{(0)} \\
+    &= 1.05 \biggl[ \frac{6 + \color{blue}{0} - 2 (\color{blue}{0})}{10} \biggr] + (1 - 1.05) (\color{blue}{0}) = \color{green}{0.63} \\
+    x_{2}^{(1)} &= 1.05 \biggl[ \frac{25 + x_{1}^{(0)} + x_{3}^{(0)} - 3 x_{4}^{(0)}}{11} \biggr] + (1 - 1.05) x_{2}^{(0)} \\
+    &= 1.05 \biggl[ \frac{25 + \color{blue}{0} + \color{blue}{0} - 3 (\color{blue}{0})}{11} \biggr] + (1 - 1.05) (\color{blue}{0}) = \color{green}{2.386364} \\
+    x_{3}^{(1)} &= 1.05 \biggl[ \frac{-11 - 2 x_{1}^{(0)} + x_{2}^{(0)} + x_{4}^{(0)}}{10} \biggr] + (1 - 1.05) x_{3}^{(0)} \\
+    &= 1.05 \biggl[ \frac{-11 - 2 (\color{blue}{0}) + \color{blue}{0} + \color{blue}{0}}{10} \biggr] + (1 - 1.05) (\color{blue}{0}) = \color{green}{-1.155} \\
+    x_{4}^{(1)} &= 1.05 \biggl[ \frac{15 - 3 x_{2}^{(0)} + x_{3}^{(0)}}{8} \biggr] + (1 - 1.05) x_{3}^{(0)} \\
+    &= 1.05 \biggl[ \frac{15 - 3 (\color{blue}{0}) + \color{blue}{0}}{8} \biggr] + (1 - 1.05) (\color{blue}{0}) = \color{green}{1.96875}
+\end{align*}
+$$
+
+<h3 id="___sec165" class="anchor">Iteración 2 </h3>
+
+$$
+\begin{align*}
+    x_{1}^{(2)} &= 1.05 \biggl[ \frac{6 + x_{2}^{(1)} - 2 x_{3}^{(1)}}{10} \biggr] + (1 - 1.05) x_{1}^{(1)} \\
+    &= 1.05 \biggl[ \frac{6 + \color{green}{2.386364} - 2 (\color{green}{-1.155})}{10} \biggr] + (1 - 1.05) (\color{green}{0.63}) = \color{red}{1.091618} \\
+    x_{2}^{(2)} &= 1.05 \biggl[ \frac{25 + x_{1}^{(1)} + x_{3}^{(1)} - 3 x_{4}^{(1)}}{11} \biggr] + (1 - 1.05) x_{2}^{(1)} \\
+    &= 1.05 \biggl[ \frac{25 + \color{green}{0.63} + (\color{green}{- 1.155}) - 3 (\color{green}{1.96875})}{11} \biggr] + (1 - 1.05) (\color{green}{2.386364}) = \color{red}{1.653153} \\
+    x_{3}^{(2)} &= 1.05 \biggl[ \frac{-11 - 2 x_{1}^{(1)} + x_{2}^{(1)} + x_{4}^{(1)}}{10} \biggr] + (1 - 1.05) x_{3}^{(1)} \\
+    &= 1.05 \biggl[ \frac{-11 - 2 (\color{green}{0.63}) + \color{green}{2.386364} + \color{green}{1.96875}}{10} \biggr] + (1 - 1.05) (\color{green}{-1.155}) = \color{red}{-0.772263} \\
+    x_{4}^{(2)} &= 1.05 \biggl[ \frac{15 - 3 x_{2}^{(1)} + x_{3}^{(1)}}{8} \biggr] + (1 - 1.05) x_{4}^{(1)} \\
+    &= 1.05 \biggl[ \frac{15 - 3 (\color{green}{2.386364}) + (\color{green}{-1.155})}{8} \biggr] + (1 - 1.05) (\color{green}{1.96875}) = \color{red}{0.779088}
+\end{align*}
+$$
+
+<h3 id="___sec166" class="anchor">Iteración 3 </h3>
+
+$$
+\begin{align*}
+    x_{1}^{(3)} &= 1.05 \biggl[ \frac{6 + x_{2}^{(2)} - 2 x_{3}^{(2)}}{10} \biggr] + (1 - 1.05) x_{1}^{(2)} \\
+    &= 1.05 \biggl[ \frac{6 + \color{red}{1.653153} - 2 (\color{red}{-0.772263})}{10} \biggr] + (1 - 1.05) (\color{red}{1.091618}) = \color{fuchsia}{0.911175} \\
+    x_{2}^{(3)} &= 1.05 \biggl[ \frac{25 + x_{1}^{(2)} + x_{3}^{(2)} - 3 x_{4}^{(2)}}{11} \biggr] + (1 - 1.05) x_{2}^{(2)} \\
+    &= 1.05 \biggl[ \frac{25 + \color{red}{1.091618} + (\color{red}{-0.772263}) - 3 (\color{red}{0.779088})}{11} \biggr] + (1 - 1.05) (\color{red}{1.653153}) = \color{fuchsia}{2.111087} \\
+    x_{3}^{(3)} &= 1.05 \biggl[ \frac{-11 - 2 x_{1}^{(2)} + x_{2}^{(2)} + x_{4}^{(2)}}{10} \biggr] + (1 - 1.05) x_{3}^{(2)} \\
+    &= 1.05 \biggl[ \frac{-11 - 2 (\color{red}{1.091618}) + \color{red}{1.653153} + \color{red}{0.779088}}{10} \biggr] + (1 - 1.05) (\color{red}{-0.772263}) = \color{fuchsia}{-1.090241} \\
+    x_{4}^{(3)} &= 1.05 \biggl[ \frac{15 - 3 x_{2}^{(2)} + x_{3}^{(2)}}{8} \biggr] + (1 - 1.05) x_{4}^{(2)} \\
+    &= 1.05 \biggl[ \frac{15 - 3 (\color{red}{1.653153}) + (\color{red}{-0.772263})}{8} \biggr] + (1 - 1.05) (\color{red}{0.779088}) = \color{fuchsia}{1.177503}
+\end{align*}
+$$
+
+<h2 id="___sec167" class="anchor">Fórmula matemática </h2>
+
+$$
+\begin{align*}
+    k &= 1, \dots \\
+    & \quad i = 1, \dots, m \\
+    & \quad \quad x_{i}^{(k)} = \frac{\omega}{a_{ii}} \biggl( b_{i} - \sum_{\substack{j = 1 \\ j \neq i}}^{n} a_{ij} x_{j}^{(k-1)} \biggr) + (1 - \omega) x_{i}^{(k-1)}
+\end{align*}
+$$
+
+<h2 id="___sec168" class="anchor">Seudocódigo </h2>
+
+<p>
+
+<!-- code=text typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>    function metodo_gauss_jacobi_ponderado(A,b,omega)
+        m, n = tamaño(A)
+        iteraciones = ...
+        x_actual = [0,...,0]
+        for k=1 to iteraciones do
+            x_anterior = x_actual
+            for i=1 to m do
+                sumatoria = 0
+                for j=1 to n do
+                    if (j != i) then
+                        sumatoria = sumatoria + A(i,j)*x_anterior(j)
+                    end if
+                end for
+                x_actual(i) = omega/A(i,i) * (b(i) - sumatoria) + (1 - omega)*x_anterior(i)
+            end for
+        end for
+        return x
+    end function
+</pre></div>
+
+<h2 id="___sec169" class="anchor">Implementación </h2>
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">metodo_gauss_jacobi_ponderado</span>(A, b, omega):
+    m, n <span style="color: #666666">=</span> A<span style="color: #666666">.</span>shape
+    x_actual <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros(n)
+    error_permitido <span style="color: #666666">=</span> <span style="color: #666666">0.000001</span>
+    <span style="color: #008000; font-weight: bold">print</span>(<span style="color: #BA2121">&quot;{0:s} </span><span style="color: #BB6622; font-weight: bold">\t</span><span style="color: #BA2121"> {1:9s} </span><span style="color: #BB6622; font-weight: bold">\t</span><span style="color: #BA2121"> {2:9s} </span><span style="color: #BB6622; font-weight: bold">\t</span><span style="color: #BA2121"> {3:9s} </span><span style="color: #BB6622; font-weight: bold">\t</span><span style="color: #BA2121"> {4:9s} </span><span style="color: #BB6622; font-weight: bold">\t</span><span style="color: #BA2121"> {5:9s}&quot;</span><span style="color: #666666">.</span>format(<span style="color: #BA2121">&#39;k&#39;</span>, <span style="color: #BA2121">&#39;x(1)&#39;</span>, <span style="color: #BA2121">&#39;x(2)&#39;</span>, <span style="color: #BA2121">&#39;x(3)&#39;</span>, <span style="color: #BA2121">&#39;x(4)&#39;</span>, <span style="color: #BA2121">&#39;error relativo %&#39;</span>))
+    <span style="color: #008000; font-weight: bold">print</span>(<span style="color: #BA2121">&quot;{0:d} </span><span style="color: #BB6622; font-weight: bold">\t</span><span style="color: #BA2121"> {1:10.9f} </span><span style="color: #BB6622; font-weight: bold">\t</span><span style="color: #BA2121"> {2:10.9f} </span><span style="color: #BB6622; font-weight: bold">\t</span><span style="color: #BA2121"> {3:10.9f} </span><span style="color: #BB6622; font-weight: bold">\t</span><span style="color: #BA2121"> {4:10.9f} </span><span style="color: #BB6622; font-weight: bold">\t</span><span style="color: #BA2121"> {5:9s}&quot;</span><span style="color: #666666">.</span>format(<span style="color: #666666">0</span>, x_actual[<span style="color: #666666">0</span>], x_actual[<span style="color: #666666">1</span>], x_actual[<span style="color: #666666">2</span>], x_actual[<span style="color: #666666">3</span>], <span style="color: #BA2121">&#39;??????????????&#39;</span>))
+    <span style="color: #008000; font-weight: bold">for</span> k <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">0</span>,<span style="color: #666666">30</span>):
+        x_anterior <span style="color: #666666">=</span> np<span style="color: #666666">.</span>copy(x_actual)
+        <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">0</span>,m):
+            sumatoria <span style="color: #666666">=</span> b[i]
+            <span style="color: #008000; font-weight: bold">for</span> j <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">0</span>,n):
+                <span style="color: #008000; font-weight: bold">if</span> j <span style="color: #666666">!=</span> i:
+                    sumatoria <span style="color: #666666">=</span> sumatoria <span style="color: #666666">-</span> A[i,j]<span style="color: #666666">*</span>x_anterior[j]
+            x_actual[i] <span style="color: #666666">=</span> (omega<span style="color: #666666">/</span>A[i,i] <span style="color: #666666">*</span> sumatoria) <span style="color: #666666">+</span> (<span style="color: #666666">1-</span>omega)<span style="color: #666666">*</span>x_anterior[i]
+        error_relativo <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linalg<span style="color: #666666">.</span>norm(((x_actual <span style="color: #666666">-</span> x_anterior)<span style="color: #666666">/</span>x_actual)<span style="color: #666666">*100</span>)
+        <span style="color: #008000; font-weight: bold">print</span>(<span style="color: #BA2121">&quot;{0:d} </span><span style="color: #BB6622; font-weight: bold">\t</span><span style="color: #BA2121"> {1:10.9f} </span><span style="color: #BB6622; font-weight: bold">\t</span><span style="color: #BA2121"> {2:10.9f} </span><span style="color: #BB6622; font-weight: bold">\t</span><span style="color: #BA2121"> {3:10.9f} </span><span style="color: #BB6622; font-weight: bold">\t</span><span style="color: #BA2121"> {4:10.9f} </span><span style="color: #BB6622; font-weight: bold">\t</span><span style="color: #BA2121"> {5:14.10f}&quot;</span><span style="color: #666666">.</span>format(k<span style="color: #666666">+1</span>, x_actual[<span style="color: #666666">0</span>], x_actual[<span style="color: #666666">1</span>], x_actual[<span style="color: #666666">2</span>], x_actual[<span style="color: #666666">3</span>], error_relativo))
+        <span style="color: #008000; font-weight: bold">if</span> error_relativo <span style="color: #666666">&lt;</span> error_permitido:
+            <span style="color: #008000; font-weight: bold">break</span>
+</pre></div>
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>A <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array([[<span style="color: #666666">10</span>,<span style="color: #666666">-1</span>,<span style="color: #666666">2</span>,<span style="color: #666666">0</span>],
+              [<span style="color: #666666">-1</span>,<span style="color: #666666">11</span>,<span style="color: #666666">-1</span>,<span style="color: #666666">3</span>],
+              [<span style="color: #666666">2</span>,<span style="color: #666666">-1</span>,<span style="color: #666666">10</span>,<span style="color: #666666">-1</span>],
+              [<span style="color: #666666">0</span>,<span style="color: #666666">3</span>,<span style="color: #666666">-1</span>,<span style="color: #666666">8</span>]])
+B <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array([<span style="color: #666666">6</span>,<span style="color: #666666">25</span>,<span style="color: #666666">-11</span>,<span style="color: #666666">15</span>])
+</pre></div>
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>metodo_gauss_jacobi_ponderado(A,B,<span style="color: #666666">1.05</span>)
+</pre></div>
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>    k 	 x(<span style="color: #666666">1</span>)      	 x(<span style="color: #666666">2</span>)      	 x(<span style="color: #666666">3</span>)      	 x(<span style="color: #666666">4</span>)      	 error relativo <span style="color: #666666">%</span>
+    <span style="color: #666666">0</span> 	 <span style="color: #666666">0.000000000</span> 	 <span style="color: #666666">0.000000000</span> 	 <span style="color: #666666">0.000000000</span> 	 <span style="color: #666666">0.000000000</span> 	 ??????????????
+    <span style="color: #666666">1</span> 	 <span style="color: #666666">0.630000000</span> 	 <span style="color: #666666">2.386363636</span> 	 <span style="color: #666666">-1.155000000</span> 	 <span style="color: #666666">1.968750000</span> 	 <span style="color: #666666">200.0000000000</span>
+    <span style="color: #666666">2</span> 	 <span style="color: #666666">1.091618182</span> 	 <span style="color: #666666">1.653153409</span> 	 <span style="color: #666666">-0.772263068</span> 	 <span style="color: #666666">0.779088068</span> 	 <span style="color: #666666">171.8390593151</span>
+    <span style="color: #666666">3</span> 	 <span style="color: #666666">0.911175443</span> 	 <span style="color: #666666">2.111087371</span> 	 <span style="color: #666666">-1.090241310</span> 	 <span style="color: #666666">1.177506914</span> 	  <span style="color: #666666">53.4622795017</span>
+    <span style="color: #666666">4</span> 	 <span style="color: #666666">1.035056077</span> 	 <span style="color: #666666">1.926521455</span> 	 <span style="color: #666666">-0.946532378</span> 	 <span style="color: #666666">0.935539830</span> 	  <span style="color: #666666">33.6820623584</span>
+    <span style="color: #666666">5</span> 	 <span style="color: #666666">0.979303748</span> 	 <span style="color: #666666">2.030582965</span> 	 <span style="color: #666666">-1.024518722</span> 	 <span style="color: #666666">1.039172811</span> 	  <span style="color: #666666">14.6993083643</span>
+    <span style="color: #666666">6</span> 	 <span style="color: #666666">1.009394956</span> 	 <span style="color: #666666">1.982937208</span> 	 <span style="color: #666666">-0.987103495</span> 	 <span style="color: #666666">0.982781235</span> 	   <span style="color: #666666">7.8709441598</span>
+    <span style="color: #666666">7</span> 	 <span style="color: #666666">0.995030393</span> 	 <span style="color: #666666">2.007911789</span> 	 <span style="color: #666666">-1.006217329</span> 	 <span style="color: #666666">1.009272079</span> 	   <span style="color: #666666">3.7588305810</span>
+    <span style="color: #666666">8</span> 	 <span style="color: #666666">1.002384857</span> 	 <span style="color: #666666">1.995881380</span> 	 <span style="color: #666666">-0.996841210</span> 	 <span style="color: #666666">0.995605105</span> 	   <span style="color: #666666">1.9159117497</span>
+    <span style="color: #666666">9</span> 	 <span style="color: #666666">0.998784956</span> 	 <span style="color: #666666">2.001993636</span> 	 <span style="color: #666666">-1.001552679</span> 	 <span style="color: #666666">1.002256042</span> 	   <span style="color: #666666">0.9406241706</span>
+    <span style="color: #666666">10</span> 	 <span style="color: #666666">1.000596146</span> 	 <span style="color: #666666">1.998990078</span> 	 <span style="color: #666666">-0.999220991</span> 	 <span style="color: #666666">0.998898415</span> 	   <span style="color: #666666">0.4719948412</span>
+    <span style="color: #666666">11</span> 	 <span style="color: #666666">0.999700559</span> 	 <span style="color: #666666">2.000497215</span> 	 <span style="color: #666666">-1.000385849</span> 	 <span style="color: #666666">1.000554981</span> 	   <span style="color: #666666">0.2338195556</span>
+    <span style="color: #666666">12</span> 	 <span style="color: #666666">1.000148208</span> 	 <span style="color: #666666">1.999750799</span> 	 <span style="color: #666666">-0.999807344</span> 	 <span style="color: #666666">0.999725830</span> 	   <span style="color: #666666">0.1167182643</span>
+    <span style="color: #666666">13</span> 	 <span style="color: #666666">0.999925966</span> 	 <span style="color: #666666">2.000123509</span> 	 <span style="color: #666666">-1.000095710</span> 	 <span style="color: #666666">1.000137118</span> 	   <span style="color: #666666">0.0579976946</span>
+    <span style="color: #666666">14</span> 	 <span style="color: #666666">1.000036769</span> 	 <span style="color: #666666">1.999938356</span> 	 <span style="color: #666666">-0.999952301</span> 	 <span style="color: #666666">0.999931950</span> 	   <span style="color: #666666">0.0288989510</span>
+    <span style="color: #666666">15</span> 	 <span style="color: #666666">0.999981672</span> 	 <span style="color: #666666">2.000030632</span> 	 <span style="color: #666666">-1.000023724</span> 	 <span style="color: #666666">1.000033935</span> 	   <span style="color: #666666">0.0143755515</span>
+    <span style="color: #666666">16</span> 	 <span style="color: #666666">1.000009115</span> 	 <span style="color: #666666">1.999984737</span> 	 <span style="color: #666666">-0.999988185</span> 	 <span style="color: #666666">0.999983128</span> 	   <span style="color: #666666">0.0071583417</span>
+    <span style="color: #666666">17</span> 	 <span style="color: #666666">0.999995461</span> 	 <span style="color: #666666">2.000007592</span> 	 <span style="color: #666666">-1.000005879</span> 	 <span style="color: #666666">1.000008404</span> 	   <span style="color: #666666">0.0035622703</span>
+    <span style="color: #666666">18</span> 	 <span style="color: #666666">1.000002259</span> 	 <span style="color: #666666">1.999996219</span> 	 <span style="color: #666666">-0.999997073</span> 	 <span style="color: #666666">0.999995819</span> 	   <span style="color: #666666">0.0017734128</span>
+    <span style="color: #666666">19</span> 	 <span style="color: #666666">0.999998875</span> 	 <span style="color: #666666">2.000001881</span> 	 <span style="color: #666666">-1.000001457</span> 	 <span style="color: #666666">1.000002082</span> 	   <span style="color: #666666">0.0008826502</span>
+    <span style="color: #666666">20</span> 	 <span style="color: #666666">1.000000560</span> 	 <span style="color: #666666">1.999999063</span> 	 <span style="color: #666666">-0.999999275</span> 	 <span style="color: #666666">0.999998964</span> 	   <span style="color: #666666">0.0004393716</span>
+    <span style="color: #666666">21</span> 	 <span style="color: #666666">0.999999721</span> 	 <span style="color: #666666">2.000000466</span> 	 <span style="color: #666666">-1.000000361</span> 	 <span style="color: #666666">1.000000516</span> 	   <span style="color: #666666">0.0002186932</span>
+    <span style="color: #666666">22</span> 	 <span style="color: #666666">1.000000139</span> 	 <span style="color: #666666">1.999999768</span> 	 <span style="color: #666666">-0.999999820</span> 	 <span style="color: #666666">0.999999743</span> 	   <span style="color: #666666">0.0001088588</span>
+    <span style="color: #666666">23</span> 	 <span style="color: #666666">0.999999931</span> 	 <span style="color: #666666">2.000000116</span> 	 <span style="color: #666666">-1.000000089</span> 	 <span style="color: #666666">1.000000128</span> 	   <span style="color: #666666">0.0000541846</span>
+    <span style="color: #666666">24</span> 	 <span style="color: #666666">1.000000034</span> 	 <span style="color: #666666">1.999999943</span> 	 <span style="color: #666666">-0.999999955</span> 	 <span style="color: #666666">0.999999936</span> 	   <span style="color: #666666">0.0000269711</span>
+    <span style="color: #666666">25</span> 	 <span style="color: #666666">0.999999983</span> 	 <span style="color: #666666">2.000000029</span> 	 <span style="color: #666666">-1.000000022</span> 	 <span style="color: #666666">1.000000032</span> 	   <span style="color: #666666">0.0000134250</span>
+    <span style="color: #666666">26</span> 	 <span style="color: #666666">1.000000009</span> 	 <span style="color: #666666">1.999999986</span> 	 <span style="color: #666666">-0.999999989</span> 	 <span style="color: #666666">0.999999984</span> 	   <span style="color: #666666">0.0000066824</span>
+    <span style="color: #666666">27</span> 	 <span style="color: #666666">0.999999996</span> 	 <span style="color: #666666">2.000000007</span> 	 <span style="color: #666666">-1.000000005</span> 	 <span style="color: #666666">1.000000008</span> 	   <span style="color: #666666">0.0000033262</span>
+    <span style="color: #666666">28</span> 	 <span style="color: #666666">1.000000002</span> 	 <span style="color: #666666">1.999999996</span> 	 <span style="color: #666666">-0.999999997</span> 	 <span style="color: #666666">0.999999996</span> 	   <span style="color: #666666">0.0000016557</span>
+    <span style="color: #666666">29</span> 	 <span style="color: #666666">0.999999999</span> 	 <span style="color: #666666">2.000000002</span> 	 <span style="color: #666666">-1.000000001</span> 	 <span style="color: #666666">1.000000002</span> 	   <span style="color: #666666">0.0000008241</span>
+</pre></div>
+<p>
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="previous">
+    <a href="sistema_de_ecuaciones_lineales016.html">&larr; Prev</a>
+  </li>
+  <li class="next">
+    <a href="sistema_de_ecuaciones_lineales018.html">Next &rarr;</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

@@ -1,0 +1,323 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Integración numérica">
+
+<title>Integración numérica</title>
+
+<!-- Bootstrap style: bootswatch_cosmo -->
+<link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/cosmo/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+
+/* Add scrollbar to dropdown menus in bootstrap navigation bar */
+.dropdown-menu {
+   height: auto;
+   max-height: 400px;
+   overflow-x: hidden;
+}
+
+/* Adds an invisible element before each target to offset for the navigation
+   bar */
+.anchor::before {
+  content:"";
+  display:block;
+  height:50px;      /* fixed header height for style bootswatch_cosmo */
+  margin:-50px 0 0; /* negative fixed header height */
+}
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 2,
+ 'sections': [('Table of contents',
+               2,
+               'table_of_contents',
+               'table_of_contents'),
+              (u'Regla del trapecio', 2, None, '___sec0'),
+              (u'Regla de Simpson 1/3', 2, None, '___sec1'),
+              (u'Regla de Simpson 3/8', 2, None, '___sec2'),
+              (u'Regla de Boole', 2, None, '___sec3'),
+              (u'M\xe9todo de los coeficientes indeterminados',
+               2,
+               None,
+               '___sec4'),
+              (u'Regla del trapecio', 3, None, '___sec5'),
+              (u'Regla de Simpson 1/3', 3, None, '___sec6'),
+              (u'Regla de Simpson 3/8', 3, None, '___sec7'),
+              (u'Regla de Boole', 3, None, '___sec8'),
+              (u'Regla del trapecio', 2, None, '___sec9'),
+              (u'Regla de Simpson 1/3', 2, None, '___sec10'),
+              (u'Regla de Simpson 3/8', 2, None, '___sec11'),
+              (u'Regla de Boole', 2, None, '___sec12'),
+              (u'M\xe9todo de los coeficientes indeterminados',
+               2,
+               None,
+               '___sec13'),
+              (u'Regla del trapecio', 3, None, '___sec14'),
+              (u'Regla de Simpson 1/3', 3, None, '___sec15'),
+              (u'Regla de Simpson 3/8', 3, None, '___sec16'),
+              (u'Regla de Boole', 3, None, '___sec17'),
+              (u'Cuadratura de Gauss', 2, None, '___sec18'),
+              (u'F\xf3rmula de dos puntos', 3, None, '___sec19'),
+              (u'F\xf3rmula de tres puntos', 3, None, '___sec20'),
+              (u'Cuadratura de Gauss', 2, None, '___sec21'),
+              (u'F\xf3rmula de dos puntos', 3, None, '___sec22'),
+              (u'F\xf3rmula de tres puntos', 3, None, '___sec23')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="integracion.html">Integración numérica</a>
+  </div>
+
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="integracion000.html#table_of_contents" style="font-size: 80%;"><b>Table of contents</b></a></li>
+     <!-- navigation toc: --> <li><a href="integracion001.html#___sec0" style="font-size: 80%;"><b>Regla del trapecio</b></a></li>
+     <!-- navigation toc: --> <li><a href="integracion002.html#___sec1" style="font-size: 80%;"><b>Regla de Simpson 1/3</b></a></li>
+     <!-- navigation toc: --> <li><a href="integracion003.html#___sec2" style="font-size: 80%;"><b>Regla de Simpson 3/8</b></a></li>
+     <!-- navigation toc: --> <li><a href="integracion004.html#___sec3" style="font-size: 80%;"><b>Regla de Boole</b></a></li>
+     <!-- navigation toc: --> <li><a href="integracion005.html#___sec4" style="font-size: 80%;"><b>Método de los coeficientes indeterminados</b></a></li>
+     <!-- navigation toc: --> <li><a href="integracion006.html#___sec5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Regla del trapecio</a></li>
+     <!-- navigation toc: --> <li><a href="integracion007.html#___sec6" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Regla de Simpson 1/3</a></li>
+     <!-- navigation toc: --> <li><a href="integracion008.html#___sec7" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Regla de Simpson 3/8</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Regla de Boole</a></li>
+     <!-- navigation toc: --> <li><a href="integracion010.html#___sec9" style="font-size: 80%;"><b>Regla del trapecio</b></a></li>
+     <!-- navigation toc: --> <li><a href="integracion011.html#___sec10" style="font-size: 80%;"><b>Regla de Simpson 1/3</b></a></li>
+     <!-- navigation toc: --> <li><a href="integracion012.html#___sec11" style="font-size: 80%;"><b>Regla de Simpson 3/8</b></a></li>
+     <!-- navigation toc: --> <li><a href="integracion013.html#___sec12" style="font-size: 80%;"><b>Regla de Boole</b></a></li>
+     <!-- navigation toc: --> <li><a href="integracion014.html#___sec13" style="font-size: 80%;"><b>Método de los coeficientes indeterminados</b></a></li>
+     <!-- navigation toc: --> <li><a href="integracion015.html#___sec14" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Regla del trapecio</a></li>
+     <!-- navigation toc: --> <li><a href="integracion016.html#___sec15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Regla de Simpson 1/3</a></li>
+     <!-- navigation toc: --> <li><a href="integracion017.html#___sec16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Regla de Simpson 3/8</a></li>
+     <!-- navigation toc: --> <li><a href="integracion018.html#___sec17" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Regla de Boole</a></li>
+     <!-- navigation toc: --> <li><a href="integracion019.html#___sec18" style="font-size: 80%;"><b>Cuadratura de Gauss</b></a></li>
+     <!-- navigation toc: --> <li><a href="integracion020.html#___sec19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Fórmula de dos puntos</a></li>
+     <!-- navigation toc: --> <li><a href="integracion021.html#___sec20" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Fórmula de tres puntos</a></li>
+     <!-- navigation toc: --> <li><a href="integracion022.html#___sec21" style="font-size: 80%;"><b>Cuadratura de Gauss</b></a></li>
+     <!-- navigation toc: --> <li><a href="integracion023.html#___sec22" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Fórmula de dos puntos</a></li>
+     <!-- navigation toc: --> <li><a href="integracion024.html#___sec23" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Fórmula de tres puntos</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0009"></a>
+<!-- !split -->
+
+<h3 id="___sec8" class="anchor">Regla de Boole </h3>
+
+$$
+\begin{equation}
+    \int_{x_{0}}^{x_{4}} f(x) \ dx = a_{0} f(x_{0}) + a_{1} f(x_{1}) + a_{2} f(x_{2}) + a_{3} f(x_{3}) + a_{4} f(x_{4})
+\tag{5}
+\end{equation}
+$$
+
+<p>
+Usando \( f(x) = 1 \)
+
+$$
+\begin{equation*}
+     a_{0} f(x_{0}) + a_{1} f(x_{1}) + a_{2} f(x_{2}) + a_{3} f(x_{3}) + a_{4} f(x_{4}) = \int_{x_{0}}^{x_{4}} 1 \ dx
+\end{equation*}
+$$
+
+<p>
+Reemplazando valores e integrando
+
+$$
+\begin{equation*}
+     a_{0} + a_{1} + a_{2} + a_{3} + a_{4} = x_{4} - x_{0}
+\end{equation*}
+$$
+
+<p>
+Usando \( f(x) = x \)
+
+$$
+\begin{equation*}
+     a_{0} f(x_{0}) + a_{1} f(x_{1}) + a_{2} f(x_{2}) + a_{3} f(x_{3}) + a_{4} f(x_{4}) = \int_{x_{0}}^{x_{4}} x \ dx
+\end{equation*}
+$$
+
+<p>
+Reemplazando valores e integrando
+
+$$
+\begin{equation*}
+     a_{0} x_{0} + a_{1} x_{1} + a_{2} x_{2} + a_{3} x_{3} + a_{4} x_{4} = \frac{1}{2} x_{4}^{2} - \frac{1}{2} x_{0}^{2}
+\end{equation*}
+$$
+
+<p>
+Usando \( f(x) = x^{2} \)
+
+$$
+\begin{equation*}
+     a_{0} f(x_{0}) + a_{1} f(x_{1}) + a_{2} f(x_{2}) + a_{3} f(x_{3}) + a_{4} f(x_{4}) = \int_{x_{0}}^{x_{4}} x^{2} \ dx
+\end{equation*}
+$$
+
+<p>
+Reemplazando valores e integrando
+
+$$
+\begin{equation*}
+     a_{0} x_{0}^{2} + a_{1} x_{1}^{2} + a_{2} x_{2}^{2} + a_{3} x_{3}^{2} + a_{4} x_{4}^{2} = \frac{1}{3} x_{4}^{3} - \frac{1}{3} x_{0}^{3}
+\end{equation*}
+$$
+
+<p>
+Usando \( f(x) = x^{3} \)
+
+$$
+\begin{equation*}
+     a_{0} f(x_{0}) + a_{1} f(x_{1}) + a_{2} f(x_{2}) + a_{3} f(x_{3}) + a_{4} f(x_{4}) = \int_{x_{0}}^{x_{4}} x^{3} \ dx
+\end{equation*}
+$$
+
+<p>
+Reemplazando valores e integrando
+
+$$
+\begin{equation*}
+     a_{0} x_{0}^{3} + a_{1} x_{1}^{3} + a_{2} x_{2}^{3} + a_{3} x_{3}^{3} + a_{4} x_{4}^{3} = \frac{1}{4} x_{4}^{4} - \frac{1}{4} x_{0}^{4}
+\end{equation*}
+$$
+
+<p>
+Usando \( f(x) = x^{4} \)
+
+$$
+\begin{equation*}
+     a_{0} f(x_{0}) + a_{1} f(x_{1}) + a_{2} f(x_{2}) + a_{3} f(x_{3}) + a_{4} f(x_{4}) = \int_{x_{0}}^{x_{4}} x^{4} \ dx
+\end{equation*}
+$$
+
+<p>
+Reemplazando valores e integrando
+
+$$
+\begin{equation*}
+     a_{0} x_{0}^{4} + a_{1} x_{1}^{4} + a_{2} x_{2}^{4} + a_{3} x_{3}^{4} + a_{4} x_{4}^{4} = \frac{1}{5} x_{4}^{5} - \frac{1}{5} x_{0}^{5}
+\end{equation*}
+$$
+
+<p>
+Formando un sistema de ecuaciones
+
+$$
+\begin{equation*}
+    \begin{bmatrix}
+    1 & 1 & 1 & 1 & 1 \\
+    x_{0} & x_{1} & x_{2} & x_{3} & x_{4} \\
+    x_{0}^{2} & x_{1}^{2} & x_{2}^{2} & x_{3}^{2} & x_{4}^{2} \\
+    x_{0}^{3} & x_{1}^{3} & x_{2}^{3} & x_{3}^{3} & x_{4}^{3} \\
+    x_{0}^{4} & x_{1}^{4} & x_{2}^{4} & x_{3}^{4} & x_{4}^{4}
+    \end{bmatrix}
+    \begin{bmatrix}
+    a_{0} \\
+    a_{1} \\
+    a_{2} \\
+    a_{3} \\
+    a_{4}
+    \end{bmatrix} =
+    \begin{bmatrix}
+    x_{4} - x_{0} \\
+    \frac{1}{2} x_{4}^{2} - \frac{1}{2} x_{0}^{2} \\
+    \frac{1}{3} x_{4}^{3} - \frac{1}{3} x_{0}^{3} \\
+    \frac{1}{4} x_{4}^{4} - \frac{1}{4} x_{0}^{4} \\
+    \frac{1}{5} x_{4}^{5} - \frac{1}{5} x_{0}^{5}
+    \end{bmatrix}
+\end{equation*}
+$$
+
+<p>
+Resolviendo
+
+$$
+\begin{align*}
+    \tiny a_{0} &= \tiny -\frac{12 x_{0}^{4} - 15 x_{0}^{3} x_{1} - 15 x_{0}^{3} x_{2} - 15 x_{0}^{3} x_{3} - 3 x_{0}^{3} x_{4} + 20 x_{0}^{2} x_{1} x_{2} + 20 x_{0}^{2} x_{1} x_{3} + 5 x_{0}^{2} x_{1} x_{4} + 20 x_{0}^{2} x_{2} x_{3} + 5 x_{0}^{2} x_{2} x_{4} + 5 x_{0}^{2} x_{3} x_{4} - 3 x_{0}^{2} x_{4}^{2} - 30 x_{0} x_{1} x_{2} x_{3} - 10 x_{0} x_{1} x_{2} x_{4} - 10 x_{0} x_{1} x_{3} x_{4} + 5 x_{0} x_{1} x_{4}^{2} - 10 x_{0} x_{2} x_{3} x_{4} + 5 x_{0} x_{2} x4^{2} + 5 x_{0} x_{3} x_{4}^{2} - 3 x_{0} x4^{3} + 30 x_{1} x_{2} x_{3} x_{4} - 10 x_{1} x_{2} x_{4}^{2} - 10 x_{1} x_{3} x_{4}^{2} + 5 x_{1} x_{4}^{3} - 10 x_{2} x_{3} x_{4}^{2} + 5 x_{2} x_{4}^{3} + 5 x_{3} x_{4}^{3} - 3 x_{4}^{4}}{60 (x_{0} - x_{3})(x_{0} - x_{2})(x_{0} - x_{1})} \\
+    \tiny a_{1} &= \tiny -\frac{3 x_{0}^{5} - 5 x_{0}^{4} x_{2} - 5 x_{0}^{4} x_{3} - 5 x_{0}^{4} x_{4} + 10 x_{0}^{3} x_{2} x_{3} + 10 x_{0}^{3} x_{2} x_{4} + 10 x_{0}^{3} x_{3} x_{4} - 30 x_{0}^{2} x_{2} x_{3} x_{4} + 30 x_{0} x_{2} x_{3} x_{4}^{2} - 10 x_{0} x_{2} x_{4}^{3} - 10 x_{0} x_{3} x_{4}^{3} + 5 x_{0} x_{4}^{4} - 10 x_{2} x_{3} x_{4}^{3} + 5 x_{2} x_{4}^{4} + 5 x_{3} x_{4}^{4} - 3 x_{4}^{5}}{60 (x_{0} - x_{1})(x_{1} - x_{4})(x_{1} - x_{3})(x_{1} - x_{2})} \\
+    \tiny a_{2} &= \tiny \frac{3 x_{0}^{5} - 5 x_{0}^{4} x_{1} - 5 x_{0}^{4} x_{3} - 5 x_{0}^{4} x_{4} + 10 x_{0}^{3} x_{1} x_{3} + 10 x_{0}^{3} x_{1} x_{4} + 10 x_{0}^{3} x_{3} x_{4} - 30 x_{0}^{2} x_{1} x_{3} x_{4} + 30 x_{0} x_{1} x_{3} x_{4}^{2} - 10 x_{0} x_{1} x_{4}^{3} - 10 x_{0} x_{3} x_{4}^{3} + 5 x_{0} x_{4}^{4} - 10 x_{1} x_{3} x_{4}^{3} + 5 x_{1} x_{4}^{4} + 5 x_{3} x_{4}^{4} - 3 x_{4}^{5}}{ 60(x_{0} x_{1} - x_{0} x_{2} - x_{1} x_{2} + x_{2}^{2})(x_{2} - x_{4})(x_{2} - x_{3})} \\
+    \tiny a_{3} &= \tiny -\frac{3 x_{0}^{5} - 5 x_{0}^{4} x1 - 5 x_{0}^{4} x_{2} - 5 x_{0}^{4} x_{4} + 10 x_{0}^{3} x_{1} x_{2} + 10 x_{0}^{3} x_{1} x_{4} + 10 x_{0}^{3} x_{2} x_{4} - 30 x_{0}^{2} x_{1} x_{2} x_{4} + 30 x_{0} x_{1} x_{2} x_{4}^{2} - 10 x_{0} x_{1} x_{4}^{3} - 10 x_{0} x_{2} x_{4}^{3} + 5 x_{0} x_{4}^{4} - 10 x_{1} x_{2} x_{4}^{3} + 5 x_{1} x_{4}^{4} + 5 x_{2} x_{4}^{4} - 3 x_{4}^{5}}{60 (x_{0} x_{1} x_{2} - x_{0} x_{1} x_{3} - x_{0} x_{2} x_{3} + x_{0} x_{3}^{2} - x_{1} x_{2} x_{3} + x_{1} x_{3}^{2} + x_{2} x_{3}^{2} - x_{3}^{3})(x_{3} - x_{4})} \\
+    \tiny a_{4} &= \tiny \frac{3 x_{0}^{4} - 5 x_{0}^{3} x_{1} - 5 x_{0}^{3} x_{2} - 5 x_{0}^{3} x_{3} + 3 x_{0}^{3} x_{4} + 10 x_{0}^{2} x_{1} x_{2} + 10 x_{0}^{2} x_{1} x_{3} - 5 x_{0}^{2} x_{1} x_{4} + 10 x_{0}^{2} x_{2} x_{3} - 5 x_{0}^{2} x_{2} x_{4} - 5 x_{0}^{2} x_{3} x_{4} + 3 x_{0}^{2} x_{4}^{2} - 30 x_{0} x_{1} x_{2} x_{3} + 10 x_{0} x_{1} x_{2} x_{4} + 10 x_{0} x_{1} x_{3} x_{4} - 5 x_{0} x_{1} x_{4}^{2} + 10 x_{0} x_{2} x_{3} x_{4} - 5 x_{0} x_{2} x_{4}^{2} - 5 x_{0} x_{3} x_{4}^{2} + 3 x_{0} x_{4}^{3} + 30 x_{1} x_{2} x_{3} x_{4} - 20 x_{1} x_{2} x_{4}^{2} - 20 x_{1} x_{3} x_{4}^{2} + 15 x_{1} x_{4}^{3} - 20 x_{2} x_{3} x_{4}^{2} + 15 x_{2} x_{4}^{3} + 15 x_{3} x_{4}^{3} - 12 x_{4}^{4}}{60 (x_{1} x_{2} x_{3} - x_{4} x_{1} x_{2} - x_{4} x_{1} x_{3} + x_{4}^{2} x_{1} - x_{4} x_{2} x_{3} + x_{4}^{2} x_{2} + x_{4}^{2} x_{3} - x_{4}^{3})}
+\end{align*}
+$$
+
+<p>
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="previous">
+    <a href="integracion008.html">&larr; Prev</a>
+  </li>
+  <li class="next">
+    <a href="integracion010.html">Next &rarr;</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

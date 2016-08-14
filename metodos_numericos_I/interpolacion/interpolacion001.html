@@ -1,0 +1,255 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Interpolación">
+
+<title>Interpolación</title>
+
+<!-- Bootstrap style: bootswatch_cosmo -->
+<link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/cosmo/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+
+/* Add scrollbar to dropdown menus in bootstrap navigation bar */
+.dropdown-menu {
+   height: auto;
+   max-height: 400px;
+   overflow-x: hidden;
+}
+
+/* Adds an invisible element before each target to offset for the navigation
+   bar */
+.anchor::before {
+  content:"";
+  display:block;
+  height:50px;      /* fixed header height for style bootswatch_cosmo */
+  margin:-50px 0 0; /* negative fixed header height */
+}
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 2,
+ 'sections': [('Table of contents',
+               2,
+               'table_of_contents',
+               'table_of_contents'),
+              (u'Diferencias divididas de Newton', 2, None, '___sec0'),
+              (u'F\xf3rmula recursiva', 3, None, '___sec1'),
+              (u'Tabla de diferencias', 3, None, '___sec2'),
+              (u'Ejemplo', 3, None, '___sec3')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="interpolacion.html">Interpolación</a>
+  </div>
+
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="interpolacion000.html#table_of_contents" style="font-size: 80%;"><b>Table of contents</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec0" style="font-size: 80%;"><b>Diferencias divididas de Newton</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Fórmula recursiva</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Tabla de diferencias</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Ejemplo</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0001"></a>
+<!-- !split -->
+
+<h2 id="___sec0" class="anchor">Diferencias divididas de Newton </h2>
+
+<h3 id="___sec1" class="anchor">Fórmula recursiva </h3>
+
+$$
+\begin{align*}
+    f[x_{0}] &= f(x_{0}) \\
+    f[x_{0}, x_{1}] &= \frac{f[x_{1}] - f[x_{0}]}{x_{1} - x_{0}} \\
+    f[x_{0}, x_{1}, x_{2}] &= \frac{f[x_{1}, x_{2}] - f[x_{0}, x_{1}]}{x_{2} - x_{0}} \\
+    f[x_{0}, x_{1}, x_{2}, x_{3}] &= \frac{f[x_{1}, x_{2}, x_{3}] - f[x_{0}, x_{1}, x_{2}]}{x_{3} - x_{0}} \\
+    f[x_{0}, x_{1}, x_{2}, x_{3}, x_{4}] &= \frac{f[x_{1}, x_{2}, x_{3}, x_{4}] - f[x_{0}, x_{1}, x_{2}, x_{3}]}{x_{4} - x_{0}} \\
+    f[x_{0}, x_{1}, \cdots, x_{n-1}, x_{n}] &= \frac{f[x_{1}, \cdots, x_{n-1}, x_{n}] - f[x_{0}, x_{1}, \cdots, x_{n-1}]}{x_{n} - x_{0}}
+\end{align*}
+$$
+
+<h3 id="___sec2" class="anchor">Tabla de diferencias </h3>
+
+$$
+\begin{equation*}
+    \begin{array}{c|ccccc}
+    x & f & f' & f'' & f''' & f^{(4)} \\
+    \hline
+    x_{0} & f[x_{0}] & & & & \\
+    & & f[x_{0}, x_{1}] & & & \\
+    x_{1} & f[x_{1}] & & f[x_{0}, x_{1}, x_{2}] & & \\
+    & & f[x_{1}, x_{2}] & & f[x_{0}, x_{1}, x_{2}, x_{3}] & \\
+    x_{2} & f[x_{2}] & & f[x_{1}, x_{2}, x_{3}] & & f[x_{0}, x_{1}, x_{2}, x_{3}, x_{4}] \\
+    & & f[x_{2}, x_{3}] & & f[x_{1}, x_{2}, x_{3}, x_{4}] & \\
+    x_{3} & f[x_{3}] & & f[x_{2}, x_{3}, x_{4}] & & \\
+    & & f[x_{3}, x_{4}] & & & \\
+    x_{4} & f[x_{4}] & & & &
+    \end{array}
+\end{equation*}
+$$
+
+<h3 id="___sec3" class="anchor">Ejemplo </h3>
+
+<p>
+Calcular las derivadas en los puntos \( x = [1, 4, 6, 7, 11] \) de
+
+$$
+\begin{equation*}
+    f(x) = \ln{x}
+\end{equation*}
+$$
+
+<p>
+Derivada cero
+
+$$
+\begin{align*}
+    f[x_{0}] &= f(x_{0}) = f(1) = 0 \\
+    f[x_{1}] &= f(x_{1}) = f(4) = 1.386294 \\
+    f[x_{2}] &= f(x_{2}) = f(6) = 1.791759 \\
+    f[x_{3}] &= f(x_{3}) = f(7) = 1.945910 \\
+    f[x_{4}] &= f(x_{4}) = f(11) = 2.397895
+\end{align*}
+$$
+
+<p>
+Primera derivada
+
+$$
+\begin{align*}
+    f[x_{0}, x_{1}] &= \frac{f[x_{1}] - f[x_{0}]}{x_{1} - x_{0}} = \frac{1.386294 - 0}{4 - 1} = 0.462098 \\
+    f[x_{1}, x_{2}] &= \frac{f[x_{2}] - f[x_{1}]}{x_{2} - x_{1}} = \frac{1.791759 - 1.386294}{6 - 4} = 0.202732 \\
+    f[x_{2}, x_{3}] &= \frac{f[x_{3}] - f[x_{2}]}{x_{3} - x_{2}} = \frac{1.945910 - 1.791759}{7 - 6} = 0.154151 \\
+    f[x_{3}, x_{4}] &= \frac{f[x_{4}] - f[x_{3}]}{x_{4} - x_{3}} = \frac{2.397895 - 1.945910}{11 - 7} = 0.112996
+\end{align*}
+$$
+
+<p>
+Segunda derivada
+
+$$
+\begin{align*}
+    f[x_{0}, x_{1}, x_{2}] &= \frac{f[x_{1}, x_{2}] - f[x_{0}, x_{1}]}{x_{2} - x_{0}} = \frac{0.202732 - 0.462098}{6 - 1} = -0.051873 \\
+    f[x_{1}, x_{2}, x_{3}] &= \frac{f[x_{2}, x_{3}] - f[x_{1}, x_{2}]}{x_{3} - x_{1}} = \frac{0.154151 - 0.202732}{7 - 4} = -0.016194 \\
+    f[x_{2}, x_{3}, x_{4}] &= \frac{f[x_{3}, x_{4}] - f[x_{2}, x_{3}]}{x_{4} - x_{2}} = \frac{0.112996 - 0.154151}{11 - 6} = -0.008231
+\end{align*}
+$$
+
+<p>
+Tercera derivada
+
+$$
+\begin{align*}
+    f[x_{0}, x_{1}, x_{2}, x_{3}] &= \frac{f[x_{1}, x_{2}, x_{3}] - f[x_{0}, x_{1}, x_{2}]}{x_{3} - x_{0}} = \frac{-0.016194 - (-0.051873)}{7 - 1} = 0.005946 \\
+    f[x_{1}, x_{2}, x_{3}, x_{4}] &= \frac{f[x_{2}, x_{3}, x_{4}] - f[x_{1}, x_{2}, x_{3}]}{x_{4} - x_{1}} = \frac{-0.008231 - (-0.016194)}{11 - 4} = 0.001138
+\end{align*}
+$$
+
+<p>
+Cuarta derivada
+
+$$
+\begin{equation*}
+    f[x_{0}, x_{1}, x_{2}, x_{3}, x_{4}] = \frac{f[x_{1}, x_{2}, x_{3}, x_{4}] - f[x_{0}, x_{1}, x_{2}, x_{3}]}{x_{4} - x_{0}} = \frac{0.00138 - 0.005946}{11 - 1} = -0.000481
+\end{equation*}
+$$
+
+<p>
+Resumiendo en una tabla
+
+$$
+\begin{equation*}
+    \begin{array}{c|ccccc}
+    x & f & f' & f'' & f''' & f^{(4)} \\
+    \hline
+    1 & 0 & & & & \\
+    & & 0.462098 & & & \\
+    4 & 1.386294 & & -0.051873 & & \\
+    & & 0.202732 & & 0.005946 & \\
+    6 & 1.791759 & & -0.016194 & & -0.000481 \\
+    & & 0.154151 & & 0.001138 & \\
+    7 & 1.945910 & & -0.008231 & & \\
+    & & 0.112996 & & & \\
+    11 & 2.397895 & & & &
+    \end{array}
+\end{equation*}
+$$
+
+
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="previous">
+    <a href="interpolacion000.html">&larr; Prev</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

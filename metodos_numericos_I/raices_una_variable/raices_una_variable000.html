@@ -1,0 +1,258 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Raices de una variable">
+
+<title>Raices de una variable</title>
+
+<!-- Bootstrap style: bootswatch_cosmo -->
+<link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/cosmo/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+
+/* Add scrollbar to dropdown menus in bootstrap navigation bar */
+.dropdown-menu {
+   height: auto;
+   max-height: 400px;
+   overflow-x: hidden;
+}
+
+/* Adds an invisible element before each target to offset for the navigation
+   bar */
+.anchor::before {
+  content:"";
+  display:block;
+  height:50px;      /* fixed header height for style bootswatch_cosmo */
+  margin:-50px 0 0; /* negative fixed header height */
+}
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 2,
+ 'sections': [('Table of contents',
+               2,
+               'table_of_contents',
+               'table_of_contents'),
+              (u'M\xe9todo de la bisecci\xf3n', 2, None, '___sec0'),
+              (u'Ejemplo 1', 3, None, '___sec1'),
+              (u'Implementaci\xf3n de funciones auxiliares',
+               3,
+               None,
+               '___sec2'),
+              (u'Implementaci\xf3n no vectorizada', 3, None, '___sec3'),
+              (u'Ejemplo 2', 3, None, '___sec4'),
+              (u'Ejemplo 3', 3, None, '___sec5'),
+              (u'Ejemplo 4', 3, None, '___sec6'),
+              (u'M\xe9todo de la falsa posici\xf3n', 2, None, '___sec7'),
+              (u'Ejemplo 1', 3, None, '___sec8'),
+              (u'Implementaci\xf3n de funciones auxiliares',
+               3,
+               None,
+               '___sec9'),
+              (u'Implementaci\xf3n no vectorizada', 3, None, '___sec10'),
+              (u'Ejemplo 2', 3, None, '___sec11'),
+              (u'Ejemplo 3', 3, None, '___sec12'),
+              (u'Ejemplo 4', 3, None, '___sec13'),
+              (u'M\xe9todo de la falsa posici\xf3n modificado',
+               2,
+               None,
+               '___sec14'),
+              (u'Ejemplo 1', 3, None, '___sec15'),
+              (u'Implementaci\xf3n de funciones auxiliares',
+               3,
+               None,
+               '___sec16'),
+              (u'Implementaci\xf3n no vectorizada', 3, None, '___sec17'),
+              (u'Ejemplo 2', 3, None, '___sec18'),
+              (u'Ejemplo 3', 3, None, '___sec19'),
+              (u'Ejemplo 4', 3, None, '___sec20'),
+              (u'M\xe9todo del punto fijo', 2, None, '___sec21'),
+              (u'Ejemplo 1', 3, None, '___sec22'),
+              (u'Implementaci\xf3n no vectorizada', 3, None, '___sec23'),
+              (u'Ejemplo 2', 3, None, '___sec24'),
+              (u'M\xe9todo de Newton-Raphson', 2, None, '___sec25'),
+              (u'Ejemplo 1', 3, None, '___sec26'),
+              (u'Implementaci\xf3n no vectorizada', 3, None, '___sec27'),
+              (u'M\xe9todo de la secante', 2, None, '___sec28'),
+              (u'Ejemplo 1', 3, None, '___sec29'),
+              (u'Implementaci\xf3n de funciones auxiliares',
+               3,
+               None,
+               '___sec30'),
+              (u'Implementaci\xf3n no vectorizada', 3, None, '___sec31'),
+              (u'Ejemplo 2', 3, None, '___sec32'),
+              (u'Ejemplo 3', 3, None, '___sec33'),
+              (u'M\xe9todo de la secante modificada', 2, None, '___sec34'),
+              (u'Ejemplo 1', 3, None, '___sec35'),
+              (u'Implementaci\xf3n de funciones auxiliares',
+               3,
+               None,
+               '___sec36'),
+              (u'Implementaci\xf3n no vectorizada', 3, None, '___sec37'),
+              (u'Ejemplo 2', 3, None, '___sec38'),
+              (u'Ejemplo 3', 3, None, '___sec39')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="raices_una_variable.html">Raices de una variable</a>
+  </div>
+
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="#table_of_contents" style="font-size: 80%;"><b>Table of contents</b></a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable001.html#___sec0" style="font-size: 80%;"><b>Método de la bisección</b></a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable001.html#___sec1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Ejemplo 1</a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable001.html#___sec2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Implementación de funciones auxiliares</a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable001.html#___sec3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Implementación no vectorizada</a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable001.html#___sec4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Ejemplo 2</a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable001.html#___sec5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Ejemplo 3</a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable001.html#___sec6" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Ejemplo 4</a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable002.html#___sec7" style="font-size: 80%;"><b>Método de la falsa posición</b></a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable002.html#___sec8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Ejemplo 1</a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable002.html#___sec9" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Implementación de funciones auxiliares</a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable002.html#___sec10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Implementación no vectorizada</a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable002.html#___sec11" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Ejemplo 2</a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable002.html#___sec12" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Ejemplo 3</a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable002.html#___sec13" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Ejemplo 4</a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable003.html#___sec14" style="font-size: 80%;"><b>Método de la falsa posición modificado</b></a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable003.html#___sec15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Ejemplo 1</a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable003.html#___sec16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Implementación de funciones auxiliares</a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable003.html#___sec17" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Implementación no vectorizada</a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable003.html#___sec18" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Ejemplo 2</a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable003.html#___sec19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Ejemplo 3</a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable003.html#___sec20" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Ejemplo 4</a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable004.html#___sec21" style="font-size: 80%;"><b>Método del punto fijo</b></a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable004.html#___sec22" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Ejemplo 1</a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable004.html#___sec23" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Implementación no vectorizada</a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable004.html#___sec24" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Ejemplo 2</a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable005.html#___sec25" style="font-size: 80%;"><b>Método de Newton-Raphson</b></a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable005.html#___sec26" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Ejemplo 1</a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable005.html#___sec27" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Implementación no vectorizada</a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable006.html#___sec28" style="font-size: 80%;"><b>Método de la secante</b></a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable006.html#___sec29" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Ejemplo 1</a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable006.html#___sec30" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Implementación de funciones auxiliares</a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable006.html#___sec31" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Implementación no vectorizada</a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable006.html#___sec32" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Ejemplo 2</a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable006.html#___sec33" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Ejemplo 3</a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable007.html#___sec34" style="font-size: 80%;"><b>Método de la secante modificada</b></a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable007.html#___sec35" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Ejemplo 1</a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable007.html#___sec36" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Implementación de funciones auxiliares</a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable007.html#___sec37" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Implementación no vectorizada</a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable007.html#___sec38" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Ejemplo 2</a></li>
+     <!-- navigation toc: --> <li><a href="raices_una_variable007.html#___sec39" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Ejemplo 3</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0000"></a>
+<!-- ------------------- main content ---------------------- -->
+
+
+
+<div class="jumbotron">
+<center><h1>Raices de una variable</h1></center>  <!-- document title -->
+
+<p>
+<!-- author(s): ClaudioVZ -->
+
+<center>
+<b>ClaudioVZ</b> 
+</center>
+
+<p>
+<!-- institution(s) -->
+
+<br>
+<b>Resumen.</b>
+Raices de una variable
+<p>
+<center><h4>Aug 13, 2016</h4></center> <!-- date -->
+<br>
+<p>
+</div> <!-- end jumbotron -->
+
+<h1 id="table_of_contents">Table of contents</h2>
+
+<p>
+<a href="raices_una_variable001.html#___sec0"> Método de la bisección </a><br>
+<a href="raices_una_variable002.html#___sec7"> Método de la falsa posición </a><br>
+<a href="raices_una_variable003.html#___sec14"> Método de la falsa posición modificado </a><br>
+<a href="raices_una_variable004.html#___sec21"> Método del punto fijo </a><br>
+<a href="raices_una_variable005.html#___sec25"> Método de Newton-Raphson </a><br>
+<a href="raices_una_variable006.html#___sec28"> Método de la secante </a><br>
+<a href="raices_una_variable007.html#___sec34"> Método de la secante modificada </a><br>
+</p>
+<p>
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="next">
+    <a href="raices_una_variable001.html">Next &rarr;</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

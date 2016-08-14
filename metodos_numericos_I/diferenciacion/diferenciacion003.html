@@ -1,0 +1,389 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Diferenciación numérica">
+
+<title>Diferenciación numérica</title>
+
+<!-- Bootstrap style: bootswatch_cosmo -->
+<link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/cosmo/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+
+/* Add scrollbar to dropdown menus in bootstrap navigation bar */
+.dropdown-menu {
+   height: auto;
+   max-height: 400px;
+   overflow-x: hidden;
+}
+
+/* Adds an invisible element before each target to offset for the navigation
+   bar */
+.anchor::before {
+  content:"";
+  display:block;
+  height:50px;      /* fixed header height for style bootswatch_cosmo */
+  margin:-50px 0 0; /* negative fixed header height */
+}
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 2,
+ 'sections': [('Table of contents',
+               2,
+               'table_of_contents',
+               'table_of_contents'),
+              (u'Polinomio de Lagrange', 2, None, '___sec0'),
+              (u'Polinomio lineal', 3, None, '___sec1'),
+              (u'Polinomio cuadr\xe1tico', 3, None, '___sec2'),
+              (u'Polinomio c\xfabico', 3, None, '___sec3'),
+              (u'Serie de Taylor', 2, None, '___sec4'),
+              (u'Expansi\xf3n hacia adelante', 3, None, '___sec5'),
+              (u'Expansi\xf3n hacia atr\xe1s', 3, None, '___sec6'),
+              (u'Primera diferencia hacia adelante', 3, None, '___sec7'),
+              (u'Primera diferencia hacia atr\xe1s', 3, None, '___sec8'),
+              (u'Primera diferencia centrada', 3, None, '___sec9'),
+              (u'Segunda diferencia hacia adelante', 3, None, '___sec10'),
+              (u'Segunda diferencia hacia atr\xe1s', 3, None, '___sec11'),
+              (u'Segunda diferencia centrada', 3, None, '___sec12'),
+              (u'M\xe9todo de los coeficientes indeterminados',
+               2,
+               None,
+               '___sec13'),
+              (u'Primera diferencia hacia adelante usando 2 puntos',
+               3,
+               None,
+               '___sec14'),
+              (u'Segunda diferencia hacia adelante usando 3 puntos',
+               3,
+               None,
+               '___sec15'),
+              (u'Extrapolaci\xf3n de Richardson', 2, None, '___sec16'),
+              (u'Extrapolaci\xf3n usando todas las potencias de $h$',
+               3,
+               None,
+               '___sec17'),
+              (u'Ejemplo', 3, None, '___sec18'),
+              (u'Patr\xf3n de c\xe1lculo', 3, None, '___sec19'),
+              (u'Seudoc\xf3digo', 3, None, '___sec20'),
+              (u'Implementaci\xf3n', 3, None, '___sec21'),
+              (u'Extrapolaci\xf3n usando potencias pares de $h$',
+               3,
+               None,
+               '___sec22'),
+              (u'Ejemplo', 3, None, '___sec23'),
+              (u'F\xf3rmula matem\xe1tica', 3, None, '___sec24'),
+              (u'Seudoc\xf3digo', 3, None, '___sec25'),
+              (u'Implementaci\xf3n', 3, None, '___sec26')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="diferenciacion.html">Diferenciación numérica</a>
+  </div>
+
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="diferenciacion000.html#table_of_contents" style="font-size: 80%;"><b>Table of contents</b></a></li>
+     <!-- navigation toc: --> <li><a href="diferenciacion001.html#___sec0" style="font-size: 80%;"><b>Polinomio de Lagrange</b></a></li>
+     <!-- navigation toc: --> <li><a href="diferenciacion001.html#___sec1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Polinomio lineal</a></li>
+     <!-- navigation toc: --> <li><a href="diferenciacion001.html#___sec2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Polinomio cuadrático</a></li>
+     <!-- navigation toc: --> <li><a href="diferenciacion001.html#___sec3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Polinomio cúbico</a></li>
+     <!-- navigation toc: --> <li><a href="diferenciacion002.html#___sec4" style="font-size: 80%;"><b>Serie de Taylor</b></a></li>
+     <!-- navigation toc: --> <li><a href="diferenciacion002.html#___sec5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Expansión hacia adelante</a></li>
+     <!-- navigation toc: --> <li><a href="diferenciacion002.html#___sec6" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Expansión hacia atrás</a></li>
+     <!-- navigation toc: --> <li><a href="diferenciacion002.html#___sec7" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Primera diferencia hacia adelante</a></li>
+     <!-- navigation toc: --> <li><a href="diferenciacion002.html#___sec8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Primera diferencia hacia atrás</a></li>
+     <!-- navigation toc: --> <li><a href="diferenciacion002.html#___sec9" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Primera diferencia centrada</a></li>
+     <!-- navigation toc: --> <li><a href="diferenciacion002.html#___sec10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Segunda diferencia hacia adelante</a></li>
+     <!-- navigation toc: --> <li><a href="diferenciacion002.html#___sec11" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Segunda diferencia hacia atrás</a></li>
+     <!-- navigation toc: --> <li><a href="diferenciacion002.html#___sec12" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Segunda diferencia centrada</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec13" style="font-size: 80%;"><b>Método de los coeficientes indeterminados</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec14" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Primera diferencia hacia adelante usando 2 puntos</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Segunda diferencia hacia adelante usando 3 puntos</a></li>
+     <!-- navigation toc: --> <li><a href="diferenciacion004.html#___sec16" style="font-size: 80%;"><b>Extrapolación de Richardson</b></a></li>
+     <!-- navigation toc: --> <li><a href="diferenciacion005.html#___sec17" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Extrapolación usando todas las potencias de \( h \)</a></li>
+     <!-- navigation toc: --> <li><a href="diferenciacion005.html#___sec18" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Ejemplo</a></li>
+     <!-- navigation toc: --> <li><a href="diferenciacion005.html#___sec19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Patrón de cálculo</a></li>
+     <!-- navigation toc: --> <li><a href="diferenciacion005.html#___sec20" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Seudocódigo</a></li>
+     <!-- navigation toc: --> <li><a href="diferenciacion005.html#___sec21" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Implementación</a></li>
+     <!-- navigation toc: --> <li><a href="diferenciacion006.html#___sec22" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Extrapolación usando potencias pares de \( h \)</a></li>
+     <!-- navigation toc: --> <li><a href="diferenciacion006.html#___sec23" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Ejemplo</a></li>
+     <!-- navigation toc: --> <li><a href="diferenciacion006.html#___sec24" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Fórmula matemática</a></li>
+     <!-- navigation toc: --> <li><a href="diferenciacion006.html#___sec25" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Seudocódigo</a></li>
+     <!-- navigation toc: --> <li><a href="diferenciacion006.html#___sec26" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Implementación</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0003"></a>
+<!-- !split -->
+
+<h2 id="___sec13" class="anchor">Método de los coeficientes indeterminados </h2>
+
+<h3 id="___sec14" class="anchor">Primera diferencia hacia adelante usando 2 puntos </h3>
+
+<p>
+Aproximando la primera derivada usando \( x=\frac{1}{2} \) y  \( h=\frac{1}{10} \)
+
+$$
+\begin{equation*}
+    f'(x) \approx a_{1} f(x+h) + a_{2} f(x)
+\end{equation*}
+$$
+
+<p>
+Reemplazando
+
+$$
+\begin{equation*}
+    f'(x) \approx a_{1} f \biggr( \frac{3}{5} \biggl) + a_{2} f \biggr( \frac{1}{2} \biggl)
+\end{equation*}
+$$
+
+<p>
+Usando \( f(x) = 1 \)
+
+$$
+\begin{align*}
+    a_{1} f \biggr( \frac{3}{5} \biggl) + a_{2} f \biggr( \frac{1}{2} \biggl) &= 0 \\
+    a_{1} + a_{2} &= 0
+\end{align*}
+$$
+
+<p>
+Usando \( f(x) = x \)
+
+$$
+\begin{align*}
+    a_{1} f \biggr( \frac{3}{5} \biggl) + a_{2} f \biggr( \frac{1}{2} \biggl) &= 1 \\
+    \frac{3}{5} a_{1} + \frac{1}{2} a_{2} &= 1
+\end{align*}
+$$
+
+<p>
+Formando un sistema de ecuaciones
+
+$$
+\begin{equation*}
+    \begin{bmatrix}
+        1 & 1 \\
+        \frac{3}{5} & \frac{1}{2}
+    \end{bmatrix}
+    \begin{bmatrix}
+        a_{1} \\
+        a_{2}
+    \end{bmatrix} =
+    \begin{bmatrix}
+        0 \\
+        1
+    \end{bmatrix}
+\end{equation*}
+$$
+
+<p>
+Resolviendo
+
+$$
+\begin{align*}
+    a_{1} &= 10 \\
+    a_{2} &= -10
+\end{align*}
+$$
+
+<p>
+Reemplazando
+
+$$
+\begin{equation*}
+    f'(x) = 10 f(x+h) - 10 f(x)
+\end{equation*}
+$$
+
+<p>
+Reordenando
+
+$$
+\begin{equation*}
+    f'(x) = \frac{f(x+h) - f(x)}{\frac{1}{10}} = \frac{f(x+h) - f(x)}{h}
+\end{equation*}
+$$
+
+<h3 id="___sec15" class="anchor">Segunda diferencia hacia adelante usando 3 puntos </h3>
+
+<p>
+Aproximando la segunda derivada usando \( x=\frac{1}{2} \) y  \( h=\frac{1}{10} \)
+
+$$
+\begin{equation*}
+    f''(x) \approx a_{1} f(x+2h) + a_{2} f(x+h) + a_{3} f(x)
+\end{equation*}
+$$
+
+<p>
+Reemplazando
+
+$$
+\begin{equation*}
+    f''(x) \approx a_{1} f \biggr( \frac{7}{10} \biggl) + a_{2} f \biggr( \frac{3}{5} \biggl) + a_{2} f \biggr( \frac{1}{2} \biggl)
+\end{equation*}
+$$
+
+<p>
+Usando \( f(x) = 1 \)
+
+$$
+\begin{align*}
+    a_{1} f \biggr( \frac{7}{10} \biggl) + a_{2} f \biggr( \frac{3}{5} \biggl) + a_{2} f \biggr( \frac{1}{2} \biggl) &= 0 \\
+    a_{1} + a_{2} + a_{3} &= 0
+\end{align*}
+$$
+
+<p>
+Usando \( f(x) = x \)
+
+$$
+\begin{align*}
+    a_{1} f \biggr( \frac{7}{10} \biggl) + a_{2} f \biggr( \frac{3}{5} \biggl) + a_{2} f \biggr( \frac{1}{2} \biggl) &= 0 \\
+    \frac{7}{10} a_{1} + \frac{3}{5} a_{2} + \frac{1}{2} a_{2} &= 0
+\end{align*}
+$$
+
+<p>
+Usando \( f(x) = x^{2} \)
+
+$$
+\begin{align*}
+    a_{1} f \biggr( \frac{7}{10} \biggl) + a_{2} f \biggr( \frac{3}{5} \biggl) + a_{2} f \biggr( \frac{1}{2} \biggl) &= 2 \\
+    \frac{49}{100} a_{1} + \frac{9}{25} a_{2} + \frac{1}{4} a_{2} &= 2
+\end{align*}
+$$
+
+<p>
+Formando un sistema de ecuaciones
+
+$$
+\begin{equation*}
+    \begin{bmatrix}
+        1 & 1 & 1 \\
+        \frac{7}{10} & \frac{3}{5} & \frac{1}{2} \\
+        \frac{49}{100} & \frac{9}{25} & \frac{1}{4}
+    \end{bmatrix}
+    \begin{bmatrix}
+        a_{1} \\
+        a_{2} \\
+        a_{3}
+    \end{bmatrix} =
+    \begin{bmatrix}
+        0 \\
+        0 \\
+        2
+    \end{bmatrix}
+\end{equation*}
+$$
+
+<p>
+Resolviendo
+
+$$
+\begin{align*}
+    a_{1} &= 100 \\
+    a_{2} &= -200 \\
+    a_{3} &= 100
+\end{align*}
+$$
+
+<p>
+Reemplazando
+
+$$
+\begin{equation*}
+    f''(x) = 100 f(x+2h) - 200 f(x+h) + 100 f(x)
+\end{equation*}
+$$
+
+<p>
+Reordenando
+
+$$
+\begin{equation*}
+    f''(x) = \frac{f(x+2h) - 2 f(x+h) + f(x)}{\frac{1}{100}} = \frac{f(x+2h) - 2 f(x+h) + f(x)}{h^{2}}
+\end{equation*}
+$$
+
+<p>
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="previous">
+    <a href="diferenciacion002.html">&larr; Prev</a>
+  </li>
+  <li class="next">
+    <a href="diferenciacion004.html">Next &rarr;</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

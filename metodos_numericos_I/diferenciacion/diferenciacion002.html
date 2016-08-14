@@ -1,0 +1,635 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Diferenciación numérica">
+
+<title>Diferenciación numérica</title>
+
+<!-- Bootstrap style: bootswatch_cosmo -->
+<link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/cosmo/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+
+/* Add scrollbar to dropdown menus in bootstrap navigation bar */
+.dropdown-menu {
+   height: auto;
+   max-height: 400px;
+   overflow-x: hidden;
+}
+
+/* Adds an invisible element before each target to offset for the navigation
+   bar */
+.anchor::before {
+  content:"";
+  display:block;
+  height:50px;      /* fixed header height for style bootswatch_cosmo */
+  margin:-50px 0 0; /* negative fixed header height */
+}
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 2,
+ 'sections': [('Table of contents',
+               2,
+               'table_of_contents',
+               'table_of_contents'),
+              (u'Polinomio de Lagrange', 2, None, '___sec0'),
+              (u'Polinomio lineal', 3, None, '___sec1'),
+              (u'Polinomio cuadr\xe1tico', 3, None, '___sec2'),
+              (u'Polinomio c\xfabico', 3, None, '___sec3'),
+              (u'Serie de Taylor', 2, None, '___sec4'),
+              (u'Expansi\xf3n hacia adelante', 3, None, '___sec5'),
+              (u'Expansi\xf3n hacia atr\xe1s', 3, None, '___sec6'),
+              (u'Primera diferencia hacia adelante', 3, None, '___sec7'),
+              (u'Primera diferencia hacia atr\xe1s', 3, None, '___sec8'),
+              (u'Primera diferencia centrada', 3, None, '___sec9'),
+              (u'Segunda diferencia hacia adelante', 3, None, '___sec10'),
+              (u'Segunda diferencia hacia atr\xe1s', 3, None, '___sec11'),
+              (u'Segunda diferencia centrada', 3, None, '___sec12'),
+              (u'M\xe9todo de los coeficientes indeterminados',
+               2,
+               None,
+               '___sec13'),
+              (u'Primera diferencia hacia adelante usando 2 puntos',
+               3,
+               None,
+               '___sec14'),
+              (u'Segunda diferencia hacia adelante usando 3 puntos',
+               3,
+               None,
+               '___sec15'),
+              (u'Extrapolaci\xf3n de Richardson', 2, None, '___sec16'),
+              (u'Extrapolaci\xf3n usando todas las potencias de $h$',
+               3,
+               None,
+               '___sec17'),
+              (u'Ejemplo', 3, None, '___sec18'),
+              (u'Patr\xf3n de c\xe1lculo', 3, None, '___sec19'),
+              (u'Seudoc\xf3digo', 3, None, '___sec20'),
+              (u'Implementaci\xf3n', 3, None, '___sec21'),
+              (u'Extrapolaci\xf3n usando potencias pares de $h$',
+               3,
+               None,
+               '___sec22'),
+              (u'Ejemplo', 3, None, '___sec23'),
+              (u'F\xf3rmula matem\xe1tica', 3, None, '___sec24'),
+              (u'Seudoc\xf3digo', 3, None, '___sec25'),
+              (u'Implementaci\xf3n', 3, None, '___sec26')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="diferenciacion.html">Diferenciación numérica</a>
+  </div>
+
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="diferenciacion000.html#table_of_contents" style="font-size: 80%;"><b>Table of contents</b></a></li>
+     <!-- navigation toc: --> <li><a href="diferenciacion001.html#___sec0" style="font-size: 80%;"><b>Polinomio de Lagrange</b></a></li>
+     <!-- navigation toc: --> <li><a href="diferenciacion001.html#___sec1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Polinomio lineal</a></li>
+     <!-- navigation toc: --> <li><a href="diferenciacion001.html#___sec2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Polinomio cuadrático</a></li>
+     <!-- navigation toc: --> <li><a href="diferenciacion001.html#___sec3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Polinomio cúbico</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec4" style="font-size: 80%;"><b>Serie de Taylor</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Expansión hacia adelante</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec6" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Expansión hacia atrás</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec7" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Primera diferencia hacia adelante</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Primera diferencia hacia atrás</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec9" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Primera diferencia centrada</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Segunda diferencia hacia adelante</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec11" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Segunda diferencia hacia atrás</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec12" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Segunda diferencia centrada</a></li>
+     <!-- navigation toc: --> <li><a href="diferenciacion003.html#___sec13" style="font-size: 80%;"><b>Método de los coeficientes indeterminados</b></a></li>
+     <!-- navigation toc: --> <li><a href="diferenciacion003.html#___sec14" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Primera diferencia hacia adelante usando 2 puntos</a></li>
+     <!-- navigation toc: --> <li><a href="diferenciacion003.html#___sec15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Segunda diferencia hacia adelante usando 3 puntos</a></li>
+     <!-- navigation toc: --> <li><a href="diferenciacion004.html#___sec16" style="font-size: 80%;"><b>Extrapolación de Richardson</b></a></li>
+     <!-- navigation toc: --> <li><a href="diferenciacion005.html#___sec17" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Extrapolación usando todas las potencias de \( h \)</a></li>
+     <!-- navigation toc: --> <li><a href="diferenciacion005.html#___sec18" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Ejemplo</a></li>
+     <!-- navigation toc: --> <li><a href="diferenciacion005.html#___sec19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Patrón de cálculo</a></li>
+     <!-- navigation toc: --> <li><a href="diferenciacion005.html#___sec20" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Seudocódigo</a></li>
+     <!-- navigation toc: --> <li><a href="diferenciacion005.html#___sec21" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Implementación</a></li>
+     <!-- navigation toc: --> <li><a href="diferenciacion006.html#___sec22" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Extrapolación usando potencias pares de \( h \)</a></li>
+     <!-- navigation toc: --> <li><a href="diferenciacion006.html#___sec23" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Ejemplo</a></li>
+     <!-- navigation toc: --> <li><a href="diferenciacion006.html#___sec24" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Fórmula matemática</a></li>
+     <!-- navigation toc: --> <li><a href="diferenciacion006.html#___sec25" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Seudocódigo</a></li>
+     <!-- navigation toc: --> <li><a href="diferenciacion006.html#___sec26" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Implementación</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0002"></a>
+<!-- !split -->
+
+<h2 id="___sec4" class="anchor">Serie de Taylor </h2>
+
+$$
+\begin{equation}
+    f(x) = \sum_{n=0}^{\infty} \frac{f^{(n)}(a)}{n!} (x - a)^{n}
+\tag{5}
+\end{equation}
+$$
+
+<h3 id="___sec5" class="anchor">Expansión hacia adelante </h3>
+
+$$
+\begin{equation*}
+    f(x) \approx f(a) + f'(a) (x - a) + \frac{1}{2} f''(a) (x - a)^{2} + \frac{1}{6} f'''(a) (x - a)^{3} + \cdots
+\end{equation*}
+$$
+
+<p>
+Usando un cambio de variable \( x - a = h \)
+
+$$
+\begin{equation*}
+    f(x) \approx f(a) + f'(a) h + \frac{1}{2} f''(a) h^{2} + \frac{1}{6} f'''(a) h^{3} + \cdots
+\end{equation*}
+$$
+
+<p>
+Reemplazando \( a = x - h \)
+
+$$
+\begin{equation*}
+    f(x) \approx f(x - h) + f'(x - h) h + \frac{1}{2} f''(x - h) h^{2} + \frac{1}{6} f'''(x - h) h^{3} + \cdots
+\end{equation*}
+$$
+
+<p>
+Usando un cambio de variable \( x = x_{i} \)
+
+$$
+\begin{equation*}
+    f(x_{i}) \approx f(x_{i} - h) + f'(x_{i} - h) h + \frac{1}{2} f''(x_{i} - h) h^{2} + \frac{1}{6} f'''(x_{i} - h) h^{3} + \cdots
+\end{equation*}
+$$
+
+<p>
+Reemplazando \( x_{i} - h = x_{i-1} \)
+
+$$
+\begin{equation*}
+    f(x_{i}) \approx f(x_{i-1}) + f'(x_{i-1}) h + \frac{1}{2} f''(x_{i-1}) h^{2} + \frac{1}{6} f'''(x_{i-1}) h^{3} + \cdots
+\end{equation*}
+$$
+
+<p>
+Recorriendo los índices
+
+$$
+\begin{equation}
+    f(x_{i+1}) \approx f(x_{i}) + f'(x_{i}) h + \frac{1}{2} f''(x_{i}) h^{2} + \frac{1}{6} f'''(x_{i}) h^{3} + \cdots
+\tag{6}
+\end{equation}
+$$
+
+<h3 id="___sec6" class="anchor">Expansión hacia atrás </h3>
+
+<p>
+La expansión hacia adelante puede escribirse como
+
+$$
+\begin{equation*}
+    f(x_{i} + h) \approx f(x_{i}) (h)^{0} + f'(x_{i}) (h)^{1} + \frac{1}{2} f''(x_{i}) (h)^{2} + \frac{1}{6} f'''(x_{i}) (h)^{3} + \cdots
+\end{equation*}
+$$
+
+<p>
+Entonces la expansión hacia atrás será
+
+$$
+\begin{equation*}
+    f(x_{i} - h) \approx f(x_{i}) (-h)^{0} + f'(x_{i}) (-h)^{1} + \frac{1}{2} f''(x_{i}) (-h)^{2} + \frac{1}{6} f'''(x_{i}) (-h)^{3} + \cdots
+\end{equation*}
+$$
+
+<p>
+Simplificando
+
+$$
+\begin{equation}
+    f(x_{i-1}) \approx f(x_{i}) - f'(x_{i}) h + \frac{1}{2} f''(x_{i}) h^{2} - \frac{1}{6} f'''(x_{i}) h^{3} + \cdots
+\tag{7}
+\end{equation}
+$$
+
+<h3 id="___sec7" class="anchor">Primera diferencia hacia adelante </h3>
+
+<p>
+Usando dos términos de la serie de Taylor expandida hacia adelante
+
+$$
+\begin{equation*}
+    f(x_{i+1}) \approx f(x_{i}) + f'(x_{i}) h
+\end{equation*}
+$$
+
+<p>
+Despejando la primera derivada
+
+$$
+\begin{equation}
+    f'(x_{i}) = \frac{f(x_{i+1}) - f(x_{i})}{h}
+\tag{8}
+\end{equation}
+$$
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">g</span>(x):
+    resultado <span style="color: #666666">=</span> <span style="color: #666666">-</span> <span style="color: #666666">0.1*</span>x<span style="color: #666666">**4</span> <span style="color: #666666">-</span> <span style="color: #666666">0.15*</span>x<span style="color: #666666">**3</span> <span style="color: #666666">-</span> <span style="color: #666666">0.5*</span>x<span style="color: #666666">**2</span> <span style="color: #666666">-</span> <span style="color: #666666">0.25*</span>x <span style="color: #666666">+</span> <span style="color: #666666">1.2</span>
+    <span style="color: #008000; font-weight: bold">return</span> resultado
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">fx_adelante</span>(f,x,h):
+    derivada <span style="color: #666666">=</span> (f(x<span style="color: #666666">+</span>h) <span style="color: #666666">-</span> f(x))<span style="color: #666666">/</span>h
+    <span style="color: #008000; font-weight: bold">return</span> derivada
+</pre></div>
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">print</span>(<span style="color: #BA2121">&#39;f</span><span style="color: #BB6622; font-weight: bold">\&#39;</span><span style="color: #BA2121">(0.5) =&#39;</span>, fx_adelante(g,<span style="color: #666666">0.5</span>,<span style="color: #666666">0.25</span>))
+</pre></div>
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>f<span style="color: #BA2121">&#39;(0.5) = -1.1546875</span>
+</pre></div>
+
+<h3 id="___sec8" class="anchor">Primera diferencia hacia atrás </h3>
+
+<p>
+Usando dos términos de la serie de Taylor expandida hacia atrás
+
+$$
+\begin{equation*}
+    f(x_{i-1}) \approx f(x_{i}) - f'(x_{i}) h
+\end{equation*}
+$$
+
+<p>
+Despejando la primera derivada
+
+$$
+\begin{equation}
+    f'(x_{i}) = \frac{f(x_{i}) - f(x_{i-1})}{h}
+\tag{9}
+\end{equation}
+$$
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">fx_atras</span>(f,x,h):
+    derivada <span style="color: #666666">=</span> (f(x) <span style="color: #666666">-</span> f(x<span style="color: #666666">-</span>h))<span style="color: #666666">/</span>h
+    <span style="color: #008000; font-weight: bold">return</span> derivada
+</pre></div>
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">print</span>(<span style="color: #BA2121">&#39;f</span><span style="color: #BB6622; font-weight: bold">\&#39;</span><span style="color: #BA2121">(0.5) =&#39;</span>, fx_atras(g,<span style="color: #666666">0.5</span>,<span style="color: #666666">0.25</span>))
+</pre></div>
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>f<span style="color: #BA2121">&#39;(0.5) = -0.7140625000000003</span>
+</pre></div>
+
+<h3 id="___sec9" class="anchor">Primera diferencia centrada </h3>
+
+<p>
+Usando tres términos de la serie de Taylor expandida hacia adelante
+
+$$
+\begin{equation}
+    f(x_{i+1}) \approx f(x_{i}) + f'(x_{i}) h + \frac{1}{2} f''(x_{i}) h^{2} \tag{10}
+\end{equation}
+$$
+
+<p>
+Usando tres términos de la serie de Taylor expandida hacia atrás
+
+$$
+\begin{equation}
+    f(x_{i-1}) \approx f(x_{i}) - f'(x_{i}) h + \frac{1}{2} f''(x_{i}) h^{2} \tag{11}
+\end{equation}
+$$
+
+<p>
+Restando <a href="#mjx-eqn-11">(11)</a> de <a href="#mjx-eqn-10">(10)</a>
+
+$$
+\begin{equation*}
+    f(x_{i+1}) - f(x_{i-1}) \approx 2 f'(x_{i}) h
+\end{equation*}
+$$
+
+<p>
+Despejando la primera derivada
+
+$$
+\begin{equation}
+    f'(x_{i}) = \frac{f(x_{i+1}) - f(x_{i-1})}{2 h}
+\tag{12}
+\end{equation}
+$$
+
+<p>
+También puede escribirse como el promedio de una diferencia hacia adelante y una diferencia hacia atrás
+
+$$
+\begin{equation*}
+    f'(x_{i}) = \frac{\frac{f(x_{i+1}) - f(x_{i})}{h} + \frac{f(x_{i}) - f(x_{i-1})}{h}}{2}
+\end{equation*}
+$$
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">fx_centrada</span>(f,x,h):
+    derivada <span style="color: #666666">=</span> (fx_adelante(f,x,h) <span style="color: #666666">+</span> fx_atras(f,x,h))<span style="color: #666666">/2</span>
+    <span style="color: #008000; font-weight: bold">return</span> derivada
+</pre></div>
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">print</span>(<span style="color: #BA2121">&#39;f</span><span style="color: #BB6622; font-weight: bold">\&#39;</span><span style="color: #BA2121">(0.5) =&#39;</span>, fx_centrada(g,<span style="color: #666666">0.5</span>,<span style="color: #666666">0.25</span>))
+</pre></div>
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>f<span style="color: #BA2121">&#39;(0.5) = -0.9343750000000002</span>
+</pre></div>
+
+<h3 id="___sec10" class="anchor">Segunda diferencia hacia adelante </h3>
+
+<p>
+Usando tres términos de la serie de Taylor expandida hacia adelante una posición
+
+$$
+\begin{equation*}
+    f(x_{i+1}) \approx f(x_{i}) + f'(x_{i}) h + \frac{1}{2} f''(x_{i}) h^{2}
+\end{equation*}
+$$
+
+<p>
+Multiplicando por dos
+
+$$
+\begin{equation}
+    2 f(x_{i+1}) \approx 2 f(x_{i}) + 2 f'(x_{i}) h + f''(x_{i}) h^{2} \tag{13}
+\end{equation}
+$$
+
+<p>
+Usando tres términos de la serie de Taylor expandida hacia adelante dos posiciones
+
+$$
+\begin{equation}
+    f(x_{i+2}) \approx f(x_{i}) + 2 f'(x_{i}) h + 2 f''(x_{i}) h^{2} \tag{14}
+\end{equation}
+$$
+
+<p>
+Restando <a href="#mjx-eqn-14">(14)</a> de <a href="#mjx-eqn-13">(13)</a>
+
+$$
+\begin{equation*}
+    2 f(x_{i+1}) - f(x_{i+2}) \approx f(x_{i}) - f''(x_{i}) h^{2}
+\end{equation*}
+$$
+
+<p>
+Despejando la segunda derivada
+
+$$
+\begin{equation}
+    f''(x_{i}) = \frac{f(x_{i+2}) - 2 f(x_{i+1}) + f(x_{i})}{h^{2}}
+\tag{15}
+\end{equation}
+$$
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">fxx_adelante</span>(f,x,h):
+    derivada <span style="color: #666666">=</span> (f(x<span style="color: #666666">+2*</span>h) <span style="color: #666666">-</span> <span style="color: #666666">2*</span>f(x<span style="color: #666666">+</span>h) <span style="color: #666666">+</span> f(x))<span style="color: #666666">/</span>h<span style="color: #666666">**2</span>
+    <span style="color: #008000; font-weight: bold">return</span> derivada
+</pre></div>
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">print</span>(<span style="color: #BA2121">&#39;f</span><span style="color: #BB6622; font-weight: bold">\&#39;\&#39;</span><span style="color: #BA2121">(0.5) =&#39;</span>, fxx_adelante(g,<span style="color: #666666">0.5</span>,<span style="color: #666666">0.25</span>))
+</pre></div>
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>f<span style="color: #BA2121">&#39;&#39;</span>(<span style="color: #666666">0.5</span>) <span style="color: #666666">=</span> <span style="color: #666666">-2.362499999999999</span>
+</pre></div>
+
+<h3 id="___sec11" class="anchor">Segunda diferencia hacia atrás </h3>
+
+<p>
+Usando tres términos de la serie de Taylor expandida hacia atrás una posición
+
+$$
+\begin{equation*}
+    f(x_{i-1}) \approx f(x_{i}) - f'(x_{i}) h + \frac{1}{2} f''(x_{i}) h^{2}
+\end{equation*}
+$$
+
+<p>
+Multiplicando por dos
+
+$$
+\begin{equation}
+    2 f(x_{i-1}) \approx 2 f(x_{i}) - 2 f'(x_{i}) h + f''(x_{i}) h^{2} \tag{16}
+\end{equation}
+$$
+
+<p>
+Usando tres términos de la serie de Taylor expandida hacia atrás dos posiciones
+
+$$
+\begin{equation}
+    f(x_{i-2}) \approx f(x_{i}) - 2 f'(x_{i}) h + 2 f''(x_{i}) h^{2} \tag{17}
+\end{equation}
+$$
+
+<p>
+Restando <a href="#mjx-eqn-17">(17)</a> de <a href="#mjx-eqn-16">(16)</a>
+
+$$
+\begin{equation*}
+    2 f(x_{i-1}) - f(x_{i-2}) \approx f(x_{i}) - f''(x_{i}) h^{2}
+\end{equation*}
+$$
+
+<p>
+Despejando la segunda derivada
+
+$$
+\begin{equation}
+    f''(x_{i}) = \frac{f(x_{i}) - 2 f(x_{i-1}) + f(x_{i-2})}{h^{2}}
+\tag{18}
+\end{equation}
+$$
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">fxx_atras</span>(f,x,h):
+    derivada <span style="color: #666666">=</span> (f(x) <span style="color: #666666">-</span> <span style="color: #666666">2*</span>f(x<span style="color: #666666">-</span>h) <span style="color: #666666">+</span> f(x<span style="color: #666666">-2*</span>h))<span style="color: #666666">/</span>h<span style="color: #666666">**2</span>
+    <span style="color: #008000; font-weight: bold">return</span> derivada
+</pre></div>
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">print</span>(<span style="color: #BA2121">&#39;f</span><span style="color: #BB6622; font-weight: bold">\&#39;\&#39;</span><span style="color: #BA2121">(0.5) =&#39;</span>, fxx_atras(g,<span style="color: #666666">0.5</span>,<span style="color: #666666">0.25</span>))
+</pre></div>
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>f<span style="color: #BA2121">&#39;&#39;</span>(<span style="color: #666666">0.5</span>) <span style="color: #666666">=</span> <span style="color: #666666">-1.3125000000000036</span>
+</pre></div>
+
+<h3 id="___sec12" class="anchor">Segunda diferencia centrada </h3>
+
+<p>
+Usando tres términos de la serie de Taylor expandida hacia adelante
+
+$$
+\begin{equation}
+    f(x_{i+1}) \approx f(x_{i}) + f'(x_{i}) h + \frac{1}{2} f''(x_{i}) h^{2} \tag{19}
+\end{equation}
+$$
+
+<p>
+Usando tres términos de la serie de Taylor expandida hacia atrás
+
+$$
+\begin{equation}
+    f(x_{i-1}) \approx f(x_{i}) - f'(x_{i}) h + \frac{1}{2} f''(x_{i}) h^{2} \tag{20}
+\end{equation}
+$$
+
+<p>
+Sumando <a href="#mjx-eqn-20">(20)</a> a <a href="#mjx-eqn-19">(19)</a>
+
+$$
+\begin{equation*}
+    f(x_{i+1}) + f(x_{i-1}) \approx 2 f(x_{i}) + f''(x_{i}) h^{2}
+\end{equation*}
+$$
+
+<p>
+Despejando la segunda derivada
+
+$$
+\begin{equation}
+    f''(x_{i}) = \frac{f(x_{i+1}) - 2 f(x_{i}) + f(x_{i-1})}{h^{2}}
+\tag{21}
+\end{equation}
+$$
+
+<p>
+También puede escribirse como la diferencia de una diferencia hacia adelante y una diferencia hacia atrás
+
+$$
+\begin{equation*}
+    f''(x_{i}) = \frac{\frac{f(x_{i+1}) - f(x_{i})}{h} - \frac{f(x_{i}) - f(x_{i-1})}{h}}{h}
+\end{equation*}
+$$
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">fxx_centrada</span>(f,x,h):
+    derivada <span style="color: #666666">=</span> (fxx_adelante(f,x,h) <span style="color: #666666">-</span> fxx_atras(f,x,h))<span style="color: #666666">/</span>h
+    <span style="color: #008000; font-weight: bold">return</span> derivada
+</pre></div>
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">print</span>(<span style="color: #BA2121">&#39;f</span><span style="color: #BB6622; font-weight: bold">\&#39;\&#39;</span><span style="color: #BA2121">(0.5) =&#39;</span>, fxx_centrada(g,<span style="color: #666666">0.5</span>,<span style="color: #666666">0.25</span>))
+</pre></div>
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>f<span style="color: #BA2121">&#39;&#39;</span>(<span style="color: #666666">0.5</span>) <span style="color: #666666">=</span> <span style="color: #666666">-4.1999999999999815</span>
+</pre></div>
+<p>
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="previous">
+    <a href="diferenciacion001.html">&larr; Prev</a>
+  </li>
+  <li class="next">
+    <a href="diferenciacion003.html">Next &rarr;</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+
