@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head><meta charset="utf-8" />
-<title>tarea</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>placa triangular</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 <style type="text/css">
@@ -11775,7 +11775,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Verificaci&#243;n-tarea-?">Verificaci&#243;n tarea ?<a class="anchor-link" href="#Verificaci&#243;n-tarea-?">&#194;&#182;</a></h1>
+<h1 id="Verificaci&#243;n-tarea-8">Verificaci&#243;n tarea 8<a class="anchor-link" href="#Verificaci&#243;n-tarea-8">&#194;&#182;</a></h1>
 </div>
 </div>
 </div>
@@ -11863,32 +11863,36 @@ $$\left[\begin{matrix}214500.214500214 & 55770.0557700558 & 0\\55770.0557700558 
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Polinomio de Lagrange</p>
-\begin{equation*}
-L_{i}(r)=\prod_{\substack{j=1 \\ j \neq i}}^{n} \frac{r-r_{j}}{r_{i}-r_{j}}
-\end{equation*}
-</div>
-</div>
-</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># https://www.longqi.cf/python/2014/03/24/implement-of-lagrange-polynomial-in-sympy/</span>
-<span class="k">def</span> <span class="nf">LagrangPoly</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">order</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">xi</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">xi</span><span class="o">==</span><span class="bp">None</span><span class="p">:</span>
-        <span class="n">xi</span><span class="o">=</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x:</span><span class="si">%d</span><span class="s1">&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">order</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
-    <span class="n">index</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">order</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">index</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">prod</span><span class="p">([(</span><span class="n">x</span><span class="o">-</span><span class="n">xi</span><span class="p">[</span><span class="n">j</span><span class="p">])</span><span class="o">/</span><span class="p">(</span><span class="n">xi</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">xi</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">index</span><span class="p">])</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">N1</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">N1</span>
 </pre></div>
 
 </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[4]:</div>
+
+
+
+
+<div class="output_latex output_subarea output_execute_result">
+$$r$$
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -11898,13 +11902,31 @@ L_{i}(r)=\prod_{\substack{j=1 \\ j \neq i}}^{n} \frac{r-r_{j}}{r_{i}-r_{j}}
 <div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">N1r</span> <span class="o">=</span> <span class="n">simplify</span><span class="p">(</span><span class="n">LagrangPoly</span><span class="p">(</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">),</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]))</span>
-<span class="n">N2r</span> <span class="o">=</span> <span class="n">simplify</span><span class="p">(</span><span class="n">LagrangPoly</span><span class="p">(</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">),</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]))</span>
-<span class="n">N1s</span> <span class="o">=</span> <span class="n">simplify</span><span class="p">(</span><span class="n">LagrangPoly</span><span class="p">(</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">),</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]))</span>
-<span class="n">N2s</span> <span class="o">=</span> <span class="n">simplify</span><span class="p">(</span><span class="n">LagrangPoly</span><span class="p">(</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">),</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]))</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">N2</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
+<span class="n">N2</span>
 </pre></div>
 
 </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[5]:</div>
+
+
+
+
+<div class="output_latex output_subarea output_execute_result">
+$$s$$
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -11914,8 +11936,8 @@ L_{i}(r)=\prod_{\substack{j=1 \\ j \neq i}}^{n} \frac{r-r_{j}}{r_{i}-r_{j}}
 <div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">N1</span> <span class="o">=</span> <span class="n">simplify</span><span class="p">(</span><span class="n">N1r</span><span class="o">*</span><span class="n">N1s</span><span class="p">)</span>
-<span class="n">N1</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">N3</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="o">-</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
+<span class="n">N3</span>
 </pre></div>
 
 </div>
@@ -11934,7 +11956,7 @@ L_{i}(r)=\prod_{\substack{j=1 \\ j \neq i}}^{n} \frac{r-r_{j}}{r_{i}-r_{j}}
 
 
 <div class="output_latex output_subarea output_execute_result">
-$$\left(r - 1\right) \left(s - 1\right)$$
+$$- r - s + 1$$
 </div>
 
 </div>
@@ -11948,8 +11970,8 @@ $$\left(r - 1\right) \left(s - 1\right)$$
 <div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">N2</span> <span class="o">=</span> <span class="n">simplify</span><span class="p">(</span><span class="n">N2r</span><span class="o">*</span><span class="n">N1s</span><span class="p">)</span>
-<span class="n">N2</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">([[</span><span class="n">N1</span><span class="p">,</span> <span class="n">N2</span><span class="p">,</span> <span class="n">N3</span><span class="p">]])</span>
+<span class="n">N</span>
 </pre></div>
 
 </div>
@@ -11968,7 +11990,7 @@ $$\left(r - 1\right) \left(s - 1\right)$$
 
 
 <div class="output_latex output_subarea output_execute_result">
-$$r \left(- s + 1\right)$$
+$$\left[\begin{matrix}r & s & - r - s + 1\end{matrix}\right]$$
 </div>
 
 </div>
@@ -11982,8 +12004,8 @@ $$r \left(- s + 1\right)$$
 <div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">N3</span> <span class="o">=</span> <span class="n">simplify</span><span class="p">(</span><span class="n">N2r</span><span class="o">*</span><span class="n">N2s</span><span class="p">)</span>
-<span class="n">N3</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="mf">2.0</span>
+<span class="n">A</span>
 </pre></div>
 
 </div>
@@ -12002,7 +12024,7 @@ $$r \left(- s + 1\right)$$
 
 
 <div class="output_latex output_subarea output_execute_result">
-$$r s$$
+$$0.5$$
 </div>
 
 </div>
@@ -12016,31 +12038,12 @@ $$r s$$
 <div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">N4</span> <span class="o">=</span> <span class="n">simplify</span><span class="p">(</span><span class="n">N1r</span><span class="o">*</span><span class="n">N2s</span><span class="p">)</span>
-<span class="n">N4</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+<span class="n">x2</span><span class="p">,</span> <span class="n">y2</span> <span class="o">=</span> <span class="mi">250</span><span class="p">,</span> <span class="mi">0</span>
+<span class="n">x3</span><span class="p">,</span> <span class="n">y3</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">250</span>
 </pre></div>
 
 </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[9]:</div>
-
-
-
-
-<div class="output_latex output_subarea output_execute_result">
-$$s \left(- r + 1\right)$$
-</div>
-
-</div>
-
 </div>
 </div>
 
@@ -12050,8 +12053,8 @@ $$s \left(- r + 1\right)$$
 <div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">([[</span><span class="n">N1</span><span class="p">,</span> <span class="n">N2</span><span class="p">,</span> <span class="n">N3</span><span class="p">,</span> <span class="n">N4</span><span class="p">]])</span>
-<span class="n">N</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">simplify</span><span class="p">(</span><span class="n">N1</span><span class="o">*</span><span class="n">x1</span> <span class="o">+</span> <span class="n">N2</span><span class="o">*</span><span class="n">x2</span> <span class="o">+</span> <span class="n">N3</span><span class="o">*</span><span class="n">x3</span><span class="p">)</span>
+<span class="n">x</span>
 </pre></div>
 
 </div>
@@ -12070,7 +12073,7 @@ $$s \left(- r + 1\right)$$
 
 
 <div class="output_latex output_subarea output_execute_result">
-$$\left[\begin{matrix}\left(r - 1\right) \left(s - 1\right) & r \left(- s + 1\right) & r s & s \left(- r + 1\right)\end{matrix}\right]$$
+$$250 s$$
 </div>
 
 </div>
@@ -12084,13 +12087,31 @@ $$\left[\begin{matrix}\left(r - 1\right) \left(s - 1\right) & r \left(- s + 1\ri
 <div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
-<span class="n">x2</span><span class="p">,</span> <span class="n">y2</span> <span class="o">=</span> <span class="mi">250</span><span class="p">,</span> <span class="mi">0</span>
-<span class="n">x3</span><span class="p">,</span> <span class="n">y3</span> <span class="o">=</span> <span class="mi">250</span><span class="p">,</span> <span class="mi">250</span>
-<span class="n">x4</span><span class="p">,</span> <span class="n">y4</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">250</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">simplify</span><span class="p">(</span><span class="n">N1</span><span class="o">*</span><span class="n">y1</span> <span class="o">+</span> <span class="n">N2</span><span class="o">*</span><span class="n">y2</span> <span class="o">+</span> <span class="n">N3</span><span class="o">*</span><span class="n">y3</span><span class="p">)</span>
+<span class="n">y</span>
 </pre></div>
 
 </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[11]:</div>
+
+
+
+
+<div class="output_latex output_subarea output_execute_result">
+$$- 250 r - 250 s + 250$$
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -12100,8 +12121,8 @@ $$\left[\begin{matrix}\left(r - 1\right) \left(s - 1\right) & r \left(- s + 1\ri
 <div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">simplify</span><span class="p">(</span><span class="n">N1</span><span class="o">*</span><span class="n">x1</span> <span class="o">+</span> <span class="n">N2</span><span class="o">*</span><span class="n">x2</span> <span class="o">+</span> <span class="n">N3</span><span class="o">*</span><span class="n">x3</span> <span class="o">+</span> <span class="n">N4</span><span class="o">*</span><span class="n">x4</span><span class="p">)</span>
-<span class="n">x</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span> <span class="o">-</span> <span class="mi">250</span><span class="p">)</span><span class="o">/</span><span class="mi">250</span>
+<span class="n">r</span>
 </pre></div>
 
 </div>
@@ -12120,7 +12141,7 @@ $$\left[\begin{matrix}\left(r - 1\right) \left(s - 1\right) & r \left(- s + 1\ri
 
 
 <div class="output_latex output_subarea output_execute_result">
-$$250 r$$
+$$- \frac{x}{250} - \frac{y}{250} + 1$$
 </div>
 
 </div>
@@ -12134,8 +12155,8 @@ $$250 r$$
 <div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">simplify</span><span class="p">(</span><span class="n">N1</span><span class="o">*</span><span class="n">y1</span> <span class="o">+</span> <span class="n">N2</span><span class="o">*</span><span class="n">y2</span> <span class="o">+</span> <span class="n">N3</span><span class="o">*</span><span class="n">y3</span> <span class="o">+</span> <span class="n">N4</span><span class="o">*</span><span class="n">y4</span><span class="p">)</span>
-<span class="n">y</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span><span class="o">/</span><span class="mi">250</span>
+<span class="n">s</span>
 </pre></div>
 
 </div>
@@ -12154,7 +12175,7 @@ $$250 r$$
 
 
 <div class="output_latex output_subarea output_execute_result">
-$$250 s$$
+$$\frac{x}{250}$$
 </div>
 
 </div>
@@ -12168,8 +12189,9 @@ $$250 s$$
 <div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span><span class="o">/</span><span class="mi">250</span>
-<span class="n">r</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">J</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">([[</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">)),</span> <span class="n">diff</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">))],</span>
+            <span class="p">[</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">)),</span> <span class="n">diff</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">))]])</span>
+<span class="n">J</span>
 </pre></div>
 
 </div>
@@ -12188,7 +12210,7 @@ $$250 s$$
 
 
 <div class="output_latex output_subarea output_execute_result">
-$$\frac{x}{250}$$
+$$\left[\begin{matrix}0 & -250\\250 & -250\end{matrix}\right]$$
 </div>
 
 </div>
@@ -12202,8 +12224,8 @@ $$\frac{x}{250}$$
 <div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span><span class="o">/</span><span class="mi">250</span>
-<span class="n">s</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">detJ</span> <span class="o">=</span> <span class="n">det</span><span class="p">(</span><span class="n">J</span><span class="p">)</span>
+<span class="n">detJ</span>
 </pre></div>
 
 </div>
@@ -12222,75 +12244,6 @@ $$\frac{x}{250}$$
 
 
 <div class="output_latex output_subarea output_execute_result">
-$$\frac{y}{250}$$
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">J</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">([[</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">)),</span> <span class="n">diff</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">))],</span>
-            <span class="p">[</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">)),</span> <span class="n">diff</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">))]])</span>
-<span class="n">J</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[16]:</div>
-
-
-
-
-<div class="output_latex output_subarea output_execute_result">
-$$\left[\begin{matrix}250 & 0\\0 & 250\end{matrix}\right]$$
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[17]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">detJ</span> <span class="o">=</span> <span class="n">det</span><span class="p">(</span><span class="n">J</span><span class="p">)</span>
-<span class="n">detJ</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[17]:</div>
-
-
-
-
-<div class="output_latex output_subarea output_execute_result">
 $$62500$$
 </div>
 
@@ -12302,7 +12255,7 @@ $$62500$$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">M1</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
@@ -12321,7 +12274,7 @@ $$62500$$
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[18]:</div>
+<div class="prompt output_prompt">Out[16]:</div>
 
 
 
@@ -12338,7 +12291,7 @@ $$\left[\begin{matrix}1 & 0 & 0 & 0\\0 & 0 & 0 & 1\\0 & 1 & 1 & 0\end{matrix}\ri
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">M2</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">([[</span><span class="n">diff</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)),</span> <span class="n">diff</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
@@ -12358,13 +12311,84 @@ $$\left[\begin{matrix}1 & 0 & 0 & 0\\0 & 0 & 0 & 1\\0 & 1 & 1 & 0\end{matrix}\ri
 
 <div class="output_area">
 
+<div class="prompt output_prompt">Out[17]:</div>
+
+
+
+
+<div class="output_latex output_subarea output_execute_result">
+$$\left[\begin{matrix}- \frac{1}{250} & \frac{1}{250} & 0 & 0\\- \frac{1}{250} & 0 & 0 & 0\\0 & 0 & - \frac{1}{250} & \frac{1}{250}\\0 & 0 & - \frac{1}{250} & 0\end{matrix}\right]$$
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">M3</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">([[</span><span class="n">diff</span><span class="p">(</span><span class="n">N1</span><span class="p">,</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">)),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">diff</span><span class="p">(</span><span class="n">N2</span><span class="p">,</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">)),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">diff</span><span class="p">(</span><span class="n">N3</span><span class="p">,</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">)),</span> <span class="mi">0</span><span class="p">],</span>
+             <span class="p">[</span><span class="n">diff</span><span class="p">(</span><span class="n">N1</span><span class="p">,</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">)),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">diff</span><span class="p">(</span><span class="n">N2</span><span class="p">,</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">)),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">diff</span><span class="p">(</span><span class="n">N3</span><span class="p">,</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">)),</span> <span class="mi">0</span><span class="p">],</span>
+             <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">diff</span><span class="p">(</span><span class="n">N1</span><span class="p">,</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">)),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">diff</span><span class="p">(</span><span class="n">N2</span><span class="p">,</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">)),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">diff</span><span class="p">(</span><span class="n">N3</span><span class="p">,</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">))],</span>
+             <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">diff</span><span class="p">(</span><span class="n">N1</span><span class="p">,</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">)),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">diff</span><span class="p">(</span><span class="n">N2</span><span class="p">,</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">)),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">diff</span><span class="p">(</span><span class="n">N3</span><span class="p">,</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">))]])</span>
+<span class="n">M3</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[18]:</div>
+
+
+
+
+<div class="output_latex output_subarea output_execute_result">
+$$\left[\begin{matrix}1 & 0 & 0 & 0 & -1 & 0\\0 & 0 & 1 & 0 & -1 & 0\\0 & 1 & 0 & 0 & 0 & -1\\0 & 0 & 0 & 1 & 0 & -1\end{matrix}\right]$$
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">B</span> <span class="o">=</span> <span class="n">M1</span><span class="o">*</span><span class="n">M2</span><span class="o">*</span><span class="n">M3</span>
+<span class="n">B</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
 <div class="prompt output_prompt">Out[19]:</div>
 
 
 
 
 <div class="output_latex output_subarea output_execute_result">
-$$\left[\begin{matrix}\frac{1}{250} & 0 & 0 & 0\\0 & \frac{1}{250} & 0 & 0\\0 & 0 & \frac{1}{250} & 0\\0 & 0 & 0 & \frac{1}{250}\end{matrix}\right]$$
+$$\left[\begin{matrix}- \frac{1}{250} & 0 & \frac{1}{250} & 0 & 0 & 0\\0 & - \frac{1}{250} & 0 & 0 & 0 & \frac{1}{250}\\- \frac{1}{250} & - \frac{1}{250} & 0 & \frac{1}{250} & \frac{1}{250} & 0\end{matrix}\right]$$
 </div>
 
 </div>
@@ -12378,12 +12402,8 @@ $$\left[\begin{matrix}\frac{1}{250} & 0 & 0 & 0\\0 & \frac{1}{250} & 0 & 0\\0 & 
 <div class="prompt input_prompt">In&nbsp;[20]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">M3</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">(</span>
-    <span class="p">[[</span><span class="n">diff</span><span class="p">(</span><span class="n">N1</span><span class="p">,</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">)),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">diff</span><span class="p">(</span><span class="n">N2</span><span class="p">,</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">)),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">diff</span><span class="p">(</span><span class="n">N3</span><span class="p">,</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">)),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">diff</span><span class="p">(</span><span class="n">N4</span><span class="p">,</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">)),</span> <span class="mi">0</span><span class="p">],</span>
-     <span class="p">[</span><span class="n">diff</span><span class="p">(</span><span class="n">N1</span><span class="p">,</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">)),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">diff</span><span class="p">(</span><span class="n">N2</span><span class="p">,</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">)),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">diff</span><span class="p">(</span><span class="n">N3</span><span class="p">,</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">)),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">diff</span><span class="p">(</span><span class="n">N4</span><span class="p">,</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">)),</span> <span class="mi">0</span><span class="p">],</span>
-     <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">diff</span><span class="p">(</span><span class="n">N1</span><span class="p">,</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">)),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">diff</span><span class="p">(</span><span class="n">N2</span><span class="p">,</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">)),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">diff</span><span class="p">(</span><span class="n">N3</span><span class="p">,</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">)),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">diff</span><span class="p">(</span><span class="n">N4</span><span class="p">,</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">))],</span>
-     <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">diff</span><span class="p">(</span><span class="n">N1</span><span class="p">,</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">)),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">diff</span><span class="p">(</span><span class="n">N2</span><span class="p">,</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">)),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">diff</span><span class="p">(</span><span class="n">N3</span><span class="p">,</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">)),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">diff</span><span class="p">(</span><span class="n">N4</span><span class="p">,</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">))]])</span>
-<span class="n">M3</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">K</span> <span class="o">=</span> <span class="n">transpose</span><span class="p">(</span><span class="n">B</span><span class="p">)</span><span class="o">*</span><span class="n">C</span><span class="o">*</span><span class="n">B</span><span class="o">*</span><span class="n">detJ</span><span class="o">*</span><span class="n">t</span><span class="o">*</span><span class="n">A</span>
+<span class="n">K</span><span class="o">.</span><span class="n">evalf</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -12402,7 +12422,7 @@ $$\left[\begin{matrix}\frac{1}{250} & 0 & 0 & 0\\0 & \frac{1}{250} & 0 & 0\\0 & 
 
 
 <div class="output_latex output_subarea output_execute_result">
-$$\left[\begin{matrix}s - 1 & 0 & - s + 1 & 0 & s & 0 & - s & 0\\r - 1 & 0 & - r & 0 & r & 0 & - r + 1 & 0\\0 & s - 1 & 0 & - s + 1 & 0 & s & 0 & - s\\0 & r - 1 & 0 & - r & 0 & r & 0 & - r + 1\end{matrix}\right]$$
+$$\left[\begin{matrix}2938652.94 & 1351351.35 & -2145002.15 & -793650.794 & -793650.794 & -557700.558\\1351351.35 & 2938652.94 & -557700.558 & -793650.794 & -793650.794 & -2145002.15\\-2145002.15 & -557700.558 & 2145002.15 & 0 & 0 & 557700.558\\-793650.794 & -793650.794 & 0 & 793650.794 & 793650.794 & 0\\-793650.794 & -793650.794 & 0 & 793650.794 & 793650.794 & 0\\-557700.558 & -2145002.15 & 557700.558 & 0 & 0 & 2145002.15\end{matrix}\right]$$
 </div>
 
 </div>
@@ -12410,14 +12430,54 @@ $$\left[\begin{matrix}s - 1 & 0 & - s + 1 & 0 & s & 0 & - s & 0\\r - 1 & 0 & - r
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Ejemplo-11.1">Ejemplo 11.1<a class="anchor-link" href="#Ejemplo-11.1">&#194;&#182;</a></h1><p>Elemento 2, página 222 del libro <em>MATLAB Guide to Finite Elements - Peter I. Kattan</em></p>
+
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[21]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">B</span> <span class="o">=</span> <span class="n">M1</span><span class="o">*</span><span class="n">M2</span><span class="o">*</span><span class="n">M3</span>
-<span class="n">B</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="mi">25</span>
+<span class="n">C</span> <span class="o">=</span> <span class="mi">210000</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="mf">0.3</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">Matrix</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                                 <span class="p">[</span><span class="mf">0.3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                                 <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="mf">0.3</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">]])</span>
+<span class="n">N1</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">N2</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
+<span class="n">N3</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="o">-</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
+<span class="n">N</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">([[</span><span class="n">N1</span><span class="p">,</span> <span class="n">N2</span><span class="p">,</span> <span class="n">N3</span><span class="p">]])</span>
+<span class="n">A</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="mf">2.0</span>
+<span class="n">x1</span><span class="p">,</span> <span class="n">y1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+<span class="n">x2</span><span class="p">,</span> <span class="n">y2</span> <span class="o">=</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">0</span>
+<span class="n">x3</span><span class="p">,</span> <span class="n">y3</span> <span class="o">=</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">250</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">simplify</span><span class="p">(</span><span class="n">N1</span><span class="o">*</span><span class="n">x1</span> <span class="o">+</span> <span class="n">N2</span><span class="o">*</span><span class="n">x2</span> <span class="o">+</span> <span class="n">N3</span><span class="o">*</span><span class="n">x3</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">simplify</span><span class="p">(</span><span class="n">N1</span><span class="o">*</span><span class="n">y1</span> <span class="o">+</span> <span class="n">N2</span><span class="o">*</span><span class="n">y2</span> <span class="o">+</span> <span class="n">N3</span><span class="o">*</span><span class="n">y3</span><span class="p">)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span> <span class="o">-</span> <span class="mi">500</span><span class="p">)</span><span class="o">/</span><span class="mi">500</span>
+<span class="n">s</span> <span class="o">=</span> <span class="p">(</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">))</span><span class="o">/</span><span class="mi">500</span>
+<span class="n">J</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">([[</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">)),</span> <span class="n">diff</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">))],</span>
+            <span class="p">[</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">)),</span> <span class="n">diff</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">))]])</span>
+<span class="n">detJ</span> <span class="o">=</span> <span class="n">det</span><span class="p">(</span><span class="n">J</span><span class="p">)</span>
+<span class="n">M1</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+             <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+             <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+<span class="n">M2</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">([[</span><span class="n">diff</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)),</span> <span class="n">diff</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+             <span class="p">[</span><span class="n">diff</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)),</span> <span class="n">diff</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+             <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">diff</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)),</span> <span class="n">diff</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">))],</span>
+             <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">diff</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)),</span> <span class="n">diff</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">))]])</span>
+<span class="n">M3</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">([[</span><span class="n">diff</span><span class="p">(</span><span class="n">N1</span><span class="p">,</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">)),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">diff</span><span class="p">(</span><span class="n">N2</span><span class="p">,</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">)),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">diff</span><span class="p">(</span><span class="n">N3</span><span class="p">,</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">)),</span> <span class="mi">0</span><span class="p">],</span>
+             <span class="p">[</span><span class="n">diff</span><span class="p">(</span><span class="n">N1</span><span class="p">,</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">)),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">diff</span><span class="p">(</span><span class="n">N2</span><span class="p">,</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">)),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">diff</span><span class="p">(</span><span class="n">N3</span><span class="p">,</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">)),</span> <span class="mi">0</span><span class="p">],</span>
+             <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">diff</span><span class="p">(</span><span class="n">N1</span><span class="p">,</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">)),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">diff</span><span class="p">(</span><span class="n">N2</span><span class="p">,</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">)),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">diff</span><span class="p">(</span><span class="n">N3</span><span class="p">,</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">))],</span>
+             <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">diff</span><span class="p">(</span><span class="n">N1</span><span class="p">,</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">)),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">diff</span><span class="p">(</span><span class="n">N2</span><span class="p">,</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">)),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">diff</span><span class="p">(</span><span class="n">N3</span><span class="p">,</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">))]])</span>
+<span class="n">B</span> <span class="o">=</span> <span class="n">M1</span><span class="o">*</span><span class="n">M2</span><span class="o">*</span><span class="n">M3</span>
+<span class="n">K</span> <span class="o">=</span> <span class="n">transpose</span><span class="p">(</span><span class="n">B</span><span class="p">)</span><span class="o">*</span><span class="n">C</span><span class="o">*</span><span class="n">B</span><span class="o">*</span><span class="n">detJ</span><span class="o">*</span><span class="n">t</span><span class="o">*</span><span class="n">A</span>
+<span class="n">K</span><span class="o">.</span><span class="n">evalf</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -12436,41 +12496,7 @@ $$\left[\begin{matrix}s - 1 & 0 & - s + 1 & 0 & s & 0 & - s & 0\\r - 1 & 0 & - r
 
 
 <div class="output_latex output_subarea output_execute_result">
-$$\left[\begin{matrix}\frac{s}{250} - \frac{1}{250} & 0 & - \frac{s}{250} + \frac{1}{250} & 0 & \frac{s}{250} & 0 & - \frac{s}{250} & 0\\0 & \frac{r}{250} - \frac{1}{250} & 0 & - \frac{r}{250} & 0 & \frac{r}{250} & 0 & - \frac{r}{250} + \frac{1}{250}\\\frac{r}{250} - \frac{1}{250} & \frac{s}{250} - \frac{1}{250} & - \frac{r}{250} & - \frac{s}{250} + \frac{1}{250} & \frac{r}{250} & \frac{s}{250} & - \frac{r}{250} + \frac{1}{250} & - \frac{s}{250}\end{matrix}\right]$$
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[22]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">K</span> <span class="o">=</span> <span class="n">integrate</span><span class="p">(</span><span class="n">integrate</span><span class="p">(</span><span class="n">transpose</span><span class="p">(</span><span class="n">B</span><span class="p">)</span><span class="o">*</span><span class="n">C</span><span class="o">*</span><span class="n">B</span><span class="o">*</span><span class="n">detJ</span><span class="o">*</span><span class="n">t</span><span class="p">,</span> <span class="p">(</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span> <span class="p">(</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
-<span class="n">K</span><span class="o">.</span><span class="n">evalf</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[22]:</div>
-
-
-
-
-<div class="output_latex output_subarea output_execute_result">
-$$\left[\begin{matrix}1959101.96 & 675675.676 & -1165451.17 & -117975.118 & -979550.979 & -675675.676 & 185900.186 & 117975.118\\675675.676 & 1959101.96 & 117975.118 & 185900.186 & -675675.676 & -979550.979 & -117975.118 & -1165451.17\\-1165451.17 & 117975.118 & 1959101.96 & -675675.676 & 185900.186 & -117975.118 & -979550.979 & 675675.676\\-117975.118 & 185900.186 & -675675.676 & 1959101.96 & 117975.118 & -1165451.17 & 675675.676 & -979550.979\\-979550.979 & -675675.676 & 185900.186 & 117975.118 & 1959101.96 & 675675.676 & -1165451.17 & -117975.118\\-675675.676 & -979550.979 & -117975.118 & -1165451.17 & 675675.676 & 1959101.96 & 117975.118 & 185900.186\\185900.186 & -117975.118 & -979550.979 & 675675.676 & -1165451.17 & 117975.118 & 1959101.96 & -675675.676\\117975.118 & -1165451.17 & 675675.676 & -979550.979 & -117975.118 & 185900.186 & -675675.676 & 1959101.96\end{matrix}\right]$$
+$$\left[\begin{matrix}1442307.69 & 0 & -1442307.69 & 865384.615 & 0 & -865384.615\\0 & 504807.692 & 1009615.38 & -504807.692 & -1009615.38 & 0\\-1442307.69 & 1009615.38 & 3461538.46 & -1875000.0 & -2019230.77 & 865384.615\\865384.615 & -504807.692 & -1875000.0 & 6274038.46 & 1009615.38 & -5769230.77\\0 & -1009615.38 & -2019230.77 & 1009615.38 & 2019230.77 & 0\\-865384.615 & 0 & 865384.615 & -5769230.77 & 0 & 5769230.77\end{matrix}\right]$$
 </div>
 
 </div>
