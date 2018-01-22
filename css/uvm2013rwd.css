@@ -67,6 +67,8 @@ li li, li p {
 img, embed, object, video {
 	max-width: 100%;
 	height: auto;
+	margin: auto;
+	display: block;
 }
 a {
     color: #444;
